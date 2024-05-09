@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <d3d11.h>
+
 #include "Component.h"
 
 class Primitive2D : public Component
@@ -16,9 +18,10 @@ protected:
     ID3D11PixelShader* pixel_shader_ = NULL;
     ID3D11InputLayout* vertex_layout_ = NULL;
 public:
-    Primitive2D() = default;
+    Primitive2D() : Component("Primitive2D") {}
     virtual ~Primitive2D() = default;
 
+    virtual void Draw() = 0;
 
     void SetTexturePath(const std::wstring& path) { texture_path_ = path; }
     void SetVertexShaderPath(const std::string& path) { vertex_shader_path_ = path; }

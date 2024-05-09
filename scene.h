@@ -4,18 +4,18 @@
 class Scene
 {
 private:
-    int entityCount_;
+    int entityCount_ = 0;
     std::vector<GameObject*> gameObjects_;
 
 public:
     Scene();
     ~Scene();
 
-    int AddGameObject(GameObject* gameObject)
+    int AddGameObject()
     {
-        gameObjects_.push_back(gameObject);
+        gameObjects_.push_back(new GameObject(entityCount_));
         entityCount_++;
-        return entityCount_ - 1;
+        return entityCount_;
     }
 
     void Update()
