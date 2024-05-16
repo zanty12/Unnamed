@@ -5,7 +5,7 @@ class Controller : public Component
 {
 public:
     Controller() : Component("Controller") {}
-    void Start() override;
+    void Start() override{}
     void Update(Entity* parent) override;
-    void CleanUp() override;
+    void CleanUp() override{}
 };

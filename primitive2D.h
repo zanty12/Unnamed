@@ -2,8 +2,9 @@
 #include <d3d11.h>
 
 #include "Component.h"
+#include "drawables.h"
 
-class Primitive2D : public Component
+class Primitive2D : public Component, public Drawable
 {
 protected:
     // DirectX resources
@@ -21,7 +22,6 @@ public:
     Primitive2D() : Component("Primitive2D") {}
     virtual ~Primitive2D() = default;
 
-    virtual void Draw() = 0;
     void CleanUp() override;
 
     void SetTexturePath(const std::wstring& path) { texture_path_ = path; }

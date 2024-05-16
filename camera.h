@@ -2,17 +2,18 @@
 #include <DirectXMath.h>
 
 #include "component.h"
+#include "drawables.h"
 
-class Camera : public Component
+class Camera : public Component, public Drawable
 {
      DirectX::XMFLOAT3 position_;
      DirectX::XMFLOAT3 target_;
      DirectX::XMFLOAT4X4 view_matrix_;
 
 public:
-     Camera() : Component("Camera") {}
+     Camera() : Component("Camera"),Drawable() {}
      void Start() override;
      void Update(Entity* parent) override;
      void CleanUp() override;
-     void Draw();
+     void Draw() override;
 };

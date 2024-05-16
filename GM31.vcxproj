@@ -134,6 +134,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="controller.h" />
+    <ClInclude Include="drawables.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="imgui_impl_hal.h" />
     <ClInclude Include="lib\ImGui\imconfig.h" />
@@ -152,12 +153,14 @@
     <ClInclude Include="rect2D.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="testscene.h" />
     <ClInclude Include="transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="component.cpp" />
     <ClCompile Include="controller.cpp" />
+    <ClCompile Include="drawables.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="imgui_impl_hal.cpp" />
     <ClCompile Include="lib\ImGui\imgui.cpp" />
@@ -174,7 +177,7 @@
     <ClCompile Include="primitive3D.cpp" />
     <ClCompile Include="rect2D.cpp" />
     <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="testscene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="data\shader\common.hlsl">

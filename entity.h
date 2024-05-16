@@ -15,6 +15,15 @@ private:
 public:
     Entity(int id) : id_(id) , transform_(Transform::Identity()){};
     ~Entity();
+
+    void Start()
+    {
+        for(auto component : components_)
+        {
+            component->Start();
+        }
+    }
+
     void Update()
     {
         for(auto component : components_)
@@ -35,9 +44,9 @@ public:
     {
         return name_;
     }
-    void SetName(std::string name)
+    void SetName(const std::string &name)
     {
-        name_ = name;
+        name_ = std::move(name);
     }
     std::string GetTag()
     {
@@ -46,5 +55,13 @@ public:
     void SetTag(std::string tag)
     {
         tag_ = tag;
+    }
+    void AddComponent(Component* component)
+    {
+        components_.push_back(component);
+    }
+    std::vector<Component*> GetComponents()
+    {
+        return components_;
     }
 };

@@ -50,7 +50,14 @@ void Rect2D::Start()
 
 void Rect2D::Update(Entity* parent)
 {
+    if(parent == nullptr)
+    {
 
+    }
+    else
+    {
+
+    }
 }
 
 void Rect2D::Draw()

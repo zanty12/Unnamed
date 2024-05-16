@@ -1,6 +1,7 @@
 ﻿#include "main.h"
 #include "renderer.h"
 #include "plane.h"
+#include "entity.h"
 
 void Plane::Start()
 {
@@ -54,13 +55,13 @@ void Plane::Start()
 
 void Plane::Update(Entity* parent)
 {
-    if(parent_id_ < 0)
+    if(parent == nullptr)
     {
         //do nothing
     }
     else
     {
-
+        transform_ = *parent->GetTransform();
     }
 }
 
