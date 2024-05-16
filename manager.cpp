@@ -1,7 +1,7 @@
 #include "main.h"
 #include "manager.h"
 
-#include "camera.h"
+#include "components/camera.h"
 #include "renderer.h"
 #include "imgui_impl_hal.h"
 #include "testscene.h"

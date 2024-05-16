@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <vector>
 
-#include "Component.h"
+#include "components/component.h"
 #include "transform.h"
 
 class Entity

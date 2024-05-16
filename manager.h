@@ -1,5 +1,5 @@
 #pragma once
-#include "drawables.h"
+#include "traits/drawable.h"
 #include "entity.h"
 
 class Manager

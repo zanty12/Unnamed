@@ -2,7 +2,7 @@
 #include <d3d11.h>
 
 #include "Component.h"
-#include "drawables.h"
+#include "traits/drawable.h"
 
 class Primitive2D : public Component, public Drawable
 {

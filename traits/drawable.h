@@ -1,6 +1,7 @@
 #pragma once
+#include "trait.h"
 
-class Drawable
+class Drawable : public Trait
 {
 public:
     Drawable();

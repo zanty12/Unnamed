@@ -1,8 +1,8 @@
 ﻿#include "testscene.h"
 #include "manager.h"
-#include "camera.h"
-#include "plane.h"
-#include "rect2D.h"
+#include "components/camera.h"
+#include "components/plane.h"
+#include "components/rect2D.h"
 
 void TestScene::Setup()
 {

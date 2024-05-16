@@ -1,6 +1,6 @@
-#include "drawables.h"
+#include "drawable.h"
 
-#include "manager.h"
+#include "../manager.h"
 
 Drawable::Drawable()
 {
