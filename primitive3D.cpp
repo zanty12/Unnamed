@@ -1,6 +1,6 @@
-﻿#include "primitive2D.h"
+﻿#include "primitive3D.h"
 
-void Primitive2D::CleanUp()
+void Primitive3D::CleanUp()
 {
     vertex_buffer_->Release();
     texture_->Release();

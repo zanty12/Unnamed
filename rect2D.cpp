@@ -35,7 +35,7 @@ void Rect2D::Start()
     D3D11_SUBRESOURCE_DATA sd{};
     sd.pSysMem = vertex;
 
-    Renderer::GetDevice()->CreateBuffer(&bd, &sd, &vertexBuffer_);
+    Renderer::GetDevice()->CreateBuffer(&bd, &sd, &vertex_buffer_);
 
     //Read texture
     TexMetadata metadata;
@@ -48,19 +48,9 @@ void Rect2D::Start()
     Renderer::CreatePixelShader(&pixel_shader_, pixel_shader_path_.c_str());
 }
 
-void Rect2D::Update()
+void Rect2D::Update(Entity* parent)
 {
 
-}
-
-
-void Rect2D::CleanUp()
-{
-    vertexBuffer_->Release();
-    texture_->Release();
-    vertex_shader_->Release();
-    pixel_shader_->Release();
-    vertex_layout_->Release();
 }
 
 void Rect2D::Draw()
@@ -75,7 +65,7 @@ void Rect2D::Draw()
     //vertex buffer
     UINT stride = sizeof(VERTEX_3D);
     UINT offset = 0;
-    Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertexBuffer_, &stride, &offset);
+    Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertex_buffer_, &stride, &offset);
     //texture
     Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &texture_);
     //primitive topology

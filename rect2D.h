@@ -7,7 +7,7 @@ public:
     Rect2D() = default;
     ~Rect2D() override = default;
     void Start() override;
-    void Update() override;
-    void CleanUp() override;
+    void Update(Entity* parent) override;
+
     void Draw() override;
 };

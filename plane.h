@@ -1,18 +1,15 @@
 ﻿#pragma once
-#include <d3d11.h>
 
+#include "primitive3D.h"
 #include "transform.h"
 
-class Plane
+
+class Plane : public Primitive3D
 {
 private:
     Transform transform_ = Transform::Identity();
-    ID3D11Buffer* vertex_buffer_{};
-    ID3D11ShaderResourceView* texture_{};
-
-    ID3D11VertexShader* vertex_shader_{};
-    ID3D11PixelShader* pixel_shader_{};
-    ID3D11InputLayout* vertex_layout_{};
 public:
-    
+    void Start() override;
+    void Update(Entity* parent) override;
+    void Draw() override;
 };

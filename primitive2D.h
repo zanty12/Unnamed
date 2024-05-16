@@ -6,22 +6,23 @@
 class Primitive2D : public Component
 {
 protected:
-    // Data
-    std::wstring texture_path_ = L"data/texture/Rider.png";
-    std::string vertex_shader_path_ = "data/shader/unlitTextureVS.cso";
-    std::string pixel_shader_path_= "data/shader/unlitTexturePS.cso";
-
     // DirectX resources
-    ID3D11Buffer* vertexBuffer_ = NULL;
+    ID3D11Buffer* vertex_buffer_ = NULL;
     ID3D11ShaderResourceView* texture_ = NULL;
     ID3D11VertexShader* vertex_shader_ = NULL;
     ID3D11PixelShader* pixel_shader_ = NULL;
     ID3D11InputLayout* vertex_layout_ = NULL;
+
+    // Data
+    std::wstring texture_path_ = L"data/texture/Rider.png";
+    std::string vertex_shader_path_ = "data/shader/unlitTextureVS.cso";
+    std::string pixel_shader_path_= "data/shader/unlitTexturePS.cso";
 public:
     Primitive2D() : Component("Primitive2D") {}
     virtual ~Primitive2D() = default;
 
     virtual void Draw() = 0;
+    void CleanUp() override;
 
     void SetTexturePath(const std::wstring& path) { texture_path_ = path; }
     void SetVertexShaderPath(const std::string& path) { vertex_shader_path_ = path; }

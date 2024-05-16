@@ -12,7 +12,7 @@ class Camera : public Component
 public:
      Camera() : Component("Camera") {}
      void Start() override;
-     void Update() override;
+     void Update(Entity* parent) override;
      void CleanUp() override;
      void Draw();
 };

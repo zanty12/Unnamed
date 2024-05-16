@@ -5,13 +5,13 @@
 
 void Camera::Start()
 {
-    if(parent_id_ > -1)
+    if(parent_id_ < 0)
     {
-        //Get the parent's transform
+        position_ = DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f);
     }
     else
     {
-        position_ = DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f);
+       //Get the transform of parent
     }
     target_ = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 }
@@ -21,7 +21,7 @@ void Camera::CleanUp()
 
 }
 
-void Camera::Update()
+void Camera::Update(Entity* parent)
 {
 
 }

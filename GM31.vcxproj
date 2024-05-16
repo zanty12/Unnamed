@@ -133,7 +133,8 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="component.h" />
-    <ClInclude Include="gameobject.h" />
+    <ClInclude Include="controller.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="imgui_impl_hal.h" />
     <ClInclude Include="lib\ImGui\imconfig.h" />
     <ClInclude Include="lib\ImGui\imgui.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="primitive2D.h" />
+    <ClInclude Include="primitive3D.h" />
     <ClInclude Include="rect2D.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene.h" />
@@ -155,7 +157,8 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="component.cpp" />
-    <ClCompile Include="gameobject.cpp" />
+    <ClCompile Include="controller.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="imgui_impl_hal.cpp" />
     <ClCompile Include="lib\ImGui\imgui.cpp" />
     <ClCompile Include="lib\ImGui\imgui_demo.cpp" />
@@ -168,6 +171,7 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="primitive2D.cpp" />
+    <ClCompile Include="primitive3D.cpp" />
     <ClCompile Include="rect2D.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="scene.cpp" />
