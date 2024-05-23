@@ -13,6 +13,7 @@ void TestScene::Setup()
     rect2D->AddComponent(new Rect2D());
     Entity* camera = Manager::MakeEntity("camera");
     camera->AddComponent(new Camera());
+    Transform::MoveTo(camera->GetTransform(),DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f));
     Entity* plane = Manager::MakeEntity("plane");
     plane->AddComponent(new Plane());
 

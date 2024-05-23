@@ -58,6 +58,7 @@ public:
     }
     void AddComponent(Component* component)
     {
+        component->AttachTo(id_);
         components_.push_back(component);
     }
     std::vector<Component*> GetComponents()

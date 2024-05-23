@@ -72,6 +72,7 @@ Entity* Manager::MakeEntity(std::string name)
 	Entity* entity = new Entity(entity_count_);
 	entity->SetName(name);
 	entities_.push_back(entity);
+	entity_count_++;
 	return entity;
 }
 

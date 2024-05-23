@@ -12,6 +12,7 @@
 void Player::Start()
 {
     entity_ = Manager::MakeEntity("player");
+    entity_->SetTag("Player");
     ModelRenderer* modelRenderer = new ModelRenderer();
     entity_->AddComponent(modelRenderer);
     entity_->AddComponent(new Controller());
