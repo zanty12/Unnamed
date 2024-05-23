@@ -21,8 +21,9 @@ void Camera::CleanUp()
 {
 }
 
-void Camera::Update(Entity* parent)
+void Camera::Update()
 {
+
 }
 
 void Camera::Draw()

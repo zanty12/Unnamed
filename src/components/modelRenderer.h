@@ -82,7 +82,7 @@ public:
     void Start() override;
     void Draw();
 
-    void Update(Entity* parent) override;
+    void Update() override;
 
     void CleanUp() override;
 };

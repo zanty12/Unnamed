@@ -1,7 +1,9 @@
 ﻿#include "main.h"
 #include "renderer.h"
+#include "manager.h"
 #include "plane.h"
 #include "entity.h"
+
 
 void Plane::Start()
 {
@@ -53,9 +55,12 @@ void Plane::Start()
 
 }
 
-void Plane::Update(Entity* parent)
+void Plane::Update()
 {
-    if(parent == nullptr)
+    //find parent
+    Entity* parent = Manager::FindEntity(parent_id_);
+
+    if(parent_id_ < 0 || parent == nullptr)
     {
         //do nothing
     }

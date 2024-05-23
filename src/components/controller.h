@@ -6,6 +6,6 @@ class Controller : public Component
 public:
     Controller() : Component("Controller") {}
     void Start() override{}
-    void Update(Entity* parent) override;
+    void Update() override;
     void CleanUp() override{}
 };

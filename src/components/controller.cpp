@@ -1,27 +1,39 @@
 ﻿#include "main.h"
 #include "input.h"
+#include "manager.h"
 #include "controller.h"
 #include "entity.h"
 
 
 
-void Controller::Update(Entity* parent)
+void Controller::Update()
 {
-    //move parent with keyboard input
-    if (Input::GetKeyPress('W'))
+    //find parent
+    Entity* parent = Manager::FindEntity(parent_id_);
+
+    if(parent_id_ < 0 || parent == nullptr)
     {
-        Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.0f, 0.0f, 0.1f));
+        //do nothing
     }
-    if (Input::GetKeyPress('S'))
+    else
     {
-        Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.0f, 0.0f, -0.1f));
+        //move parent with keyboard input
+        if (Input::GetKeyPress('W'))
+        {
+            Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.0f, 0.0f, 0.1f));
+        }
+        if (Input::GetKeyPress('S'))
+        {
+            Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.0f, 0.0f, -0.1f));
+        }
+        if (Input::GetKeyPress('A'))
+        {
+            Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(-0.1f, 0.0f, 0.0f));
+        }
+        if (Input::GetKeyPress('D'))
+        {
+            Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.1f, 0.0f, 0.0f));
+        }
     }
-    if (Input::GetKeyPress('A'))
-    {
-        Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(-0.1f, 0.0f, 0.0f));
-    }
-    if (Input::GetKeyPress('D'))
-    {
-        Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.1f, 0.0f, 0.0f));
-    }
+
 }

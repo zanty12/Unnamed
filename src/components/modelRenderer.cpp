@@ -5,6 +5,7 @@
 
 #include "main.h"
 #include "renderer.h"
+#include "manager.h"
 #include "modelRenderer.h"
 #include "entity.h"
 
@@ -57,15 +58,18 @@ void ModelRenderer::Draw()
     }
 }
 
-void ModelRenderer::Update(Entity* parent)
+void ModelRenderer::Update()
 {
-    if (parent == nullptr)
+    //find parent
+    Entity* parent = Manager::FindEntity(parent_id_);
+
+    if(parent_id_ < 0 || parent == nullptr)
     {
         //do nothing
     }
     else
     {
-        Transform::Copy(&transform_, parent->GetTransform());
+        Transform::Copy(&transform_,parent->GetTransform());
     }
 }
 

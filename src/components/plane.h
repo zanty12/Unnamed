@@ -7,6 +7,6 @@ class Plane : public Primitive3D
 {
 public:
     void Start() override;
-    void Update(Entity* parent) override;
+    void Update() override;
     void Draw() override;
 };

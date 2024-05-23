@@ -12,7 +12,7 @@ public:
     Component(std::string type) : type_(std::move(type)){}
     virtual ~Component() = default;
     virtual void Start() = 0;
-    virtual void Update(Entity* parent) = 0;
+    virtual void Update() = 0;
     virtual void CleanUp() = 0;
     int GetParentID() const { return parent_id_; }
     std::string GetType() const { return type_; }

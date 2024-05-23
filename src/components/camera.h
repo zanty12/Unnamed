@@ -13,7 +13,7 @@ class Camera : public Component, public Drawable
 public:
      Camera() : Component("Camera"),Drawable() {}
      void Start() override;
-     void Update(Entity* parent) override;
+     void Update() override;
      void CleanUp() override;
      void Draw() override;
 };

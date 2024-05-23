@@ -28,7 +28,7 @@ public:
     {
         for(auto component : components_)
         {
-            component->Update(this);
+            component->Update();
         }
     }
 

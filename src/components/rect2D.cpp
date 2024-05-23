@@ -1,8 +1,8 @@
 ﻿#include "main.h"
 #include "renderer.h"
-#include "rect2D.h"
-
+#include "manager.h"
 #include "entity.h"
+#include "rect2D.h"
 
 void Rect2D::Start()
 {
@@ -17,14 +17,17 @@ void Rect2D::Start()
     Renderer::CreatePixelShader(&pixel_shader_, pixel_shader_path_.c_str());
 }
 
-void Rect2D::Update(Entity* parent)
+void Rect2D::Update()
 {
-    if (parent == nullptr)
+    //find parent
+    Entity* parent = Manager::FindEntity(parent_id_);
+
+    if(parent_id_ < 0 || parent == nullptr)
     {
+        //do nothing
     }
     else
     {
-        //update pos to parent pos
         Transform::Copy(&transform_,parent->GetTransform());
     }
 }
