@@ -1,4 +1,5 @@
 #pragma once
+#include "transform.h"
 #include "traits/drawable.h"
 
 
@@ -49,7 +50,7 @@ struct MODEL
 #include "components/component.h"
 
 
-class ModelRenderer : public Component
+class ModelRenderer : public Component, public Drawable
 {
 private:
     static std::unordered_map<std::string, MODEL*> m_ModelPool;
@@ -60,6 +61,11 @@ private:
 
     MODEL* m_Model{};
 
+    ID3D11VertexShader* vertex_shader_ = nullptr;
+    ID3D11PixelShader* pixel_shader_ = nullptr;
+    ID3D11InputLayout* vertex_layout_ = nullptr;
+    Transform transform_ = Transform::Identity();
+
 public:
     static void Preload(const char* FileName);
     static void UnloadAll();
@@ -67,20 +73,16 @@ public:
 
     using Component::Component;
 
-    ModelRenderer() : Component("ModelRenderer") {}
+    ModelRenderer() : Component("ModelRenderer")
+    {
+    }
 
     void Load(const char* FileName);
 
-    void Start() override
-    {
-    };
+    void Start() override;
     void Draw();
 
-    void Update(Entity* parent) override
-    {
-    };
+    void Update(Entity* parent) override;
 
-    void CleanUp() override
-    {
-    };
+    void CleanUp() override;
 };

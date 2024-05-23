@@ -52,7 +52,6 @@ void Manager::Update()
 void Manager::Draw()
 {
 	Renderer::Begin();
-	testScene->Draw();
 	for(auto& drawable : drawables_)
 	{
 		if(drawable != nullptr)

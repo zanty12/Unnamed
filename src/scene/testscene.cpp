@@ -25,7 +25,3 @@ void TestScene::Setup()
     player->Start();
 }
 
-void TestScene::Draw()
-{
-    player->Draw();
-}
