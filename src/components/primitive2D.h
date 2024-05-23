@@ -2,7 +2,8 @@
 #include <d3d11.h>
 
 #include "Component.h"
-#include "traits/drawable.h"
+#include "../transform.h"
+#include "../traits/drawable.h"
 
 class Primitive2D : public Component, public Drawable
 {
@@ -15,9 +16,10 @@ protected:
     ID3D11InputLayout* vertex_layout_ = NULL;
 
     // Data
-    std::wstring texture_path_ = L"data/texture/Rider.png";
-    std::string vertex_shader_path_ = "data/shader/unlitTextureVS.cso";
-    std::string pixel_shader_path_= "data/shader/unlitTexturePS.cso";
+    std::wstring texture_path_ = L"asset\\texture\\Rider.png";
+    std::string vertex_shader_path_ = "asset\\shader\\unlitTextureVS.cso";
+    std::string pixel_shader_path_= "asset\\shader\\unlitTexturePS.cso";
+    Transform transform_ = Transform::Identity();
 public:
     Primitive2D() : Component("Primitive2D") {}
     virtual ~Primitive2D() = default;
@@ -30,4 +32,6 @@ public:
     std::wstring GetTexturePath() const { return texture_path_; }
     std::string GetVertexShaderPath() const { return vertex_shader_path_; }
     std::string GetPixelShaderPath() const { return pixel_shader_path_; }
+    Transform* GetTransform() {return &transform_;}
+    void SetTransform(Transform target) {}
 };

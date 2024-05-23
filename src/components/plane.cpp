@@ -61,7 +61,7 @@ void Plane::Update(Entity* parent)
     }
     else
     {
-        transform_ = *parent->GetTransform();
+        Transform::Copy(&transform_,parent->GetTransform());
     }
 }
 

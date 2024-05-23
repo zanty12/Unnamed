@@ -8,6 +8,7 @@ protected:
     int parent_id_ = -1;
     std::string type_;
 public:
+    Component() = delete;
     Component(std::string type) : type_(std::move(type)){}
     virtual ~Component() = default;
     virtual void Start() = 0;

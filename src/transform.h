@@ -54,4 +54,12 @@ public:
         transform->scale.z *= scale.z;
         return transform;
     }
+
+    static Transform* Copy(Transform* transform, const Transform* other)
+    {
+        transform->position = other->position;
+        transform->rotation = other->rotation;
+        transform->scale = other->scale;
+        return transform;
+    }
 };

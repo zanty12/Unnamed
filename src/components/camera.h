@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 
-#include "components/component.h"
-#include "traits/drawable.h"
+#include "component.h"
+#include "../traits/drawable.h"
 
 class Camera : public Component, public Drawable
 {

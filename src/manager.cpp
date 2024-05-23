@@ -1,10 +1,11 @@
 #include "main.h"
 #include "manager.h"
+#include "renderer.h"
+#include "input.h"
 
 #include "components/camera.h"
-#include "renderer.h"
 #include "imgui_impl_hal.h"
-#include "testscene.h"
+#include "scene/testscene.h"
 
 TestScene* testScene;
 int Manager::entity_count_ = 0;
@@ -14,6 +15,7 @@ std::vector<Drawable*> Manager::drawables_ = std::vector<Drawable*>();
 void Manager::Init()
 {
 	Renderer::Init();
+	Input::Init();
 	testScene = new TestScene();
 	testScene->Setup();
 }
@@ -22,6 +24,7 @@ void Manager::Init()
 void Manager::Uninit()
 {
 	Renderer::Uninit();
+	Input::Uninit();
 	delete testScene;
 	for (auto& entity : entities_)
 	{
@@ -35,6 +38,7 @@ void Manager::Uninit()
 
 void Manager::Update()
 {
+	Input::Update();
 	//update all entities
 	for (auto& entity : entities_)
 	{
@@ -48,6 +52,7 @@ void Manager::Update()
 void Manager::Draw()
 {
 	Renderer::Begin();
+	testScene->Draw();
 	for(auto& drawable : drawables_)
 	{
 		if(drawable != nullptr)

@@ -1,8 +1,11 @@
 ﻿#include "testscene.h"
-#include "manager.h"
-#include "components/camera.h"
-#include "components/plane.h"
-#include "components/rect2D.h"
+#include "../manager.h"
+#include "../objects/player.h"
+#include "../components/camera.h"
+#include "../components/controller.h"
+#include "../components/plane.h"
+#include "../components/rect2D.h"
+Player* player;
 
 void TestScene::Setup()
 {
@@ -13,7 +16,16 @@ void TestScene::Setup()
     Entity* plane = Manager::MakeEntity("plane");
     plane->AddComponent(new Plane());
 
+    player = new Player();
+
+
     rect2D->Start();
     camera->Start();
     plane->Start();
+    player->Start();
+}
+
+void TestScene::Draw()
+{
+    player->Draw();
 }

@@ -35,8 +35,8 @@ void ImGui_Hal::Initialize()
 	// ImGuiのスタイルをダークに設定
 	ImGui::StyleColorsDark();
 	// ファイルから日本語のフォントを追加
-	io.Fonts->AddFontFromFileTTF("data/fonts/NotoSansJP-Bold.ttf", 20.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
-	//io.Fonts->AddFontFromFileTTF("data/TEXTURE/JF-Dot-Kappa20-0213.ttf", 135.0f, nullptr);
+	io.Fonts->AddFontFromFileTTF("asset/fonts/NotoSansJP-Bold.ttf", 20.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
+	//io.Fonts->AddFontFromFileTTF("asset/TEXTURE/JF-Dot-Kappa20-0213.ttf", 135.0f, nullptr);
 	// マウスカーソルの描画を有効にする
 	io.MouseDrawCursor = true;
 }
