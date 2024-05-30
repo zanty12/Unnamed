@@ -7,5 +7,4 @@ public:
     TestScene() = default;
     ~TestScene() override = default;
     void Setup() override;
-    void Draw();
 };

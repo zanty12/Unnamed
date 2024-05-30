@@ -11,13 +11,13 @@
 TestScene* testScene;
 int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();
-std::vector<Drawable*> Manager::drawables_ = std::vector<Drawable*>();
 
 void Manager::Init()
 {
 	Renderer::Init();
 	Input::Init();
 	Time::Start();
+
 	testScene = new TestScene();
 	testScene->Setup();
 }
@@ -27,7 +27,7 @@ void Manager::Uninit()
 {
 	Renderer::Uninit();
 	Input::Uninit();
-	Time::Cleanup();
+	Time::CleanUp();
 	delete testScene;
 	for (auto& entity : entities_)
 	{
@@ -36,6 +36,7 @@ void Manager::Uninit()
 			delete entity;
 		}
 	}
+	RenderPL::CleanUp();
 	entities_.clear();
 }
 
@@ -43,6 +44,7 @@ void Manager::Update()
 {
 	Input::Update();
 	Time::Update();
+
 	//update all entities
 	for (auto& entity : entities_)
 	{
@@ -56,19 +58,15 @@ void Manager::Update()
 void Manager::Draw()
 {
 	Renderer::Begin();
-	for(auto& drawable : drawables_)
-	{
-		if(drawable != nullptr)
-		{
-			drawable->Draw();
-		}
-	}
+	RenderPL::Draw();
+
 	ImGui_Hal::BeginDraw();
 	ImGui::Begin("FPS");
 	ImGui::Text("Hello, world!");
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
 	ImGui_Hal::EndDraw();
+
 	Renderer::End();
 }
 
@@ -117,8 +115,4 @@ std::vector<Entity*> Manager::FindEntitiesWithTag(std::string tag)
 	return result;
 }
 
-void Manager::AddDrawable(Drawable* drawable)
-{
-	drawables_.push_back(drawable);
-}
 ;

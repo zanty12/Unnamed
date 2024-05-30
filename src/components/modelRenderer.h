@@ -73,7 +73,7 @@ public:
 
     using Component::Component;
 
-    ModelRenderer() : Component("ModelRenderer")
+    ModelRenderer() : Component("ModelRenderer"),Drawable(2)
     {
     }
 

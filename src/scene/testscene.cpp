@@ -18,9 +18,6 @@ void TestScene::Setup()
     rect2D->AddComponent(rect2DComponent);
     rect2D->AddComponent(texture2d);
 
-    Entity* camera = Manager::MakeEntity("camera");
-    camera->AddComponent(new Camera());
-    Transform::MoveTo(camera->GetTransform(),DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f));
     Entity* plane = Manager::MakeEntity("plane");
     Plane* planecomponent = new Plane();
     VideoTexture* video_texture = new VideoTexture("asset/video/banana.mp4");
@@ -30,11 +27,9 @@ void TestScene::Setup()
     plane->AddComponent(video_texture);
 
     player = new Player();
-
+    player->Start();
 
     rect2D->Start();
-    camera->Start();
     plane->Start();
-    player->Start();
 }
 

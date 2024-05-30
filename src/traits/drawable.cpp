@@ -2,7 +2,13 @@
 
 #include "../manager.h"
 
-Drawable::Drawable()
+Drawable::Drawable(int draw_priority)
 {
-    Manager::AddDrawable(this);
+    draw_priority_ = draw_priority;
+    RenderPL::AddDrawable(this);
+}
+
+Drawable::~Drawable()
+{
+    RenderPL::RemoveDrawable(this);
 }

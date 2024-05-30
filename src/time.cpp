@@ -11,7 +11,7 @@ void Time::Start(void)
     startTime = currentTime = previousTime = timeGetTime();
 }
 
-void Time::Cleanup(void)
+void Time::CleanUp(void)
 {
     startTime = timeGetTime();
     timeBeginPeriod(1000);

@@ -12,5 +12,4 @@ public:
     Player() = default;
     ~Player();
     void Start();
-    void Update();
 };

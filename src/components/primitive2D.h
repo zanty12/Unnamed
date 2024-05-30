@@ -21,7 +21,7 @@ protected:
     Transform transform_ = Transform::Identity();
     Texture* texture_ = nullptr;
 public:
-    Primitive2D() : Component("Primitive2D") {}
+    Primitive2D() : Component("Primitive2D"), Drawable(10) {}
     virtual ~Primitive2D() = default;
 
     void CleanUp() override;

@@ -11,7 +11,7 @@ private:
 public:
 
 	static void Start(void);
-	static void Cleanup(void);
+	static void CleanUp(void);
 	static void Update(void);
 	static float GetDeltaTime(void);
 	static float GetDeltaTime(float start);
