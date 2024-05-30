@@ -1,11 +1,14 @@
 #pragma once
-#include <unordered_map>
-#include <thread>
+#include "../main.h"
+#include "../renderer.h"
+#include <iostream>
+#include <list>
 
-#include "graphical.h"
-#include "sprite.h"
-#include "time.h"
-#include "lib/video_reader.hpp"
+#include "component.h"
+#include "../time.h"
+#include "../include/video_reader.hpp"
+#include "../imgui_impl_hal.h"
+#include "texture.h"
 
 struct frame_data
 {
@@ -13,31 +16,37 @@ struct frame_data
     uint8_t* data;
 };
 
-class Video
+class VideoTexture : public Texture
 {
 private:
+    //directx
     VideoReaderState vr_state_;
     ID3D11Texture2D* texture_;
     ID3D11ShaderResourceView* texture_view_;
+
+    //setting
+    std::string filename_;
+    XMFLOAT2 debug_window_size_ = XMFLOAT2(100.0f,100.0f);
+    XMFLOAT2 debug_window_pos_ = XMFLOAT2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    bool loop_ = false;
+
+    //video playback control
     uint8_t* frame_data_;
     bool first_frame_ = true;
     double time_ = 0.0;
-    float scale_ = 1.0f;
     std::list<frame_data> frame_buffer_;
-    std::string filename_;
-    bool loop_ = false;
     int64_t end_pts_ = 0;
     double pts_ = 0;
     bool loaded_ = false;
     int64_t first_frame_pts_ = 0;
-    Vector2 size_;
-    Vector2 window_pos_ = Vector2(Graphical::GetWidth() / 2, Graphical::GetHeight() / 2);
+
 
 public:
-    Video(const char* filename)
+    VideoTexture(const char* filename) : Texture("VideoPlayer"),filename_(filename){}
+
+    void Start() override
     {
-        filename_ = filename;
-        if (!video_reader_open(&vr_state_, filename))
+        if (!video_reader_open(&vr_state_, filename_.c_str()))
         {
             std::cout << "Couldn't open video file (make sure you set a video file that exists)\n";
         }
@@ -55,7 +64,7 @@ public:
         desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-        Graphical::GetDevice().Get()->CreateTexture2D(&desc, NULL, &texture_);
+        Renderer::GetDevice()->CreateTexture2D(&desc, NULL, &texture_);
 
         D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
         ZeroMemory(&srvDesc, sizeof(srvDesc));
@@ -63,7 +72,7 @@ public:
         srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
         srvDesc.Texture2D.MipLevels = desc.MipLevels;
         srvDesc.Texture2D.MostDetailedMip = 0;
-        Graphical::GetDevice().Get()->CreateShaderResourceView(texture_, &srvDesc, &texture_view_);
+        Renderer::GetDevice()->CreateShaderResourceView(texture_, &srvDesc, &texture_view_);
 
         // Allocate frame buffer
         constexpr int ALIGNMENT = 128;
@@ -75,10 +84,9 @@ public:
             std::cout << "Couldn't allocate frame buffer\n";
         }
 
-        size_ = Vector2(frame_width, frame_height);
-    }
-
-    ~Video()
+        debug_window_size_ = XMFLOAT2(frame_width, frame_height);
+    };
+    void CleanUp() override
     {
         _aligned_free(frame_data_);
         for (auto frame : frame_buffer_)
@@ -87,9 +95,11 @@ public:
         }
         video_reader_close(&vr_state_);
         texture_->Release();
-    }
+    };
 
-    void Update()
+    ~VideoTexture() override = default;
+
+    void Update() override
     {
         time_ += Time::GetDeltaTime();
 
@@ -144,14 +154,14 @@ public:
             pts_ = frame.ts;
             //load frame data to texture
             D3D11_MAPPED_SUBRESOURCE resource;
-            Graphical::GetDevice().GetContext()->Map(texture_, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+            Renderer::GetDeviceContext()->Map(texture_, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
             uint8_t* dest = (uint8_t*)resource.pData;
             for (int y = 0; y < vr_state_.height; ++y)
             {
                 memcpy(dest, frame_data_ + y * vr_state_.width * 4, vr_state_.width * 4);
                 dest += resource.RowPitch;
             }
-            Graphical::GetDevice().GetContext()->Unmap(texture_, 0);
+            Renderer::GetDeviceContext()->Unmap(texture_, 0);
 
             D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
             ZeroMemory(&srvDesc, sizeof(srvDesc));
@@ -159,34 +169,30 @@ public:
             srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
             srvDesc.Texture2D.MipLevels = 1;
             srvDesc.Texture2D.MostDetailedMip = 0;
-            Graphical::GetDevice().Get()->CreateShaderResourceView(texture_, &srvDesc, &texture_view_);
+            Renderer::GetDevice()->CreateShaderResourceView(texture_, &srvDesc, &texture_view_);
             // Remove the consumed frame from the buffer.
             _aligned_free(frame.data);
             frame_buffer_.pop_front();
         }
     }
 
-    void Draw()
+    void DebugDraw() const
     {
         ImGuiWindowFlags window_flags = 0;
         window_flags |= ImGuiWindowFlags_NoBackground;
         window_flags |= ImGuiWindowFlags_NoTitleBar;
         bool open = true;
-        ImGui::SetNextWindowPos(ImVec2(window_pos_.x - size_.x * scale_ / 2, window_pos_.y - size_.y * scale_ / 2));
+        ImGui::SetNextWindowPos(ImVec2(debug_window_pos_.x - debug_window_size_.x  / 2, debug_window_pos_.y - debug_window_size_.y  / 2));
         // Draw the texture with ImGui
         ImGui::Begin(filename_.c_str(), &open, window_flags);
         //ImGui::Text("time: %.2f, pts: %.2f", time_, pts_);
-        ImGui::Image((void*)texture_view_, ImVec2(size_.x * scale_, size_.y * scale_));
+        ImGui::Image((void*)texture_view_, ImVec2(debug_window_size_.x , debug_window_size_.y ));
         ImGui::End();
     }
 
-    void DrawAsResource(Color color = Color::White){
-        DrawResource(texture_view_, window_pos_, size_* scale_,color);
-    }
-
-    void SetScale(float scale)
+    ID3D11ShaderResourceView* GetView() override
     {
-        scale_ = scale;
+        return texture_view_;
     }
 
     void SetLoop(bool loop)
@@ -194,13 +200,13 @@ public:
         loop_ = loop;
     }
 
-    void SetSize(Vector2 size)
+    void SetSize(XMFLOAT2 size)
     {
-        size_ = size;
+        debug_window_size_ = size;
     }
 
-    void SetWindowPos(Vector2 pos)
+    void SetWindowPos(XMFLOAT2 pos)
     {
-        window_pos_ = pos;
+        debug_window_pos_ = pos;
     }
 };

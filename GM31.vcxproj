@@ -297,7 +297,9 @@
     <ClInclude Include="src\components\primitive2D.h" />
     <ClInclude Include="src\components\primitive3D.h" />
     <ClInclude Include="src\components\rect2D.h" />
-    <ClInclude Include="src\components\video.h" />
+    <ClInclude Include="src\components\texture.h" />
+    <ClInclude Include="src\components\texture2D.h" />
+    <ClInclude Include="src\components\videotexture.h" />
     <ClInclude Include="src\entity.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />
     <ClInclude Include="src\input.h" />
@@ -307,6 +309,7 @@
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\scene\scene.h" />
     <ClInclude Include="src\scene\testscene.h" />
+    <ClInclude Include="src\time.h" />
     <ClInclude Include="src\traits\drawable.h" />
     <ClInclude Include="src\traits\trait.h" />
     <ClInclude Include="src\transform.h" />
@@ -337,7 +340,13 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
-    <ClCompile Include="asset\shader\video.hlsl" />
+    <FxCompile Include="asset\shader\video.hlsl">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
     <ClCompile Include="include\ImGui\imgui.cpp" />
     <ClCompile Include="include\ImGui\imgui_demo.cpp" />
     <ClCompile Include="include\ImGui\imgui_draw.cpp" />
@@ -953,6 +962,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\time.cpp" />
     <ClCompile Include="src\traits\drawable.cpp" />
     <ClCompile Include="src\traits\trait.cpp" />
   </ItemGroup>
@@ -970,6 +980,31 @@
     <Content Include="asset\shader\unlitTextureVS.cso" />
     <Content Include="asset\texture\cat.png" />
     <Content Include="asset\texture\Rider.png" />
+    <Content Include="asset\video\banana.mp4" />
+    <Content Include="lib\avcodec-61.def" />
+    <Content Include="lib\avcodec.lib" />
+    <Content Include="lib\avdevice-61.def" />
+    <Content Include="lib\avdevice.lib" />
+    <Content Include="lib\avfilter-10.def" />
+    <Content Include="lib\avfilter.lib" />
+    <Content Include="lib\avformat-61.def" />
+    <Content Include="lib\avformat.lib" />
+    <Content Include="lib\avutil-59.def" />
+    <Content Include="lib\avutil.lib" />
+    <Content Include="lib\pkgconfig\libavcodec.pc" />
+    <Content Include="lib\pkgconfig\libavdevice.pc" />
+    <Content Include="lib\pkgconfig\libavfilter.pc" />
+    <Content Include="lib\pkgconfig\libavformat.pc" />
+    <Content Include="lib\pkgconfig\libavutil.pc" />
+    <Content Include="lib\pkgconfig\libpostproc.pc" />
+    <Content Include="lib\pkgconfig\libswresample.pc" />
+    <Content Include="lib\pkgconfig\libswscale.pc" />
+    <Content Include="lib\postproc-58.def" />
+    <Content Include="lib\postproc.lib" />
+    <Content Include="lib\swresample-5.def" />
+    <Content Include="lib\swresample.lib" />
+    <Content Include="lib\swscale-8.def" />
+    <Content Include="lib\swscale.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

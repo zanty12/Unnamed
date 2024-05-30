@@ -16,7 +16,7 @@
  * ImGuiのコンテキストを設定し、Win32とDirectX 11用のImGuiを初期化します。
  * また、スタイルをダークに設定し、ファイルから日本語のフォントを追加します。
  */
-void ImGui_Hal::Initialize()
+void ImGui_Hal::Start()
 {
 	// ImGuiのバージョンをチェック
 	IMGUI_CHECKVERSION();
@@ -46,7 +46,7 @@ void ImGui_Hal::Initialize()
  *
  * DirectX 11とWin32用のImGuiをシャットダウンし、ImGuiのコンテキストを破棄します。
  */
-void ImGui_Hal::Release()
+void ImGui_Hal::Cleanup()
 {
 	// DirectX 11用のImGuiをシャットダウン
 	ImGui_ImplDX11_Shutdown();

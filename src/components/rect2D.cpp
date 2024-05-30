@@ -7,11 +7,7 @@
 void Rect2D::Start()
 {
     //Read texture
-    TexMetadata metadata;
-    ScratchImage image;
-    LoadFromWICFile(texture_path_.c_str(), WIC_FLAGS_NONE, &metadata, image);
-    CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metadata, &texture_);
-    assert(texture_);
+    //texture_->Start();
 
     Renderer::CreateVertexShader(&vertex_shader_, &vertex_layout_, vertex_shader_path_.c_str());
     Renderer::CreatePixelShader(&pixel_shader_, pixel_shader_path_.c_str());
@@ -85,7 +81,8 @@ void Rect2D::Draw()
     UINT offset = 0;
     Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertex_buffer_, &stride, &offset);
     //texture
-    Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &texture_);
+    ID3D11ShaderResourceView* view = texture_->GetView();
+    Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &view);
     //material
     MATERIAL material;
     ZeroMemory(&material,sizeof(material));

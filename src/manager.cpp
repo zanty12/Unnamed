@@ -2,6 +2,7 @@
 #include "manager.h"
 #include "renderer.h"
 #include "input.h"
+#include "time.h"
 
 #include "components/camera.h"
 #include "imgui_impl_hal.h"
@@ -16,6 +17,7 @@ void Manager::Init()
 {
 	Renderer::Init();
 	Input::Init();
+	Time::Start();
 	testScene = new TestScene();
 	testScene->Setup();
 }
@@ -25,6 +27,7 @@ void Manager::Uninit()
 {
 	Renderer::Uninit();
 	Input::Uninit();
+	Time::Cleanup();
 	delete testScene;
 	for (auto& entity : entities_)
 	{
@@ -39,6 +42,7 @@ void Manager::Uninit()
 void Manager::Update()
 {
 	Input::Update();
+	Time::Update();
 	//update all entities
 	for (auto& entity : entities_)
 	{
@@ -60,8 +64,9 @@ void Manager::Draw()
 		}
 	}
 	ImGui_Hal::BeginDraw();
-	ImGui::Begin("test");
+	ImGui::Begin("FPS");
 	ImGui::Text("Hello, world!");
+	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
 	ImGui_Hal::EndDraw();
 	Renderer::End();

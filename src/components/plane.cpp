@@ -43,13 +43,6 @@ void Plane::Start()
 
     Renderer::GetDevice()->CreateBuffer(&buffer_desc,&subresource_data,&vertex_buffer_);
 
-    //Texture]
-    DirectX::TexMetadata metadata;
-    DirectX::ScratchImage scratch_image;
-    DirectX::LoadFromWICFile(texture_path_.c_str(),DirectX::WIC_FLAGS_NONE,&metadata,scratch_image);
-    DirectX::CreateShaderResourceView(Renderer::GetDevice(),scratch_image.GetImages(),scratch_image.GetImageCount(),metadata,&texture_);
-    assert(texture_);
-
     Renderer::CreateVertexShader(&vertex_shader_,&vertex_layout_,vertex_shader_path_.c_str());
     Renderer::CreatePixelShader(&pixel_shader_,pixel_shader_path_.c_str());
 
@@ -100,7 +93,8 @@ void Plane::Draw()
     Renderer::SetMaterial(material);
 
     //texture
-    Renderer::GetDeviceContext()->PSSetShaderResources(0,1,&texture_);
+    ID3D11ShaderResourceView* view = texture_->GetView();
+    Renderer::GetDeviceContext()->PSSetShaderResources(0,1,&view);
 
     //primitive topology
     Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);

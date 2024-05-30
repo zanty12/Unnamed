@@ -62,7 +62,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     dwExecLastTime = timeGetTime();
     dwCurrentTime = 0;
 
-    ImGui_Hal::Initialize();
+    ImGui_Hal::Start();
 
 
     MSG msg;
@@ -102,7 +102,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     Manager::Uninit();
 
-    ImGui_Hal::Release();
+    ImGui_Hal::Cleanup();
 
     CoUninitialize();
 
