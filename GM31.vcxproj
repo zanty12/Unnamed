@@ -297,6 +297,7 @@
     <ClInclude Include="src\components\primitive2D.h" />
     <ClInclude Include="src\components\primitive3D.h" />
     <ClInclude Include="src\components\rect2D.h" />
+    <ClInclude Include="src\components\rigidbody.h" />
     <ClInclude Include="src\components\texture.h" />
     <ClInclude Include="src\components\texture2D.h" />
     <ClInclude Include="src\components\videotexture.h" />
@@ -437,6 +438,7 @@
     <ClCompile Include="src\components\primitive2D.cpp" />
     <ClCompile Include="src\components\primitive3D.cpp" />
     <ClCompile Include="src\components\rect2D.cpp" />
+    <ClCompile Include="src\components\rigidbody.cpp" />
     <ClCompile Include="src\entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
