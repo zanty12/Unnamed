@@ -1,5 +1,4 @@
-﻿
-#include "main.h"
+﻿#include "main.h"
 #include "renderer.h"
 #include "manager.h"
 #include "player.h"
@@ -7,6 +6,7 @@
 #include "components/camera.h"
 #include "components/controller.h"
 #include "components/modelRenderer.h"
+#include "components/rigidbody.h"
 
 
 void Player::Start()
@@ -24,6 +24,10 @@ void Player::Start()
     Camera* camera = new Camera();
     entity_->AddComponent(camera);
     camera->Start();
+
+    RigidBody* rigidBody = new RigidBody();
+    entity_->AddComponent(rigidBody);
+    rigidBody->Start();
 }
 
 Player::~Player()

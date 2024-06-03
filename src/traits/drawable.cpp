@@ -2,7 +2,7 @@
 
 #include "../manager.h"
 
-Drawable::Drawable(int draw_priority)
+Drawable::Drawable(int draw_priority) : Trait("Drawable")
 {
     draw_priority_ = draw_priority;
     RenderPL::AddDrawable(this);

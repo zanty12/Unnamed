@@ -314,6 +314,7 @@
     <ClInclude Include="src\time.h" />
     <ClInclude Include="src\traits\drawable.h" />
     <ClInclude Include="src\traits\trait.h" />
+    <ClInclude Include="src\traits\unique.h" />
     <ClInclude Include="src\transform.h" />
   </ItemGroup>
   <ItemGroup>
@@ -1042,7 +1043,6 @@
     </ClCompile>
     <ClCompile Include="src\time.cpp" />
     <ClCompile Include="src\traits\drawable.cpp" />
-    <ClCompile Include="src\traits\trait.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

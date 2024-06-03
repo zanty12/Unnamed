@@ -12,7 +12,7 @@
 /**
  * @brief DebugUIクラスのメソッド
  *
- * このメソッドはDebugUIを初期化します。
+ * このメソッドはImGuiを初期化します。
  * ImGuiのコンテキストを設定し、Win32とDirectX 11用のImGuiを初期化します。
  * また、スタイルをダークに設定し、ファイルから日本語のフォントを追加します。
  */
@@ -42,7 +42,7 @@ void ImGui_Hal::Start()
 }
 
 /**
- * @brief このメソッドはDebugUIが使用していたリソースを解放します。
+ * @brief このメソッドはImGuiが使用していたリソースを解放します。
  *
  * DirectX 11とWin32用のImGuiをシャットダウンし、ImGuiのコンテキストを破棄します。
  */
@@ -58,7 +58,7 @@ void ImGui_Hal::Cleanup()
 
 
 /**
- * @brief このメソッドはDebugUIの描画プロセスを開始します。
+ * @brief このメソッドはImGuiの描画プロセスを開始します。
  *
  * 新しいフレームのためのImGuiを準備します。
  */
@@ -73,7 +73,7 @@ void ImGui_Hal::BeginDraw()
 }
 
 /**
- * @brief このメソッドはDebugUIの描画プロセスを終了します。
+ * @brief このメソッドはImGuiの描画プロセスを終了します。
  *
  * DirectX 11を使用してImGuiの描画データをレンダリングします。
  */

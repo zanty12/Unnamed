@@ -3,7 +3,7 @@
 #include "manager.h"
 #include "controller.h"
 #include "entity.h"
-
+#include "rigidbody.h"
 
 
 void Controller::Update()
@@ -33,6 +33,10 @@ void Controller::Update()
         if (Input::GetKeyPress('D'))
         {
             Transform::MoveBy(parent->GetTransform(), DirectX::XMFLOAT3(0.1f, 0.0f, 0.0f));
+        }
+        if(Input::GetKeyPress(VK_SPACE))
+        {
+            parent->GetComponent<RigidBody>()->SetLinearAccel(XMFLOAT3(0.0f, 20.0f, 0.0f));
         }
     }
 

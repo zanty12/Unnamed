@@ -2,7 +2,6 @@
 #include "../main.h"
 #include "../renderer.h"
 
-#include "component.h"
 #include "texture.h"
 
 class Texture2D : public Texture
