@@ -36,7 +36,9 @@ void Controller::Update()
         }
         if(Input::GetKeyPress(VK_SPACE))
         {
-            parent->GetComponent<RigidBody>()->SetLinearAccel(XMFLOAT3(0.0f, 20.0f, 0.0f));
+            RigidBody* rigidBody = parent->GetComponent<RigidBody>();
+            if(parent->GetComponent<RigidBody>() != nullptr)
+                rigidBody->SetLinearVel(XMFLOAT3(0.0f, 10.0f, 0.0f));
         }
     }
 

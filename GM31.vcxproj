@@ -300,6 +300,7 @@
     <ClInclude Include="src\components\rigidbody.h" />
     <ClInclude Include="src\components\texture.h" />
     <ClInclude Include="src\components\texture2D.h" />
+    <ClInclude Include="src\components\transformconstraint.h" />
     <ClInclude Include="src\components\videotexture.h" />
     <ClInclude Include="src\entity.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />

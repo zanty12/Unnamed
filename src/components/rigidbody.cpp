@@ -25,9 +25,9 @@ void RigidBody::Update()
     //apply gravity
     if (use_gravity_)
     {
-        linear_accel_.x += gravity_.x;
-        linear_accel_.y += gravity_.y;
-        linear_accel_.z += gravity_.z;
+        linear_vel_.x += gravity_.x * dt;
+        linear_vel_.y += gravity_.y * dt;
+        linear_vel_.z += gravity_.z * dt;
     }
     //apply acceleration
     linear_vel_.x += linear_accel_.x * dt;

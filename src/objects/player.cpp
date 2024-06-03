@@ -7,6 +7,7 @@
 #include "components/controller.h"
 #include "components/modelRenderer.h"
 #include "components/rigidbody.h"
+#include "components/transformconstraint.h"
 
 
 void Player::Start()
@@ -28,6 +29,9 @@ void Player::Start()
     RigidBody* rigidBody = new RigidBody();
     entity_->AddComponent(rigidBody);
     rigidBody->Start();
+
+    TransformConstraint* transformConstraint = new TransformConstraint();
+    entity_->AddComponent(transformConstraint);
 }
 
 Player::~Player()
