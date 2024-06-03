@@ -9,11 +9,11 @@
 #include "components/modelRenderer.h"
 
 
-
 void Player::Start()
 {
     entity_ = Manager::MakeEntity("player");
     entity_->SetTag("Player");
+
     entity_->AddComponent(new Controller());
 
     ModelRenderer* modelRenderer = new ModelRenderer();

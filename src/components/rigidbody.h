@@ -8,6 +8,8 @@ private:
     XMFLOAT3 linear_vel_;
     XMFLOAT3 angular_vel_;
     XMFLOAT3 gravity_;
+    XMFLOAT3 linear_accel_;
+    XMFLOAT3 angular_accel_;
 
     float mass = 1;
 public:
@@ -22,21 +24,6 @@ public:
     void Update() override;
     void CleanUp() override{};
 
-    void LinearAccel(XMFLOAT3 accel)
-    {
-        linear_vel_.x += accel.x;
-        linear_vel_.y += accel.y;
-        linear_vel_.z += accel.z;
-    }
-
-    void AngularAccel(XMFLOAT3 accel)
-    {
-        angular_vel_.x += accel.x;
-        angular_vel_.y += accel.y;
-        angular_vel_.z += accel.z;
-    }
-
-
     void SetLinearVel(XMFLOAT3 vel)
     {
         linear_vel_ = vel;
@@ -45,6 +32,16 @@ public:
     void SetAngularVel(XMFLOAT3 vel)
     {
         angular_vel_ = vel;
+    }
+
+    void SetLinearAccel(XMFLOAT3 accel)
+    {
+        linear_accel_ = accel;
+    }
+
+    void SetAngularAccel(XMFLOAT3 accel)
+    {
+        angular_accel_ = accel;
     }
 
     void SetGravity(XMFLOAT3 gravity)
@@ -65,6 +62,16 @@ public:
     XMFLOAT3 GetAngularVel()
     {
         return angular_vel_;
+    }
+
+    XMFLOAT3 GetLinearAccel()
+    {
+        return linear_accel_;
+    }
+
+    XMFLOAT3 GetAngularAccel()
+    {
+        return angular_accel_;
     }
 
     XMFLOAT3 GetGravity()
