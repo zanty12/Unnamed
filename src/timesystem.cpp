@@ -1,4 +1,4 @@
-#include "time.h"
+#include "timesystem.h"
 DWORD Time::startTime = 0;
 DWORD Time::previousTime = 0;
 DWORD Time::currentTime = 0;

@@ -1,7 +1,7 @@
 ﻿#include "rigidbody.h"
 
 #include "manager.h"
-#include "time.h"
+#include "..\timesystem.h"
 #include "transform.h"
 
 void RigidBody::Update()

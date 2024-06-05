@@ -1,11 +1,11 @@
 ﻿#include "testscene.h"
-#include "../manager.h"
-#include "../objects/player.h"
-#include "../components/camera.h"
-#include "../components/plane.h"
-#include "../components/rect2D.h"
-#include "src/components/texture2D.h"
-#include "src/components/videotexture.h"
+#include "manager.h"
+#include "objects/player.h"
+#include "components/camera.h"
+#include "components/plane.h"
+#include "components/rect2D.h"
+#include "components/texture2D.h"
+#include "components/videotexture.h"
 Player* player;
 
 void TestScene::Setup()

@@ -5,7 +5,7 @@
 #include <list>
 
 #include "component.h"
-#include "../time.h"
+#include "..\timesystem.h"
 #include "../include/video_reader.hpp"
 #include "../imgui_impl_hal.h"
 #include "texture.h"
