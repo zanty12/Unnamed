@@ -34,7 +34,3 @@ void Player::Start()
     entity_->AddComponent(transformConstraint);
 }
 
-Player::~Player()
-{
-    delete entity_;
-}

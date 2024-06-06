@@ -8,6 +8,7 @@ class Manager
 private:
 	static int entity_count_; //keeps track of created entities,even after deleting
 	static std::vector<Entity*> entities_;
+	static std::vector<int> removal_queue_;
 
 public:
 	static void Init();
@@ -15,9 +16,10 @@ public:
 	static void Update();
 	static void Draw();
 	static Entity* MakeEntity(std::string name = "Entity");
-	static void RemoveEntity(int id);
+	static bool RemoveEntity(int id);
 	static Entity* FindEntity(int id);
 	static Entity* FindEntity(std::string name);
 	static std::vector<Entity*> FindEntitiesWithTag(std::string tag);
+	static void QueueForRemoval(int id);
 
 };

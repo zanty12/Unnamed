@@ -319,6 +319,7 @@
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\manager.h" />
+    <ClInclude Include="src\objects\bullet.h" />
     <ClInclude Include="src\objects\player.h" />
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\renderPL.h" />
@@ -754,6 +755,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\objects\bullet.cpp" />
     <ClCompile Include="src\objects\player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

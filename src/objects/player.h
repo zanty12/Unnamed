@@ -9,6 +9,6 @@ private:
 
 public:
     Player() = default;
-    ~Player();
+    ~Player()= default;
     void Start();
 };

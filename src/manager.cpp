@@ -8,9 +8,10 @@
 #include "imgui_impl_hal.h"
 #include "scene/testscene.h"
 
-TestScene* testScene;
+Scene* testScene;
 int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();
+std::vector<int> Manager::removal_queue_ = std::vector<int>();
 
 void Manager::Init()
 {
@@ -53,6 +54,16 @@ void Manager::Update()
 			entity->Update();
 		}
 	}
+
+	//delete entities in the removal queue
+	for (auto& id : removal_queue_)
+	{
+		if (entities_[id] != nullptr)
+		{
+			RemoveEntity(id);
+		}
+
+	}
 }
 
 void Manager::Draw()
@@ -79,11 +90,18 @@ Entity* Manager::MakeEntity(std::string name)
 	return entity;
 }
 
-void Manager::RemoveEntity(int id)
+bool Manager::RemoveEntity(int id)
 {
-	delete entities_[id];
-	entities_[id] = nullptr;
+	if(entities_[id])
+	{
+		delete entities_[id];
+		entities_[id] = nullptr;
+		return true;
+	}
+	return false;
 }
+
+
 
 Entity* Manager::FindEntity(int id)
 {
@@ -113,6 +131,11 @@ std::vector<Entity*> Manager::FindEntitiesWithTag(std::string tag)
 		}
 	}
 	return result;
+}
+
+void Manager::QueueForRemoval(int id)
+{
+	removal_queue_.push_back(id);
 }
 
 ;

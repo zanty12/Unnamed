@@ -6,6 +6,7 @@
 #include "components/rect2D.h"
 #include "components/texture2D.h"
 #include "components/videotexture.h"
+#include "objects/bullet.h"
 Player* player;
 
 void TestScene::Setup()
@@ -28,6 +29,10 @@ void TestScene::Setup()
 
     player = new Player();
     player->Start();
+
+    Bullet* bullet = new Bullet();
+    bullet->SetVelocity(XMFLOAT3(0.0f, 0.0f, 2.0f));
+    bullet->Start();
 
     rect2D->Start();
     plane->Start();
