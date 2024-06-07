@@ -301,9 +301,10 @@
     <ClInclude Include="include\libswscale\version.h" />
     <ClInclude Include="include\libswscale\version_major.h" />
     <ClInclude Include="include\video_reader.hpp" />
+    <ClInclude Include="src\components\bulletbehaviour.h" />
     <ClInclude Include="src\components\camera.h" />
     <ClInclude Include="src\components\component.h" />
-    <ClInclude Include="src\components\controller.h" />
+    <ClInclude Include="src\components\playercontroller.h" />
     <ClInclude Include="src\components\modelRenderer.h" />
     <ClInclude Include="src\components\plane.h" />
     <ClInclude Include="src\components\primitive2D.h" />
@@ -327,6 +328,7 @@
     <ClInclude Include="src\scene\testscene.h" />
     <ClInclude Include="src\timesystem.h" />
     <ClInclude Include="src\traits\drawable.h" />
+    <ClInclude Include="src\traits\object\spawnable.h" />
     <ClInclude Include="src\traits\trait.h" />
     <ClInclude Include="src\traits\unique.h" />
     <ClInclude Include="src\transform.h" />
@@ -373,7 +375,7 @@
     <ClCompile Include="include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="include\video_reader.cpp" />
     <ClCompile Include="src\components\camera.cpp" />
-    <ClCompile Include="src\components\controller.cpp" />
+    <ClCompile Include="src\components\playercontroller.cpp" />
     <ClCompile Include="src\components\modelRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

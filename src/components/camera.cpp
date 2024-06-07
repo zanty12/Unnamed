@@ -7,17 +7,17 @@ void Camera::Start()
 {
     if (parent_id_ < 0)
     {
-        position_ = DirectX::XMFLOAT3(0.0f + offset.x, 0.0f + offset.y, 0.0f + offset.z);
-        target_ = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+        position_ = DirectX::XMFLOAT3(0.0f + offset_.x, 0.0f + offset_.y, 0.0f + offset_.z);
     }
     else
     {
         //Get the transform of parent
         position_ = Manager::FindEntity(parent_id_)->GetTransform()->position;
-        target_ = position_;
-        position_.x += offset.x;
-        position_.y += offset.y;
-        position_.z += offset.z;
+        if(look_at_parent_)
+            target_ = position_;
+        position_.x += offset_.x;
+        position_.y += offset_.y;
+        position_.z += offset_.z;
     }
 }
 
@@ -31,10 +31,11 @@ void Camera::Update()
     {
         //Get the transform of parent
         position_ = Manager::FindEntity(parent_id_)->GetTransform()->position;
-        target_ = position_;
-        position_.x += offset.x;
-        position_.y += offset.y;
-        position_.z += offset.z;
+        if(look_at_parent_)
+            target_ = position_;
+        position_.x += offset_.x;
+        position_.y += offset_.y;
+        position_.z += offset_.z;
     }
 }
 

@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include "component.h"
 
-class Controller : public Component
+class PlayerController : public Component
 {
 public:
-    Controller() : Component("Controller") {}
+    PlayerController() : Component("Controller") {}
+    ~PlayerController() override = default;
     void Start() override{}
     void Update() override;
     void CleanUp() override{}

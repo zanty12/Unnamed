@@ -7,11 +7,13 @@
 #include "components/camera.h"
 #include "imgui_impl_hal.h"
 #include "scene/testscene.h"
+#include "traits/object/spawnable.h"
 
 Scene* testScene;
 int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();
 std::vector<int> Manager::removal_queue_ = std::vector<int>();
+std::vector<Spawnable*> Manager::spawn_queue_ = std::vector<Spawnable*>();
 
 void Manager::Init()
 {
@@ -45,6 +47,13 @@ void Manager::Update()
 {
 	Input::Update();
 	Time::Update();
+	//spawn entities
+	for (auto& spawnable : spawn_queue_)
+	{
+		spawnable->Spawn();
+	}
+	//clean up spawn queue
+	spawn_queue_.clear();
 
 	//update all entities
 	for (auto& entity : entities_)
@@ -136,6 +145,11 @@ std::vector<Entity*> Manager::FindEntitiesWithTag(std::string tag)
 void Manager::QueueForRemoval(int id)
 {
 	removal_queue_.push_back(id);
+}
+
+void Manager::QueueForSpawn(Spawnable* spawnable)
+{
+	spawn_queue_.push_back(spawnable);
 }
 
 ;

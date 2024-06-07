@@ -4,7 +4,7 @@
 #include "player.h"
 
 #include "components/camera.h"
-#include "components/controller.h"
+#include "components/playercontroller.h"
 #include "components/modelRenderer.h"
 #include "components/rigidbody.h"
 #include "components/transformconstraint.h"
@@ -15,7 +15,7 @@ void Player::Start()
     entity_ = Manager::MakeEntity("player");
     entity_->SetTag("Player");
 
-    entity_->AddComponent(new Controller());
+    entity_->AddComponent(new PlayerController());
 
     ModelRenderer* modelRenderer = new ModelRenderer();
     entity_->AddComponent(modelRenderer);
@@ -24,6 +24,7 @@ void Player::Start()
 
     Camera* camera = new Camera();
     entity_->AddComponent(camera);
+    camera->SetLookAtParent(true);
     camera->Start();
 
     RigidBody* rigidBody = new RigidBody();

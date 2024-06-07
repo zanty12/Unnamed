@@ -75,6 +75,11 @@ public:
         return id_;
     }
 
+    void SetId(int id)
+    {
+        id_ = id;
+    }
+
     std::string GetName()
     {
         return name_;

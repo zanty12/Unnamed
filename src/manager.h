@@ -3,12 +3,14 @@
 #include "entity.h"
 #include "renderPL.h"
 
+class Spawnable;
 class Manager
 {
 private:
 	static int entity_count_; //keeps track of created entities,even after deleting
 	static std::vector<Entity*> entities_;
 	static std::vector<int> removal_queue_;
+	static std::vector<Spawnable*> spawn_queue_;
 
 public:
 	static void Init();
@@ -21,5 +23,6 @@ public:
 	static Entity* FindEntity(std::string name);
 	static std::vector<Entity*> FindEntitiesWithTag(std::string tag);
 	static void QueueForRemoval(int id);
+	static void QueueForSpawn(Spawnable* spawnable);
 
 };

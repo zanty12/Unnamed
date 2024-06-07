@@ -30,10 +30,6 @@ void TestScene::Setup()
     player = new Player();
     player->Start();
 
-    Bullet* bullet = new Bullet();
-    bullet->SetVelocity(XMFLOAT3(0.0f, 0.0f, 2.0f));
-    bullet->Start();
-
     rect2D->Start();
     plane->Start();
 }

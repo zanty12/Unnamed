@@ -7,9 +7,10 @@
 class Camera : public Component, public Drawable
 {
      DirectX::XMFLOAT3 position_;
-     DirectX::XMFLOAT3 offset = DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f);
+     DirectX::XMFLOAT3 offset_ = DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f);
      DirectX::XMFLOAT3 target_;
      DirectX::XMFLOAT4X4 view_matrix_;
+     bool look_at_parent_ = false;
 
 public:
      Camera() : Component("Camera"),Drawable(0) {}
@@ -18,4 +19,8 @@ public:
      void CleanUp() override;
      void Draw() override;
      void SetTarget(DirectX::XMFLOAT3 target) { target_ = target;}
+     XMFLOAT3 GetOffset() { return offset_; }
+     void SetOffset(XMFLOAT3 offset) { offset_ = offset; }
+     void SetLookAtParent(bool look) { look_at_parent_ = look; }
+     XMFLOAT3 GetPosition() { return position_; }
 };
