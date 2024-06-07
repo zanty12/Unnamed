@@ -64,6 +64,7 @@ public:
         return transform;
     }
 
+    //return the forward vector of a transform
     static XMFLOAT3 GetForward(Transform* transform)
     {
         XMMATRIX rot = XMMatrixRotationRollPitchYaw(transform->rotation.x, transform->rotation.y, transform->rotation.z);
@@ -73,6 +74,7 @@ public:
         return forward;
     }
 
+    // return the normalized right vector of a forward vector
     static XMFLOAT3 GetRight(XMFLOAT3 forward)
     {
         XMFLOAT3 right;
@@ -96,7 +98,7 @@ public:
         XMStoreFloat3(&rotatedPoint, XMVector3TransformCoord(XMLoadFloat3(&translatedPoint),rotationMatrix));
 
         // Translate back
-        XMStoreFloat3(&rotatedPoint,XMLoadFloat3(&rotatedPoint) - XMLoadFloat3(&targetpt));
+        XMStoreFloat3(&rotatedPoint,XMLoadFloat3(&rotatedPoint) + XMLoadFloat3(&targetpt));
 
         return rotatedPoint;
     }
