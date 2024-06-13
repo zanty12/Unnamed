@@ -6,6 +6,7 @@
 
 #include "components/CCamera.h"
 #include "imgui_impl_hal.h"
+#include "textureLoader.h"
 #include "scene/testscene.h"
 #include "traits/object/spawnable.h"
 
@@ -41,6 +42,7 @@ void Manager::Uninit()
 		}
 	}
 	RenderPL::CleanUp();
+	TextureLoader::CleanUp();
 	entities_.clear();
 }
 

@@ -327,6 +327,7 @@
     <ClInclude Include="src\renderPL.h" />
     <ClInclude Include="src\scene\scene.h" />
     <ClInclude Include="src\scene\testscene.h" />
+    <ClInclude Include="src\textureLoader.h" />
     <ClInclude Include="src\timesystem.h" />
     <ClInclude Include="src\traits\drawable.h" />
     <ClInclude Include="src\traits\object\spawnable.h" />
@@ -1059,6 +1060,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\textureLoader.cpp" />
     <ClCompile Include="src\timesystem.cpp" />
     <ClCompile Include="src\traits\drawable.cpp" />
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "../renderer.h"
 
 #include "CTexture.h"
+#include "textureLoader.h"
 
 class CTexture2D : public CTexture
 {
@@ -24,11 +25,12 @@ public:
     void Start() override
     {
         //Texture
-        DirectX::TexMetadata metadata;
+        /*DirectX::TexMetadata metadata;
         DirectX::ScratchImage scratch_image;
         DirectX::LoadFromWICFile(texture_path_.c_str(), DirectX::WIC_FLAGS_NONE, &metadata, scratch_image);
         DirectX::CreateShaderResourceView(Renderer::GetDevice(), scratch_image.GetImages(),
-                                          scratch_image.GetImageCount(), metadata, &view_);
+                                          scratch_image.GetImageCount(), metadata, &view_);*/
+        view_ = TextureLoader::LoadTexture(texture_path_);
         assert(view_);
     }
 
