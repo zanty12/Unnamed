@@ -8,9 +8,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4508ec7c-826c-4e87-8e47-e29a65d3b29d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/asset/texture/explosion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CSprite2D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GM31/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GM31/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GM31/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GM31/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/playercontroller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/playercontroller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transform.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/transform.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GM31.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GM31.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/bulletbehaviour.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CBulletBehaviour.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CCamera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CCamera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/component.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Component.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modelRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CModelRenderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modelRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CModelRenderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/plane.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPlane.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/plane.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPlane.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/playercontroller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPlayerController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/playercontroller.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPlayerController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive2D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPrimitive2D.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPrimitive2D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive3D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPrimitive3D.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive3D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CPrimitive3D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rect2D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CRect2D.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rect2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CRect2D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rigidbody.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CRigidBody.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rigidbody.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CRigidBody.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/texture.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CTexture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/texture2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CTexture2D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/transformconstraint.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CTransformConstraint.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/videotexture.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CVideoTexture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/objects/bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/objects/bullet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/objects/player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/objects/player.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/testscene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/testscene.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +81,66 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files (x86)/Windows Kits/10/Include/10.0.22000.0/um/DirectXMath.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/directxtex_desktop_win10.2024.6.5.1/include/DirectXTex.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/memory" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/type_traits" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/vector" root0="SKIP_HIGHLIGHTING" />
@@ -65,28 +154,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C++ Project.GM31.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C++ Project.GM31.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\admin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\admin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\admin\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\admin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\admin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\admin\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="GM31" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -132,7 +221,9 @@
       <workItem from="1717658513329" duration="6298000" />
       <workItem from="1717681160998" duration="142000" />
       <workItem from="1717724519558" duration="9605000" />
-      <workItem from="1717734976295" duration="1253000" />
+      <workItem from="1717734976295" duration="1377000" />
+      <workItem from="1718204806519" duration="212000" />
+      <workItem from="1718260289078" duration="9797000" />
     </task>
     <task id="LOCAL-00001" summary="adjusted includes">
       <option name="closed" value="true" />
@@ -166,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717734851597</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed camera rotation">
+      <option name="closed" value="true" />
+      <created>1717736364845</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717736364845</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,13 +290,15 @@
     <MESSAGE value="reverted ffmpeg change" />
     <MESSAGE value="added bullet" />
     <MESSAGE value="added spawnable object trait" />
-    <option name="LAST_COMMIT_MESSAGE" value="added spawnable object trait" />
+    <MESSAGE value="fixed camera rotation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed camera rotation" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="CppProject">
         <watch expression="this" />
         <watch expression="Manager::entities_" />
+        <watch expression="world" />
       </configuration>
     </watches-manager>
   </component>

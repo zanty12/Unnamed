@@ -1,17 +1,17 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 
-#include "component.h"
+#include "Component.h"
 #include "manager.h"
 #include "transform.h"
 
-class TransformConstraint : public Component
+class CTransformConstraint : public Component
 {
 private:
     DirectX::XMFLOAT3 position_start_ = DirectX::XMFLOAT3(-100, 0, -100);
     DirectX::XMFLOAT3 position_end_ = DirectX::XMFLOAT3(100, 100, 100);
 public:
-    TransformConstraint() : Component("TransformConstraint")
+    CTransformConstraint() : Component("TransformConstraint")
     {
     }
     void Start() override{};
@@ -46,5 +46,5 @@ public:
         }
     }
     void CleanUp() override{};
-    ~TransformConstraint() override = default;
+    ~CTransformConstraint() override = default;
 };

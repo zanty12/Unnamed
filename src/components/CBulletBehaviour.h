@@ -1,16 +1,16 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 #include "manager.h"
-#include "component.h"
+#include "Component.h"
 
 
-class BulletBehaviour : public Component
+class CBulletBehaviour : public Component
 {
 private:
     DirectX::XMFLOAT3 start_pos_;
 public:
-    BulletBehaviour() : Component("BulletBehaviour") {};
-    ~BulletBehaviour() override= default;
+    CBulletBehaviour() : Component("BulletBehaviour") {};
+    ~CBulletBehaviour() override= default;
     void Start() override
     {
         start_pos_ = Manager::FindEntity(parent_id_)->GetTransform()->position;

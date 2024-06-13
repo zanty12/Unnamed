@@ -3,11 +3,11 @@
 #include "manager.h"
 #include "player.h"
 
-#include "components/camera.h"
-#include "components/playercontroller.h"
-#include "components/modelRenderer.h"
-#include "components/rigidbody.h"
-#include "components/transformconstraint.h"
+#include "components/CCamera.h"
+#include "components/CPlayerController.h"
+#include "components/CModelRenderer.h"
+#include "components/CRigidBody.h"
+#include "components/CTransformConstraint.h"
 
 
 void Player::Start()
@@ -15,23 +15,24 @@ void Player::Start()
     entity_ = Manager::MakeEntity("player");
     entity_->SetTag("Player");
 
-    entity_->AddComponent(new PlayerController());
+    entity_->AddComponent(new CPlayerController());
 
-    ModelRenderer* modelRenderer = new ModelRenderer();
+    CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\player.obj");
     modelRenderer->Start();
 
-    Camera* camera = new Camera();
+    CCamera* camera = new CCamera();
     entity_->AddComponent(camera);
     camera->SetLookAtParent(true);
+    camera->Activate();
     camera->Start();
 
-    RigidBody* rigidBody = new RigidBody();
+    CRigidBody* rigidBody = new CRigidBody();
     entity_->AddComponent(rigidBody);
     rigidBody->Start();
 
-    TransformConstraint* transformConstraint = new TransformConstraint();
+    CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);
 }
 

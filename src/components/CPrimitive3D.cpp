@@ -1,6 +1,6 @@
-﻿#include "primitive3D.h"
+﻿#include "CPrimitive3D.h"
 
-void Primitive3D::CleanUp()
+void CPrimitive3D::CleanUp()
 {
     vertex_buffer_->Release();
     vertex_shader_->Release();

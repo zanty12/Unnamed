@@ -2,6 +2,7 @@
 #include "traits/drawable.h"
 #include "entity.h"
 #include "renderPL.h"
+#include "components/CCamera.h"
 
 class Spawnable;
 class Manager
@@ -11,6 +12,7 @@ private:
 	static std::vector<Entity*> entities_;
 	static std::vector<int> removal_queue_;
 	static std::vector<Spawnable*> spawn_queue_;
+	static CCamera* active_camera_;
 
 public:
 	static void Init();
@@ -24,5 +26,6 @@ public:
 	static std::vector<Entity*> FindEntitiesWithTag(std::string tag);
 	static void QueueForRemoval(int id);
 	static void QueueForSpawn(Spawnable* spawnable);
-
+	static CCamera* GetActiveCamera();
+	static void SetActiveCamera(CCamera* camera);
 };

@@ -2,11 +2,11 @@
 #include <d3d11.h>
 
 #include "Component.h"
-#include "texture.h"
+#include "CTexture.h"
 #include "../transform.h"
 #include "../traits/drawable.h"
 
-class Primitive2D : public Component, public Drawable
+class CPrimitive2D : public Component, public Drawable
 {
 protected:
     // DirectX resources
@@ -19,17 +19,17 @@ protected:
     std::string vertex_shader_path_ = "asset\\shader\\unlitTextureVS.cso";
     std::string pixel_shader_path_= "asset\\shader\\unlitTexturePS.cso";
     Transform transform_ = Transform::Identity();
-    Texture* texture_ = nullptr;
+    CTexture* texture_ = nullptr;
 public:
-    Primitive2D() : Component("Primitive2D"), Drawable(10) {}
-    virtual ~Primitive2D() = default;
+    CPrimitive2D() : Component("Primitive2D"), Drawable(10) {}
+    virtual ~CPrimitive2D() = default;
 
     void CleanUp() override;
 
     void SetVertexShaderPath(const std::string& path) { vertex_shader_path_ = path; }
     void SetPixelShaderPath(const std::string& path) { pixel_shader_path_ = path; }
     void SetTransform(Transform target) {}
-    void SetTexture(Texture* texture) { texture_ = texture; }
+    void SetTexture(CTexture* texture) { texture_ = texture; }
 
     std::string GetVertexShaderPath() const { return vertex_shader_path_; }
     std::string GetPixelShaderPath() const { return pixel_shader_path_; }

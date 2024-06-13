@@ -6,14 +6,14 @@
 #include "main.h"
 #include "renderer.h"
 #include "manager.h"
-#include "modelRenderer.h"
+#include "CModelRenderer.h"
 #include "entity.h"
 
 
-std::unordered_map<std::string, MODEL*> ModelRenderer::m_ModelPool;
+std::unordered_map<std::string, MODEL*> CModelRenderer::m_ModelPool;
 
 
-void ModelRenderer::Draw()
+void CModelRenderer::Draw()
 {
 
     //input layout
@@ -58,7 +58,7 @@ void ModelRenderer::Draw()
     }
 }
 
-void ModelRenderer::Update()
+void CModelRenderer::Update()
 {
     //find parent
     Entity* parent = Manager::FindEntity(parent_id_);
@@ -73,7 +73,7 @@ void ModelRenderer::Update()
     }
 }
 
-void ModelRenderer::CleanUp()
+void CModelRenderer::CleanUp()
 {
     if(vertex_layout_)
         vertex_layout_->Release();
@@ -83,7 +83,7 @@ void ModelRenderer::CleanUp()
         pixel_shader_->Release();
 }
 
-void ModelRenderer::Preload(const char* FileName)
+void CModelRenderer::Preload(const char* FileName)
 {
     if (m_ModelPool.count(FileName) > 0)
     {
@@ -97,7 +97,7 @@ void ModelRenderer::Preload(const char* FileName)
 }
 
 
-void ModelRenderer::UnloadAll()
+void CModelRenderer::UnloadAll()
 {
     for (std::pair<const std::string, MODEL*> pair : m_ModelPool)
     {
@@ -119,7 +119,7 @@ void ModelRenderer::UnloadAll()
 }
 
 
-void ModelRenderer::Load(const char* FileName)
+void CModelRenderer::Load(const char* FileName)
 {
     if (m_ModelPool.count(FileName) > 0)
     {
@@ -133,13 +133,13 @@ void ModelRenderer::Load(const char* FileName)
     m_ModelPool[FileName] = m_Model;
 }
 
-void ModelRenderer::Start()
+void CModelRenderer::Start()
 {
     Renderer::CreateVertexShader(&vertex_shader_, &vertex_layout_, "asset\\shader\\unlitTextureVS.cso");
     Renderer::CreatePixelShader(&pixel_shader_, "asset\\shader\\unlitTexturePS.cso");
 }
 
-void ModelRenderer::LoadModel(const char* FileName, MODEL* Model)
+void CModelRenderer::LoadModel(const char* FileName, MODEL* Model)
 {
     MODEL_OBJ modelObj;
     LoadObj(FileName, &modelObj);
@@ -215,7 +215,7 @@ void ModelRenderer::LoadModel(const char* FileName, MODEL* Model)
 
 
 //モデル読込////////////////////////////////////////////
-void ModelRenderer::LoadObj(const char* FileName, MODEL_OBJ* ModelObj)
+void CModelRenderer::LoadObj(const char* FileName, MODEL_OBJ* ModelObj)
 {
     char dir[MAX_PATH];
     strcpy(dir, FileName);
@@ -453,7 +453,7 @@ void ModelRenderer::LoadObj(const char* FileName, MODEL_OBJ* ModelObj)
 
 
 //マテリアル読み込み///////////////////////////////////////////////////////////////////
-void ModelRenderer::LoadMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, unsigned int* MaterialNum)
+void CModelRenderer::LoadMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, unsigned int* MaterialNum)
 {
     char dir[MAX_PATH];
     strcpy(dir, FileName);

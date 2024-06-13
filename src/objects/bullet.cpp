@@ -3,9 +3,9 @@
 #include "bullet.h"
 
 #include "manager.h"
-#include "components/bulletbehaviour.h"
-#include "components/modelRenderer.h"
-#include "components/rigidbody.h"
+#include "components/CBulletBehaviour.h"
+#include "components/CModelRenderer.h"
+#include "components/CRigidBody.h"
 
 void Bullet::Start()
 {
@@ -13,18 +13,18 @@ void Bullet::Start()
     entity_->GetTransform()->position = pos_;
     entity_->SetTag("Bullet");
 
-    ModelRenderer* modelRenderer = new ModelRenderer();
+    CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\bullet.obj");
     modelRenderer->Start();
 
-    RigidBody* rigidBody = new RigidBody();
+    CRigidBody* rigidBody = new CRigidBody();
     entity_->AddComponent(rigidBody);
     rigidBody->SetUseGravity(false);
     rigidBody->SetLinearVel(vel_);
     rigidBody->Start();
 
-    BulletBehaviour* bulletBehaviour = new BulletBehaviour();
+    CBulletBehaviour* bulletBehaviour = new CBulletBehaviour();
     entity_->AddComponent(bulletBehaviour);
     bulletBehaviour->Start();
 }

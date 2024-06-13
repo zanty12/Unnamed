@@ -301,20 +301,21 @@
     <ClInclude Include="include\libswscale\version.h" />
     <ClInclude Include="include\libswscale\version_major.h" />
     <ClInclude Include="include\video_reader.hpp" />
-    <ClInclude Include="src\components\bulletbehaviour.h" />
-    <ClInclude Include="src\components\camera.h" />
-    <ClInclude Include="src\components\component.h" />
-    <ClInclude Include="src\components\playercontroller.h" />
-    <ClInclude Include="src\components\modelRenderer.h" />
-    <ClInclude Include="src\components\plane.h" />
-    <ClInclude Include="src\components\primitive2D.h" />
-    <ClInclude Include="src\components\primitive3D.h" />
-    <ClInclude Include="src\components\rect2D.h" />
-    <ClInclude Include="src\components\rigidbody.h" />
-    <ClInclude Include="src\components\texture.h" />
-    <ClInclude Include="src\components\texture2D.h" />
-    <ClInclude Include="src\components\transformconstraint.h" />
-    <ClInclude Include="src\components\videotexture.h" />
+    <ClInclude Include="src\components\CBulletBehaviour.h" />
+    <ClInclude Include="src\components\CCamera.h" />
+    <ClInclude Include="src\components\Component.h" />
+    <ClInclude Include="src\components\CPlayerController.h" />
+    <ClInclude Include="src\components\CModelRenderer.h" />
+    <ClInclude Include="src\components\CPlane.h" />
+    <ClInclude Include="src\components\CPrimitive2D.h" />
+    <ClInclude Include="src\components\CPrimitive3D.h" />
+    <ClInclude Include="src\components\CRect2D.h" />
+    <ClInclude Include="src\components\CRigidBody.h" />
+    <ClInclude Include="src\components\CSprite2D.h" />
+    <ClInclude Include="src\components\CTexture.h" />
+    <ClInclude Include="src\components\CTexture2D.h" />
+    <ClInclude Include="src\components\CTransformConstraint.h" />
+    <ClInclude Include="src\components\CVideoTexture.h" />
     <ClInclude Include="src\entity.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />
     <ClInclude Include="src\input.h" />
@@ -374,9 +375,9 @@
     <ClCompile Include="include\ImGui\imgui_tables.cpp" />
     <ClCompile Include="include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="include\video_reader.cpp" />
-    <ClCompile Include="src\components\camera.cpp" />
-    <ClCompile Include="src\components\playercontroller.cpp" />
-    <ClCompile Include="src\components\modelRenderer.cpp">
+    <ClCompile Include="src\components\CCamera.cpp" />
+    <ClCompile Include="src\components\CPlayerController.cpp" />
+    <ClCompile Include="src\components\CModelRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -451,11 +452,11 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\src;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="src\components\plane.cpp" />
-    <ClCompile Include="src\components\primitive2D.cpp" />
-    <ClCompile Include="src\components\primitive3D.cpp" />
-    <ClCompile Include="src\components\rect2D.cpp" />
-    <ClCompile Include="src\components\rigidbody.cpp" />
+    <ClCompile Include="src\components\CPlane.cpp" />
+    <ClCompile Include="src\components\CPrimitive2D.cpp" />
+    <ClCompile Include="src\components\CPrimitive3D.cpp" />
+    <ClCompile Include="src\components\CRect2D.cpp" />
+    <ClCompile Include="src\components\CRigidBody.cpp" />
     <ClCompile Include="src\entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

@@ -4,7 +4,7 @@
 #include "input.h"
 #include "timesystem.h"
 
-#include "components/camera.h"
+#include "components/CCamera.h"
 #include "imgui_impl_hal.h"
 #include "scene/testscene.h"
 #include "traits/object/spawnable.h"
@@ -14,6 +14,7 @@ int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();
 std::vector<int> Manager::removal_queue_ = std::vector<int>();
 std::vector<Spawnable*> Manager::spawn_queue_ = std::vector<Spawnable*>();
+CCamera* Manager::active_camera_ = nullptr;
 
 void Manager::Init()
 {
@@ -47,13 +48,7 @@ void Manager::Update()
 {
 	Input::Update();
 	Time::Update();
-	//spawn entities
-	for (auto& spawnable : spawn_queue_)
-	{
-		spawnable->Spawn();
-	}
-	//clean up spawn queue
-	spawn_queue_.clear();
+
 
 	//update all entities
 	for (auto& entity : entities_)
@@ -71,8 +66,14 @@ void Manager::Update()
 		{
 			RemoveEntity(id);
 		}
-
 	}
+	//spawn entities
+	for (auto& spawnable : spawn_queue_)
+	{
+		spawnable->Spawn();
+	}
+	//clean up spawn queue
+	spawn_queue_.clear();
 }
 
 void Manager::Draw()
@@ -150,6 +151,18 @@ void Manager::QueueForRemoval(int id)
 void Manager::QueueForSpawn(Spawnable* spawnable)
 {
 	spawn_queue_.push_back(spawnable);
+}
+
+CCamera* Manager::GetActiveCamera()
+{
+	return active_camera_;
+}
+
+void Manager::SetActiveCamera(CCamera* camera)
+{
+	if(active_camera_)
+		active_camera_->Deactivate();
+	active_camera_ = camera;
 }
 
 ;

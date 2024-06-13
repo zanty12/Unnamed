@@ -1,15 +1,15 @@
 ﻿#include "main.h"
 #include "input.h"
 #include "manager.h"
-#include "playercontroller.h"
+#include "CPlayerController.h"
 
-#include "camera.h"
+#include "CCamera.h"
 #include "entity.h"
-#include "rigidbody.h"
+#include "CRigidBody.h"
 #include "timesystem.h"
 #include "objects/bullet.h"
 
-void PlayerController::Update()
+void CPlayerController::Update()
 {
     //find parent
     Entity* parent = Manager::FindEntity(parent_id_);
@@ -20,7 +20,7 @@ void PlayerController::Update()
     else
     {
         //get camera component
-        Camera* camera = parent->GetComponent<Camera>();
+        CCamera* camera = parent->GetComponent<CCamera>();
         XMFLOAT3 camera_pos = camera->GetPosition();
         XMFLOAT3 parent_pos = parent->GetTransform()->position;
         float dt = Time::GetDeltaTime();
@@ -127,8 +127,8 @@ void PlayerController::Update()
         //jump
         if (Input::GetKeyPress(VK_SPACE))
         {
-            RigidBody* rigidBody = parent->GetComponent<RigidBody>();
-            if (parent->GetComponent<RigidBody>() != nullptr)
+            CRigidBody* rigidBody = parent->GetComponent<CRigidBody>();
+            if (parent->GetComponent<CRigidBody>() != nullptr)
                 rigidBody->SetLinearVel(XMFLOAT3(0.0f, 10.0f, 0.0f));
         }
         //shoot bullet
@@ -140,9 +140,11 @@ void PlayerController::Update()
             //normalize forward vector
             XMStoreFloat3(&forward, XMVector3Normalize(XMLoadFloat3(&forward)));
             //set bullet velocity to forward vector
-            forward = XMFLOAT3(forward.x * 2.0f, forward.y * 2.0f, forward.z * 2.0f);
+            forward = XMFLOAT3(-forward.x * 5.0f, forward.y * 5.0f, -forward.z * 5.0f);
             bullet->SetVelocity(forward);
-            bullet->SetPosition(parent_pos);
+            XMFLOAT3 bullet_pos = parent_pos;
+            bullet_pos.y += 1.0f;
+            bullet->SetPosition(bullet_pos);
             bullet->QueueSpawn();
         }
     }

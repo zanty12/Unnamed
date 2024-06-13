@@ -6,7 +6,7 @@
 #pragma once
 #include <vector>
 
-#include "components/component.h"
+#include "components/Component.h"
 #include "transform.h"
 #include "traits/unique.h"
 

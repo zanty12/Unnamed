@@ -4,11 +4,11 @@
 #include <iostream>
 #include <list>
 
-#include "component.h"
+#include "Component.h"
 #include "..\timesystem.h"
 #include "../include/video_reader.hpp"
 #include "../imgui_impl_hal.h"
-#include "texture.h"
+#include "CTexture.h"
 
 struct frame_data
 {
@@ -16,7 +16,7 @@ struct frame_data
     uint8_t* data;
 };
 
-class VideoTexture : public Texture
+class CVideoTexture : public CTexture
 {
 private:
     //directx
@@ -42,7 +42,7 @@ private:
 
 
 public:
-    VideoTexture(const char* filename) : Texture("VideoPlayer"),filename_(filename){}
+    CVideoTexture(const char* filename) : CTexture("VideoPlayer"),filename_(filename){}
 
     void Start() override
     {
@@ -97,7 +97,7 @@ public:
         texture_->Release();
     };
 
-    ~VideoTexture() override = default;
+    ~CVideoTexture() override = default;
 
     void Update() override
     {

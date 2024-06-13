@@ -1,6 +1,6 @@
-﻿#include "primitive2D.h"
+﻿#include "CPrimitive2D.h"
 
-void Primitive2D::CleanUp()
+void CPrimitive2D::CleanUp()
 {
     if(vertex_buffer_)
         vertex_buffer_->Release();

@@ -47,10 +47,10 @@ struct MODEL
 
 #include <string>
 #include <unordered_map>
-#include "components/component.h"
+#include "components/Component.h"
 
 
-class ModelRenderer : public Component, public Drawable
+class CModelRenderer : public Component, public Drawable
 {
 private:
     static std::unordered_map<std::string, MODEL*> m_ModelPool;
@@ -73,7 +73,7 @@ public:
 
     using Component::Component;
 
-    ModelRenderer() : Component("ModelRenderer"),Drawable(2)
+    CModelRenderer() : Component("ModelRenderer"),Drawable(2)
     {
     }
 

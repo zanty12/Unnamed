@@ -1,10 +1,10 @@
-﻿#include "rigidbody.h"
+﻿#include "CRigidBody.h"
 
 #include "manager.h"
 #include "..\timesystem.h"
 #include "transform.h"
 
-void RigidBody::Update()
+void CRigidBody::Update()
 {
     float dt = Time::GetDeltaTime();
 

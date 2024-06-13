@@ -1,12 +1,12 @@
 ﻿#pragma once
 #include <d3d11.h>
 
-#include "component.h"
-#include "texture.h"
+#include "Component.h"
+#include "CTexture.h"
 #include "../traits/drawable.h"
 #include "../transform.h"
 
-class Primitive3D : public Component, public Drawable
+class CPrimitive3D : public Component, public Drawable
 {
 protected:
     //directx
@@ -19,10 +19,10 @@ protected:
     std::string vertex_shader_path_ = "asset\\shader\\unlitTextureVS.cso";
     std::string pixel_shader_path_= "asset\\shader\\unlitTexturePS.cso";
     Transform transform_ = Transform::Identity();
-    Texture* texture_ = nullptr;
+    CTexture* texture_ = nullptr;
 
 public:
-    Primitive3D() : Component("Primitive3D"),Drawable(2){}
+    CPrimitive3D() : Component("Primitive3D"),Drawable(2){}
     void CleanUp() override;
-    void SetTexture(Texture* texture) { texture_ = texture; }
+    void SetTexture(CTexture* texture) { texture_ = texture; }
 };

@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "main.h"
-#include "component.h"
+#include "Component.h"
 #include "traits/unique.h"
 
-class RigidBody : public Component, public Unique
+class CRigidBody : public Component, public Unique
 {
 private:
     XMFLOAT3 linear_vel_ = XMFLOAT3(0, 0, 0);
@@ -25,11 +25,11 @@ private:
     bool constrain_angular_z_ = false;
 
 public:
-    RigidBody() : Component("RigidBody")
+    CRigidBody() : Component("RigidBody")
     {
     }
 
-    ~RigidBody() override = default;
+    ~CRigidBody() override = default;
 
     void Start() override
     {
