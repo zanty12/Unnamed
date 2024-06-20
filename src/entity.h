@@ -4,8 +4,8 @@
  */
 
 #pragma once
+#include <mutex>
 #include <vector>
-
 #include "components/Component.h"
 #include "transform.h"
 #include "traits/unique.h"
@@ -44,6 +44,8 @@ private:
      * @brief The list of components attached to the Entity.
      */
     std::vector<Component*> components_;
+
+    std::mutex mutex_;
 public:
     Entity(int id) : id_(id) , transform_(Transform::Identity()){};
 
@@ -57,13 +59,7 @@ public:
         }
     }
 
-    void Update()
-    {
-        for(auto component : components_)
-        {
-            component->Update();
-        }
-    }
+    void Update();
 
     Transform* GetTransform()
     {
@@ -147,4 +143,13 @@ public:
         return nullptr;
     }
 
+    void Lock()
+    {
+        mutex_.lock();
+    }
+
+    void Unlock()
+    {
+        mutex_.unlock();
+    }
 };

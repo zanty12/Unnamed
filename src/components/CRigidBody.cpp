@@ -82,10 +82,13 @@ void CRigidBody::Update()
     if(parent_id_ > -1)
     {
         //get parent transform
-        Transform* parent_transform = Manager::FindEntity(parent_id_)->GetTransform();
+        Entity* parent = Manager::FindEntity(parent_id_);
+        parent->Lock();
+        Transform* parent_transform = parent->GetTransform();
         //apply linear velocity
         Transform::MoveBy(parent_transform, XMFLOAT3(linear_vel_.x * dt, linear_vel_.y * dt, linear_vel_.z * dt));
         //apply angular velocity
         Transform::RotateBy(parent_transform, XMFLOAT3(angular_vel_.x * dt, angular_vel_.y * dt, angular_vel_.z * dt));
+        parent->Unlock();
     }
 }

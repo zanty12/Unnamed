@@ -2,6 +2,7 @@
 #include "traits/drawable.h"
 #include "entity.h"
 #include "renderPL.h"
+#include "threadpool.h"
 #include "components/CCamera.h"
 
 class Spawnable;
@@ -13,6 +14,7 @@ private:
 	static std::vector<int> removal_queue_;
 	static std::vector<Spawnable*> spawn_queue_;
 	static CCamera* active_camera_;
+	static ThreadPool thread_pool_;
 
 public:
 	static void Init();
@@ -28,4 +30,5 @@ public:
 	static void QueueForSpawn(Spawnable* spawnable);
 	static CCamera* GetActiveCamera();
 	static void SetActiveCamera(CCamera* camera);
+	static ThreadPool& GetThreadPool();
 };

@@ -7,7 +7,7 @@
 #include "components/CSprite2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
-#include "objects/bullet.h"
+#include "objects/explosion.h"
 Player* player;
 
 void TestScene::Setup()
@@ -29,19 +29,7 @@ void TestScene::Setup()
     plane->AddComponent(video_texture);
     planecomponent->SetEndUV(XMFLOAT2(10.0f,10.0f));
 
-    Entity* explosion = Manager::MakeEntity("explosion");
-    Transform::ScaleTo(explosion->GetTransform(),XMFLOAT3(0.1f,0.1f,0.1f));
-    Transform::RotateTo(explosion->GetTransform(),XMFLOAT3(-3.14f/2.0f,0.0,0.0f));
-    CPlane* explosion_component = new CPlane();
-    CSprite2D* sprite2d = new CSprite2D();
-    sprite2d->SetWidth(4);
-    sprite2d->SetHeight(4);
-    sprite2d->SetLoop(0);
-    sprite2d->SetFPS(16);
-    explosion_component->SetBillboard(1);
-    explosion_component->SetTexture(sprite2d);
-    explosion->AddComponent(explosion_component);
-    explosion->AddComponent(sprite2d);
+    Explosion* explosion = new Explosion();
 
     player = new Player();
     player->Start();

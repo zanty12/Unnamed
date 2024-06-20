@@ -3,7 +3,6 @@
 #include "manager.h"
 #include "Component.h"
 
-
 class CBulletBehaviour : public Component
 {
 private:

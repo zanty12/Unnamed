@@ -13,6 +13,7 @@ void CPlayerController::Update()
 {
     //find parent
     Entity* parent = Manager::FindEntity(parent_id_);
+    parent->Lock();
     if (parent_id_ < 0 || parent == nullptr)
     {
         //do nothing
@@ -148,4 +149,5 @@ void CPlayerController::Update()
             bullet->QueueSpawn();
         }
     }
+    parent->Unlock();
 }

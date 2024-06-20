@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "CTexture.h"
+#include "Priorites.h"
 #include "../traits/drawable.h"
 #include "../transform.h"
 

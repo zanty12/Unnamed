@@ -104,7 +104,7 @@ public:
         time_ += Time::GetDeltaTime();
 
         // Define a constant for the maximum buffer size.
-        const int MAX_BUFFER_SIZE = 1; // Change this value as needed.
+        const int MAX_BUFFER_SIZE = 5; // Change this value as needed.
 
         int64_t pts = 0;
         // Check if the buffer is not full before loading frame data.

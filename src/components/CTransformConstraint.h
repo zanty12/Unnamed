@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <DirectXMath.h>
-
 #include "Component.h"
 #include "manager.h"
 #include "transform.h"
@@ -17,7 +16,9 @@ public:
     void Start() override{};
     void Update() override{
         //constrain position
-        Transform* transform = Manager::FindEntity(parent_id_)->GetTransform();
+        Entity* parent = Manager::FindEntity(parent_id_);
+        parent->Lock();
+        Transform* transform = parent->GetTransform();
         if (transform->position.x < position_start_.x)
         {
             Transform::MoveTo(transform,DirectX::XMFLOAT3(position_start_.x, transform->position.y, transform->position.z));
@@ -44,6 +45,7 @@ public:
         {
             Transform::MoveTo(transform,DirectX::XMFLOAT3(transform->position.x, transform->position.y, position_end_.z));
         }
+        parent->Unlock();
     }
     void CleanUp() override{};
     ~CTransformConstraint() override = default;

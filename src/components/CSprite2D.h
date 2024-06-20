@@ -5,6 +5,7 @@
 #include "CTexture.h"
 #include "manager.h"
 #include "timesystem.h"
+#include "textureLoader.h"
 
 class CSprite2D : public CTexture
 {
@@ -35,11 +36,7 @@ public:
     void Start() override
     {
         //Texture
-        DirectX::TexMetadata metadata;
-        DirectX::ScratchImage scratch_image;
-        DirectX::LoadFromWICFile(texture_path_.c_str(), DirectX::WIC_FLAGS_NONE, &metadata, scratch_image);
-        DirectX::CreateShaderResourceView(Renderer::GetDevice(), scratch_image.GetImages(),
-                                          scratch_image.GetImageCount(), metadata, &view_);
+        view_ = TextureLoader::LoadTexture(texture_path_);
         assert(view_);
         end_u_ = 1.0f / static_cast<float>(width_);
         end_v_ = 1.0f / static_cast<float>(height_);
