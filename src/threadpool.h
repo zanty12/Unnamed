@@ -58,7 +58,7 @@ public:
                         task = this->tasks_.top();
                         this->tasks_.pop();
                     }
-//make sure the threads run tasks with the same priority
+//TODO: make sure the threads run tasks with the same priority
                     //std::cout<<"thread id: "<<std::this_thread::get_id()<<" working on task with priority: "<<task.priority<<"\n";
                     ++working_threads_; // increment counter when starting a task
                     task.func();
