@@ -72,6 +72,7 @@ void Manager::Update()
         if(thread_pool_.GetWorkingThreads()<=0 && thread_pool_.GetTasksCount()<=0)
             break;
     }
+    thread_pool_.StopProcessing();
 
     //delete entities in the removal queue
     for (auto& id : removal_queue_)
