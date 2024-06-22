@@ -69,7 +69,7 @@ void Manager::Update()
     //wait for all threads to finish
     while(true)
     {
-        if(thread_pool_.GetWorkingThreads()<=0)
+        if(thread_pool_.GetWorkingThreads()<=0 && thread_pool_.GetTasksCount()<=0)
             break;
     }
 

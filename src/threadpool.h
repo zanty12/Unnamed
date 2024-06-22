@@ -30,7 +30,8 @@ class ThreadPool
 private:
     std::vector<std::thread> workers_;
     std::priority_queue<Task> tasks_;
-    std::atomic<int> working_threads_ = 0; // counter for working threads
+    std::atomic<int> working_threads_{0}; // counter for working threads
+    std::atomic<int> task_priority_{0}; // counter for task priority
 
 
     std::mutex queueMutex_;
@@ -39,34 +40,59 @@ private:
     bool start_processing_ = false; // flag to indicate whether to start processing tasks
 
 public:
-    ThreadPool() {
+    ThreadPool()
+    {
         size_t numThreads = std::thread::hardware_concurrency();
         workers_.reserve(numThreads);
-        for (size_t i = 0; i < numThreads; ++i) {
-            workers_.emplace_back([this] {
-                while (true) {
+        for (size_t i = 0; i < numThreads; ++i)
+        {
+            workers_.emplace_back([this]
+            {
+                while (true)
+                {
                     Task task;
                     {
                         std::unique_lock<std::mutex> lock(this->queueMutex_);
-                        this->condition_.wait(lock, [this] {
+                        this->condition_.wait(lock, [this]
+                        {
                             return this->stop_ || (this->start_processing_ && !this->tasks_.empty());
                         });
 
                         if (this->stop_)
                             return;
 
-                        task = this->tasks_.top();
-                        this->tasks_.pop();
+                        //if there are higher priority tasks, wait for them to finish
+                        if (!this->tasks_.empty() && this->tasks_.top().priority < task_priority_ && this->
+                            working_threads_ > 0)
+                        {
+                            std::cout << "thread id: " << std::this_thread::get_id() <<
+                                " waiting for task with priority: " << task_priority_ << "\n";
+                            std::cout << "current task priority: " << this->tasks_.top().priority << "\n";
+                            this->condition_.wait(lock, [this]
+                            {
+                                return this->stop_ || (this->start_processing_ && !this->tasks_.empty() && (this->tasks_.
+                                    top().priority >= task_priority_ || this->working_threads_ <= 0));
+                            });
+                        }
+                        //if current task has higher priority than current priority, or there are no tasks running
+                        else if (!this->tasks_.empty() && this->tasks_.top().priority >= task_priority_ || this->
+                            working_threads_ == 0)
+                        {
+                            task = this->tasks_.top();
+                            this->tasks_.pop();
+                            //set current priority to the priority of the task that was just executed
+                            task_priority_ = task.priority;
+                            //std::cout<<"thread id: "<<std::this_thread::get_id()<<" working on task with priority: "<<task.priority<<"\n";
+                            ++working_threads_; // increment counter when starting a task
+                            task.func();
+                            --working_threads_; // decrement counter when finishing a task
+                            //std::cout<<"thread id: "<<std::this_thread::get_id()<<" finished task with priority: "<<task.priority<<"\n";
+                        }
                     }
-//TODO: make sure the threads run tasks with the same priority
-                    //std::cout<<"thread id: "<<std::this_thread::get_id()<<" working on task with priority: "<<task.priority<<"\n";
-                    ++working_threads_; // increment counter when starting a task
-                    task.func();
-                    --working_threads_; // decrement counter when finishing a task
-                    //std::cout<<"thread id: "<<std::this_thread::get_id()<<" finished task with priority: "<<task.priority<<"\n";
 
                     // Reset the start_processing_ flag if there are no more tasks
-                    if (this->tasks_.empty()) {
+                    if (this->tasks_.empty())
+                    {
                         std::unique_lock<std::mutex> lock(this->queueMutex_);
                         start_processing_ = false;
                     }
@@ -101,7 +127,8 @@ public:
         condition_.notify_one();
     }
 
-    void StartProcessing() {
+    void StartProcessing()
+    {
         {
             std::unique_lock<std::mutex> lock(queueMutex_);
             start_processing_ = true;
@@ -125,7 +152,8 @@ public:
         return tasks_.size();
     }
 
-    int GetWorkingThreads() const {
+    int GetWorkingThreads() const
+    {
         return working_threads_;
     }
 };
