@@ -136,15 +136,13 @@ public:
         condition_.notify_all();
     }
 
-    void WaitForJoin()
+    void StopProcessing()
     {
-        /*{
+        {
             std::unique_lock<std::mutex> lock(queueMutex_);
-            stop_ = true;
+            start_processing_ = false;
         }
-        condition_.notify_all();*/
-        for (std::thread& worker : workers_)
-            worker.join();
+        condition_.notify_all();
     }
 
     int GetTasksCount() const
