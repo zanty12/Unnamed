@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "main.h"
 #include "Component.h"
-#include "Priorites.h"
+#include "processpriority.h"
 #include "traits/unique.h"
 
 class CRigidBody : public Component, public Unique

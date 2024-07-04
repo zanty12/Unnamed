@@ -10,6 +10,7 @@
 
 #include "components/CCamera.h"
 #include "imgui_impl_hal.h"
+#include "physicssystem3D.h"
 #include "textureLoader.h"
 #include "scene/testscene.h"
 #include "traits/object/spawnable.h"
@@ -64,6 +65,9 @@ void Manager::Update()
             entity->Update();
         }
     }
+    //update physics
+    PhysicsSystem3D::UpdateCollisions();
+    PhysicsSystem3D::ApplyCollisions();
 
     thread_pool_.StartProcessing();
     //wait for all threads to finish

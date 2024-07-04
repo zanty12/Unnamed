@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <string>
 #define PRIORITIES_H_
-#include "Priorites.h"
+#include "processpriority.h"
 
 
 class Entity;
@@ -13,7 +13,7 @@ protected:
     int priority_;
 public:
     Component() = delete;
-    Component(std::string type) : type_(std::move(type)),priority_(component_priority.at(type_)){}
+    Component(std::string type) : type_(std::move(type)),priority_(process_priority.at(type_)){}
     virtual ~Component() = default;
     virtual void Start() = 0;
     virtual void Update() = 0;

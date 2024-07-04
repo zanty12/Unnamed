@@ -63,10 +63,10 @@ void CPlane::Update()
         Transform::Copy(&transform_, parent->GetTransform());
     }
     //if texture is sprite, get uv
-    if (texture_->GetType() == "Sprite2D")
+    CSprite2D* sprite = dynamic_cast<CSprite2D*>(texture_);
+    if (sprite)
     {
         //get uv
-        CSprite2D* sprite = dynamic_cast<CSprite2D*>(texture_);
         start_uv_ = sprite->GetStartUV();
         end_uv_ = sprite->GetEndUV();
     }

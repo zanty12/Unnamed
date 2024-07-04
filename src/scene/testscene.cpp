@@ -7,6 +7,7 @@
 #include "components/CSprite2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
+#include "objects/enemy.h"
 #include "objects/explosion.h"
 Player* player;
 
@@ -29,13 +30,14 @@ void TestScene::Setup()
     plane->AddComponent(video_texture);
     planecomponent->SetEndUV(XMFLOAT2(10.0f,10.0f));
 
-    Explosion* explosion = new Explosion();
-
     player = new Player();
     player->Start();
 
+    Enemy* enemy = new Enemy();
+    enemy->Start();
+    Transform::MoveBy(enemy->GetEntity()->GetTransform(),XMFLOAT3(0.0f,0.0f, 5.0f));
+
     rect2D->Start();
     plane->Start();
-    explosion->Start();
 }
 

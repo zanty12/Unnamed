@@ -303,6 +303,10 @@
     <ClInclude Include="include\video_reader.hpp" />
     <ClInclude Include="src\components\CBulletBehaviour.h" />
     <ClInclude Include="src\components\CCamera.h" />
+    <ClInclude Include="src\components\CCollider2D.h" />
+    <ClInclude Include="src\components\CCollider3D.h" />
+    <ClInclude Include="src\components\CCylinderCollider.h" />
+    <ClInclude Include="src\components\CEnemyBehaviour.h" />
     <ClInclude Include="src\components\Component.h" />
     <ClInclude Include="src\components\CPlayerController.h" />
     <ClInclude Include="src\components\CModelRenderer.h" />
@@ -311,20 +315,24 @@
     <ClInclude Include="src\components\CPrimitive3D.h" />
     <ClInclude Include="src\components\CRect2D.h" />
     <ClInclude Include="src\components\CRigidBody.h" />
+    <ClInclude Include="src\components\CSphereCollider.h" />
     <ClInclude Include="src\components\CSprite2D.h" />
     <ClInclude Include="src\components\CTexture.h" />
     <ClInclude Include="src\components\CTexture2D.h" />
     <ClInclude Include="src\components\CTransformConstraint.h" />
     <ClInclude Include="src\components\CVideoTexture.h" />
-    <ClInclude Include="src\components\Priorites.h" />
     <ClInclude Include="src\entity.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\manager.h" />
     <ClInclude Include="src\objects\bullet.h" />
+    <ClInclude Include="src\objects\enemy.h" />
     <ClInclude Include="src\objects\explosion.h" />
     <ClInclude Include="src\objects\player.h" />
+    <ClInclude Include="src\physicssystem2D.h" />
+    <ClInclude Include="src\physicssystem3D.h" />
+    <ClInclude Include="src\processpriority.h" />
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\renderPL.h" />
     <ClInclude Include="src\scene\scene.h" />
@@ -334,6 +342,8 @@
     <ClInclude Include="src\timesystem.h" />
     <ClInclude Include="src\traits\drawable.h" />
     <ClInclude Include="src\traits\object\spawnable.h" />
+    <ClInclude Include="src\traits\physics2D.h" />
+    <ClInclude Include="src\traits\physics3D.h" />
     <ClInclude Include="src\traits\trait.h" />
     <ClInclude Include="src\traits\unique.h" />
     <ClInclude Include="src\transform.h" />
@@ -763,6 +773,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\objects\bullet.cpp" />
+    <ClCompile Include="src\objects\enemy.cpp" />
     <ClCompile Include="src\objects\player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -838,6 +849,8 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\src;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\physicssystem2D.cpp" />
+    <ClCompile Include="src\physicssystem3D.cpp" />
     <ClCompile Include="src\renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1110,11 +1123,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets')" />
+    <Import Project="packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets'))" />
+    <Error Condition="!Exists('packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets'))" />
   </Target>
 </Project>

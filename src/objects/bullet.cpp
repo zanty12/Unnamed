@@ -6,6 +6,7 @@
 #include "components/CBulletBehaviour.h"
 #include "components/CModelRenderer.h"
 #include "components/CRigidBody.h"
+#include "components/CSphereCollider.h"
 
 void Bullet::Start()
 {
@@ -23,6 +24,12 @@ void Bullet::Start()
     rigidBody->SetUseGravity(false);
     rigidBody->SetLinearVel(vel_);
     rigidBody->Start();
+
+    CSphereCollider* sphereCollider = new CSphereCollider();
+    entity_->AddComponent(sphereCollider);
+    sphereCollider->SetRadius(0.5f);
+    sphereCollider->SetDynamic(true);
+    sphereCollider->Start();
 
     CBulletBehaviour* bulletBehaviour = new CBulletBehaviour();
     entity_->AddComponent(bulletBehaviour);

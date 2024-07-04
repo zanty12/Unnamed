@@ -12,11 +12,9 @@ private:
     ID3D11ShaderResourceView* view_ = NULL;
 
 public:
-    CTexture2D() : CTexture("Texture2D")
-    {
-    }
+    CTexture2D() = default;
 
-    CTexture2D(const std::wstring& path) : CTexture("Texture2D"), texture_path_(path)
+    CTexture2D(const std::wstring& path) :texture_path_(path)
     {
     }
 

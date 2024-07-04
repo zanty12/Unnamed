@@ -42,7 +42,7 @@ private:
 
 
 public:
-    CVideoTexture(const char* filename) : CTexture("VideoPlayer"),filename_(filename){}
+    CVideoTexture(const char* filename) : filename_(filename){}
 
     void Start() override
     {

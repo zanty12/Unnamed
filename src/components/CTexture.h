@@ -4,7 +4,7 @@
 class CTexture : public Component
 {
 public:
-    CTexture(std::string type) : Component(std::move(type)) {}
+    CTexture() : Component("Texture") {}
     virtual ~CTexture() = default;
 
     virtual ID3D11ShaderResourceView* GetView() = 0;

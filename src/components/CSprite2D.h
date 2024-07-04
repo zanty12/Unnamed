@@ -23,11 +23,9 @@ private:
     float end_v_ = 1.0f;
 
 public:
-    CSprite2D() : CTexture("Sprite2D")
-    {
-    }
+    CSprite2D() = default;
 
-    CSprite2D(const std::wstring& path) : CTexture("Sprite2D"), texture_path_(path)
+    CSprite2D(const std::wstring& path) :  texture_path_(path)
     {
     }
 
