@@ -4,6 +4,7 @@
 #include "renderPL.h"
 #include "threadpool.h"
 #include "components/CCamera.h"
+#include "gamemode/GameMode.h"
 #include "scene/scene.h"
 
 class Spawnable;
@@ -17,6 +18,7 @@ private:
 	static CCamera* active_camera_;
 	static ThreadPool thread_pool_;
 	static Scene* scene_;
+	static GameMode* game_mode_;
 
 public:
 	static void Init();
@@ -35,4 +37,6 @@ public:
 	static ThreadPool& GetThreadPool();
 	static void LoadScene(Scene* scene);
 	static void UnloadCurrentScene();
+	static void SetGameMode(GameMode* game_mode);
+	static GameMode* GetGameMode();
 };

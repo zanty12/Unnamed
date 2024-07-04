@@ -322,6 +322,8 @@
     <ClInclude Include="src\components\CTransformConstraint.h" />
     <ClInclude Include="src\components\CVideoTexture.h" />
     <ClInclude Include="src\entity.h" />
+    <ClInclude Include="src\gamemode\GMdefaultGamemode.h" />
+    <ClInclude Include="src\gamemode\GameMode.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\main.h" />

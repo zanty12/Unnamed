@@ -12,6 +12,7 @@
 #include "imgui_impl_hal.h"
 #include "physicssystem3D.h"
 #include "textureLoader.h"
+#include "gamemode/GMdefaultGamemode.h"
 #include "scene/testscene.h"
 #include "scene/title.h"
 #include "traits/object/spawnable.h"
@@ -23,12 +24,14 @@ std::vector<Spawnable*> Manager::spawn_queue_ = std::vector<Spawnable*>();
 CCamera* Manager::active_camera_ = nullptr;
 ThreadPool Manager::thread_pool_;
 Scene* Manager::scene_ = nullptr;
+GameMode* Manager::game_mode_ = nullptr;
 
 void Manager::Init()
 {
     Renderer::Init();
     Input::Init();
     Time::Start();
+    game_mode_ = new DefaultGameMode();
 
     LoadScene(new Title());
 }
@@ -82,6 +85,8 @@ void Manager::Update()
     }
     //clean up spawn queue
     spawn_queue_.clear();
+
+    game_mode_->Update();
 }
 
 void Manager::Draw()
@@ -92,7 +97,7 @@ void Manager::Draw()
     ImGui_Hal::BeginDraw();
     ImGui::Begin("FPS");
     ImGui::Text("Hello, world!");
-    ImGui::Text(u8"テスト");
+    //ImGui::Text(u8"テスト");
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
                 ImGui::GetIO().Framerate);
     ImGui::End();
@@ -201,6 +206,16 @@ void Manager::UnloadCurrentScene()
     removal_queue_.clear();
     spawn_queue_.clear();
     entity_count_ = 0;
+}
+
+void Manager::SetGameMode(GameMode* game_mode)
+{
+    game_mode_ = game_mode;
+}
+
+GameMode* Manager::GetGameMode()
+{
+    return game_mode_;
 }
 
 ;

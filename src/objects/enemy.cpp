@@ -24,6 +24,7 @@ void Enemy::Start()
     CSphereCollider* sphereCollider = new CSphereCollider();
     entity_->AddComponent(sphereCollider);
     sphereCollider->SetRadius(2.0f);
+    sphereCollider->SetDynamic(true);
     sphereCollider->Start();
 
     CEnemyBehaviour* enemyBehaviour = new CEnemyBehaviour();
