@@ -126,7 +126,7 @@ void CPlayerController::Update()
         }
 
         //jump
-        if (Input::GetKeyPress(VK_SPACE))
+        if (Input::GetKeyTrigger(VK_SPACE))
         {
             CRigidBody* rigidBody = parent->GetComponent<CRigidBody>();
             if (parent->GetComponent<CRigidBody>() != nullptr)

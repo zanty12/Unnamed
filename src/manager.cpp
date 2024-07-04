@@ -13,15 +13,16 @@
 #include "physicssystem3D.h"
 #include "textureLoader.h"
 #include "scene/testscene.h"
+#include "scene/title.h"
 #include "traits/object/spawnable.h"
 
-Scene* testScene;
 int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();
 std::vector<int> Manager::removal_queue_ = std::vector<int>();
 std::vector<Spawnable*> Manager::spawn_queue_ = std::vector<Spawnable*>();
 CCamera* Manager::active_camera_ = nullptr;
 ThreadPool Manager::thread_pool_;
+Scene* Manager::scene_ = nullptr;
 
 void Manager::Init()
 {
@@ -29,27 +30,15 @@ void Manager::Init()
     Input::Init();
     Time::Start();
 
-    testScene = new TestScene();
-    testScene->Setup();
+    LoadScene(new Title());
 }
-
 
 void Manager::Uninit()
 {
     Renderer::Uninit();
     Input::Uninit();
     Time::CleanUp();
-    delete testScene;
-    for (auto& entity : entities_)
-    {
-        if (entity != nullptr)
-        {
-            delete entity;
-        }
-    }
-    RenderPL::CleanUp();
-    TextureLoader::CleanUp();
-    entities_.clear();
+    UnloadCurrentScene();
 }
 
 void Manager::Update()
@@ -71,9 +60,9 @@ void Manager::Update()
 
     thread_pool_.StartProcessing();
     //wait for all threads to finish
-    while(true)
+    while (true)
     {
-        if(thread_pool_.GetWorkingThreads()<=0 && thread_pool_.GetTasksCount()<=0)
+        if (thread_pool_.GetWorkingThreads() <= 0 && thread_pool_.GetTasksCount() <= 0)
             break;
     }
     thread_pool_.StopProcessing();
@@ -93,7 +82,6 @@ void Manager::Update()
     }
     //clean up spawn queue
     spawn_queue_.clear();
-
 }
 
 void Manager::Draw()
@@ -188,6 +176,31 @@ void Manager::SetActiveCamera(CCamera* camera)
 ThreadPool& Manager::GetThreadPool()
 {
     return thread_pool_;
+}
+
+void Manager::LoadScene(Scene* scene)
+{
+    scene_ = scene;
+    scene_->Setup();
+}
+
+void Manager::UnloadCurrentScene()
+{
+    delete scene_;
+    for (auto& entity : entities_)
+    {
+        if (entity != nullptr)
+        {
+            delete entity;
+        }
+    }
+    RenderPL::CleanUp();
+    TextureLoader::CleanUp();
+    PhysicsSystem3D::CleanUp();
+    entities_.clear();
+    removal_queue_.clear();
+    spawn_queue_.clear();
+    entity_count_ = 0;
 }
 
 ;

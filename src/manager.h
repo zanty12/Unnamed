@@ -4,17 +4,19 @@
 #include "renderPL.h"
 #include "threadpool.h"
 #include "components/CCamera.h"
+#include "scene/scene.h"
 
 class Spawnable;
 class Manager
 {
 private:
-	static int entity_count_; //keeps track of created entities,even after deleting
+	static int entity_count_; //keeps track of created entities of the current scene,even after deleting
 	static std::vector<Entity*> entities_;
 	static std::vector<int> removal_queue_;
 	static std::vector<Spawnable*> spawn_queue_;
 	static CCamera* active_camera_;
 	static ThreadPool thread_pool_;
+	static Scene* scene_;
 
 public:
 	static void Init();
@@ -31,4 +33,6 @@ public:
 	static CCamera* GetActiveCamera();
 	static void SetActiveCamera(CCamera* camera);
 	static ThreadPool& GetThreadPool();
+	static void LoadScene(Scene* scene);
+	static void UnloadCurrentScene();
 };

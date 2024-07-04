@@ -337,6 +337,7 @@
     <ClInclude Include="src\renderPL.h" />
     <ClInclude Include="src\scene\scene.h" />
     <ClInclude Include="src\scene\testscene.h" />
+    <ClInclude Include="src\scene\title.h" />
     <ClInclude Include="src\textureLoader.h" />
     <ClInclude Include="src\threadpool.h" />
     <ClInclude Include="src\timesystem.h" />
@@ -1076,6 +1077,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\scene\title.cpp" />
     <ClCompile Include="src\textureLoader.cpp" />
     <ClCompile Include="src\timesystem.cpp" />
     <ClCompile Include="src\traits\drawable.cpp" />
@@ -1116,6 +1118,7 @@
     <Content Include="lib\swresample.lib" />
     <Content Include="lib\swscale-8.def" />
     <Content Include="lib\swscale.lib" />
+    <Content Include="src\components\CTitleControl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
