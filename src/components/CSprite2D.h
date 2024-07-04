@@ -11,7 +11,7 @@ class CSprite2D : public CTexture
 {
 private:
     std::wstring texture_path_ = L"asset\\texture\\explosion.png";
-    ID3D11ShaderResourceView* view_ = NULL;
+    ID3D11Texture2D* texture_resource_ = NULL;
     int width_ = 1;
     int height_ = 1;
     bool loop_ = false;
@@ -34,8 +34,8 @@ public:
     void Start() override
     {
         //Texture
-        view_ = TextureLoader::LoadTexture(texture_path_);
-        assert(view_);
+        texture_resource_ = TextureLoader::LoadTexture(texture_path_);
+        assert(texture_resource_);
         end_u_ = 1.0f / static_cast<float>(width_);
         end_v_ = 1.0f / static_cast<float>(height_);
     }
@@ -74,12 +74,15 @@ public:
 
     void CleanUp() override
     {
-        view_->Release();
+        texture_resource_->Release();
     }
 
     ID3D11ShaderResourceView* GetView()
     {
-        return view_;
+        ID3D11ShaderResourceView* view = nullptr;
+        HRESULT hr = Renderer::GetDevice()->CreateShaderResourceView(texture_resource_, nullptr, &view);
+        if (FAILED(hr)) return nullptr;
+        return view;
     }
 
     void SetTexturePath(const std::wstring& path) { texture_path_ = path; }
