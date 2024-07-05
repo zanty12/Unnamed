@@ -32,26 +32,33 @@ void TestScene::Setup()
 
     player = new Player();
     player->Start();
+    //delete setup object after creating entity
+    delete player;
 
     Enemy* enemy = new Enemy();
     enemy->Start();
     Transform::MoveBy(enemy->GetEntity()->GetTransform(),XMFLOAT3(-4.0f,0.0f, 5.0f));
+    delete enemy;
 
     Enemy* enemy2 = new Enemy();
     enemy2->Start();
     Transform::MoveBy(enemy2->GetEntity()->GetTransform(),XMFLOAT3(-2.0f,0.0f, 5.0f));
+    delete enemy2;
 
     Enemy* enemy3 = new Enemy();
     enemy3->Start();
     Transform::MoveBy(enemy3->GetEntity()->GetTransform(),XMFLOAT3(0.0f,0.0f, 5.0f));
+    delete enemy3;
 
     Enemy* enemy4 = new Enemy();
     enemy4->Start();
     Transform::MoveBy(enemy4->GetEntity()->GetTransform(),XMFLOAT3(2.0f,0.0f, 5.0f));
+    delete enemy4;
 
     Enemy* enemy5 = new Enemy();
     enemy5->Start();
     Transform::MoveBy(enemy5->GetEntity()->GetTransform(),XMFLOAT3(4.0f,0.0f, 5.0f));
+    delete enemy5;
 
     rect2D->Start();
     plane->Start();

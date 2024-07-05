@@ -82,6 +82,7 @@ void Manager::Update()
     for (auto& spawnable : spawn_queue_)
     {
         spawnable->Spawn();
+        delete spawnable;
     }
     //clean up spawn queue
     spawn_queue_.clear();
@@ -204,6 +205,11 @@ void Manager::UnloadCurrentScene()
     PhysicsSystem3D::CleanUp();
     entities_.clear();
     removal_queue_.clear();
+    //clean up spawn queue
+    for (auto& spawnable : spawn_queue_)
+    {
+        delete spawnable;
+    }
     spawn_queue_.clear();
     entity_count_ = 0;
 }
