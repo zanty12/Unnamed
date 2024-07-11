@@ -131,3 +131,13 @@ void CAudio::Play(bool Loop)
     // Ä¶
     source_voice_->Start();
 }
+
+void CAudio::Stop()
+{
+    source_voice_->Stop();
+}
+
+void CAudio::SetVolume(float Volume)
+{
+    source_voice_->SetVolume(Volume);
+}

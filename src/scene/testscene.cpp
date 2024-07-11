@@ -68,13 +68,6 @@ void TestScene::Setup()
     bgm->Play(true);
     plane->Start();
 
-    //cleanup setup objects
-    delete player;
-    delete enemy;
-    delete enemy2;
-    delete enemy3;
-    delete enemy4;
-    delete enemy5;
 }
 
 
