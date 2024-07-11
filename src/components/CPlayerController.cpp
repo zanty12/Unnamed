@@ -3,6 +3,7 @@
 #include "manager.h"
 #include "CPlayerController.h"
 
+#include "CAudio.h"
 #include "CCamera.h"
 #include "entity.h"
 #include "CRigidBody.h"
@@ -136,6 +137,7 @@ void CPlayerController::Update()
         if (Input::GetKeyTrigger('G'))
         {
             Bullet* bullet = new Bullet();
+            parent->GetComponent<CAudio>()->Play();
             //Get forward vector of parent
             XMFLOAT3 forward = Transform::GetForward(parent->GetTransform());
             //normalize forward vector

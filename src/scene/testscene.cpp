@@ -1,5 +1,6 @@
 ﻿#include "testscene.h"
 #include "manager.h"
+#include "components/CAudio.h"
 #include "objects/player.h"
 #include "components/CCamera.h"
 #include "components/CPlane.h"
@@ -9,7 +10,7 @@
 #include "components/CVideoTexture.h"
 #include "objects/enemy.h"
 #include "objects/explosion.h"
-Player* player;
+
 
 void TestScene::Setup()
 {
@@ -20,6 +21,9 @@ void TestScene::Setup()
     rect2DComponent->SetTexture(texture2d);
     rect2D->AddComponent(rect2DComponent);
     rect2D->AddComponent(texture2d);
+    CAudio* bgm = new CAudio;
+    bgm->Load("asset/sound/bgm.wav");
+    rect2D->AddComponent(bgm);
 
     Entity* plane = Manager::MakeEntity("plane");
     CPlane* planecomponent = new CPlane();
@@ -30,7 +34,7 @@ void TestScene::Setup()
     plane->AddComponent(video_texture);
     planecomponent->SetEndUV(XMFLOAT2(10.0f,10.0f));
 
-    player = new Player();
+    Player* player = new Player();
     player->Start();
 
     Enemy* enemy = new Enemy();
@@ -54,6 +58,16 @@ void TestScene::Setup()
     Transform::MoveBy(enemy5->GetEntity()->GetTransform(),XMFLOAT3(4.0f,0.0f, 5.0f));
 
     rect2D->Start();
+    bgm->Play(true);
     plane->Start();
+
+    //cleanup setup objects
+    delete player;
+    delete enemy;
+    delete enemy2;
+    delete enemy3;
+    delete enemy4;
+    delete enemy5;
 }
+
 

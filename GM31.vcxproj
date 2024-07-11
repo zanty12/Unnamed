@@ -301,6 +301,7 @@
     <ClInclude Include="include\libswscale\version.h" />
     <ClInclude Include="include\libswscale\version_major.h" />
     <ClInclude Include="include\video_reader.hpp" />
+    <ClInclude Include="src\components\CAudio.h" />
     <ClInclude Include="src\components\CBulletBehaviour.h" />
     <ClInclude Include="src\components\CCamera.h" />
     <ClInclude Include="src\components\CCollider2D.h" />
@@ -392,6 +393,7 @@
     <ClCompile Include="include\ImGui\imgui_tables.cpp" />
     <ClCompile Include="include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="include\video_reader.cpp" />
+    <ClCompile Include="src\components\CAudio.cpp" />
     <ClCompile Include="src\components\CCamera.cpp" />
     <ClCompile Include="src\components\CPlayerController.cpp" />
     <ClCompile Include="src\components\CModelRenderer.cpp">
@@ -1089,11 +1091,16 @@
     <Content Include="asset\fonts\JF-Dot-Kappa20-0213.ttf" />
     <Content Include="asset\fonts\NotoSansJP-Bold.ttf" />
     <Content Include="asset\fonts\wapuro-mincho.otf" />
+    <Content Include="asset\model\bullet.mtl" />
+    <Content Include="asset\model\bullet.obj" />
     <Content Include="asset\model\player.mtl" />
     <Content Include="asset\model\player.obj" />
     <Content Include="asset\shader\unlitTexturePS.cso" />
     <Content Include="asset\shader\unlitTextureVS.cso" />
+    <Content Include="asset\sound\bgm.wav" />
+    <Content Include="asset\sound\wan.wav" />
     <Content Include="asset\texture\cat.png" />
+    <Content Include="asset\texture\explosion.png" />
     <Content Include="asset\texture\Rider.png" />
     <Content Include="asset\video\banana.mp4" />
     <Content Include="lib\avcodec-61.def" />

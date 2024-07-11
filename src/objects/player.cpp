@@ -3,6 +3,7 @@
 #include "manager.h"
 #include "player.h"
 
+#include "components/CAudio.h"
 #include "components/CCamera.h"
 #include "components/CPlayerController.h"
 #include "components/CModelRenderer.h"
@@ -34,5 +35,9 @@ void Player::Start()
 
     CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);
+
+    CAudio* audio = new CAudio();
+    entity_->AddComponent(audio);
+    audio->Load("asset/sound/wan.wav");
 }
 

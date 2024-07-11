@@ -12,6 +12,8 @@
 #include "imgui_impl_hal.h"
 #include "physicssystem3D.h"
 #include "textureLoader.h"
+#include "components/CAudio.h"
+#include "components/CModelRenderer.h"
 #include "gamemode/GMdefaultGamemode.h"
 #include "scene/testscene.h"
 #include "scene/title.h"
@@ -31,6 +33,7 @@ void Manager::Init()
     Renderer::Init();
     Input::Init();
     Time::Start();
+    CAudio::StartMaster();
     game_mode_ = new DefaultGameMode();
 
     LoadScene(new Title());
@@ -41,6 +44,7 @@ void Manager::Uninit()
     Renderer::Uninit();
     Input::Uninit();
     Time::CleanUp();
+    CAudio::CleanUpMaster();
     UnloadCurrentScene();
 }
 
@@ -202,6 +206,7 @@ void Manager::UnloadCurrentScene()
     RenderPL::CleanUp();
     TextureLoader::CleanUp();
     PhysicsSystem3D::CleanUp();
+    CModelRenderer::UnloadAll();
     entities_.clear();
     removal_queue_.clear();
     spawn_queue_.clear();
@@ -217,5 +222,3 @@ GameMode* Manager::GetGameMode()
 {
     return game_mode_;
 }
-
-;
