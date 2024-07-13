@@ -1,4 +1,4 @@
-#GM31
+GM31
 ---
 ### To-Do List
 - [ ] ⏫ Game loop optimization(component alignment)
