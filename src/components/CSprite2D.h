@@ -4,8 +4,8 @@
 
 #include "CTexture.h"
 #include "manager.h"
-#include "timesystem.h"
-#include "textureLoader.h"
+#include "system/timesystem.h"
+#include "system/textureLoader.h"
 
 class CSprite2D : public CTexture
 {

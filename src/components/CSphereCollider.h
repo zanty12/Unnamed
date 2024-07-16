@@ -1,7 +1,7 @@
 #pragma once
 #include "CCollider3D.h"
 #include "manager.h"
-#include "physicssystem3D.h"
+#include "system/physicssystem3D.h"
 
 class CSphereCollider : public CCollider3D
 {

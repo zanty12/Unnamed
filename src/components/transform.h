@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <DirectXMath.h>
-
 using namespace DirectX;
+
+//Technically a component but it is treated as a helper class
 struct Transform
 {
 public:

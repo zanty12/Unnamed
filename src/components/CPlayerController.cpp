@@ -1,5 +1,5 @@
 ﻿#include "main.h"
-#include "input.h"
+#include "system/input.h"
 #include "manager.h"
 #include "CPlayerController.h"
 
@@ -7,7 +7,7 @@
 #include "CCamera.h"
 #include "entity.h"
 #include "CRigidBody.h"
-#include "timesystem.h"
+#include "system/timesystem.h"
 #include "objects/bullet.h"
 
 void CPlayerController::Update()

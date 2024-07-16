@@ -1,8 +1,8 @@
 #pragma once
 #include "traits/drawable.h"
 #include "entity.h"
-#include "renderPL.h"
-#include "threadpool.h"
+#include "system/renderPL.h"
+#include "system/threadpool.h"
 #include "components/CCamera.h"
 #include "gamemode/GameMode.h"
 #include "scene/scene.h"

@@ -5,13 +5,13 @@
 #include <stdbool.h>
 
 #include "renderer.h"
-#include "input.h"
-#include "timesystem.h"
+#include "system/input.h"
+#include "system/timesystem.h"
 
 #include "components/CCamera.h"
 #include "imgui_impl_hal.h"
-#include "physicssystem3D.h"
-#include "textureLoader.h"
+#include "system/physicssystem3D.h"
+#include "system/textureLoader.h"
 #include "components/CAudio.h"
 #include "components/CModelRenderer.h"
 #include "gamemode/GMdefaultGamemode.h"

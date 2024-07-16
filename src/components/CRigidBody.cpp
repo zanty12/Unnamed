@@ -1,7 +1,7 @@
 ﻿#include "CRigidBody.h"
 
 #include "manager.h"
-#include "..\timesystem.h"
+#include "system/timesystem.h"
 #include "transform.h"
 
 void CRigidBody::Update()
