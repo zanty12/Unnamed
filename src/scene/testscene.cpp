@@ -6,6 +6,7 @@
 #include "components/CPlane.h"
 #include "components/CRect2D.h"
 #include "components/CSprite2D.h"
+#include "components/CText2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
 #include "objects/enemy.h"
@@ -64,10 +65,21 @@ void TestScene::Setup()
     Transform::MoveBy(enemy5->GetEntity()->GetTransform(),XMFLOAT3(4.0f,0.0f, 5.0f));
     delete enemy5;
 
+    Entity* text = Manager::MakeEntity("score");
+    Transform::MoveTo(text->GetTransform(),XMFLOAT3(0,0, 0.0f));
+    Transform::ScaleTo(text->GetTransform(),XMFLOAT3(200.0f,100.0f,0.0f));
+    CText2D* textComponent = new CText2D();
+    textComponent->SetFontColor(XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f));
+    textComponent->SetFontWeight(DWRITE_FONT_WEIGHT_BOLD);
+    textComponent->SetFontSize(50);
+    textComponent->SetText(L"Score: 0");
+    textComponent->SetAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+    text->AddComponent(textComponent);
+
     rect2D->Start();
     bgm->Play(true);
     plane->Start();
-
+    text->Start();
 }
 
 

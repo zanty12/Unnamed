@@ -20,7 +20,7 @@ public:
         if (dynamic_ || first_frame_)
         {
             //move collider to parent
-            Transform::Copy(&this->transform_, Manager::FindEntity(parent_id_)->GetTransform());
+            Transform::Copy(&this->transform_, Manager::FindEntityByID(parent_id_)->GetTransform());
             Transform::MoveBy(&this->transform_, center_offset_);
             first_frame_ = false;
         }
@@ -87,7 +87,7 @@ public:
                                                   distance.z / distance_length);
                     XMFLOAT3 correction = XMFLOAT3(direction.x * overlap, direction.y * overlap, direction.z * overlap);
                     Transform::MoveBy(&transform_, correction);
-                    Transform::Copy(&transform_, Manager::FindEntity(parent_id_)->GetTransform());
+                    Transform::Copy(&transform_, Manager::FindEntityByID(parent_id_)->GetTransform());
                 }
             }
         }

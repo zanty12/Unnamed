@@ -22,6 +22,7 @@ const std::map<std::string, int> process_priority = {
     {"ModelRenderer", 2},
     {"Primitive2D", 2},
     {"Primitive3D", 2},
+    {"Text2D", 2},
     {"Camera", 1},
     //components that changes the scene
     {"TitleControl", 0},

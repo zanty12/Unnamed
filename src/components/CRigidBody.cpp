@@ -82,7 +82,7 @@ void CRigidBody::Update()
     if(parent_id_ > -1)
     {
         //get parent transform
-        Entity* parent = Manager::FindEntity(parent_id_);
+        Entity* parent = Manager::FindEntityByID(parent_id_);
         parent->Lock();
         Transform* parent_transform = parent->GetTransform();
         //apply linear velocity

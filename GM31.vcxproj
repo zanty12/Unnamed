@@ -319,13 +319,14 @@
     <ClInclude Include="src\components\CRigidBody.h" />
     <ClInclude Include="src\components\CSphereCollider.h" />
     <ClInclude Include="src\components\CSprite2D.h" />
+    <ClInclude Include="src\components\CText2D.h" />
     <ClInclude Include="src\components\CTexture.h" />
     <ClInclude Include="src\components\CTexture2D.h" />
     <ClInclude Include="src\components\CTransformConstraint.h" />
     <ClInclude Include="src\components\CVideoTexture.h" />
     <ClInclude Include="src\components\transform.h" />
     <ClInclude Include="src\entity.h" />
-    <ClInclude Include="src\gamemode\GMdefaultGamemode.h" />
+    <ClInclude Include="src\gamemode\GMDefaultGamemode.h" />
     <ClInclude Include="src\gamemode\GameMode.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />
     <ClInclude Include="src\main.h" />
@@ -478,6 +479,7 @@
     <ClCompile Include="src\components\CPrimitive3D.cpp" />
     <ClCompile Include="src\components\CRect2D.cpp" />
     <ClCompile Include="src\components\CRigidBody.cpp" />
+    <ClCompile Include="src\components\CText2D.cpp" />
     <ClCompile Include="src\entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

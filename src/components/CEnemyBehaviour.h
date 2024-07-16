@@ -4,7 +4,7 @@
 #include "CCollider3D.h"
 #include "manager.h"
 #include "Component.h"
-#include "gamemode/GMdefaultGamemode.h"
+#include "gamemode/GMDefaultGamemode.h"
 #include "objects/explosion.h"
 
 class CEnemyBehaviour : public Component
@@ -23,11 +23,11 @@ public:
     void Update() override
     {
         //if the enemy got hit by a bullet, remove it
-        Entity* entity = Manager::FindEntity(parent_id_);
+        Entity* entity = Manager::FindEntityByID(parent_id_);
         std::vector<CCollider3D*> collided = entity->GetComponent<CCollider3D>()->GetCollided();
         for(auto other : collided)
         {
-            if(Manager::FindEntity(other->GetParentID())->GetTag() == "Bullet")
+            if(Manager::FindEntityByID(other->GetParentID())->GetTag() == "Bullet")
             {
                 Manager::QueueForRemoval(parent_id_);
                 //add point to the player

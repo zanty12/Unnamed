@@ -1,21 +1,20 @@
 #include "main.h"
+#include "renderer.h"
 #include "manager.h"
-
 #include <iostream>
 #include <stdbool.h>
 
-#include "renderer.h"
+#include "imgui_impl_hal.h"
 #include "system/input.h"
 #include "system/timesystem.h"
-
-#include "components/CCamera.h"
-#include "imgui_impl_hal.h"
 #include "system/physicssystem3D.h"
 #include "system/textureLoader.h"
+
+#include "components/CCamera.h"
 #include "components/CAudio.h"
 #include "components/CModelRenderer.h"
-#include "gamemode/GMdefaultGamemode.h"
-#include "scene/testscene.h"
+#include "components/CText2D.h"
+#include "gamemode/GMDefaultGamemode.h"
 #include "scene/title.h"
 #include "traits/object/spawnable.h"
 
@@ -34,6 +33,7 @@ void Manager::Init()
     Input::Init();
     Time::Start();
     CAudio::StartMaster();
+    CText2D::CreatePublicResources();
     game_mode_ = new DefaultGameMode();
 
     LoadScene(new Title());
@@ -45,6 +45,7 @@ void Manager::Uninit()
     Input::Uninit();
     Time::CleanUp();
     CAudio::CleanUpMaster();
+    CText2D::DiscardPublicResources();
     UnloadCurrentScene();
 }
 
@@ -97,7 +98,9 @@ void Manager::Update()
 void Manager::Draw()
 {
     Renderer::Begin();
+    CText2D::TextStart();
     RenderPL::Draw();
+    CText2D::TextEnd();
 
     ImGui_Hal::BeginDraw();
     ImGui::Begin("FPS");
@@ -131,15 +134,17 @@ bool Manager::RemoveEntity(int id)
     return false;
 }
 
-Entity* Manager::FindEntity(int id)
+Entity* Manager::FindEntityByID(int id)
 {
     return entities_[id];
 }
 
-Entity* Manager::FindEntity(std::string name)
+Entity* Manager::FindEntityByName(std::string name)
 {
     for (auto entity : entities_)
     {
+        if(entity == nullptr)
+            return nullptr;
         if (entity->GetName() == name)
         {
             return entity;

@@ -22,7 +22,7 @@ public:
         {
             //move collider to parent
             //move collider to parent
-            Transform::Copy(&this->transform_, Manager::FindEntity(parent_id_)->GetTransform());
+            Transform::Copy(&this->transform_, Manager::FindEntityByID(parent_id_)->GetTransform());
             Transform::MoveBy(&this->transform_, center_offset_);
             collided_.clear();
             first_frame_ = false;

@@ -4,8 +4,8 @@
 #include "Component.h"
 #include "CTexture.h"
 #include "processpriority.h"
-#include "../transform.h"
-#include "../traits/drawable.h"
+#include "transform.h"
+#include "traits/drawable.h"
 
 class CPrimitive2D : public Component, public Drawable
 {

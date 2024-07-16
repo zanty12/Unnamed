@@ -27,8 +27,8 @@ public:
 	static void Draw();
 	static Entity* MakeEntity(std::string name = "Entity");
 	static bool RemoveEntity(int id);
-	static Entity* FindEntity(int id);
-	static Entity* FindEntity(std::string name);
+	static Entity* FindEntityByID(int id);
+	static Entity* FindEntityByName(std::string name);
 	static std::vector<Entity*> FindEntitiesWithTag(std::string tag);
 	static void QueueForRemoval(int id);
 	static void QueueForSpawn(Spawnable* spawnable);

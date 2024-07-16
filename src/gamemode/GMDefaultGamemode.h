@@ -2,6 +2,7 @@
 #include "manager.h"
 #include "GameMode.h"
 #include "scene/title.h"
+#include "../components/CText2D.h"
 
 class DefaultGameMode : public GameMode
 {
@@ -25,5 +26,10 @@ public:
     void AddPoint()
     {
         point_++;
+        Entity* score = Manager::FindEntityByName("score");
+        if (score)
+        {
+            score->GetComponent<CText2D>()->SetText(L"Score: " + std::to_wstring(point_));
+        }
     }
 };

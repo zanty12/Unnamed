@@ -18,16 +18,16 @@ public:
 
     void Start() override
     {
-        start_pos_ = Manager::FindEntity(parent_id_)->GetTransform()->position;
+        start_pos_ = Manager::FindEntityByID(parent_id_)->GetTransform()->position;
     }
 
     void Update() override
     {
         //if bullet is too far from start position, remove it
         if (XMVectorGetX(XMVector3Length(XMVectorSubtract(
-            XMLoadFloat3(&(Manager::FindEntity(parent_id_)->GetTransform()->position)),
+            XMLoadFloat3(&(Manager::FindEntityByID(parent_id_)->GetTransform()->position)),
             XMLoadFloat3(&start_pos_)))) > 20.0f||
-            Manager::FindEntity(parent_id_)->GetComponent<CCollider3D>()->GetCollided().size() > 0)
+            Manager::FindEntityByID(parent_id_)->GetComponent<CCollider3D>()->GetCollided().size() > 0)
         {
             Manager::QueueForRemoval(parent_id_);
         }
