@@ -3,6 +3,7 @@
 #include "components/CAudio.h"
 #include "objects/player.h"
 #include "components/CCamera.h"
+#include "components/CParticleEmitter.h"
 #include "components/CPlane.h"
 #include "components/CRect2D.h"
 #include "components/CSprite2D.h"
@@ -76,10 +77,15 @@ void TestScene::Setup()
     textComponent->SetAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
     text->AddComponent(textComponent);
 
+    Entity* particle = Manager::MakeEntity("particle");
+    CParticleEmitter* particleComponent = new CParticleEmitter();
+    particle->AddComponent(particleComponent);
+
     rect2D->Start();
     bgm->Play(true);
     plane->Start();
     text->Start();
+    particle->Start();
 }
 
 

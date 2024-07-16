@@ -6,19 +6,13 @@
 
 class CParticleEmitter : public Component,public Drawable
 {
-public:
-
-};
-
-class ParticleEmitter
-{
 private:
-    ID3D11Buffer* m_VertexBuffer{};
+    ID3D11Buffer* vertex_buffer_{};
     ID3D11ShaderResourceView* m_Texture{};
 
-    ID3D11VertexShader* m_VertexShader{};
-    ID3D11PixelShader* m_PixelShader{};
-    ID3D11InputLayout* m_VertexLayout{};
+    ID3D11VertexShader* vertex_shader_{};
+    ID3D11PixelShader* pixel_shader_{};
+    ID3D11InputLayout* vertex_layout_{};
 
     int m_Count{};
 
@@ -35,8 +29,9 @@ private:
     PARTICLE m_Particle[ PARTICLE_MAX] {};
 
 public:
-    void Init();
-    void Uninit();
-    void Update();
-    void Draw();
+    CParticleEmitter() : Component("Particle Emitter"),Drawable(2){};
+    void Start() override;
+    void CleanUp() override;
+    void Update()override;
+    void Draw() override;
 };
