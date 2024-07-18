@@ -79,6 +79,7 @@ void TestScene::Setup()
 
     Entity* particle = Manager::MakeEntity("particle");
     CParticleEmitter* particleComponent = new CParticleEmitter();
+
     particle->AddComponent(particleComponent);
 
     rect2D->Start();

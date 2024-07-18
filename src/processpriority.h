@@ -1,8 +1,8 @@
-﻿#pragma once
-#include <map>
+#pragma once
+#include <unordered_map>
 #include <string>
 
-const std::map<std::string, int> process_priority = {
+const std::unordered_map<std::string, int> process_priority = {
     //components that moves the entity
     {"Controller", 8},
     {"RigidBody", 7},
@@ -18,11 +18,11 @@ const std::map<std::string, int> process_priority = {
     {"EnemyBehaviour", 3},
     //textures goes first
     {"Texture", 3},
+    {"ParticleEmitter", 2},
     //components that draws the entity
     {"ModelRenderer", 2},
     {"Primitive2D", 2},
     {"Primitive3D", 2},
-    {"Particle Emitter", 2},
     {"Text2D", 2},
     {"Camera", 1},
     //components that changes the scene

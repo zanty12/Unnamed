@@ -22,6 +22,7 @@ public:
     void CleanUp() override;
     void Draw() override;
     void SetTarget(DirectX::XMFLOAT3 target) { target_ = target; }
+    XMFLOAT3 GetTarget() { return target_; }
     XMFLOAT3 GetOffset() { return offset_; }
     void SetOffset(XMFLOAT3 offset) { offset_ = offset; }
     void SetLookAtParent(bool look) { look_at_parent_ = look; }

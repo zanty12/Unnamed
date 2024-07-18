@@ -50,9 +50,9 @@ void CParticleEmitter::Start()
 	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metadata, &m_Texture);
 	assert(m_Texture);
 
-	Renderer::CreateVertexShader(&vertex_shader_, &vertex_layout_, "shader\\unlitTextureVS.cso");
+	Renderer::CreateVertexShader(&vertex_shader_, &vertex_layout_, "asset\\shader\\unlitTextureVS.cso");
 
-	Renderer::CreatePixelShader(&pixel_shader_, "shader\\unlitTexturePS.cso");
+	Renderer::CreatePixelShader(&pixel_shader_, "asset\\shader\\unlitTexturePS.cso");
 }
 
 void CParticleEmitter::CleanUp()
