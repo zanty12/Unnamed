@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 
-#include "CCollider3D.h"
+#include "components/CCollider3D.h"
 #include "manager.h"
-#include "Component.h"
+#include "components/Component.h"
 #include "gamemode/GMDefaultGamemode.h"
 #include "objects/explosion.h"
 

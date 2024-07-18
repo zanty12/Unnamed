@@ -5,7 +5,7 @@
 
 #include "components/CAudio.h"
 #include "components/CCamera.h"
-#include "components/CPlayerController.h"
+#include "components/custom/CPlayerController.h"
 #include "components/CModelRenderer.h"
 #include "components/CRigidBody.h"
 #include "components/CTransformConstraint.h"
@@ -26,6 +26,7 @@ void Player::Start()
     CCamera* camera = new CCamera();
     entity_->AddComponent(camera);
     camera->SetLookAtParent(true);
+    camera->SetSmoothing(true);
     camera->Activate();
     camera->Start();
 

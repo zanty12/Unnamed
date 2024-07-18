@@ -3,10 +3,10 @@
 #include "manager.h"
 #include "CPlayerController.h"
 
-#include "CAudio.h"
-#include "CCamera.h"
+#include "components/CAudio.h"
+#include "components/CCamera.h"
 #include "entity.h"
-#include "CRigidBody.h"
+#include "components/CRigidBody.h"
 #include "system/timesystem.h"
 #include "objects/bullet.h"
 
@@ -32,7 +32,7 @@ void CPlayerController::Update()
         {
             //Rotate camera around parent
             XMFLOAT3 new_cam_pos = Transform::RotatePointAroundTarget(camera_pos, parent_pos,
-                                                                      3.14f * Time::GetDeltaTime(),
+                                                                      -3.14f * Time::GetDeltaTime(),
                                                                       XMFLOAT3(0.0f, 1.0f, 0.0f));
             //set new camera offset
             camera->SetOffset(XMFLOAT3(new_cam_pos.x - parent_pos.x,
@@ -43,7 +43,7 @@ void CPlayerController::Update()
         {
             //Rotate camera around parent
             XMFLOAT3 new_cam_pos = Transform::RotatePointAroundTarget(camera_pos, parent_pos,
-                                                                      -3.14f * Time::GetDeltaTime(),
+                                                                      +3.14f * Time::GetDeltaTime(),
                                                                       XMFLOAT3(0.0f, 1.0f, 0.0f));
             //set new camera offset
             camera->SetOffset(XMFLOAT3(new_cam_pos.x - parent_pos.x,
@@ -143,7 +143,7 @@ void CPlayerController::Update()
             //normalize forward vector
             XMStoreFloat3(&forward, XMVector3Normalize(XMLoadFloat3(&forward)));
             //set bullet velocity to forward vector
-            forward = XMFLOAT3(-forward.x * 5.0f, forward.y * 5.0f, -forward.z * 5.0f);
+            forward = XMFLOAT3(-forward.x * 10.0f, forward.y * 10.0f, -forward.z * 10.0f);
             bullet->SetVelocity(forward);
             XMFLOAT3 bullet_pos = parent_pos;
             bullet_pos.y += 1.0f;

@@ -41,12 +41,14 @@ void Manager::Init()
 
 void Manager::Uninit()
 {
+    thread_pool_.StopProcessing();
     Renderer::Uninit();
     Input::Uninit();
     Time::CleanUp();
-    CAudio::CleanUpMaster();
     CText2D::DiscardPublicResources();
+
     UnloadCurrentScene();
+    CAudio::CleanUpMaster();
 }
 
 void Manager::Update()
@@ -144,7 +146,7 @@ Entity* Manager::FindEntityByName(std::string name)
     for (auto entity : entities_)
     {
         if(entity == nullptr)
-            return nullptr;
+            continue;
         if (entity->GetName() == name)
         {
             return entity;

@@ -1,8 +1,6 @@
 #pragma once
-
 #include <xaudio2.h>
 #include "component.h"
-
 
 class CAudio : public Component
 {

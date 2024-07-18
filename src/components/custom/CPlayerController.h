@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Component.h"
+#include "components/Component.h"
 
 class CPlayerController : public Component
 {
