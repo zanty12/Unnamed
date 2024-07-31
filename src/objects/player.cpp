@@ -20,7 +20,7 @@ void Player::Start()
 
     CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
-    modelRenderer->Load("asset\\model\\player.obj");
+    modelRenderer->Load("asset\\model\\roundedcube.obj");
     modelRenderer->Start();
 
     CCamera* camera = new CCamera();
