@@ -16,6 +16,7 @@ const std::unordered_map<std::string, int> process_priority = {
     {"TransformConstraint", 3},
     {"BulletBehaviour", 3},
     {"EnemyBehaviour", 3},
+{"GridSnap", 3},
     //textures goes first
     {"Texture", 3},
     {"ParticleEmitter", 2},
@@ -29,4 +30,5 @@ const std::unordered_map<std::string, int> process_priority = {
     {"TitleControl", 0},
     //dont care
     {"Audio", 0},
+    {"Grid",0},
 };

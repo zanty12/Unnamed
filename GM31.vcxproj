@@ -306,6 +306,8 @@
     <ClInclude Include="src\components\CCollider2D.h" />
     <ClInclude Include="src\components\CCollider3D.h" />
     <ClInclude Include="src\components\CCylinderCollider.h" />
+    <ClInclude Include="src\components\CGrid.h" />
+    <ClInclude Include="src\components\CGridSnap.h" />
     <ClInclude Include="src\components\Component.h" />
     <ClInclude Include="src\components\CParticleEmitter.h" />
     <ClInclude Include="src\components\CModelRenderer.h" />
@@ -332,6 +334,7 @@
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\manager.h" />
     <ClInclude Include="src\objects\bullet.h" />
+    <ClInclude Include="src\objects\cube.h" />
     <ClInclude Include="src\objects\enemy.h" />
     <ClInclude Include="src\objects\explosion.h" />
     <ClInclude Include="src\objects\player.h" />
@@ -342,6 +345,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="src\renderer.h" />
+    <ClInclude Include="src\scene\game.h" />
     <ClInclude Include="src\scene\scene.h" />
     <ClInclude Include="src\scene\testscene.h" />
     <ClInclude Include="src\scene\title.h" />
@@ -402,6 +406,8 @@
     <ClCompile Include="include\video_reader.cpp" />
     <ClCompile Include="src\components\CAudio.cpp" />
     <ClCompile Include="src\components\CCamera.cpp" />
+    <ClCompile Include="src\components\CGrid.cpp" />
+    <ClCompile Include="src\components\CGridSnap.cpp" />
     <ClCompile Include="src\components\CParticleEmitter.cpp" />
     <ClCompile Include="src\components\CModelRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -860,6 +866,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\objects\bullet.cpp" />
+    <ClCompile Include="src\objects\cube.cpp" />
     <ClCompile Include="src\objects\enemy.cpp" />
     <ClCompile Include="src\objects\player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1011,6 +1018,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\scene\game.cpp" />
     <ClCompile Include="src\scene\testscene.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
