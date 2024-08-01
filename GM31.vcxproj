@@ -307,7 +307,7 @@
     <ClInclude Include="src\components\CCollider3D.h" />
     <ClInclude Include="src\components\CCylinderCollider.h" />
     <ClInclude Include="src\components\CGrid.h" />
-    <ClInclude Include="src\components\CGridSnap.h" />
+    <ClInclude Include="src\components\CGridCell.h" />
     <ClInclude Include="src\components\Component.h" />
     <ClInclude Include="src\components\CParticleEmitter.h" />
     <ClInclude Include="src\components\CModelRenderer.h" />
@@ -407,7 +407,7 @@
     <ClCompile Include="src\components\CAudio.cpp" />
     <ClCompile Include="src\components\CCamera.cpp" />
     <ClCompile Include="src\components\CGrid.cpp" />
-    <ClCompile Include="src\components\CGridSnap.cpp" />
+    <ClCompile Include="src\components\CGridCell.cpp" />
     <ClCompile Include="src\components\CParticleEmitter.cpp" />
     <ClCompile Include="src\components\CModelRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
