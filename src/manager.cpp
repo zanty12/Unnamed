@@ -101,6 +101,19 @@ void Manager::Draw()
     //ImGui::Text(u8"ƒeƒXƒg");
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
                 ImGui::GetIO().Framerate);
+    ImGui::Text("Mouse Pos: %d, %d", Input::GetMousePos().x, Input::GetMousePos().y);
+    if(active_camera_){
+    XMFLOAT4X4 view_matrix = active_camera_->GetViewMatrix();
+    XMFLOAT4X4 proj_matrix = active_camera_->GetProjectionMatrix();
+    XMMATRIX view = XMLoadFloat4x4(&view_matrix);
+    XMMATRIX proj = XMLoadFloat4x4(&proj_matrix);
+    XMVECTOR mouse_world_pos = Input::GetMouseWorldPos(view, proj);
+    ImGui::Text("Mouse World Pos: %f, %f, %f", XMVectorGetX(mouse_world_pos),
+                    XMVectorGetY(mouse_world_pos),
+                    XMVectorGetZ(mouse_world_pos));
+    }
+
+
     ImGui::End();
     ImGui_Hal::EndDraw();
 

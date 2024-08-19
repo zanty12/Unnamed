@@ -9,6 +9,7 @@ class CCamera : public Component, public Drawable
     DirectX::XMFLOAT3 offset_ = DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f);
     DirectX::XMFLOAT3 target_;
     DirectX::XMFLOAT4X4 view_matrix_;
+    DirectX::XMFLOAT4X4 projection_matrix_;
     bool look_at_parent_ = false;
     bool active_ = false;
 
@@ -30,4 +31,5 @@ public:
     void Activate();
     void Deactivate();
     XMFLOAT4X4 GetViewMatrix() { return view_matrix_; }
+    XMFLOAT4X4 GetProjectionMatrix() { return projection_matrix_; }
 };

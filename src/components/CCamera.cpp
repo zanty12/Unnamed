@@ -54,6 +54,7 @@ void CCamera::Draw()
         //projection matrix
         DirectX::XMMATRIX projectionMatrix;
         projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(1.0f, (float)SCREEN_WIDTH / SCREEN_HEIGHT, 1.0f, 1000.0f);
+        DirectX::XMStoreFloat4x4(&projection_matrix_, projectionMatrix);
 
         Renderer::SetProjectionMatrix(projectionMatrix);
     }
