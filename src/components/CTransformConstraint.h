@@ -16,7 +16,7 @@ public:
     void Start() override{};
     void Update() override{
         //constrain position
-        Entity* parent = Manager::FindEntity(parent_id_);
+        Entity* parent = Manager::FindEntityByID(parent_id_);
         parent->Lock();
         Transform* transform = parent->GetTransform();
         if (transform->position.x < position_start_.x)
@@ -49,4 +49,6 @@ public:
     }
     void CleanUp() override{};
     ~CTransformConstraint() override = default;
+
+
 };

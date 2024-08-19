@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include <string>
-#define PRIORITIES_H_
 #include "processpriority.h"
-
+#define PRIORITIES_H_
 
 class Entity;
 class Component

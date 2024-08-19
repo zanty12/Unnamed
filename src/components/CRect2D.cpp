@@ -13,7 +13,7 @@ void CRect2D::Start()
 
     Renderer::CreateVertexShader(&vertex_shader_, &vertex_layout_, vertex_shader_path_.c_str());
     Renderer::CreatePixelShader(&pixel_shader_, pixel_shader_path_.c_str());
-    if(texture_->GetType() == "Sprite2D")
+    if (texture_->GetType() == "Sprite2D")
     {
         //get uv
         CSprite2D* sprite = dynamic_cast<CSprite2D*>(texture_);
@@ -30,18 +30,18 @@ void CRect2D::Start()
 void CRect2D::Update()
 {
     //find parent
-    Entity* parent = Manager::FindEntity(parent_id_);
+    Entity* parent = Manager::FindEntityByID(parent_id_);
 
-    if(parent_id_ < 0 || parent == nullptr)
+    if (parent_id_ < 0 || parent == nullptr)
     {
         //do nothing
     }
     else
     {
-        Transform::Copy(&transform_,parent->GetTransform());
+        Transform::Copy(&transform_, parent->GetTransform());
     }
     //if texture is sprite, get uv
-    if(texture_->GetType() == "Sprite2D")
+    if (texture_->GetType() == "Sprite2D")
     {
         //get uv
         CSprite2D* sprite = dynamic_cast<CSprite2D*>(texture_);
@@ -52,31 +52,31 @@ void CRect2D::Update()
 
 void CRect2D::Draw()
 {
-    if(vertex_buffer_)
+    if (vertex_buffer_)
         vertex_buffer_->Release();
     //set vertex buffer
     VERTEX_3D vertex[4];
 
     vertex[0].Position = DirectX::XMFLOAT3((transform_.position.x - (100.0f * transform_.scale.x / 2.0f)),
-                                           transform_.position.y - 100.0f *transform_.scale.y / 2.0f, 0.0f);
+                                           transform_.position.y - 100.0f * transform_.scale.y / 2.0f, 0.0f);
     vertex[0].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[0].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[0].TexCoord = DirectX::XMFLOAT2(start_uv_.x, start_uv_.y);
 
-    vertex[1].Position = DirectX::XMFLOAT3(transform_.position.x + 100.0f *transform_.scale.x / 2.0f,
-                                           transform_.position.y - 100.0f *transform_.scale.y / 2.0f, 0.0f);
+    vertex[1].Position = DirectX::XMFLOAT3(transform_.position.x + 100.0f * transform_.scale.x / 2.0f,
+                                           transform_.position.y - 100.0f * transform_.scale.y / 2.0f, 0.0f);
     vertex[1].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[1].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[1].TexCoord = DirectX::XMFLOAT2(end_uv_.x, start_uv_.y);
 
-    vertex[2].Position = DirectX::XMFLOAT3(transform_.position.x - 100.0f *transform_.scale.x / 2.0f,
-                                           transform_.position.y + 100.0f *transform_.scale.y / 2.0f, 0.0f);
+    vertex[2].Position = DirectX::XMFLOAT3(transform_.position.x - 100.0f * transform_.scale.x / 2.0f,
+                                           transform_.position.y + 100.0f * transform_.scale.y / 2.0f, 0.0f);
     vertex[2].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[2].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[2].TexCoord = DirectX::XMFLOAT2(start_uv_.x, end_uv_.y);
 
-    vertex[3].Position = DirectX::XMFLOAT3(transform_.position.x + 100.0f *transform_.scale.x / 2.0f,
-                                           transform_.position.y + 100.0f *transform_.scale.y / 2.0f, 0.0f);
+    vertex[3].Position = DirectX::XMFLOAT3(transform_.position.x + 100.0f * transform_.scale.x / 2.0f,
+                                           transform_.position.y + 100.0f * transform_.scale.y / 2.0f, 0.0f);
     vertex[3].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[3].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[3].TexCoord = DirectX::XMFLOAT2(end_uv_.x, end_uv_.y);
@@ -107,8 +107,8 @@ void CRect2D::Draw()
     Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &view);
     //material
     MATERIAL material;
-    ZeroMemory(&material,sizeof(material));
-    material.Diffuse = DirectX::XMFLOAT4(1.0f,1.0f,1.0f,1.0f);
+    ZeroMemory(&material, sizeof(material));
+    material.Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     material.TextureEnable = true;
     Renderer::SetMaterial(material);
     //primitive topology

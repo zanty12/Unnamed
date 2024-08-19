@@ -4,7 +4,7 @@
 #include "enemy.h"
 
 #include "components/CCamera.h"
-#include "components/CEnemyBehaviour.h"
+#include "components/custom/CEnemyBehaviour.h"
 #include "components/CModelRenderer.h"
 #include "components/CRigidBody.h"
 #include "components/CSphereCollider.h"

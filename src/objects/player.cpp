@@ -3,8 +3,9 @@
 #include "manager.h"
 #include "player.h"
 
+#include "components/CAudio.h"
 #include "components/CCamera.h"
-#include "components/CPlayerController.h"
+#include "components/custom/CPlayerController.h"
 #include "components/CModelRenderer.h"
 #include "components/CRigidBody.h"
 #include "components/CTransformConstraint.h"
@@ -19,12 +20,13 @@ void Player::Start()
 
     CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
-    modelRenderer->Load("asset\\model\\player.obj");
+    modelRenderer->Load("asset\\model\\roundedcube.obj");
     modelRenderer->Start();
 
     CCamera* camera = new CCamera();
     entity_->AddComponent(camera);
     camera->SetLookAtParent(true);
+    camera->SetSmoothing(true);
     camera->Activate();
     camera->Start();
 
@@ -34,5 +36,9 @@ void Player::Start()
 
     CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);
+
+    CAudio* audio = new CAudio();
+    entity_->AddComponent(audio);
+    audio->Load("asset/sound/wan.wav");
 }
 

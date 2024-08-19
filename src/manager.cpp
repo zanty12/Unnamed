@@ -1,19 +1,20 @@
 #include "main.h"
+#include "renderer.h"
 #include "manager.h"
-
 #include <iostream>
 #include <stdbool.h>
 
-#include "renderer.h"
-#include "input.h"
-#include "timesystem.h"
+#include "imgui_impl_hal.h"
+#include "system/input.h"
+#include "system/timesystem.h"
+#include "system/physicssystem3D.h"
+#include "system/textureLoader.h"
 
 #include "components/CCamera.h"
-#include "imgui_impl_hal.h"
-#include "physicssystem3D.h"
-#include "textureLoader.h"
-#include "gamemode/GMdefaultGamemode.h"
-#include "scene/testscene.h"
+#include "components/CAudio.h"
+#include "components/CModelRenderer.h"
+#include "components/CText2D.h"
+#include "gamemode/GMDefaultGamemode.h"
 #include "scene/title.h"
 #include "traits/object/spawnable.h"
 
@@ -31,6 +32,8 @@ void Manager::Init()
     Renderer::Init();
     Input::Init();
     Time::Start();
+    CAudio::StartMaster();
+    CText2D::CreatePublicResources();
     game_mode_ = new DefaultGameMode();
 
     LoadScene(new Title());
@@ -38,10 +41,14 @@ void Manager::Init()
 
 void Manager::Uninit()
 {
+    thread_pool_.StopProcessing();
     Renderer::Uninit();
     Input::Uninit();
     Time::CleanUp();
+    CText2D::DiscardPublicResources();
+
     UnloadCurrentScene();
+    CAudio::CleanUpMaster();
 }
 
 void Manager::Update()
@@ -93,7 +100,9 @@ void Manager::Update()
 void Manager::Draw()
 {
     Renderer::Begin();
+    CText2D::TextStart();
     RenderPL::Draw();
+    CText2D::TextEnd();
 
     ImGui_Hal::BeginDraw();
     ImGui::Begin("FPS");
@@ -140,15 +149,17 @@ bool Manager::RemoveEntity(int id)
     return false;
 }
 
-Entity* Manager::FindEntity(int id)
+Entity* Manager::FindEntityByID(int id)
 {
     return entities_[id];
 }
 
-Entity* Manager::FindEntity(std::string name)
+Entity* Manager::FindEntityByName(std::string name)
 {
     for (auto entity : entities_)
     {
+        if(entity == nullptr)
+            continue;
         if (entity->GetName() == name)
         {
             return entity;
@@ -216,6 +227,7 @@ void Manager::UnloadCurrentScene()
     RenderPL::CleanUp();
     TextureLoader::CleanUp();
     PhysicsSystem3D::CleanUp();
+    CModelRenderer::UnloadAll();
     entities_.clear();
     removal_queue_.clear();
     //clean up spawn queue
@@ -236,5 +248,3 @@ GameMode* Manager::GetGameMode()
 {
     return game_mode_;
 }
-
-;

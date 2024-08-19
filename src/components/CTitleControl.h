@@ -1,7 +1,7 @@
 #pragma once
-#include "input.h"
+#include "system/input.h"
 #include "manager.h"
-#include "scene/TestScene.h"
+#include "scene/game.h"
 
 class CTitleControl : public Component
 {
@@ -13,7 +13,7 @@ public:
         if (Input::GetKeyTrigger(VK_SPACE))
         {
             Manager::UnloadCurrentScene();
-            Manager::LoadScene(new TestScene());
+            Manager::LoadScene(new Game());
         }
     };
     void CleanUp() override{};

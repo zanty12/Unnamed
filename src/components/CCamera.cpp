@@ -12,7 +12,7 @@ void CCamera::Start()
     else
     {
         //Get the transform of parent
-        position_ = Manager::FindEntity(parent_id_)->GetTransform()->position;
+        position_ = Manager::FindEntityByID(parent_id_)->GetTransform()->position;
         if(look_at_parent_)
             target_ = position_;
         position_.x += offset_.x;
@@ -30,9 +30,20 @@ void CCamera::Update()
     if (parent_id_ >= 0)
     {
         //Get the transform of parent
-        position_ = Manager::FindEntity(parent_id_)->GetTransform()->position;
+        position_ = Manager::FindEntityByID(parent_id_)->GetTransform()->position;
         if(look_at_parent_)
-            target_ = position_;
+        {
+            if(smoothing_)
+            {
+                target_.x += (position_.x - target_.x) * 0.1;
+                target_.y += (position_.y - target_.y) * 0.1;
+                target_.z += (position_.z - target_.z) * 0.1;
+            }
+            else
+            {
+                target_ = position_;
+            }
+        }
         position_.x += offset_.x;
         position_.y += offset_.y;
         position_.z += offset_.z;

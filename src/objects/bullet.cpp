@@ -3,7 +3,7 @@
 #include "bullet.h"
 
 #include "manager.h"
-#include "components/CBulletBehaviour.h"
+#include "components/custom/CBulletBehaviour.h"
 #include "components/CModelRenderer.h"
 #include "components/CRigidBody.h"
 #include "components/CSphereCollider.h"

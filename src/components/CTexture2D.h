@@ -3,7 +3,7 @@
 #include "../renderer.h"
 
 #include "CTexture.h"
-#include "textureLoader.h"
+#include "system/textureLoader.h"
 
 class CTexture2D : public CTexture
 {

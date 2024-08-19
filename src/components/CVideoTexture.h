@@ -5,10 +5,10 @@
 #include <list>
 
 #include "Component.h"
-#include "..\timesystem.h"
-#include "../include/video_reader.hpp"
-#include "../imgui_impl_hal.h"
+#include "system/timesystem.h"
+#include "imgui_impl_hal.h"
 #include "CTexture.h"
+#include "video_reader.hpp"
 
 struct frame_data
 {

@@ -12,6 +12,7 @@ class CCamera : public Component, public Drawable
     DirectX::XMFLOAT4X4 projection_matrix_;
     bool look_at_parent_ = false;
     bool active_ = false;
+    bool smoothing_ = false;
 
 public:
     CCamera() : Component("Camera"), Drawable(0)
@@ -23,13 +24,16 @@ public:
     void CleanUp() override;
     void Draw() override;
     void SetTarget(DirectX::XMFLOAT3 target) { target_ = target; }
-    XMFLOAT3 GetOffset() { return offset_; }
+    XMFLOAT3 GetTarget() const { return target_; }
+    XMFLOAT3 GetOffset() const { return offset_; }
     void SetOffset(XMFLOAT3 offset) { offset_ = offset; }
     void SetLookAtParent(bool look) { look_at_parent_ = look; }
-    XMFLOAT3 GetPosition() { return position_; }
+    XMFLOAT3 GetPosition() const { return position_; }
     bool GetActive() const { return active_; }
     void Activate();
     void Deactivate();
-    XMFLOAT4X4 GetViewMatrix() { return view_matrix_; }
-    XMFLOAT4X4 GetProjectionMatrix() { return projection_matrix_; }
+    void SetSmoothing(bool smooth) { smoothing_ = smooth; }
+    bool GetSmoothing() const{ return smoothing_; }
+    XMFLOAT4X4 GetViewMatrix() const{ return view_matrix_; }
+    XMFLOAT4X4 GetProjectionMatrix() const { return projection_matrix_; }
 };
