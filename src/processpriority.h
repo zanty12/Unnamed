@@ -25,6 +25,7 @@ const std::unordered_map<std::string, int> process_priority = {
     {"Primitive2D", 2},
     {"Primitive3D", 2},
     {"Text2D", 2},
+    {"MouseCursor",2},
     {"Camera", 1},
     //components that changes the scene
     {"TitleControl", 0},

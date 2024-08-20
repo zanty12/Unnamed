@@ -1,5 +1,5 @@
 #include "CGridCell.h"
-
+#include "CGrid.h"
 #include "manager.h"
 
 void CGridCell::Update()

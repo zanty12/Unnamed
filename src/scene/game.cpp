@@ -3,7 +3,6 @@
 #include "components/CAudio.h"
 #include "objects/player.h"
 #include "components/CCamera.h"
-#include "components/CParticleEmitter.h"
 #include "components/CPlane.h"
 #include "components/CRect2D.h"
 #include "components/CSprite2D.h"
@@ -12,8 +11,8 @@
 #include "components/CVideoTexture.h"
 #include "components/custom/CPlayerController.h"
 #include "objects/cube.h"
-#include "objects/enemy.h"
-#include "objects/explosion.h"
+#include "components/custom/CMouseCursor.h"
+#include <components/CModelRenderer.h>
 
 
 void Game::Setup()
@@ -67,6 +66,14 @@ void Game::Setup()
     textComponent->SetAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
     text->AddComponent(textComponent);
     text->Start();
+
+    Entity* mouse = Manager::MakeEntity("mouse");
+    CMouseCursor* mouseComponent = new CMouseCursor();
+    mouse->AddComponent(mouseComponent);
+    CModelRenderer* model = new CModelRenderer();
+    mouse->AddComponent(model);
+    model->Load("asset\\model\\roundedcube.obj");
+    mouse->Start();
 }
 
 

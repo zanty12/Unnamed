@@ -324,6 +324,7 @@
     <ClInclude Include="src\components\CTransformConstraint.h" />
     <ClInclude Include="src\components\custom\CBulletBehaviour.h" />
     <ClInclude Include="src\components\custom\CEnemyBehaviour.h" />
+    <ClInclude Include="src\components\custom\CMouseCursor.h" />
     <ClInclude Include="src\components\custom\CPlayerController.h" />
     <ClInclude Include="src\components\CVideoTexture.h" />
     <ClInclude Include="src\components\transform.h" />
@@ -490,6 +491,7 @@
     <ClCompile Include="src\components\CRect2D.cpp" />
     <ClCompile Include="src\components\CRigidBody.cpp" />
     <ClCompile Include="src\components\CText2D.cpp" />
+    <ClCompile Include="src\components\custom\CMouseCursor.cpp" />
     <ClCompile Include="src\components\custom\CPlayerController.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

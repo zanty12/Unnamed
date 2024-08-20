@@ -1,7 +1,7 @@
 #pragma once
-#include "CGrid.h"
 #include "component.h"
 
+class CGrid;
 class CGridCell: public Component
 {
 private:
