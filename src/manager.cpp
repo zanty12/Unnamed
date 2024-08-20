@@ -17,11 +17,13 @@
 #include "gamemode/GMDefaultGamemode.h"
 #include "scene/title.h"
 #include "traits/object/spawnable.h"
+#include "traits/debugmenu.h"
 
 int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();
 std::vector<int> Manager::removal_queue_ = std::vector<int>();
 std::vector<Spawnable*> Manager::spawn_queue_ = std::vector<Spawnable*>();
+std::vector<DebugMenu*> Manager::debug_menu_;
 CCamera* Manager::active_camera_ = nullptr;
 ThreadPool Manager::thread_pool_;
 Scene* Manager::scene_ = nullptr;
@@ -105,25 +107,20 @@ void Manager::Draw()
     CText2D::TextEnd();
 
     ImGui_Hal::BeginDraw();
+
     ImGui::Begin("FPS");
     ImGui::Text("Hello, world!");
     //ImGui::Text(u8"ƒeƒXƒg");
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
                 ImGui::GetIO().Framerate);
     ImGui::Text("Mouse Pos: %d, %d", Input::GetMousePos().x, Input::GetMousePos().y);
-    if(active_camera_){
-    XMFLOAT4X4 view_matrix = active_camera_->GetViewMatrix();
-    XMFLOAT4X4 proj_matrix = active_camera_->GetProjectionMatrix();
-    XMMATRIX view = XMLoadFloat4x4(&view_matrix);
-    XMMATRIX proj = XMLoadFloat4x4(&proj_matrix);
-    XMVECTOR mouse_world_pos = Input::GetMouseWorldPos(view, proj);
-    ImGui::Text("Mouse World Pos: %f, %f, %f", XMVectorGetX(mouse_world_pos),
-                    XMVectorGetY(mouse_world_pos),
-                    XMVectorGetZ(mouse_world_pos));
+    ImGui::End();
+
+    for (auto& debug_menu : debug_menu_)
+    {
+        debug_menu->DrawMenu();
     }
 
-
-    ImGui::End();
     ImGui_Hal::EndDraw();
 
     Renderer::End();
@@ -247,4 +244,9 @@ void Manager::SetGameMode(GameMode* game_mode)
 GameMode* Manager::GetGameMode()
 {
     return game_mode_;
+}
+
+void Manager::RegisterDebugMenu(DebugMenu* debug_menu){
+    debug_menu_.push_back(debug_menu);
+   
 }

@@ -7,7 +7,9 @@
 #include "gamemode/GameMode.h"
 #include "scene/scene.h"
 
+
 class Spawnable;
+class DebugMenu;
 class Manager
 {
 private:
@@ -15,10 +17,12 @@ private:
 	static std::vector<Entity*> entities_;
 	static std::vector<int> removal_queue_;
 	static std::vector<Spawnable*> spawn_queue_;
+	static std::vector<DebugMenu*> debug_menu_;
 	static CCamera* active_camera_;
 	static ThreadPool thread_pool_;
 	static Scene* scene_;
 	static GameMode* game_mode_;
+
 
 public:
 	static void Init();
@@ -39,4 +43,5 @@ public:
 	static void UnloadCurrentScene();
 	static void SetGameMode(GameMode* game_mode);
 	static GameMode* GetGameMode();
+	static void RegisterDebugMenu(DebugMenu* debug_menu);
 };

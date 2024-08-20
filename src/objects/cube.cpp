@@ -14,6 +14,7 @@ void Cube::Start()
 {
     entity_ = Manager::MakeEntity("Cube");
     entity_->SetTag("Cube");
+	Transform::Copy(entity_->GetTransform(), &transform_);
 
     CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
@@ -29,5 +30,10 @@ void Cube::Start()
     entity_->AddComponent(audio);
     audio->Load("asset/sound/wan.wav");
     entity_->Start();
+}
+
+void Cube::Spawn() 
+{
+    Start();
 }
 

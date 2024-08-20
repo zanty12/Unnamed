@@ -357,6 +357,7 @@
     <ClInclude Include="src\system\textureLoader.h" />
     <ClInclude Include="src\system\threadpool.h" />
     <ClInclude Include="src\system\timesystem.h" />
+    <ClInclude Include="src\traits\debugmenu.h" />
     <ClInclude Include="src\traits\drawable.h" />
     <ClInclude Include="src\traits\object\spawnable.h" />
     <ClInclude Include="src\traits\physics2D.h" />
