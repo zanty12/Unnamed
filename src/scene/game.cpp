@@ -17,7 +17,7 @@
 
 void Game::Setup()
 {
-    Entity* rect2D = Manager::MakeEntity("rect2D");
+    /*Entity* rect2D = Manager::MakeEntity("rect2D");
     Transform::MoveTo(rect2D->GetTransform(),XMFLOAT3(200.0f,200.0f, 0.0f));
     CRect2D* rect2DComponent = new CRect2D();
     CTexture2D* texture2d = new CTexture2D();
@@ -28,21 +28,20 @@ void Game::Setup()
     bgm->Load("asset/sound/bgm.wav");
     rect2D->AddComponent(bgm);
     rect2D->Start();
-    bgm->Play(true);
+    bgm->Play(true);*/
 
     Entity* plane = Manager::MakeEntity("plane");
     CPlane* planecomponent = new CPlane();
-    CVideoTexture* video_texture = new CVideoTexture("asset/video/banana.mp4");
-    video_texture->SetLoop(1);
-    planecomponent->SetTexture(video_texture);
+    CTexture2D* texture_2d = new CTexture2D(L"asset/texture/calibrate.png");
+    planecomponent->SetTexture(texture_2d);
     plane->AddComponent(planecomponent);
-    plane->AddComponent(video_texture);
-    planecomponent->SetEndUV(XMFLOAT2(10.0f,10.0f));
+    plane->AddComponent(texture_2d);
+    planecomponent->SetEndUV(XMFLOAT2(100.0f,100.0f));
     plane->Start();
 
-    Cube* cube1 = new Cube();
+    /*Cube* cube1 = new Cube();
     cube1->Start();
-    delete cube1;
+    delete cube1;*/
 
     Entity* Camera = Manager::MakeEntity("Camera");
     CCamera* camera = new CCamera();
