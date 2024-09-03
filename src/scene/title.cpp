@@ -5,7 +5,7 @@
 #include "components/CText2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
-#include "components/CTitleControl.h"
+#include "components/custom/CTitleControl.h"
 
 void Title::Setup()
 {

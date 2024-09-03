@@ -26,7 +26,10 @@ void CModelRenderer::Draw()
     //world matrix
     XMMATRIX world,scale,rot,trans;
     scale = XMMatrixScaling(transform_.scale.x, transform_.scale.y, transform_.scale.z);
-    rot = XMMatrixRotationRollPitchYaw(transform_.rotation.x, transform_.rotation.y, transform_.rotation.z);
+    if(transform_.quaternion_set)
+        rot = XMMatrixRotationQuaternion(XMLoadFloat4(&transform_.quaternion));
+    else
+        rot = XMMatrixRotationRollPitchYaw(transform_.rotation.x, transform_.rotation.y, transform_.rotation.z);
     trans = XMMatrixTranslation(transform_.position.x, transform_.position.y, transform_.position.z);
     world = scale*rot*trans;
     Renderer::SetWorldMatrix(world);

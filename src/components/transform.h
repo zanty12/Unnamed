@@ -10,6 +10,10 @@ public:
     XMFLOAT3 rotation;
     XMFLOAT3 scale;
 
+    XMFLOAT4 quaternion{0.0f,0.0f,0.0f,1.0f};
+
+    bool quaternion_set = false;
+
     static Transform Identity()
     {
         return Transform{XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f}};
@@ -62,6 +66,8 @@ public:
         transform->position = other->position;
         transform->rotation = other->rotation;
         transform->scale = other->scale;
+        transform->quaternion = other->quaternion;
+        transform->quaternion_set = other->quaternion_set;
         return transform;
     }
 
@@ -103,4 +109,10 @@ public:
 
         return rotatedPoint;
     }
+
+    static void SetQuaternionMode(Transform* transform, bool mode)
+    {
+        transform->quaternion_set = mode;
+    }
+
 };

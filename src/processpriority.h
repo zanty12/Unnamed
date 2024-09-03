@@ -22,6 +22,7 @@ const std::unordered_map<std::string, int> process_priority = {
     {"ParticleEmitter", 2},
     //components that draws the entity
     {"ModelRenderer", 2},
+    {"AnimationModel",2},
     {"Primitive2D", 2},
     {"Primitive3D", 2},
     {"Text2D", 2},

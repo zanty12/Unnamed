@@ -83,7 +83,40 @@ void CPlayerController::Update()
                                        new_cam_pos.z - parent_pos.z));
         }
 
-        //move parent with keyboard input
+        if(Input::GetKeyPress('W'))
+        {
+            Transform::MoveBy(parent->GetTransform(), XMFLOAT3(0.0f, 0.0f, 0.1f));
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(0.1f, 0.0f, 0.0f);
+            quat = XMQuaternionMultiply(XMLoadFloat4(&(parent->GetTransform()->quaternion)), quat);
+            XMStoreFloat4(&(parent->GetTransform()->quaternion), quat);
+            //Transform::RotateBy(parent->GetTransform(), XMFLOAT3(0.1f, 0.0f, 0.0f));
+        }
+        if(Input::GetKeyPress('S'))
+        {
+            Transform::MoveBy(parent->GetTransform(), XMFLOAT3(0.0f, 0.0f, -0.1f));
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(-0.1f, 0.0f, 0.0f);
+            quat = XMQuaternionMultiply(XMLoadFloat4(&(parent->GetTransform()->quaternion)), quat);
+            XMStoreFloat4(&(parent->GetTransform()->quaternion), quat);
+            //Transform::RotateBy(parent->GetTransform(), XMFLOAT3(-0.1f, 0.0f, 0.0f));
+        }
+        if(Input::GetKeyPress('A'))
+        {
+            Transform::MoveBy(parent->GetTransform(), XMFLOAT3(-0.1f, 0.0f, 0.0f));
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(0.0f, 0.0f, 0.1f);
+            quat = XMQuaternionMultiply(XMLoadFloat4(&(parent->GetTransform()->quaternion)), quat);
+            XMStoreFloat4(&(parent->GetTransform()->quaternion), quat);
+            //Transform::RotateBy(parent->GetTransform(), XMFLOAT3(0.0f, 0.0f, 0.1f));
+        }
+        if(Input::GetKeyPress('D'))
+        {
+            Transform::MoveBy(parent->GetTransform(), XMFLOAT3(0.1f, 0.0f, 0.0f));
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(0.0f, 0.0f, -0.1f);
+            quat = XMQuaternionMultiply(XMLoadFloat4(&(parent->GetTransform()->quaternion)), quat);
+            XMStoreFloat4(&(parent->GetTransform()->quaternion), quat);
+            //Transform::RotateBy(parent->GetTransform(), XMFLOAT3(0.0f, 0.0f, -0.1f));
+        }
+
+        /*//move parent with keyboard input
         if (Input::GetKeyPress('W'))
         {
             //Get vector between camera and parent
@@ -124,7 +157,7 @@ void CPlayerController::Update()
             Transform::MoveBy(parent->GetTransform(), right);
             //rotate parent to face right
             Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f));
-        }
+        }*/
 
         //jump
         if (Input::GetKeyTrigger(VK_SPACE))
