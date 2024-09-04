@@ -1483,6 +1483,9 @@
     <Content Include="asset\fonts\JF-Dot-Kappa20-0213.ttf" />
     <Content Include="asset\fonts\NotoSansJP-Bold.ttf" />
     <Content Include="asset\fonts\wapuro-mincho.otf" />
+    <Content Include="asset\model\Akai.fbx" />
+    <Content Include="asset\model\Akai_Idle.fbx" />
+    <Content Include="asset\model\Akai_Run.fbx" />
     <Content Include="asset\model\bullet.mtl" />
     <Content Include="asset\model\bullet.obj" />
     <Content Include="asset\model\cube.png" />
@@ -1501,6 +1504,7 @@
     <Content Include="asset\texture\particle.png" />
     <Content Include="asset\texture\Rider.png" />
     <Content Include="asset\video\banana.mp4" />
+    <Content Include="lib\assimp-vc143-mt.lib" />
     <Content Include="lib\avcodec-61.def" />
     <Content Include="lib\avcodec.lib" />
     <Content Include="lib\avdevice-61.def" />
