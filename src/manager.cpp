@@ -9,6 +9,7 @@
 #include "system/timesystem.h"
 #include "system/physicssystem3D.h"
 #include "system/textureLoader.h"
+#include "system/PhysX_Impl.h"
 
 #include "components/CCamera.h"
 #include "components/CAudio.h"
@@ -37,6 +38,8 @@ void Manager::Init()
     CAudio::StartMaster();
     CText2D::CreatePublicResources();
     game_mode_ = new DefaultGameMode();
+    if(!PhysX_Impl::Start())
+        std::cout << "PhysX failed to start" << std::endl;
 
     LoadScene(new Title());
 }
@@ -48,7 +51,7 @@ void Manager::Uninit()
     Input::Uninit();
     Time::CleanUp();
     CText2D::DiscardPublicResources();
-
+    PhysX_Impl::CleanUp();
     UnloadCurrentScene();
     CAudio::CleanUpMaster();
 }
@@ -57,6 +60,8 @@ void Manager::Update()
 {
     Input::Update();
     Time::Update();
+
+    PhysX_Impl::Update();
 
     //update all entities
     for (auto& entity : entities_)
