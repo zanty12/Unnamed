@@ -17,6 +17,7 @@
 #include "components/CText2D.h"
 #include "gamemode/GMDefaultGamemode.h"
 #include "scene/title.h"
+#include "scene/physXtest.h"
 #include "traits/object/spawnable.h"
 #include "traits/debugmenu.h"
 
@@ -41,7 +42,7 @@ void Manager::Init()
     if(!PhysX_Impl::Start())
         std::cout << "PhysX failed to start" << std::endl;
 
-    LoadScene(new Title());
+    LoadScene(new physXtest());
 }
 
 void Manager::Uninit()

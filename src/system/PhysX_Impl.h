@@ -35,4 +35,6 @@ public:
     static bool Start();
     static void Update();
     static void CleanUp();
+    static physx::PxPhysics* GetPhysics() { return m_pPhysics; }
+    static physx::PxScene* GetScene() { return m_pScene; }
 };

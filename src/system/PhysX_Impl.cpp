@@ -114,7 +114,7 @@ bool PhysX_Impl::Start()
 void PhysX_Impl::Update()
 {
     // シミュレーション速度を指定する
-    m_pScene->simulate(Time::GetDeltaTime());
+    m_pScene->simulate(1.0f/60.0f);
     // PhysXの処理が終わるまで待つ
     m_pScene->fetchResults(true);
 }

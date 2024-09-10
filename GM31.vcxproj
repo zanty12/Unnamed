@@ -687,6 +687,8 @@
     <ClInclude Include="src\components\Component.h" />
     <ClInclude Include="src\components\CParticleEmitter.h" />
     <ClInclude Include="src\components\CModelRenderer.h" />
+    <ClInclude Include="src\components\CPhysXBox.h" />
+    <ClInclude Include="src\components\CPhysXRigidBody.h" />
     <ClInclude Include="src\components\CPlane.h" />
     <ClInclude Include="src\components\CPrimitive2D.h" />
     <ClInclude Include="src\components\CPrimitive3D.h" />
@@ -723,6 +725,7 @@
     </ClInclude>
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\scene\game.h" />
+    <ClInclude Include="src\scene\physXtest.h" />
     <ClInclude Include="src\scene\scene.h" />
     <ClInclude Include="src\scene\testscene.h" />
     <ClInclude Include="src\scene\title.h" />
@@ -864,6 +867,8 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\src;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\components\CPhysXBox.cpp" />
+    <ClCompile Include="src\components\CPhysXRigidBody.cpp" />
     <ClCompile Include="src\components\CPlane.cpp" />
     <ClCompile Include="src\components\CPrimitive2D.cpp" />
     <ClCompile Include="src\components\CPrimitive3D.cpp" />
@@ -1326,6 +1331,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\scene\game.cpp" />
+    <ClCompile Include="src\scene\physXtest.cpp" />
     <ClCompile Include="src\scene\testscene.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
