@@ -24,7 +24,7 @@ public:
 
     ~CPhysXRigidBody() override = default;
     void Start() override;
-    void Update() override {}
+    void Update() override;
     void CleanUp() override;
 
     physx::PxRigidActor* GetActor() const { return actor_; }

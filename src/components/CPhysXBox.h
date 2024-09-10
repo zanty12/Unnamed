@@ -7,7 +7,7 @@ class CPhysXBox : public Component
 private:
     physx::PxShape* box_shape_ = nullptr;
 public:
-    CPhysXBox() : Component("PhysXBox") {}
+    CPhysXBox() : Component("PhysXPrimitive") {}
     ~CPhysXBox() override = default;
     void Start() override;
     void Update() override{}

@@ -688,6 +688,7 @@
     <ClInclude Include="src\components\CParticleEmitter.h" />
     <ClInclude Include="src\components\CModelRenderer.h" />
     <ClInclude Include="src\components\CPhysXBox.h" />
+    <ClInclude Include="src\components\CPhysXPlane.h" />
     <ClInclude Include="src\components\CPhysXRigidBody.h" />
     <ClInclude Include="src\components\CPlane.h" />
     <ClInclude Include="src\components\CPrimitive2D.h" />
@@ -868,6 +869,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\components\CPhysXBox.cpp" />
+    <ClCompile Include="src\components\CPhysXPlane.cpp" />
     <ClCompile Include="src\components\CPhysXRigidBody.cpp" />
     <ClCompile Include="src\components\CPlane.cpp" />
     <ClCompile Include="src\components\CPrimitive2D.cpp" />

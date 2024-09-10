@@ -10,7 +10,7 @@ const std::unordered_map<std::string, int> process_priority = {
     //collision update
     {"Collider2D", 6},
     {"Collider3D", 6},
-    {"PhysXBox",6},
+    {"PhysXPrimitive",6},
     //collision
     {"CollisionCheck", 5},
     {"CollisionApply", 4},

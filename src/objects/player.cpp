@@ -5,6 +5,7 @@
 
 #include "components/CAudio.h"
 #include "components/CCamera.h"
+#include "components/CModelRenderer.h"
 #include "components/custom/CPlayerController.h"
 #include "components/animationModel.h"
 #include "components/CRigidBody.h"
@@ -19,14 +20,14 @@ void Player::Start()
 
     entity_->AddComponent(new CPlayerController());
 
-    /*CModelRenderer* modelRenderer = new CModelRenderer();
+    CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
-    modelRenderer->Load("asset\\model\\roundedcube.obj");
-    modelRenderer->Start();*/
-    AnimationModel* animModel = new AnimationModel();
+    modelRenderer->Load("asset\\model\\player.obj");
+    modelRenderer->Start();
+    /*AnimationModel* animModel = new AnimationModel();
     animModel->Load("asset\\model\\Akai.fbx");
     entity_->AddComponent(animModel);
-    animModel->Start();
+    animModel->Start();*/
 
     CCamera* camera = new CCamera();
     entity_->AddComponent(camera);
