@@ -22,6 +22,7 @@ public:
     {
         for (auto& drawable : drawables_)
         {
+
             drawable->Draw();
         }
     }

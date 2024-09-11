@@ -1,9 +1,9 @@
-#include "CPhysXPlane.h"
+#include "CPhysXCapsule.h"
 #include "CPhysXRigidBody.h"
 #include "system/PhysX_Impl.h"
 #include "Manager.h"
 
-void CPhysXPlane::Start()
+void CPhysXCapsule::Start()
 {
     Entity* parent = Manager::FindEntityByID(parent_id_);
     Transform* transform = parent->GetTransform();
@@ -17,22 +17,22 @@ void CPhysXPlane::Start()
         physx::PxShape* box_shape
             = PhysX_Impl::GetPhysics()->createShape(
                 // Boxの大きさ
-                physx::PxPlaneGeometry(),
-            // 摩擦係数と反発係数の設定
-            *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f)
+                physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
+                // 摩擦係数と反発係数の設定
+                *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f)
             );
         // 形状を紐づけ
         box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*box_shape);
-        plane_shape_ = box_shape;
+        shape_ = box_shape;
     }
     else
     {
-        std::cerr<<"Parent entity does not have a PhysX actor"<<std::endl;
+        std::cerr << "Parent entity does not have a PhysX actor" << std::endl;
     }
 }
 
-void CPhysXPlane::CleanUp()
+void CPhysXCapsule::CleanUp()
 {
-    plane_shape_->getActor()->detachShape(*plane_shape_);
+    shape_->getActor()->detachShape(*shape_);
 }

@@ -411,4 +411,62 @@ void Renderer::CreatePixelShader( ID3D11PixelShader** PixelShader, const char* F
 	delete[] buffer;
 }
 
+	void Renderer::LoadState()
+{
+    // Reset render target and depth stencil view
+    m_DeviceContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
+
+
+    // Reset rasterizer state
+	D3D11_RASTERIZER_DESC rasterizerDesc{};
+	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
+	rasterizerDesc.CullMode = D3D11_CULL_BACK;
+	rasterizerDesc.DepthClipEnable = TRUE;
+	rasterizerDesc.MultisampleEnable = FALSE;
+
+	ID3D11RasterizerState *rs;
+	m_Device->CreateRasterizerState( &rasterizerDesc, &rs );
+
+	m_DeviceContext->RSSetState( rs );
+
+    // Reset blend state
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc{};
+	depthStencilDesc.DepthEnable = TRUE;
+	depthStencilDesc.DepthWriteMask	= D3D11_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
+	depthStencilDesc.StencilEnable = FALSE;
+
+	m_Device->CreateDepthStencilState( &depthStencilDesc, &m_DepthStateEnable );//深度有効ステート
+
+	//depthStencilDesc.DepthEnable = FALSE;
+	depthStencilDesc.DepthWriteMask	= D3D11_DEPTH_WRITE_MASK_ZERO;
+	m_Device->CreateDepthStencilState( &depthStencilDesc, &m_DepthStateDisable );//深度無効ステート
+
+	m_DeviceContext->OMSetDepthStencilState( m_DepthStateEnable, NULL );
+
+    // Reset samplers
+	D3D11_SAMPLER_DESC samplerDesc{};
+	samplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.MaxAnisotropy = 4;
+	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	ID3D11SamplerState* samplerState{};
+	m_Device->CreateSamplerState( &samplerDesc, &samplerState );
+
+	m_DeviceContext->PSSetSamplers( 0, 1, &samplerState );
+
+    // Reset constant buffers
+    m_DeviceContext->VSSetConstantBuffers(0, 1, &m_WorldBuffer);
+    m_DeviceContext->VSSetConstantBuffers(1, 1, &m_ViewBuffer);
+    m_DeviceContext->VSSetConstantBuffers(2, 1, &m_ProjectionBuffer);
+    m_DeviceContext->VSSetConstantBuffers(3, 1, &m_MaterialBuffer);
+    m_DeviceContext->PSSetConstantBuffers(3, 1, &m_MaterialBuffer);
+    m_DeviceContext->VSSetConstantBuffers(4, 1, &m_LightBuffer);
+    m_DeviceContext->PSSetConstantBuffers(4, 1, &m_LightBuffer);
+}
+
+
 

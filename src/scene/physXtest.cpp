@@ -12,7 +12,9 @@ void physXtest::Setup()
     Entity* box = Manager::MakeEntity();
     Transform::MoveTo(box->GetTransform(), XMFLOAT3(0, 5, 0));
     box->AddComponent(new CPhysXRigidBody(true));
-    box->AddComponent(new CPhysXBox());
+    CPhysXBox* physXBox = new CPhysXBox();
+    physXBox->SetView(true);
+    box->AddComponent(physXBox);
 
     CModelRenderer* modelRenderer = new CModelRenderer();
     box->AddComponent(modelRenderer);

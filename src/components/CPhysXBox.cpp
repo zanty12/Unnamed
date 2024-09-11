@@ -2,6 +2,8 @@
 #include "CPhysXRigidBody.h"
 #include "system/PhysX_Impl.h"
 #include "Manager.h"
+#include "renderer.h"
+
 
 void CPhysXBox::Start()
 {
@@ -24,7 +26,8 @@ void CPhysXBox::Start()
         // 形状を紐づけ
         box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*box_shape);
-        box_shape_ = box_shape;
+        shape_ = box_shape;
+        debug_shape_ = GeometricPrimitive::CreateBox(Renderer::GetDeviceContext(), transform->scale,false);
     }
     else
     {
@@ -34,5 +37,35 @@ void CPhysXBox::Start()
 
 void CPhysXBox::CleanUp()
 {
-    box_shape_->getActor()->detachShape(*box_shape_);
+    shape_->getActor()->detachShape(*shape_);
+}
+
+void CPhysXBox::Draw()
+{
+    if (view_)
+    {
+        Entity* parent = Manager::FindEntityByID(parent_id_);
+        if (!parent) {
+            std::cerr << "Parent entity not found" << std::endl;
+            return;
+        }
+        Transform* transform = parent->GetTransform();
+        if (!transform) {
+            std::cerr << "Transform not found" << std::endl;
+            return;
+        }
+        XMFLOAT4X4 originalView, originalProj;
+        originalView = Manager::GetActiveCamera()->GetViewMatrix();
+        originalProj = Manager::GetActiveCamera()->GetProjectionMatrix();
+        XMMATRIX world, scale, rot, trans;
+        rot = XMMatrixRotationQuaternion(XMLoadFloat4(&transform->quaternion));
+        trans = XMMatrixTranslation(transform->position.x, transform->position.y, transform->position.z);
+        scale = XMMatrixScaling(1.0f, 1.0f, 1.0f);
+        world = scale * rot * trans;
+        XMMATRIX viewMatrix = XMLoadFloat4x4(&originalView);
+        XMMATRIX projMatrix = XMLoadFloat4x4(&originalProj);
+        debug_shape_->Draw(world, viewMatrix, projMatrix, Colors::Green, nullptr, true);
+        Renderer::LoadState();
+        Manager::GetActiveCamera()->Draw();
+    }
 }
