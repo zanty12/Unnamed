@@ -2,6 +2,7 @@
 #include "CPhysXRigidBody.h"
 #include "system/PhysX_Impl.h"
 #include "Manager.h"
+#include "renderer.h"
 
 void CPhysXSphere::Start()
 {
@@ -13,8 +14,8 @@ void CPhysXSphere::Start()
         /*//create dynamic actor
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
             physx::PxTransform(Transform::ToPhysXTransform(transform)));*/
-        // 形状(Box)を作成
-        physx::PxShape* box_shape
+        // 形状を作成
+        physx::PxShape* shape
             = PhysX_Impl::GetPhysics()->createShape(
                 // Boxの大きさ
                 physx::PxSphereGeometry(transform->scale.x),
@@ -22,9 +23,10 @@ void CPhysXSphere::Start()
                 *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f)
             );
         // 形状を紐づけ
-        box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
-        ac->attachShape(*box_shape);
-        shape_ = box_shape;
+        shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
+        ac->attachShape(*shape);
+        shape_ = shape;
+        debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), transform->scale.x, 16);
     }
     else
     {

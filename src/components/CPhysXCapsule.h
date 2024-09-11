@@ -1,13 +1,10 @@
 #pragma once
-#include "component.h"
-#include "PxActor.h"
+#include "CPhysXPrimitive.h"
 
-class CPhysXCapsule : public Component
+class CPhysXCapsule : public CPhysXPrimitive
 {
-private:
-    physx::PxShape* shape_ = nullptr;
 public:
-    CPhysXCapsule() : Component("PhysXPrimitive") {}
+    CPhysXCapsule() = default;
     ~CPhysXCapsule() override = default;
     void Start() override;
     void Update() override{}

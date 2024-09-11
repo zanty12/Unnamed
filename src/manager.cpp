@@ -109,6 +109,8 @@ void Manager::Draw()
 {
     Renderer::Begin();
     CText2D::TextStart();
+    Renderer::LoadState();
+    active_camera_->Draw();
     RenderPL::Draw();
     CText2D::TextEnd();
 

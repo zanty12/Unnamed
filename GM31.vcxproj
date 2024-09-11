@@ -689,6 +689,7 @@
     <ClInclude Include="src\components\CModelRenderer.h" />
     <ClInclude Include="src\components\CPhysXBox.h" />
     <ClInclude Include="src\components\CPhysXCapsule.h" />
+    <ClInclude Include="src\components\CPhysXPrimitive.h" />
     <ClInclude Include="src\components\CPhysXRigidBody.h" />
     <ClInclude Include="src\components\CPhysXSphere.h" />
     <ClInclude Include="src\components\CPlane.h" />
@@ -945,6 +946,7 @@
       <AdditionalIncludeDirectories>C:\Users\admin\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\admin\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\admin\RiderProjects\GM31\\include\PhysX;C:\Users\admin\RiderProjects\GM31\\include\;C:\Users\admin\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\components\CPhysXPrimitive.cpp" />
     <ClCompile Include="src\components\CPhysXRigidBody.cpp" />
     <ClCompile Include="src\components\CPhysXSphere.cpp">
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
