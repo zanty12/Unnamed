@@ -39,6 +39,7 @@ void Game::Setup()
     planecomponent->SetEndUV(XMFLOAT2(100.0f,100.0f));
     plane->Start();
 
+
     /*Cube* cube1 = new Cube();
     cube1->Start();
     delete cube1;*/
