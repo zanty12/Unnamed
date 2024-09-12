@@ -2231,12 +2231,18 @@
     <Content Include="lib\Debug\PhysXVehicle_static_64.pdb" />
     <Content Include="lib\Debug\PhysX_64.lib" />
     <Content Include="lib\Debug\PhysX_64.pdb" />
+    <Content Include="lib\Debug\postproc-58.def" />
+    <Content Include="lib\Debug\postproc.lib" />
     <Content Include="lib\Debug\PVDRuntime_64.lib" />
     <Content Include="lib\Debug\PVDRuntime_64.pdb" />
     <Content Include="lib\Debug\SceneQuery_static_64.lib" />
     <Content Include="lib\Debug\SceneQuery_static_64.pdb" />
     <Content Include="lib\Debug\SimulationController_static_64.lib" />
     <Content Include="lib\Debug\SimulationController_static_64.pdb" />
+    <Content Include="lib\Debug\swresample-5.def" />
+    <Content Include="lib\Debug\swresample.lib" />
+    <Content Include="lib\Debug\swscale-8.def" />
+    <Content Include="lib\Debug\swscale.lib" />
     <Content Include="lib\pkgconfig\libavcodec.pc" />
     <Content Include="lib\pkgconfig\libavdevice.pc" />
     <Content Include="lib\pkgconfig\libavfilter.pc" />
@@ -2285,12 +2291,18 @@
     <Content Include="lib\Release\PhysXVehicle_static_64.pdb" />
     <Content Include="lib\Release\PhysX_64.lib" />
     <Content Include="lib\Release\PhysX_64.pdb" />
+    <Content Include="lib\Release\postproc-58.def" />
+    <Content Include="lib\Release\postproc.lib" />
     <Content Include="lib\Release\PVDRuntime_64.lib" />
     <Content Include="lib\Release\PVDRuntime_64.pdb" />
     <Content Include="lib\Release\SceneQuery_static_64.lib" />
     <Content Include="lib\Release\SceneQuery_static_64.pdb" />
     <Content Include="lib\Release\SimulationController_static_64.lib" />
     <Content Include="lib\Release\SimulationController_static_64.pdb" />
+    <Content Include="lib\Release\swresample-5.def" />
+    <Content Include="lib\Release\swresample.lib" />
+    <Content Include="lib\Release\swscale-8.def" />
+    <Content Include="lib\Release\swscale.lib" />
     <Content Include="README.md" />
     <Content Include="src\components\custom\CTitleControl.h" />
   </ItemGroup>
