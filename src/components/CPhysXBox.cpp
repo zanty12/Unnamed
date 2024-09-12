@@ -12,9 +12,6 @@ void CPhysXBox::Start()
     if (parent->GetComponent<CPhysXRigidBody>())
     {
         physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
-        /*//create dynamic actor
-        physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
-            physx::PxTransform(Transform::ToPhysXTransform(transform)));*/
         // 形状(Box)を作成
         physx::PxShape* box_shape
             = PhysX_Impl::GetPhysics()->createShape(

@@ -5,6 +5,8 @@
 #include "components/CPhysXSphere.h"
 #include "components/CPhysXRigidBody.h"
 #include "components/CModelRenderer.h"
+#include "components/CPlane.h"
+#include "components/CVideoTexture.h"
 #include "objects/player.h"
 
 
@@ -16,10 +18,6 @@ void physXtest::Setup()
     CPhysXBox* physXBox = new CPhysXBox();
     physXBox->SetDebugView(true);
     box->AddComponent(physXBox);
-
-    /*CModelRenderer* modelRenderer = new CModelRenderer();
-    box->AddComponent(modelRenderer);
-    modelRenderer->Load("asset\\model\\roundedcube.obj");*/
     box->Start();
 
     Entity* sphere = Manager::MakeEntity();
@@ -28,13 +26,22 @@ void physXtest::Setup()
     CPhysXSphere* physXSphere = new CPhysXSphere();
     physXSphere->SetDebugView(true);
     sphere->AddComponent(physXSphere);
-
     sphere->Start();
 
+    //Create a plane
+    Entity* plane = Manager::MakeEntity("plane");
+    CPlane* planecomponent = new CPlane();
+    CVideoTexture* video_texture = new CVideoTexture("asset/video/banana.mp4");
+    video_texture->SetLoop(1);
+    planecomponent->SetTexture(video_texture);
+    plane->AddComponent(planecomponent);
+    plane->AddComponent(video_texture);
+    plane->Start();
+    planecomponent->SetEndUV(XMFLOAT2(10.0f,10.0f));
     PhysX_Impl::GetScene()->addActor(*physx::PxCreatePlane(
     *PhysX_Impl::GetPhysics(), physx::PxPlane(0, 1, 0, 0),
     *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f))
-);
+    );
 
     Player* player = new Player();
     player->Start();
