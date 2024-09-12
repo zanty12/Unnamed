@@ -796,10 +796,6 @@
     <ClInclude Include="src\components\CAudio.h" />
     <ClInclude Include="src\components\CCamera.h" />
     <ClInclude Include="src\components\CCollider2D.h" />
-    <ClInclude Include="src\components\CCollider3D.h" />
-    <ClInclude Include="src\components\CCylinderCollider.h" />
-    <ClInclude Include="src\components\CGrid.h" />
-    <ClInclude Include="src\components\CGridCell.h" />
     <ClInclude Include="src\components\Component.h" />
     <ClInclude Include="src\components\CParticleEmitter.h" />
     <ClInclude Include="src\components\CModelRenderer.h" />
@@ -812,8 +808,6 @@
     <ClInclude Include="src\components\CPrimitive2D.h" />
     <ClInclude Include="src\components\CPrimitive3D.h" />
     <ClInclude Include="src\components\CRect2D.h" />
-    <ClInclude Include="src\components\CRigidBody.h" />
-    <ClInclude Include="src\components\CSphereCollider.h" />
     <ClInclude Include="src\components\CSprite2D.h" />
     <ClInclude Include="src\components\CText2D.h" />
     <ClInclude Include="src\components\CTexture.h" />
@@ -824,6 +818,7 @@
     <ClInclude Include="src\components\custom\CMouseCursor.h" />
     <ClInclude Include="src\components\custom\CPlayerController.h" />
     <ClInclude Include="src\components\CVideoTexture.h" />
+    <ClInclude Include="src\components\depreciated\CSphereCollider.h" />
     <ClInclude Include="src\components\transform.h" />
     <ClInclude Include="src\entity.h" />
     <ClInclude Include="src\gamemode\GMDefaultGamemode.h" />
@@ -908,8 +903,6 @@
     <ClCompile Include="src\components\animationModel.cpp" />
     <ClCompile Include="src\components\CAudio.cpp" />
     <ClCompile Include="src\components\CCamera.cpp" />
-    <ClCompile Include="src\components\CGrid.cpp" />
-    <ClCompile Include="src\components\CGridCell.cpp" />
     <ClCompile Include="src\components\CParticleEmitter.cpp" />
     <ClCompile Include="src\components\CModelRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1149,7 +1142,6 @@
     <ClCompile Include="src\components\CPrimitive2D.cpp" />
     <ClCompile Include="src\components\CPrimitive3D.cpp" />
     <ClCompile Include="src\components\CRect2D.cpp" />
-    <ClCompile Include="src\components\CRigidBody.cpp" />
     <ClCompile Include="src\components\CText2D.cpp" />
     <ClCompile Include="src\components\custom\CMouseCursor.cpp" />
     <ClCompile Include="src\components\custom\CPlayerController.cpp">
@@ -2179,6 +2171,8 @@
     <Content Include="asset\model\player.obj" />
     <Content Include="asset\model\roundedcube.mtl" />
     <Content Include="asset\model\roundedcube.obj" />
+    <Content Include="asset\model\sky.mtl" />
+    <Content Include="asset\model\sky.obj" />
     <Content Include="asset\shader\unlitTexturePS.cso" />
     <Content Include="asset\shader\unlitTextureVS.cso" />
     <Content Include="asset\sound\bgm.wav" />

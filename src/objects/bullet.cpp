@@ -5,8 +5,8 @@
 #include "manager.h"
 #include "components/custom/CBulletBehaviour.h"
 #include "components/CModelRenderer.h"
-#include "components/CRigidBody.h"
-#include "components/CSphereCollider.h"
+#include <components/CPhysXSphere.h>
+#include <components/CPhysXRigidBody.h>
 
 void Bullet::Start()
 {
@@ -19,21 +19,21 @@ void Bullet::Start()
     modelRenderer->Load("asset\\model\\bullet.obj");
     modelRenderer->Start();
 
-    CRigidBody* rigidBody = new CRigidBody();
-    entity_->AddComponent(rigidBody);
-    rigidBody->SetUseGravity(false);
-    rigidBody->SetLinearVel(vel_);
-    rigidBody->Start();
-
-    CSphereCollider* sphereCollider = new CSphereCollider();
-    entity_->AddComponent(sphereCollider);
-    sphereCollider->SetRadius(0.5f);
-    sphereCollider->SetDynamic(true);
-    sphereCollider->Start();
-
     CBulletBehaviour* bulletBehaviour = new CBulletBehaviour();
     entity_->AddComponent(bulletBehaviour);
-    bulletBehaviour->Start();
+
+	CPhysXRigidBody* rigidBody = new CPhysXRigidBody();
+	rigidBody->SetDynamic(true);
+	rigidBody->SetIsTrigger(false);
+	entity_->AddComponent(rigidBody);
+
+	CPhysXSphere* sphere = new CPhysXSphere();
+    sphere->SetIsTrigger(true);
+	sphere->SetDebugView(true);
+	entity_->AddComponent(sphere);
+
+	entity_->Start();
+	rigidBody->SetLinearVelocity(vel_);
 }
 
 void Bullet::Spawn()

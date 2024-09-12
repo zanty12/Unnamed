@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "main.h"
-#include "Component.h"
+#include "components/component.h"
 #include "processpriority.h"
 #include "traits/unique.h"
 

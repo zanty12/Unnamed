@@ -15,6 +15,4 @@ public:
     void Spawn() override;
     void SetVelocity(XMFLOAT3 vel) { vel_ = vel; }
     void SetPosition(XMFLOAT3 pos) { pos_ = pos; }
-
-    
 };

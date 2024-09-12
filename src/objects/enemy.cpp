@@ -6,8 +6,8 @@
 #include "components/CCamera.h"
 #include "components/custom/CEnemyBehaviour.h"
 #include "components/CModelRenderer.h"
-#include "components/CRigidBody.h"
-#include "components/CSphereCollider.h"
+#include "components/depreciated/CRigidBody.h"
+#include "components/depreciated/CSphereCollider.h"
 #include "components/CTransformConstraint.h"
 
 

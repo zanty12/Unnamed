@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include "manager.h"
-#include "components/CCollider3D.h"
+#include "components/depreciated/CCollider3D.h"
 
 std::vector<Physics3D*> PhysicsSystem3D::physics3D_;
 void PhysicsSystem3D::AddCollider3D(Physics3D* physics3D)

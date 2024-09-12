@@ -8,7 +8,6 @@
 #include "components/CModelRenderer.h"
 #include "components/custom/CPlayerController.h"
 #include "components/animationModel.h"
-#include "components/CRigidBody.h"
 #include "components/CTransformConstraint.h"
 
 
@@ -36,9 +35,9 @@ void Player::Start()
     camera->Activate();
     camera->Start();
 
-    CRigidBody* rigidBody = new CRigidBody();
+    /*CRigidBody* rigidBody = new CRigidBody();
     entity_->AddComponent(rigidBody);
-    rigidBody->Start();
+    rigidBody->Start();*/
 
     CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);

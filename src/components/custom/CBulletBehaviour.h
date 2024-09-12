@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 
-#include "components/CCollider3D.h"
+#include "components/depreciated/CCollider3D.h"
 #include "manager.h"
 #include "components/Component.h"
 
@@ -26,8 +26,7 @@ public:
         //if bullet is too far from start position, remove it
         if (XMVectorGetX(XMVector3Length(XMVectorSubtract(
             XMLoadFloat3(&(Manager::FindEntityByID(parent_id_)->GetTransform()->position)),
-            XMLoadFloat3(&start_pos_)))) > 30.0f||
-            Manager::FindEntityByID(parent_id_)->GetComponent<CCollider3D>()->GetCollided().size() > 0)
+            XMLoadFloat3(&start_pos_)))) > 30.0f)
         {
             Manager::QueueForRemoval(parent_id_);
         }

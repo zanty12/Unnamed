@@ -1,5 +1,5 @@
 #pragma once
-#include "CCollider3D.h"
+#include "components/depreciated/CCollider3D.h"
 #include "manager.h"
 #include "system/physicssystem3D.h"
 

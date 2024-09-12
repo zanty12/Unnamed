@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 
-#include "components/CCollider3D.h"
+#include "components/depreciated/CCollider3D.h"
 #include "manager.h"
 #include "components/Component.h"
 #include "gamemode/GMDefaultGamemode.h"

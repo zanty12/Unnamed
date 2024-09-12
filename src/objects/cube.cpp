@@ -6,7 +6,6 @@
 #include "components/CAudio.h"
 #include "components/CCamera.h"
 #include "components/CModelRenderer.h"
-#include "components/CRigidBody.h"
 #include "components/CTransformConstraint.h"
 
 
@@ -19,9 +18,6 @@ void Cube::Start()
     CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\roundedcube.obj");
-
-    CRigidBody* rigidBody = new CRigidBody();
-    entity_->AddComponent(rigidBody);
 
     CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);

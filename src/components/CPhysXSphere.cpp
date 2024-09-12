@@ -20,13 +20,13 @@ void CPhysXSphere::Start()
                 // Boxの大きさ
                 physx::PxSphereGeometry(transform->scale.x),
                 // 摩擦係数と反発係数の設定
-                *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f)
+                *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
         // 形状を紐づけ
         shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*shape);
         shape_ = shape;
-        debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), transform->scale.x, 16);
+        debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), transform->scale.x, 8);
         if(is_trigger_)
         {
             shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);

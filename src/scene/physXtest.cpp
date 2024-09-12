@@ -12,16 +12,27 @@
 
 void physXtest::Setup()
 {
-    Entity* box = Manager::MakeEntity();
-    Transform::MoveTo(box->GetTransform(), XMFLOAT3(0, 5, 0));
-    box->AddComponent(new CPhysXRigidBody(true));
-    CPhysXBox* physXBox = new CPhysXBox();
-    physXBox->SetDebugView(true);
-    box->AddComponent(physXBox);
-    box->Start();
+    //create 125 boxes in a 5x5x5 grid
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int k = 0; k < 5; k++)
+            {
+                Entity* box = Manager::MakeEntity();
+                Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*1.1f, k*1.1f));
+                box->AddComponent(new CPhysXRigidBody(true));
+                CPhysXBox* physXBox = new CPhysXBox();
+                physXBox->SetDebugView(true);
+                physXBox->SetMaterial(0.5f, 0.5f, 0.0f);
+                box->AddComponent(physXBox);
+                box->Start();
+            }
+        }
+    }
 
     Entity* sphere = Manager::MakeEntity();
-    Transform::MoveTo(sphere->GetTransform(), XMFLOAT3(2, 5, 0));
+    Transform::MoveTo(sphere->GetTransform(), XMFLOAT3(2, 10, 0));
     sphere->AddComponent(new CPhysXRigidBody(true));
     CPhysXSphere* physXSphere = new CPhysXSphere();
     physXSphere->SetDebugView(true);
@@ -42,6 +53,14 @@ void physXtest::Setup()
     *PhysX_Impl::GetPhysics(), physx::PxPlane(0, 1, 0, 0),
     *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f))
     );
+
+    //skybox
+    Entity* skybox = Manager::MakeEntity("skybox");
+    skybox->GetTransform()->scale = XMFLOAT3(100, 100, 100);
+    CModelRenderer* skybox_renderer = new CModelRenderer();
+    skybox_renderer->Load("asset\\model\\sky.obj");
+    skybox->AddComponent(skybox_renderer);
+    skybox->Start();
 
     Player* player = new Player();
     player->Start();

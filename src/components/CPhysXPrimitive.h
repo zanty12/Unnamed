@@ -9,8 +9,6 @@
 
 #pragma comment (lib, "DirectXTK.lib")
 
-
-
 class CPhysXPrimitive : public Component, public Drawable
 {
 protected:
@@ -18,6 +16,10 @@ protected:
     bool is_trigger_ = false;
     bool debug_view_ = false;
     std::unique_ptr<DirectX::GeometricPrimitive> debug_shape_;
+    float static_friction_ = 0.5f;
+    float dynamic_friction_ = 0.5f;
+    float restitution_ = 0.5f;
+
 
 public:
     CPhysXPrimitive() : Component("PhysXPrimitive"), Drawable(10)
@@ -35,4 +37,10 @@ public:
     void Draw();
     void SetDebugView(bool view) { debug_view_ = view; }
     void SetIsTrigger(bool is_trigger) { is_trigger_ = is_trigger; }
+    void SetMaterial(float static_friction = 0.5f, float dynamic_friction = 0.5f, float restitution = 0.5f)
+    {
+        static_friction_ = static_friction;
+        dynamic_friction_ = dynamic_friction;
+        restitution_ = restitution;
+    }
 };

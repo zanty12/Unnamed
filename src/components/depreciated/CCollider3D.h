@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 
-#include "Component.h"
-#include "transform.h"
+#include "components/Component.h"
+#include "components/transform.h"
 #include "traits/physics3D.h"
 
 class CCollider3D : public Component,public Physics3D

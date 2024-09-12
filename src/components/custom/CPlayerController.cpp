@@ -6,7 +6,7 @@
 #include "components/CAudio.h"
 #include "components/CCamera.h"
 #include "entity.h"
-#include "components/CRigidBody.h"
+#include "components/depreciated/CRigidBody.h"
 #include "system/timesystem.h"
 #include "objects/bullet.h"
 

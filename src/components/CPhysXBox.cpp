@@ -18,7 +18,7 @@ void CPhysXBox::Start()
                 // Boxの大きさ
                 physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
                 // 摩擦係数と反発係数の設定
-                *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f)
+                *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
         // 形状を紐づけ
         box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));

@@ -27,16 +27,151 @@ void CPhysXRigidBody::Update()
     {
         return;
     }
-    //copy actor transform to entity transform
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
-    physx::PxTransform actor_transform = actor_->getGlobalPose();
-    Transform::MoveTo(transform, XMFLOAT3(actor_transform.p.x, actor_transform.p.y, actor_transform.p.z));
-    XMFLOAT4 quat = XMFLOAT4(actor_transform.q.x, actor_transform.q.y, actor_transform.q.z, actor_transform.q.w);
-    Transform::RotateToQuat(transform, quat);
+	if (!is_dynamic_)
+    {
+		//copy entity transform to actor transform
+		Entity* parent = Manager::FindEntityByID(parent_id_);
+		Transform* transform = parent->GetTransform();
+		physx::PxTransform actor_transform = actor_->getGlobalPose();
+		actor_transform.p = physx::PxVec3(transform->position.x, transform->position.y, transform->position.z);
+		actor_transform.q = physx::PxQuat(transform->quaternion.x, transform->quaternion.y, transform->quaternion.z, transform->quaternion.w);
+		actor_->setGlobalPose(actor_transform);
+	}
+	else
+	{
+		//copy actor transform to entity transform
+		Entity* parent = Manager::FindEntityByID(parent_id_);
+		Transform* transform = parent->GetTransform();
+		physx::PxTransform actor_transform = actor_->getGlobalPose();
+		Transform::MoveTo(transform, XMFLOAT3(actor_transform.p.x, actor_transform.p.y, actor_transform.p.z));
+		XMFLOAT4 quat = XMFLOAT4(actor_transform.q.x, actor_transform.q.y, actor_transform.q.z, actor_transform.q.w);
+		Transform::RotateToQuat(transform, quat);
+	}
 }
 
 void CPhysXRigidBody::CleanUp()
 {
     actor_->release();
+}
+
+void CPhysXRigidBody::SetLinearVelocity(const DirectX::XMFLOAT3& velocity)
+{
+	if (is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setLinearVelocity(physx::PxVec3(velocity.x, velocity.y, velocity.z));
+	}
+
+}
+
+void CPhysXRigidBody::SetAngularVelocity(const DirectX::XMFLOAT3& velocity)
+{
+	if(is_dynamic_)
+	{
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setAngularVelocity(physx::PxVec3(velocity.x, velocity.y, velocity.z));
+	}
+}
+
+void CPhysXRigidBody::SetMass(float mass)
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setMass(mass);
+	}
+}
+
+void CPhysXRigidBody::SetLinearDamping(float damping)
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setLinearDamping(damping);
+	}
+}
+
+void CPhysXRigidBody::SetAngularDamping(float damping)
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setAngularDamping(damping);
+	}
+}
+
+void CPhysXRigidBody::SetEnableGravity(bool enable)
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, enable);
+	}
+}
+
+float CPhysXRigidBody::GetMass() const
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		return dynamic->getMass();
+	}
+}
+
+float CPhysXRigidBody::GetLinearDamping() const
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		return dynamic->getLinearDamping();
+	}
+}
+
+float CPhysXRigidBody::GetAngularDamping() const
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		return dynamic->getAngularDamping();
+	}
+}
+
+DirectX::XMFLOAT3 CPhysXRigidBody::GetLinearVelocity() const
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		physx::PxVec3 velocity = dynamic->getLinearVelocity();
+		return XMFLOAT3(velocity.x, velocity.y, velocity.z);
+	}
+}
+
+DirectX::XMFLOAT3 CPhysXRigidBody::GetAngularVelocity() const
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		physx::PxVec3 velocity = dynamic->getAngularVelocity();
+		return XMFLOAT3(velocity.x, velocity.y, velocity.z);
+	}
+}
+
+bool CPhysXRigidBody::GetEnableGravity() const
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		return dynamic->getActorFlags() & physx::PxActorFlag::eDISABLE_GRAVITY;
+	}
 }
