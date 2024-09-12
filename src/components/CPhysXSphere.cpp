@@ -27,6 +27,11 @@ void CPhysXSphere::Start()
         ac->attachShape(*shape);
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), transform->scale.x, 16);
+        if(is_trigger_)
+        {
+            shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
+            shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
+        }
     }
     else
     {

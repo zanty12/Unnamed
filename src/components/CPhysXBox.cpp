@@ -25,6 +25,11 @@ void CPhysXBox::Start()
         ac->attachShape(*box_shape);
         shape_ = box_shape;
         debug_shape_ = GeometricPrimitive::CreateBox(Renderer::GetDeviceContext(), transform->scale);
+        if(is_trigger_)
+        {
+            shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
+            shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
+        }
     }
     else
     {

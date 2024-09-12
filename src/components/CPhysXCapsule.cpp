@@ -18,7 +18,7 @@ void CPhysXCapsule::Start()
         physx::PxShape* shape
             = PhysX_Impl::GetPhysics()->createShape(
                 // Boxの大きさ
-                physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
+                physx::PxCapsuleGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f),
                 // 摩擦係数と反発係数の設定
                 *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f)
             );
@@ -27,6 +27,11 @@ void CPhysXCapsule::Start()
         ac->attachShape(*shape);
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateCylinder(Renderer::GetDeviceContext(), transform->scale.y, transform->scale.x, 16);
+        if(is_trigger_)
+        {
+            shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
+            shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
+        }
     }
     else
     {

@@ -15,6 +15,7 @@ class CPhysXPrimitive : public Component, public Drawable
 {
 protected:
     physx::PxShape* shape_ = nullptr;
+    bool is_trigger_ = false;
     bool debug_view_ = false;
     std::unique_ptr<DirectX::GeometricPrimitive> debug_shape_;
 
@@ -33,4 +34,5 @@ public:
     virtual void CleanUp() = 0;
     void Draw();
     void SetDebugView(bool view) { debug_view_ = view; }
+    void SetIsTrigger(bool is_trigger) { is_trigger_ = is_trigger; }
 };
