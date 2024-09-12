@@ -1,6 +1,6 @@
 #pragma once
 #include "component.h"
-#include "PxRigidActor.h"
+#include "system/PhysX_Impl.h"
 
 namespace physx
 {

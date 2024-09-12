@@ -90,7 +90,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,7 +109,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -128,13 +128,15 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\lib\;$(SolutionDir)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,7 +149,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,6 +161,120 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\assimp\aabb.h" />
+    <ClInclude Include="include\assimp\ai_assert.h" />
+    <ClInclude Include="include\assimp\anim.h" />
+    <ClInclude Include="include\assimp\Base64.hpp" />
+    <ClInclude Include="include\assimp\BaseImporter.h" />
+    <ClInclude Include="include\assimp\Bitmap.h" />
+    <ClInclude Include="include\assimp\BlobIOSystem.h" />
+    <ClInclude Include="include\assimp\ByteSwapper.h" />
+    <ClInclude Include="include\assimp\camera.h" />
+    <ClInclude Include="include\assimp\cexport.h" />
+    <ClInclude Include="include\assimp\cfileio.h" />
+    <ClInclude Include="include\assimp\cimport.h" />
+    <ClInclude Include="include\assimp\ColladaMetaData.h" />
+    <ClInclude Include="include\assimp\color4.h" />
+    <ClInclude Include="include\assimp\color4.inl" />
+    <ClInclude Include="include\assimp\commonMetaData.h" />
+    <ClInclude Include="include\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="include\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="include\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="include\assimp\config.h" />
+    <ClInclude Include="include\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="include\assimp\DefaultIOStream.h" />
+    <ClInclude Include="include\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="include\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="include\assimp\defs.h" />
+    <ClInclude Include="include\assimp\Exceptional.h" />
+    <ClInclude Include="include\assimp\Exporter.hpp" />
+    <ClInclude Include="include\assimp\fast_atof.h" />
+    <ClInclude Include="include\assimp\GenericProperty.h" />
+    <ClInclude Include="include\assimp\GltfMaterial.h" />
+    <ClInclude Include="include\assimp\Hash.h" />
+    <ClInclude Include="include\assimp\Importer.hpp" />
+    <ClInclude Include="include\assimp\importerdesc.h" />
+    <ClInclude Include="include\assimp\IOStream.hpp" />
+    <ClInclude Include="include\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="include\assimp\IOSystem.hpp" />
+    <ClInclude Include="include\assimp\light.h" />
+    <ClInclude Include="include\assimp\LineSplitter.h" />
+    <ClInclude Include="include\assimp\LogAux.h" />
+    <ClInclude Include="include\assimp\Logger.hpp" />
+    <ClInclude Include="include\assimp\LogStream.hpp" />
+    <ClInclude Include="include\assimp\material.h" />
+    <ClInclude Include="include\assimp\material.inl" />
+    <ClInclude Include="include\assimp\MathFunctions.h" />
+    <ClInclude Include="include\assimp\matrix3x3.h" />
+    <ClInclude Include="include\assimp\matrix3x3.inl" />
+    <ClInclude Include="include\assimp\matrix4x4.h" />
+    <ClInclude Include="include\assimp\matrix4x4.inl" />
+    <ClInclude Include="include\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="include\assimp\mesh.h" />
+    <ClInclude Include="include\assimp\metadata.h" />
+    <ClInclude Include="include\assimp\NullLogger.hpp" />
+    <ClInclude Include="include\assimp\ObjMaterial.h" />
+    <ClInclude Include="include\assimp\ParsingUtils.h" />
+    <ClInclude Include="include\assimp\pbrmaterial.h" />
+    <ClInclude Include="include\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="include\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="include\assimp\postprocess.h" />
+    <ClInclude Include="include\assimp\Profiler.h" />
+    <ClInclude Include="include\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="include\assimp\qnan.h" />
+    <ClInclude Include="include\assimp\quaternion.h" />
+    <ClInclude Include="include\assimp\quaternion.inl" />
+    <ClInclude Include="include\assimp\RemoveComments.h" />
+    <ClInclude Include="include\assimp\scene.h" />
+    <ClInclude Include="include\assimp\SceneCombiner.h" />
+    <ClInclude Include="include\assimp\SGSpatialSort.h" />
+    <ClInclude Include="include\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="include\assimp\SmallVector.h" />
+    <ClInclude Include="include\assimp\SmoothingGroups.h" />
+    <ClInclude Include="include\assimp\SmoothingGroups.inl" />
+    <ClInclude Include="include\assimp\SpatialSort.h" />
+    <ClInclude Include="include\assimp\StandardShapes.h" />
+    <ClInclude Include="include\assimp\StreamReader.h" />
+    <ClInclude Include="include\assimp\StreamWriter.h" />
+    <ClInclude Include="include\assimp\StringComparison.h" />
+    <ClInclude Include="include\assimp\StringUtils.h" />
+    <ClInclude Include="include\assimp\Subdivision.h" />
+    <ClInclude Include="include\assimp\texture.h" />
+    <ClInclude Include="include\assimp\TinyFormatter.h" />
+    <ClInclude Include="include\assimp\types.h" />
+    <ClInclude Include="include\assimp\vector2.h" />
+    <ClInclude Include="include\assimp\vector2.inl" />
+    <ClInclude Include="include\assimp\vector3.h" />
+    <ClInclude Include="include\assimp\vector3.inl" />
+    <ClInclude Include="include\assimp\version.h" />
+    <ClInclude Include="include\assimp\Vertex.h" />
+    <ClInclude Include="include\assimp\XmlParser.h" />
+    <ClInclude Include="include\assimp\XMLTools.h" />
+    <ClInclude Include="include\assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="include\DirectXTex.h" />
+    <ClInclude Include="include\DirectXTex.inl" />
+    <ClInclude Include="include\DirectXTK\Audio.h" />
+    <ClInclude Include="include\DirectXTK\BufferHelpers.h" />
+    <ClInclude Include="include\DirectXTK\CommonStates.h" />
+    <ClInclude Include="include\DirectXTK\DDSTextureLoader.h" />
+    <ClInclude Include="include\DirectXTK\DirectXHelpers.h" />
+    <ClInclude Include="include\DirectXTK\Effects.h" />
+    <ClInclude Include="include\DirectXTK\GamePad.h" />
+    <ClInclude Include="include\DirectXTK\GeometricPrimitive.h" />
+    <ClInclude Include="include\DirectXTK\GraphicsMemory.h" />
+    <ClInclude Include="include\DirectXTK\Keyboard.h" />
+    <ClInclude Include="include\DirectXTK\Model.h" />
+    <ClInclude Include="include\DirectXTK\Mouse.h" />
+    <ClInclude Include="include\DirectXTK\PostProcess.h" />
+    <ClInclude Include="include\DirectXTK\PrimitiveBatch.h" />
+    <ClInclude Include="include\DirectXTK\ScreenGrab.h" />
+    <ClInclude Include="include\DirectXTK\SimpleMath.h" />
+    <ClInclude Include="include\DirectXTK\SimpleMath.inl" />
+    <ClInclude Include="include\DirectXTK\SpriteBatch.h" />
+    <ClInclude Include="include\DirectXTK\SpriteFont.h" />
+    <ClInclude Include="include\DirectXTK\VertexTypes.h" />
+    <ClInclude Include="include\DirectXTK\WICTextureLoader.h" />
+    <ClInclude Include="include\DirectXTK\XboxDDSTextureLoader.h" />
     <ClInclude Include="include\ImGui\imconfig.h" />
     <ClInclude Include="include\ImGui\imgui.h" />
     <ClInclude Include="include\ImGui\imgui_impl_dx11.h" />
@@ -869,6 +985,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\src;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\components\CPhysXBox.cpp" />
     <ClCompile Include="src\components\CPhysXCapsule.cpp">
@@ -945,6 +1063,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\admin\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\admin\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\admin\RiderProjects\GM31\\include\PhysX;C:\Users\admin\RiderProjects\GM31\\include\;C:\Users\admin\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\components\CPhysXPrimitive.cpp" />
     <ClCompile Include="src\components\CPhysXRigidBody.cpp" />
@@ -1022,6 +1142,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\admin\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\admin\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\admin\RiderProjects\GM31\\include\PhysX;C:\Users\admin\RiderProjects\GM31\\include\;C:\Users\admin\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\components\CPlane.cpp" />
     <ClCompile Include="src\components\CPrimitive2D.cpp" />
@@ -1104,6 +1226,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1179,6 +1303,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\imgui_impl_hal.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1254,6 +1380,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1329,6 +1457,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\manager.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1404,6 +1534,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\objects\bullet.cpp" />
     <ClCompile Include="src\objects\cube.cpp" />
@@ -1483,6 +1615,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\scene\game.cpp" />
     <ClCompile Include="src\scene\physXtest.cpp" />
@@ -1560,6 +1694,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\scene\title.cpp" />
     <ClCompile Include="src\system\input.cpp">
@@ -1636,6 +1772,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\system\physicssystem2D.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1711,6 +1849,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\system\physicssystem3D.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1786,6 +1926,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\system\PhysX_Impl.cpp" />
     <ClCompile Include="src\system\renderPL.cpp">
@@ -1862,6 +2004,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\system\textureLoader.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1937,6 +2081,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\system\timesystem.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -2012,6 +2158,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtk_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.6.5.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\\include\;C:\Users\zant1\RiderProjects\GM31\\src\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\traits\drawable.cpp" />
   </ItemGroup>
@@ -2041,17 +2189,22 @@
     <Content Include="asset\texture\particle.png" />
     <Content Include="asset\texture\Rider.png" />
     <Content Include="asset\video\banana.mp4" />
-    <Content Include="lib\assimp-vc143-mt.lib" />
-    <Content Include="lib\avcodec-61.def" />
-    <Content Include="lib\avcodec.lib" />
-    <Content Include="lib\avdevice-61.def" />
-    <Content Include="lib\avdevice.lib" />
-    <Content Include="lib\avfilter-10.def" />
-    <Content Include="lib\avfilter.lib" />
-    <Content Include="lib\avformat-61.def" />
-    <Content Include="lib\avformat.lib" />
-    <Content Include="lib\avutil-59.def" />
-    <Content Include="lib\avutil.lib" />
+    <Content Include="include\assimp\.editorconfig" />
+    <Content Include="include\assimp\config.h.in" />
+    <Content Include="lib\Debug\assimp-vc143-mt.lib" />
+    <Content Include="lib\Debug\avcodec-61.def" />
+    <Content Include="lib\Debug\avcodec.lib" />
+    <Content Include="lib\Debug\avdevice-61.def" />
+    <Content Include="lib\Debug\avdevice.lib" />
+    <Content Include="lib\Debug\avfilter-10.def" />
+    <Content Include="lib\Debug\avfilter.lib" />
+    <Content Include="lib\Debug\avformat-61.def" />
+    <Content Include="lib\Debug\avformat.lib" />
+    <Content Include="lib\Debug\avutil-59.def" />
+    <Content Include="lib\Debug\avutil.lib" />
+    <Content Include="lib\Debug\DirectXTex_Debug.lib" />
+    <Content Include="lib\Debug\DirectXTK.lib" />
+    <Content Include="lib\Debug\DirectXTK.pdb" />
     <Content Include="lib\Debug\LowLevelAABB_static_64.lib" />
     <Content Include="lib\Debug\LowLevelAABB_static_64.pdb" />
     <Content Include="lib\Debug\LowLevelDynamics_static_64.lib" />
@@ -2092,8 +2245,20 @@
     <Content Include="lib\pkgconfig\libpostproc.pc" />
     <Content Include="lib\pkgconfig\libswresample.pc" />
     <Content Include="lib\pkgconfig\libswscale.pc" />
-    <Content Include="lib\postproc-58.def" />
-    <Content Include="lib\postproc.lib" />
+    <Content Include="lib\Release\assimp-vc143-mt.lib" />
+    <Content Include="lib\Release\avcodec-61.def" />
+    <Content Include="lib\Release\avcodec.lib" />
+    <Content Include="lib\Release\avdevice-61.def" />
+    <Content Include="lib\Release\avdevice.lib" />
+    <Content Include="lib\Release\avfilter-10.def" />
+    <Content Include="lib\Release\avfilter.lib" />
+    <Content Include="lib\Release\avformat-61.def" />
+    <Content Include="lib\Release\avformat.lib" />
+    <Content Include="lib\Release\avutil-59.def" />
+    <Content Include="lib\Release\avutil.lib" />
+    <Content Include="lib\Release\DirectXTex_Release.lib" />
+    <Content Include="lib\Release\DirectXTK.lib" />
+    <Content Include="lib\Release\DirectXTK.pdb" />
     <Content Include="lib\Release\LowLevelAABB_static_64.lib" />
     <Content Include="lib\Release\LowLevelAABB_static_64.pdb" />
     <Content Include="lib\Release\LowLevelDynamics_static_64.lib" />
@@ -2126,26 +2291,9 @@
     <Content Include="lib\Release\SceneQuery_static_64.pdb" />
     <Content Include="lib\Release\SimulationController_static_64.lib" />
     <Content Include="lib\Release\SimulationController_static_64.pdb" />
-    <Content Include="lib\swresample-5.def" />
-    <Content Include="lib\swresample.lib" />
-    <Content Include="lib\swscale-8.def" />
-    <Content Include="lib\swscale.lib" />
     <Content Include="README.md" />
     <Content Include="src\components\custom\CTitleControl.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets')" />
-    <Import Project="packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtex_desktop_win10.2024.6.5.1\build\native\directxtex_desktop_win10.targets'))" />
-    <Error Condition="!Exists('packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk_desktop_win10.2024.6.5.1\build\native\directxtk_desktop_win10.targets'))" />
-  </Target>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

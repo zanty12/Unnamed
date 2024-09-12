@@ -1,8 +1,15 @@
 #pragma once
-#include <GeometricPrimitive.h>
+
+#include <memory>
+#include "system/PhysX_Impl.h"
 #include "component.h"
-#include "PxActor.h"
 #include "traits/drawable.h"
+
+#include <DirectXTK/GeometricPrimitive.h>
+
+#pragma comment (lib, "DirectXTK.lib")
+
+
 
 class CPhysXPrimitive : public Component, public Drawable
 {

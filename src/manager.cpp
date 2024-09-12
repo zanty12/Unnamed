@@ -52,8 +52,8 @@ void Manager::Uninit()
     Input::Uninit();
     Time::CleanUp();
     CText2D::DiscardPublicResources();
-    PhysX_Impl::CleanUp();
     UnloadCurrentScene();
+    PhysX_Impl::CleanUp();
     CAudio::CleanUpMaster();
 }
 

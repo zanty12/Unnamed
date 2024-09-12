@@ -1,6 +1,6 @@
-﻿#include "textureLoader.h"
-
+﻿#include "main.h"
 #include "renderer.h"
+#include "textureLoader.h"
 
 std::unordered_map<std::wstring, ID3D11Texture2D*> TextureLoader::loaded_textures_;
 
