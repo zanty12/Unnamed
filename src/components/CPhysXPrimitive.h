@@ -15,6 +15,7 @@ protected:
     physx::PxShape* shape_ = nullptr;
     bool is_trigger_ = false;
     bool debug_view_ = false;
+    physx::PxRigidActor* actor_ = nullptr;
     std::unique_ptr<DirectX::GeometricPrimitive> debug_shape_;
     float static_friction_ = 0.5f;
     float dynamic_friction_ = 0.5f;

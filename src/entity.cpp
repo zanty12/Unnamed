@@ -1,6 +1,7 @@
 ﻿#include "entity.h"
 
 #include "manager.h"
+#include "components/CPhysXRigidBody.h"
 
 void Entity::Update()
 {
@@ -17,10 +18,19 @@ void Entity::Update()
 
 Entity::~Entity()
 {
+    Component* rigidBody = nullptr;
     for(auto component : components_)
     {
-        component->CleanUp();
-        delete component;
+        if(component->GetType() != "CPhysXRigidBody")
+        {
+            component->CleanUp();
+            delete component;
+        }
+        else
+        {
+            rigidBody = component;
+        }
     }
-
+    //delete rigidBody lasts
+    delete rigidBody;
 }

@@ -110,7 +110,7 @@ void CPhysXRigidBody::SetEnableGravity(bool enable)
 	{
 		//cast to dynamic
 		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
-		dynamic->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, enable);
+		dynamic->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, !enable);
 	}
 }
 

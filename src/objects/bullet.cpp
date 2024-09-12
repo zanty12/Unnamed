@@ -34,6 +34,7 @@ void Bullet::Start()
 
 	entity_->Start();
 	rigidBody->SetLinearVelocity(vel_);
+	rigidBody->SetEnableGravity(false);
 }
 
 void Bullet::Spawn()

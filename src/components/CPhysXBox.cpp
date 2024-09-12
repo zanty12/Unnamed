@@ -13,7 +13,7 @@ void CPhysXBox::Start()
     {
         physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
         // 形状(Box)を作成
-        physx::PxShape* box_shape
+        /*physx::PxShape* box_shape
             = PhysX_Impl::GetPhysics()->createShape(
                 // Boxの大きさ
                 physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
@@ -22,10 +22,14 @@ void CPhysXBox::Start()
             );
         // 形状を紐づけ
         box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
-        ac->attachShape(*box_shape);
+        ac->attachShape(*box_shape);*/
+        //create exclusive shape
+        physx::PxShape* box_shape = physx::PxRigidActorExt::createExclusiveShape(
+            *ac, physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
+            *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = box_shape;
         debug_shape_ = GeometricPrimitive::CreateBox(Renderer::GetDeviceContext(), transform->scale);
-        if(is_trigger_)
+        if (is_trigger_)
         {
             shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
             shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
@@ -39,6 +43,4 @@ void CPhysXBox::Start()
 
 void CPhysXBox::CleanUp()
 {
-    shape_->getActor()->detachShape(*shape_);
 }
-

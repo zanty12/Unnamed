@@ -11,11 +11,8 @@ void CPhysXSphere::Start()
     if (parent->GetComponent<CPhysXRigidBody>())
     {
         physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
-        /*//create dynamic actor
-        physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
-            physx::PxTransform(Transform::ToPhysXTransform(transform)));*/
         // 形状を作成
-        physx::PxShape* shape
+        /*physx::PxShape* shape
             = PhysX_Impl::GetPhysics()->createShape(
                 // Boxの大きさ
                 physx::PxSphereGeometry(transform->scale.x),
@@ -24,7 +21,9 @@ void CPhysXSphere::Start()
             );
         // 形状を紐づけ
         shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
-        ac->attachShape(*shape);
+        ac->attachShape(*shape);*/
+        //create exclusive shape
+        physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(*ac,physx::PxSphereGeometry(transform->scale.x), *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), transform->scale.x, 8);
         if(is_trigger_)
@@ -41,5 +40,4 @@ void CPhysXSphere::Start()
 
 void CPhysXSphere::CleanUp()
 {
-    shape_->getActor()->detachShape(*shape_);
 }
