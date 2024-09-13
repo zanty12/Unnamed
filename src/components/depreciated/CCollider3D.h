@@ -8,7 +8,6 @@
 class CCollider3D : public Component,public Physics3D
 {
 protected:
-    Transform transform_ = Transform::Identity();
     bool dynamic_ = false;
     bool first_frame_ = true;
     std::vector<CCollider3D*> collided_;
@@ -21,5 +20,4 @@ public:
     virtual void ApplyCollision() = 0;
     std::vector<CCollider3D*> GetCollided(){return collided_;}
     void SetDynamic(bool dynamic){dynamic_ = dynamic;}
-    Transform* GetTransform(){return &transform_;}
 };

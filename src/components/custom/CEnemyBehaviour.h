@@ -5,7 +5,7 @@
 #include "manager.h"
 #include "components/Component.h"
 #include "gamemode/GMDefaultGamemode.h"
-#include "objects/explosion.h"
+#include "prefab/explosion.h"
 
 class CEnemyBehaviour : public Component
 {

@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\CPhysXCharacterController.h" />
     <ClInclude Include="include\assimp\aabb.h" />
     <ClInclude Include="include\assimp\ai_assert.h" />
     <ClInclude Include="include\assimp\anim.h" />
@@ -819,18 +820,18 @@
     <ClInclude Include="src\components\custom\CPlayerController.h" />
     <ClInclude Include="src\components\CVideoTexture.h" />
     <ClInclude Include="src\components\depreciated\CSphereCollider.h" />
-    <ClInclude Include="src\components\transform.h" />
+    <ClInclude Include="src\components\Transform.h" />
     <ClInclude Include="src\entity.h" />
     <ClInclude Include="src\gamemode\GMDefaultGamemode.h" />
     <ClInclude Include="src\gamemode\GameMode.h" />
     <ClInclude Include="src\imgui_impl_hal.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\manager.h" />
-    <ClInclude Include="src\objects\bullet.h" />
-    <ClInclude Include="src\objects\cube.h" />
-    <ClInclude Include="src\objects\enemy.h" />
-    <ClInclude Include="src\objects\explosion.h" />
-    <ClInclude Include="src\objects\player.h" />
+    <ClInclude Include="src\prefab\bullet.h" />
+    <ClInclude Include="src\prefab\cube.h" />
+    <ClInclude Include="src\prefab\enemy.h" />
+    <ClInclude Include="src\prefab\explosion.h" />
+    <ClInclude Include="src\prefab\player.h" />
     <ClInclude Include="src\processpriority.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -892,6 +893,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
+    <ClCompile Include="src\components\CPhysXCharacterController.cpp" />
     <ClCompile Include="include\ImGui\imgui.cpp" />
     <ClCompile Include="include\ImGui\imgui_demo.cpp" />
     <ClCompile Include="include\ImGui\imgui_draw.cpp" />
@@ -903,6 +905,7 @@
     <ClCompile Include="src\components\animationModel.cpp" />
     <ClCompile Include="src\components\CAudio.cpp" />
     <ClCompile Include="src\components\CCamera.cpp" />
+    <ClCompile Include="src\components\Component.cpp" />
     <ClCompile Include="src\components\CParticleEmitter.cpp" />
     <ClCompile Include="src\components\CModelRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1529,10 +1532,10 @@
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
-    <ClCompile Include="src\objects\bullet.cpp" />
-    <ClCompile Include="src\objects\cube.cpp" />
-    <ClCompile Include="src\objects\enemy.cpp" />
-    <ClCompile Include="src\objects\player.cpp" />
+    <ClCompile Include="src\prefab\bullet.cpp" />
+    <ClCompile Include="src\prefab\cube.cpp" />
+    <ClCompile Include="src\prefab\enemy.cpp" />
+    <ClCompile Include="src\prefab\player.cpp" />
     <ClCompile Include="src\renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

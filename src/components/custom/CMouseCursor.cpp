@@ -2,7 +2,7 @@
 #include "manager.h"
 #include "system/input.h"
 #include "CMouseCursor.h"
-#include "objects/cube.h"
+#include "prefab/cube.h"
 
 
 void CMouseCursor::Update()
@@ -22,7 +22,7 @@ void CMouseCursor::Update()
             //Get normalized vector from view position to mouse position
             XMVECTOR mouse_world_pos = Input::GetMouseWorldPos(view, proj);
             // Calculate the vector from the camera to the mouse position
-            XMFLOAT3 camera_pos = camera->GetPosition();
+            XMFLOAT3 camera_pos = camera->GetWorldTransform().position;
             XMVECTOR camera_vec = XMLoadFloat3(&camera_pos);
             XMVECTOR vector_to_mouse = XMVectorSubtract(mouse_world_pos, camera_vec);
 
@@ -76,9 +76,10 @@ void CMouseCursor::Update()
         {
             //do something
 			Cube* new_cube = new Cube();
-			Transform CubeTransform = Transform::Identity();
-			CubeTransform.position = mouse_world_pos_;
-			new_cube->SetTransform(CubeTransform);
+			Transform* CubeTransform = Transform::Identity();
+			CubeTransform->position = mouse_world_pos_;
+			new_cube->SetTransform(*CubeTransform);
+			delete CubeTransform;
 			new_cube->QueueSpawn();
         }
     }

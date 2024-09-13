@@ -42,7 +42,7 @@
     <ClInclude Include="src\traits\trait.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\player.h">
+    <ClInclude Include="src\prefab\player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\scene.h">
@@ -507,9 +507,6 @@
     <ClInclude Include="src\components\CCollider2D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\CCollider3D.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\CModelRenderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -525,12 +522,6 @@
     <ClInclude Include="src\components\CRect2D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\CRigidBody.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\components\CSphereCollider.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\CSprite2D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -543,10 +534,10 @@
     <ClInclude Include="src\components\CTransformConstraint.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\bullet.h">
+    <ClInclude Include="src\prefab\bullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\explosion.h">
+    <ClInclude Include="src\prefab\explosion.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\traits\object\spawnable.h">
@@ -561,16 +552,13 @@
     <ClInclude Include="src\components\CAudio.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\CCylinderCollider.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\CParticleEmitter.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\components\CText2D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\transform.h">
+    <ClInclude Include="src\components\Transform.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\gamemode\GMDefaultGamemode.h">
@@ -579,7 +567,7 @@
     <ClInclude Include="src\gamemode\GameMode.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\enemy.h">
+    <ClInclude Include="src\prefab\enemy.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\processpriority.h">
@@ -612,12 +600,6 @@
     <ClInclude Include="src\components\animationModel.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\CGrid.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\components\CGridCell.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\custom\CBulletBehaviour.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -630,7 +612,7 @@
     <ClInclude Include="src\components\custom\CPlayerController.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\cube.h">
+    <ClInclude Include="src\prefab\cube.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\game.h">
@@ -2109,6 +2091,12 @@
     <ClInclude Include="src\components\CVideoTexture.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\components\depreciated\CSphereCollider.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\CPhysXCharacterController.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\entity.cpp">
@@ -2129,7 +2117,7 @@
     <ClCompile Include="src\traits\drawable.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\player.cpp">
+    <ClCompile Include="src\prefab\player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\scene\testscene.cpp">
@@ -2174,10 +2162,7 @@
     <ClCompile Include="src\components\CRect2D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\CRigidBody.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\objects\bullet.cpp">
+    <ClCompile Include="src\prefab\bullet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\components\CAudio.cpp">
@@ -2189,7 +2174,7 @@
     <ClCompile Include="src\components\CText2D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\enemy.cpp">
+    <ClCompile Include="src\prefab\enemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\scene\title.cpp">
@@ -2216,19 +2201,13 @@
     <ClCompile Include="src\components\animationModel.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\CGrid.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\components\CGridCell.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\custom\CMouseCursor.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\components\custom\CPlayerController.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\cube.cpp">
+    <ClCompile Include="src\prefab\cube.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\scene\game.cpp">
@@ -2256,6 +2235,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="include\video_reader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Component.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\CPhysXCharacterController.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,11 +12,9 @@ public:
     XMFLOAT3 scale;
     XMFLOAT4 quaternion{0.0f, 0.0f, 0.0f, 1.0f};
 
-    bool quaternion_set = false;
-
-    static Transform Identity()
+    static Transform* Identity()
     {
-        return Transform{XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f}};
+        return new Transform{XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f}};
     }
 
     static Transform* MoveTo(Transform* transform, XMFLOAT3 position)
@@ -86,7 +84,6 @@ public:
         transform->rotation = other->rotation;
         transform->scale = other->scale;
         transform->quaternion = other->quaternion;
-        transform->quaternion_set = other->quaternion_set;
         return transform;
     }
 
@@ -131,11 +128,6 @@ public:
         return rotatedPoint;
     }
 
-    static void SetQuaternionMode(Transform* transform, bool mode)
-    {
-        transform->quaternion_set = mode;
-    }
-
     static physx::PxTransform ToPhysXTransform(Transform* transform)
     {
         physx::PxVec3 position = physx::PxVec3(transform->position.x, transform->position.y, transform->position.z);
@@ -144,13 +136,25 @@ public:
         return physx::PxTransform(position, rotation);
     }
 
+    static Transform ToWorld(const Transform* parent,const Transform* local)
+    {
+        Transform world;
+        world.position = parent->position;
+        world.rotation = parent->rotation;
+        world.scale = parent->scale;
+        world.quaternion = parent->quaternion;
+        MoveBy(&world, local->position);
+        RotateBy(&world, local->rotation);
+        ScaleBy(&world, local->scale);
+        return world;
+    }
+
 private:
     static void EulerToQuat(Transform* transform)
     {
         XMVECTOR rotationVector = XMQuaternionRotationRollPitchYaw(transform->rotation.x, transform->rotation.y,
                                                                    transform->rotation.z);
         XMStoreFloat4(&transform->quaternion, rotationVector);
-        transform->quaternion_set = true;
     }
 
     static void QuatToEuler(Transform* transform)

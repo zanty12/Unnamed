@@ -19,7 +19,6 @@ protected:
     // Data
     std::string vertex_shader_path_ = "asset\\shader\\unlitTextureVS.cso";
     std::string pixel_shader_path_= "asset\\shader\\unlitTexturePS.cso";
-    Transform transform_ = Transform::Identity();
     CTexture* texture_ = nullptr;
 public:
     CPrimitive2D() : Component("Primitive2D"), Drawable(10) {}
@@ -34,6 +33,4 @@ public:
 
     std::string GetVertexShaderPath() const { return vertex_shader_path_; }
     std::string GetPixelShaderPath() const { return pixel_shader_path_; }
-    Transform* GetTransform() {return &transform_;}
-
 };

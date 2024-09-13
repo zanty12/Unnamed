@@ -33,4 +33,5 @@ Entity::~Entity()
     }
     //delete rigidBody lasts
     delete rigidBody;
+    delete transform_;
 }

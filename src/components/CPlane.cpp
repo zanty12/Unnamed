@@ -60,7 +60,6 @@ void CPlane::Update()
     }
     else
     {
-        Transform::Copy(&transform_, parent->GetTransform());
     }
     //if texture is sprite, get uv
     CSprite2D* sprite = dynamic_cast<CSprite2D*>(texture_);
@@ -121,10 +120,11 @@ void CPlane::Draw()
     if (!billboard_)
     {
         DirectX::XMMATRIX world, scale, rot, trans;
-        scale = DirectX::XMMatrixScaling(transform_.scale.x, transform_.scale.y, transform_.scale.z);
-        rot = DirectX::XMMatrixRotationRollPitchYaw(transform_.rotation.x, transform_.rotation.y,
-                                                    transform_.rotation.z);
-        trans = DirectX::XMMatrixTranslation(transform_.position.x, transform_.position.y, transform_.position.z);
+		Transform world_transform = GetWorldTransform();
+        scale = DirectX::XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
+        rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,
+                                                    world_transform.rotation.z);
+        trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y, world_transform.position.z);
         world = scale * rot * trans;
         Renderer::SetWorldMatrix(world);
     }
@@ -138,10 +138,11 @@ void CPlane::Draw()
         inv_view.r[3].m128_f32[2] = 0.0f;
 
         DirectX::XMMATRIX world,rot, scale, trans;
-        scale = DirectX::XMMatrixScaling(transform_.scale.x, transform_.scale.y, transform_.scale.z);
-        rot = DirectX::XMMatrixRotationRollPitchYaw(transform_.rotation.x, transform_.rotation.y,
-                                                    transform_.rotation.z);
-        trans = DirectX::XMMatrixTranslation(transform_.position.x, transform_.position.y, transform_.position.z);
+        Transform world_transform = GetWorldTransform();
+        scale = DirectX::XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
+        rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,
+                                                    world_transform.rotation.z);
+        trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y, world_transform.position.z);
         world = scale * rot*inv_view * trans;
         Renderer::SetWorldMatrix(world);
     }

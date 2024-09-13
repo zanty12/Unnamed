@@ -8,7 +8,8 @@
 #include "entity.h"
 #include "components/depreciated/CRigidBody.h"
 #include "system/timesystem.h"
-#include "objects/bullet.h"
+#include "prefab/bullet.h"
+#include <components/CPhysXRigidBody.h>
 
 void CPlayerController::Update()
 {
@@ -23,9 +24,9 @@ void CPlayerController::Update()
     {
         //get camera component
         CCamera* camera = parent->GetComponent<CCamera>();
-        XMFLOAT3 camera_pos = camera->GetPosition();
+        XMFLOAT3 camera_pos = camera->GetWorldTransform().position;
         XMFLOAT3 parent_pos = parent->GetTransform()->position;
-        float dt = Time::GetDeltaTime();
+		CPhysXRigidBody* rigidBody = parent->GetComponent<CPhysXRigidBody>();
 
         //rotate camera with arrow keys
         if (Input::GetKeyPress(VK_LEFT))
@@ -83,7 +84,7 @@ void CPlayerController::Update()
                                        new_cam_pos.z - parent_pos.z));
         }
 
-        if(Input::GetKeyPress('W'))
+        /*if(Input::GetKeyPress('W'))
         {
             Transform::MoveBy(parent->GetTransform(), XMFLOAT3(0.0f, 0.0f, 0.1f));
             XMVECTOR quat = XMQuaternionRotationRollPitchYaw(0.1f, 0.0f, 0.0f);
@@ -114,50 +115,65 @@ void CPlayerController::Update()
             quat = XMQuaternionMultiply(XMLoadFloat4(&(parent->GetTransform()->quaternion)), quat);
             XMStoreFloat4(&(parent->GetTransform()->quaternion), quat);
             //Transform::RotateBy(parent->GetTransform(), XMFLOAT3(0.0f, 0.0f, -0.1f));
-        }
+        }*/
 
-        /*//move parent with keyboard input
+        //move parent with keyboard input
         if (Input::GetKeyPress('W'))
         {
             //Get vector between camera and parent
             XMFLOAT3 forward;
             XMStoreFloat3(&forward, XMLoadFloat3(&camera_pos) - XMLoadFloat3(&parent_pos));
             XMStoreFloat3(&forward, XMVector3Normalize(XMLoadFloat3(&forward)));
-            XMStoreFloat3(&forward, XMLoadFloat3(&forward) * dt * -10);
-            Transform::MoveBy(parent->GetTransform(), forward);
+            XMStoreFloat3(&forward, XMLoadFloat3(&forward)  * -10);
+			forward.y = 0.0f;
+            //Transform::MoveBy(parent->GetTransform(), forward);
+			rigidBody->SetLinearVelocity(forward);
             //rotate parent to face forward
             Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f));
+            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
+
         }
         if (Input::GetKeyPress('S'))
         {
             XMFLOAT3 forward;
             XMStoreFloat3(&forward, XMLoadFloat3(&camera_pos) - XMLoadFloat3(&parent_pos));
             XMStoreFloat3(&forward, XMVector3Normalize(XMLoadFloat3(&forward)));
-            XMStoreFloat3(&forward, XMLoadFloat3(&forward) * dt * 10);
-            Transform::MoveBy(parent->GetTransform(), forward);
+            XMStoreFloat3(&forward, XMLoadFloat3(&forward)  * 10);
+            forward.y = 0.0f;
+            //Transform::MoveBy(parent->GetTransform(), forward);
+            rigidBody->SetLinearVelocity(forward);
             //rotate parent to face backward
             Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f));
+            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
         }
         if (Input::GetKeyPress('A'))
         {
             XMFLOAT3 forward;
             XMStoreFloat3(&forward, XMLoadFloat3(&camera_pos) - XMLoadFloat3(&parent_pos));
             XMFLOAT3 right = Transform::GetRight(forward);
-            XMStoreFloat3(&right, XMLoadFloat3(&right) * dt * 10);
-            Transform::MoveBy(parent->GetTransform(), right);
+            //move right
+            XMStoreFloat3(&right, XMLoadFloat3(&right)  * 10);
+            right.y = 0.0f;
+            rigidBody->SetLinearVelocity(right);
+            //Transform::MoveBy(parent->GetTransform(), right);
             //rotate parent to face left
             Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f));
+            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
         }
         if (Input::GetKeyPress('D'))
         {
             XMFLOAT3 forward;
             XMStoreFloat3(&forward, XMLoadFloat3(&camera_pos) - XMLoadFloat3(&parent_pos));
             XMFLOAT3 right = Transform::GetRight(forward);
-            XMStoreFloat3(&right, XMLoadFloat3(&right) * dt * -10);
-            Transform::MoveBy(parent->GetTransform(), right);
+            //move left
+            XMStoreFloat3(&right, XMLoadFloat3(&right) * -10);
+            right.y = 0.0f;
+            rigidBody->SetLinearVelocity(right);
+            //Transform::MoveBy(parent->GetTransform(), right);
             //rotate parent to face right
             Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f));
-        }*/
+            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
+        }
 
         //jump
         if (Input::GetKeyTrigger(VK_SPACE))

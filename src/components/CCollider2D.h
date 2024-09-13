@@ -5,7 +5,6 @@
 class CCollider2D : public Component
 {
 protected:
-    Transform transform_ = Transform::Identity();
     bool dynamic_ = false;
     bool collision_checked_ = false;
 public:

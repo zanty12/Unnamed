@@ -15,19 +15,19 @@
 class PhysX_Impl
 {
 private:
-    // PhysX内で利用するアロケーター
+    // PhysX���ŗ��p����A���P�[�^�[
     static physx::PxDefaultAllocator m_defaultAllocator;
-    // エラー時用のコールバックでエラー内容が入ってる
+    // �G���[���p�̃R�[���o�b�N�ŃG���[���e�������Ă�
     static physx::PxDefaultErrorCallback m_defaultErrorCallback;
-    // 上位レベルのSDK(PxPhysicsなど)をインスタンス化する際に必要
+    // ��ʃ��x����SDK(PxPhysics�Ȃ�)���C���X�^���X������ۂɕK�v
     static physx::PxFoundation* m_pFoundation;
-    // 実際に物理演算を行う
+    // ���ۂɕ������Z���s��
     static physx::PxPhysics* m_pPhysics;
-    // シミュレーションをどう処理するかの設定でマルチスレッドの設定もできる
+    // �V�~�����[�V�������ǂ��������邩�̐ݒ�Ń}���`�X���b�h�̐ݒ���ł���
     static physx::PxDefaultCpuDispatcher* m_pDispatcher;
-    // シミュレーションする空間の単位でActorの追加などもここで行う
+    // �V�~�����[�V���������Ԃ̒P�ʂ�Actor�̒ǉ��Ȃǂ������ōs��
     static physx::PxScene* m_pScene;
-    // PVDと通信する際に必要
+    // PVD�ƒʐM����ۂɕK�v
     static physx::PxPvd* m_pPvd;
     //CUDA
     static physx::PxCudaContextManager* m_pCudaCtxMgr;

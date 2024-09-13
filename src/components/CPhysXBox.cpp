@@ -8,27 +8,27 @@
 void CPhysXBox::Start()
 {
     Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
     if (parent->GetComponent<CPhysXRigidBody>())
     {
         physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
-        // å½¢çŠ¶(Box)ã‚’ä½œæˆ
+        // Œ`ó(Box)‚ðì¬
         /*physx::PxShape* box_shape
             = PhysX_Impl::GetPhysics()->createShape(
-                // Boxã®å¤§ãã•
-                physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
-                // æ‘©æ“¦ä¿‚æ•°ã¨åç™ºä¿‚æ•°ã®è¨­å®š
+                // Box‚Ì‘å‚«‚³
+                physx::PxBoxGeometry(local_transform_->scale.x / 2.0f, local_transform_->scale.y / 2.0f, local_transform_->scale.z / 2.0f),
+                // –€ŽCŒW”‚Æ”½”­ŒW”‚ÌÝ’è
                 *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
-        // å½¢çŠ¶ã‚’ç´ã¥ã‘
+        // Œ`ó‚ð•R‚Ã‚¯
         box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*box_shape);*/
         //create exclusive shape
+		Transform world_transform = GetWorldTransform();    
         physx::PxShape* box_shape = physx::PxRigidActorExt::createExclusiveShape(
-            *ac, physx::PxBoxGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f, transform->scale.z / 2.0f),
+            *ac, physx::PxBoxGeometry(world_transform.scale.x / 2.0f, world_transform.scale.y / 2.0f, world_transform.scale.z / 2.0f),
             *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = box_shape;
-        debug_shape_ = GeometricPrimitive::CreateBox(Renderer::GetDeviceContext(), transform->scale);
+        debug_shape_ = GeometricPrimitive::CreateBox(Renderer::GetDeviceContext(), world_transform.scale);
         if (is_trigger_)
         {
             shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);

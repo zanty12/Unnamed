@@ -66,7 +66,6 @@ private:
     ID3D11VertexShader* vertex_shader_ = nullptr;
     ID3D11PixelShader* pixel_shader_ = nullptr;
     ID3D11InputLayout* vertex_layout_ = nullptr;
-    Transform transform_ = Transform::Identity();
 
 public:
     static void Preload(const char* FileName);

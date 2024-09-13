@@ -4,26 +4,26 @@
 #include "timesystem.h"
 #include "PhysX_Impl.h"
 
-// PhysXÂÜÖ„ÅßÂà©Áî®„Åô„Çã„Ç¢„É≠„Ç±„Éº„Çø„Éº
+// PhysXì‡Ç≈óòópÇ∑ÇÈÉAÉçÉPÅ[É^Å[
 physx::PxDefaultAllocator PhysX_Impl::m_defaultAllocator;
-// „Ç®„É©„ÉºÊôÇÁî®„ÅÆ„Ç≥„Éº„É´„Éê„ÉÉ„ÇØ„Åß„Ç®„É©„ÉºÂÜÖÂÆπ„ÅåÂÖ•„Å£„Å¶„Çã
+// ÉGÉâÅ[éûópÇÃÉRÅ[ÉãÉoÉbÉNÇ≈ÉGÉâÅ[ì‡óeÇ™ì¸Ç¡ÇƒÇÈ
 physx::PxDefaultErrorCallback PhysX_Impl::m_defaultErrorCallback;
-// ‰∏ä‰Ωç„É¨„Éô„É´„ÅÆSDK(PxPhysics„Å™„Å©)„Çí„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ„Åô„ÇãÈöõ„Å´ÂøÖË¶Å
+// è„à ÉåÉxÉãÇÃSDK(PxPhysicsÇ»Ç«)ÇÉCÉìÉXÉ^ÉìÉXâªÇ∑ÇÈç€Ç…ïKóv
 physx::PxFoundation* PhysX_Impl::m_pFoundation = nullptr;
-// ÂÆüÈöõ„Å´Áâ©ÁêÜÊºîÁÆó„ÇíË°å„ÅÜ
+// é¿ç€Ç…ï®óùââéZÇçsÇ§
 physx::PxPhysics* PhysX_Impl::m_pPhysics = nullptr;
-// „Ç∑„Éü„É•„É¨„Éº„Ç∑„Éß„É≥„Çí„Å©„ÅÜÂá¶ÁêÜ„Åô„Çã„Åã„ÅÆË®≠ÂÆö„Åß„Éû„É´„ÉÅ„Çπ„É¨„ÉÉ„Éâ„ÅÆË®≠ÂÆö„ÇÇ„Åß„Åç„Çã
+// ÉVÉ~ÉÖÉåÅ[ÉVÉáÉìÇÇ«Ç§èàóùÇ∑ÇÈÇ©ÇÃê›íËÇ≈É}ÉãÉ`ÉXÉåÉbÉhÇÃê›íËÇ‡Ç≈Ç´ÇÈ
 physx::PxDefaultCpuDispatcher* PhysX_Impl::m_pDispatcher = nullptr;
-// „Ç∑„Éü„É•„É¨„Éº„Ç∑„Éß„É≥„Åô„ÇãÁ©∫Èñì„ÅÆÂçò‰Ωç„ÅßActor„ÅÆËøΩÂä†„Å™„Å©„ÇÇ„Åì„Åì„ÅßË°å„ÅÜ
+// ÉVÉ~ÉÖÉåÅ[ÉVÉáÉìÇ∑ÇÈãÛä‘ÇÃíPà Ç≈ActorÇÃí«â¡Ç»Ç«Ç‡Ç±Ç±Ç≈çsÇ§
 physx::PxScene* PhysX_Impl::m_pScene = nullptr;
-// PVD„Å®ÈÄö‰ø°„Åô„ÇãÈöõ„Å´ÂøÖË¶Å
+// PVDÇ∆í êMÇ∑ÇÈç€Ç…ïKóv
 physx::PxPvd* PhysX_Impl::m_pPvd = nullptr;
 //CUDA
 physx::PxCudaContextManager* PhysX_Impl::m_pCudaCtxMgr = nullptr;
 
 bool PhysX_Impl::Start()
 {
-    // Foundation„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ
+    // FoundationÇÃÉCÉìÉXÉ^ÉìÉXâª
     m_pFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, m_defaultAllocator, m_defaultErrorCallback);
     if (!m_pFoundation)
     {
@@ -31,7 +31,7 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // PVD„Å®Êé•Á∂ö„Åô„ÇãË®≠ÂÆö
+    // PVDÇ∆ê⁄ë±Ç∑ÇÈê›íË
     m_pPvd = physx::PxCreatePvd(*m_pFoundation);
     if (m_pPvd)
     {
@@ -39,7 +39,7 @@ bool PhysX_Impl::Start()
         m_pPvd->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
     }
 
-    // Physics„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ
+    // PhysicsÇÃÉCÉìÉXÉ^ÉìÉXâª
     m_pPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *m_pFoundation, physx::PxTolerancesScale(), true, m_pPvd);
     if (!m_pPhysics)
     {
@@ -47,14 +47,14 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // Êã°ÂºµÊ©üËÉΩÁî®
+    // ägí£ã@î\óp
     if (!PxInitExtensions(*m_pPhysics, m_pPvd))
     {
         std::cerr << "Failed to initialize PhysX extensions" << std::endl;
         return false;
     }
 
-    // Âá¶ÁêÜ„Å´‰Ωø„ÅÜ„Çπ„É¨„ÉÉ„Éâ„ÇíÊåáÂÆö„Åô„Çã
+    // èàóùÇ…égÇ§ÉXÉåÉbÉhÇéwíËÇ∑ÇÈ
     m_pDispatcher = physx::PxDefaultCpuDispatcherCreate(8);
     if (!m_pDispatcher)
     {
@@ -62,13 +62,13 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // Á©∫Èñì„ÅÆË®≠ÂÆö
+    // ãÛä‘ÇÃê›íË
     physx::PxSceneDesc scene_desc(m_pPhysics->getTolerancesScale());
     scene_desc.gravity = physx::PxVec3(0, -9, 0);
     scene_desc.filterShader = physx::PxDefaultSimulationFilterShader;
     scene_desc.cpuDispatcher = m_pDispatcher;
 
-    // GPU„Çí‰Ωø„ÅÜÂ†¥Âêà„ÅØ„Åì„Åì„ÅßË®≠ÂÆö
+    // GPUÇégÇ§èÍçáÇÕÇ±Ç±Ç≈ê›íË
     physx::PxCudaContextManagerDesc cuda_ctx_mgr_desc;
     ID3D11Device* dev = Renderer::GetDevice();
     cuda_ctx_mgr_desc.graphicsDevice = dev;
@@ -91,7 +91,7 @@ bool PhysX_Impl::Start()
         }
     }
 
-    // Á©∫Èñì„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ
+    // ãÛä‘ÇÃÉCÉìÉXÉ^ÉìÉXâª
     m_pScene = m_pPhysics->createScene(scene_desc);
     if (!m_pScene)
     {
@@ -99,7 +99,7 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // PVD„ÅÆË°®Á§∫Ë®≠ÂÆö
+    // PVDÇÃï\é¶ê›íË
     physx::PxPvdSceneClient* pvd_client = m_pScene->getScenePvdClient();
     if (pvd_client)
     {
@@ -113,9 +113,9 @@ bool PhysX_Impl::Start()
 
 void PhysX_Impl::Update()
 {
-    // „Ç∑„Éü„É•„É¨„Éº„Ç∑„Éß„É≥ÈÄüÂ∫¶„ÇíÊåáÂÆö„Åô„Çã
+    // ÉVÉ~ÉÖÉåÅ[ÉVÉáÉìë¨ìxÇéwíËÇ∑ÇÈ
     m_pScene->simulate(1.0f/60.0f);
-    // PhysX„ÅÆÂá¶ÁêÜ„ÅåÁµÇ„Çè„Çã„Åæ„ÅßÂæÖ„Å§
+    // PhysXÇÃèàóùÇ™èIÇÌÇÈÇ‹Ç≈ë“Ç¬
     m_pScene->fetchResults(true);
 }
 

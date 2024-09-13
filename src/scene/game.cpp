@@ -1,7 +1,7 @@
 ﻿#include "game.h"
 #include "manager.h"
 #include "components/CAudio.h"
-#include "objects/player.h"
+#include "prefab/player.h"
 #include "components/CCamera.h"
 #include "components/CPlane.h"
 #include "components/CRect2D.h"
@@ -10,7 +10,7 @@
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
 #include "components/custom/CPlayerController.h"
-#include "objects/cube.h"
+#include "prefab/cube.h"
 #include "components/custom/CMouseCursor.h"
 #include <components/CModelRenderer.h>
 

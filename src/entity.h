@@ -38,7 +38,7 @@ private:
     /**
      * @brief The transform of the Entity.
      */
-    Transform transform_;
+    Transform* transform_;
 
     /**
      * @brief The list of components attached to the Entity.
@@ -63,7 +63,7 @@ public:
 
     Transform* GetTransform()
     {
-        return &transform_;
+        return transform_;
     }
 
     int GetId()

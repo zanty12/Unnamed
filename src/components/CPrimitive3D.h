@@ -19,7 +19,6 @@ protected:
     // Data
     std::string vertex_shader_path_ = "asset\\shader\\unlitTextureVS.cso";
     std::string pixel_shader_path_= "asset\\shader\\unlitTexturePS.cso";
-    Transform transform_ = Transform::Identity();
     CTexture* texture_ = nullptr;
 
 public:

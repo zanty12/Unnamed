@@ -7,31 +7,35 @@
 void CPhysXCapsule::Start()
 {
     Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
     if (parent->GetComponent<CPhysXRigidBody>())
     {
         physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
         /*//create dynamic actor
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
-            physx::PxTransform(Transform::ToPhysXTransform(transform)));*/
-        // å½¢çŠ¶ã‚’ä½œæˆ
+            physx::PxTransform(Transform::ToPhysXTransform(local_transform_)));*/
+        // Œ`ó‚ðì¬
         /*physx::PxShape* shape
             = PhysX_Impl::GetPhysics()->createShape(
-                // Boxã®å¤§ãã•
-                physx::PxCapsuleGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f),
-                // æ‘©æ“¦ä¿‚æ•°ã¨åç™ºä¿‚æ•°ã®è¨­å®š
+                // Box‚Ì‘å‚«‚³
+                physx::PxCapsuleGeometry(local_transform_->scale.x / 2.0f, local_transform_->scale.y / 2.0f),
+                // –€ŽCŒW”‚Æ”½”­ŒW”‚ÌÝ’è
                 *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
-        // å½¢çŠ¶ã‚’ç´ã¥ã‘
+        // Œ`ó‚ð•R‚Ã‚¯
         shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*shape);*/
         //create exclusive shape
+		Transform world_transform = GetWorldTransform();
+		physx::PxTransform relativePose = Transform::ToPhysXTransform(local_transform_);
+       
+		relativePose.q = relativePose.q * (physx::PxQuat(physx::PxHalfPi, physx::PxVec3(0, 0, 1)));
         physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(
-            *ac, physx::PxCapsuleGeometry(transform->scale.x / 2.0f, transform->scale.y / 2.0f),
+            *ac, physx::PxCapsuleGeometry(world_transform.scale.x / 2.0f, world_transform.scale.y / 2.0f),
             *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
+		shape->setLocalPose(relativePose);
         shape_ = shape;
-        debug_shape_ = GeometricPrimitive::CreateCylinder(Renderer::GetDeviceContext(), transform->scale.y,
-                                                          transform->scale.x, 16);
+        debug_shape_ = GeometricPrimitive::CreateCylinder(Renderer::GetDeviceContext(), world_transform.scale.y,
+            world_transform.scale.x, 16);
         if (is_trigger_)
         {
             shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);

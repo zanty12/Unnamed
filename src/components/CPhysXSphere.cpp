@@ -7,25 +7,25 @@
 void CPhysXSphere::Start()
 {
     Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
     if (parent->GetComponent<CPhysXRigidBody>())
     {
         physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
-        // å½¢çŠ¶ã‚’ä½œæˆ
+        // Œ`ó‚ðì¬
         /*physx::PxShape* shape
             = PhysX_Impl::GetPhysics()->createShape(
-                // Boxã®å¤§ãã•
-                physx::PxSphereGeometry(transform->scale.x),
-                // æ‘©æ“¦ä¿‚æ•°ã¨åç™ºä¿‚æ•°ã®è¨­å®š
+                // Box‚Ì‘å‚«‚³
+                physx::PxSphereGeometry(local_transform_->scale.x),
+                // –€ŽCŒW”‚Æ”½”­ŒW”‚ÌÝ’è
                 *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
-        // å½¢çŠ¶ã‚’ç´ã¥ã‘
+        // Œ`ó‚ð•R‚Ã‚¯
         shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*shape);*/
         //create exclusive shape
-        physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(*ac,physx::PxSphereGeometry(transform->scale.x), *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
+		Transform world_transform = GetWorldTransform();
+        physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(*ac,physx::PxSphereGeometry(world_transform.scale.x), *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = shape;
-        debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), transform->scale.x, 8);
+        debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), world_transform.scale.x, 8);
         if(is_trigger_)
         {
             shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);

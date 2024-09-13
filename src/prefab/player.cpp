@@ -9,13 +9,14 @@
 #include "components/custom/CPlayerController.h"
 #include "components/animationModel.h"
 #include "components/CTransformConstraint.h"
+#include <components/CPhysXRigidBody.h>
+#include <components/CPhysXCapsule.h>
 
 
 void Player::Start()
 {
     entity_ = Manager::MakeEntity("player");
     entity_->SetTag("Player");
-    Transform::SetQuaternionMode(entity_->GetTransform(),true);
 
     entity_->AddComponent(new CPlayerController());
 
@@ -35,9 +36,18 @@ void Player::Start()
     camera->Activate();
     camera->Start();
 
-    /*CRigidBody* rigidBody = new CRigidBody();
-    entity_->AddComponent(rigidBody);
-    rigidBody->Start();*/
+	CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
+	entity_->AddComponent(rigidBody);
+	rigidBody->Start();
+    //rigidBody->SetMass(0.0f);0
+    rigidBody->SetMassSpaceInertiaTensor(XMFLOAT3(0.0f, 0.0f, 0.0f));
+
+	CPhysXCapsule* capsule = new CPhysXCapsule();
+	capsule->SetDebugView(true);
+	capsule->SetIsTrigger(false);
+    Transform::ScaleTo(capsule->GetLocalTransform(), XMFLOAT3(1.0f, 2.0f, 1.0f));
+	entity_->AddComponent(capsule);
+	capsule->Start();
 
     CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);

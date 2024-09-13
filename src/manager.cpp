@@ -60,7 +60,6 @@ void Manager::Uninit()
 void Manager::Update()
 {
     Input::Update();
-    Time::Update();
 
     PhysX_Impl::Update();
 
@@ -132,6 +131,7 @@ void Manager::Draw()
     ImGui_Hal::EndDraw();
 
     Renderer::End();
+    Time::Update();
 }
 
 Entity* Manager::MakeEntity(std::string name)

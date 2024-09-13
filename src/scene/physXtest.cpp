@@ -7,7 +7,7 @@
 #include "components/CModelRenderer.h"
 #include "components/CPlane.h"
 #include "components/CVideoTexture.h"
-#include "objects/player.h"
+#include "prefab/player.h"
 
 
 void physXtest::Setup()
@@ -21,6 +21,7 @@ void physXtest::Setup()
             {
                 Entity* box = Manager::MakeEntity();
                 Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*1.1f, k*1.1f));
+				Transform::ScaleTo(box->GetTransform(), XMFLOAT3(0.5f, 0.5f, 0.5f));
                 box->AddComponent(new CPhysXRigidBody(true));
                 CPhysXBox* physXBox = new CPhysXBox();
                 physXBox->SetDebugView(true);

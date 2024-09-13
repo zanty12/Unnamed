@@ -1,7 +1,7 @@
 ﻿#include "testscene.h"
 #include "manager.h"
 #include "components/CAudio.h"
-#include "objects/player.h"
+#include "prefab/player.h"
 #include "components/CCamera.h"
 #include "components/CParticleEmitter.h"
 #include "components/CPlane.h"
@@ -10,8 +10,8 @@
 #include "components/CText2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
-#include "objects/enemy.h"
-#include "objects/explosion.h"
+#include "prefab/enemy.h"
+#include "prefab/explosion.h"
 
 
 void TestScene::Setup()

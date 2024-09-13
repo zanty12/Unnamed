@@ -5,7 +5,6 @@
 
 class CCamera : public Component, public Drawable
 {
-    DirectX::XMFLOAT3 position_;
     DirectX::XMFLOAT3 offset_ = DirectX::XMFLOAT3(0.0f, 5.0f, -10.0f);
     DirectX::XMFLOAT3 target_;
     DirectX::XMFLOAT4X4 view_matrix_;
@@ -28,7 +27,6 @@ public:
     XMFLOAT3 GetOffset() const { return offset_; }
     void SetOffset(XMFLOAT3 offset) { offset_ = offset; }
     void SetLookAtParent(bool look) { look_at_parent_ = look; }
-    XMFLOAT3 GetPosition() const { return position_; }
     bool GetActive() const { return active_; }
     void Activate();
     void Deactivate();

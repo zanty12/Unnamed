@@ -38,7 +38,7 @@ void CRect2D::Update()
     }
     else
     {
-        Transform::Copy(&transform_, parent->GetTransform());
+        
     }
     //if texture is sprite, get uv
     if (texture_->GetType() == "Sprite2D")
@@ -56,27 +56,28 @@ void CRect2D::Draw()
         vertex_buffer_->Release();
     //set vertex buffer
     VERTEX_3D vertex[4];
+	Transform world_transform = GetWorldTransform();
 
-    vertex[0].Position = DirectX::XMFLOAT3((transform_.position.x - (100.0f * transform_.scale.x / 2.0f)),
-                                           transform_.position.y - 100.0f * transform_.scale.y / 2.0f, 0.0f);
+    vertex[0].Position = DirectX::XMFLOAT3((world_transform.position.x - (100.0f * world_transform.scale.x / 2.0f)),
+        world_transform.position.y - 100.0f * world_transform.scale.y / 2.0f, 0.0f);
     vertex[0].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[0].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[0].TexCoord = DirectX::XMFLOAT2(start_uv_.x, start_uv_.y);
 
-    vertex[1].Position = DirectX::XMFLOAT3(transform_.position.x + 100.0f * transform_.scale.x / 2.0f,
-                                           transform_.position.y - 100.0f * transform_.scale.y / 2.0f, 0.0f);
+    vertex[1].Position = DirectX::XMFLOAT3(world_transform.position.x + 100.0f * world_transform.scale.x / 2.0f,
+        world_transform.position.y - 100.0f * world_transform.scale.y / 2.0f, 0.0f);
     vertex[1].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[1].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[1].TexCoord = DirectX::XMFLOAT2(end_uv_.x, start_uv_.y);
 
-    vertex[2].Position = DirectX::XMFLOAT3(transform_.position.x - 100.0f * transform_.scale.x / 2.0f,
-                                           transform_.position.y + 100.0f * transform_.scale.y / 2.0f, 0.0f);
+    vertex[2].Position = DirectX::XMFLOAT3(world_transform.position.x - 100.0f * world_transform.scale.x / 2.0f,
+        world_transform.position.y + 100.0f * world_transform.scale.y / 2.0f, 0.0f);
     vertex[2].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[2].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[2].TexCoord = DirectX::XMFLOAT2(start_uv_.x, end_uv_.y);
 
-    vertex[3].Position = DirectX::XMFLOAT3(transform_.position.x + 100.0f * transform_.scale.x / 2.0f,
-                                           transform_.position.y + 100.0f * transform_.scale.y / 2.0f, 0.0f);
+    vertex[3].Position = DirectX::XMFLOAT3(world_transform.position.x + 100.0f * world_transform.scale.x / 2.0f,
+        world_transform.position.y + 100.0f * world_transform.scale.y / 2.0f, 0.0f);
     vertex[3].Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     vertex[3].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[3].TexCoord = DirectX::XMFLOAT2(end_uv_.x, end_uv_.y);

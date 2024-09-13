@@ -20,8 +20,8 @@ public:
         if (dynamic_ || first_frame_)
         {
             //move collider to parent
-            Transform::Copy(&this->transform_, Manager::FindEntityByID(parent_id_)->GetTransform());
-            Transform::MoveBy(&this->transform_, center_offset_);
+            /*Transform::Copy(&this->transform_, Manager::FindEntityByID(parent_id_)->GetTransform());
+            Transform::MoveBy(&this->transform_, center_offset_);*/
             first_frame_ = false;
         }
     }
@@ -55,9 +55,10 @@ public:
             if (sphere_collider == this)
                 return false;
             //check if the distance between the two centers is less than the sum of the radii
-            XMFLOAT3 distance = XMFLOAT3(transform_.position.x - collider->GetTransform()->position.x,
-                                         transform_.position.y - collider->GetTransform()->position.y,
-                                         transform_.position.z - collider->GetTransform()->position.z);
+			Transform world_transform = GetWorldTransform();
+            XMFLOAT3 distance = XMFLOAT3(world_transform.position.x - collider->GetWorldTransform().position.x,
+                world_transform.position.y - collider->GetWorldTransform().position.y,
+                world_transform.position.z - collider->GetWorldTransform().position.z);
             float distance_length = (distance.x * distance.x + distance.y * distance.y + distance.z * distance.z);
             if (distance_length < (radius_ + sphere_collider->radius_) * (radius_ + sphere_collider->radius_))
                 return true;
@@ -77,17 +78,17 @@ public:
                 if (sphere_collider)
                 {
                     //check if the distance between the two centers is less than the sum of the radii
-                    XMFLOAT3 distance = XMFLOAT3(transform_.position.x - other->GetTransform()->position.x,
-                                                 transform_.position.y - other->GetTransform()->position.y,
-                                                 transform_.position.z - other->GetTransform()->position.z);
+                    Transform world_transform = GetWorldTransform();
+                    XMFLOAT3 distance = XMFLOAT3(world_transform.position.x - other->GetWorldTransform().position.x,
+                        world_transform.position.y - other->GetWorldTransform().position.y,
+                        world_transform.position.z - other->GetWorldTransform().position.z);
                     float distance_length = sqrt(
                         distance.x * distance.x + distance.y * distance.y + distance.z * distance.z);
                     float overlap = (radius_ + sphere_collider->radius_) - distance_length;
                     XMFLOAT3 direction = XMFLOAT3(distance.x / distance_length, distance.y / distance_length,
                                                   distance.z / distance_length);
                     XMFLOAT3 correction = XMFLOAT3(direction.x * overlap, direction.y * overlap, direction.z * overlap);
-                    Transform::MoveBy(&transform_, correction);
-                    Transform::Copy(&transform_, Manager::FindEntityByID(parent_id_)->GetTransform());
+                    Transform::MoveBy(Manager::FindEntityByID(parent_id_)->GetTransform(), correction);
                 }
             }
         }

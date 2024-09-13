@@ -24,7 +24,6 @@ void Bullet::Start()
 
 	CPhysXRigidBody* rigidBody = new CPhysXRigidBody();
 	rigidBody->SetDynamic(true);
-	rigidBody->SetIsTrigger(false);
 	entity_->AddComponent(rigidBody);
 
 	CPhysXSphere* sphere = new CPhysXSphere();

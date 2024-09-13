@@ -5,7 +5,7 @@
 void CPhysXRigidBody::Start()
 {
     Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
+	Transform* transform = parent->GetTransform();
     if (is_dynamic_)
     {
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
@@ -29,20 +29,19 @@ void CPhysXRigidBody::Update()
     }
 	if (!is_dynamic_)
     {
-		//copy entity transform to actor transform
-		Entity* parent = Manager::FindEntityByID(parent_id_);
-		Transform* transform = parent->GetTransform();
+		//copy actor transform to component transform
 		physx::PxTransform actor_transform = actor_->getGlobalPose();
-		actor_transform.p = physx::PxVec3(transform->position.x, transform->position.y, transform->position.z);
-		actor_transform.q = physx::PxQuat(transform->quaternion.x, transform->quaternion.y, transform->quaternion.z, transform->quaternion.w);
+		Transform worldTransform = GetWorldTransform();
+		actor_transform.p = physx::PxVec3(worldTransform.position.x, worldTransform.position.y, worldTransform.position.z);
+		actor_transform.q = physx::PxQuat(worldTransform.quaternion.x, worldTransform.quaternion.y, worldTransform.quaternion.z, worldTransform.quaternion.w);
 		actor_->setGlobalPose(actor_transform);
 	}
 	else
 	{
-		//copy actor transform to entity transform
+		//copy actor transform to Parent transform
+		physx::PxTransform actor_transform = actor_->getGlobalPose();
 		Entity* parent = Manager::FindEntityByID(parent_id_);
 		Transform* transform = parent->GetTransform();
-		physx::PxTransform actor_transform = actor_->getGlobalPose();
 		Transform::MoveTo(transform, XMFLOAT3(actor_transform.p.x, actor_transform.p.y, actor_transform.p.z));
 		XMFLOAT4 quat = XMFLOAT4(actor_transform.q.x, actor_transform.q.y, actor_transform.q.z, actor_transform.q.w);
 		Transform::RotateToQuat(transform, quat);
@@ -113,6 +112,30 @@ void CPhysXRigidBody::SetEnableGravity(bool enable)
 		dynamic->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, !enable);
 	}
 }
+
+void CPhysXRigidBody::SetMassSpaceInertiaTensor(const DirectX::XMFLOAT3& inertia_tensor) {
+	if (is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		dynamic->setMassSpaceInertiaTensor(physx::PxVec3(inertia_tensor.x, inertia_tensor.y, inertia_tensor.z));
+	}
+}
+
+void CPhysXRigidBody::SetGlobalPosition(const DirectX::XMFLOAT3& position)
+{
+	physx::PxTransform actor_transform = actor_->getGlobalPose();
+	actor_transform.p = physx::PxVec3(position.x, position.y, position.z);
+	actor_->setGlobalPose(actor_transform);
+}
+
+void CPhysXRigidBody::SetGlobalRotation(const DirectX::XMFLOAT4& rotation)
+{
+	physx::PxTransform actor_transform = actor_->getGlobalPose();
+	actor_transform.q = physx::PxQuat(rotation.x, rotation.y, rotation.z, rotation.w);
+	actor_->setGlobalPose(actor_transform);
+}
+
 
 float CPhysXRigidBody::GetMass() const
 {
