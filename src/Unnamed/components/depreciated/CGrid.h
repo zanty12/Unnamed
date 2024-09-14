@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "CGridCell.h"
-#include "component.h"
+#include "components/component.h"
 
 //defines a square grid with snapping for objects
 class CGrid : public Component

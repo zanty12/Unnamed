@@ -1,25 +1,25 @@
 #include "main.h"
-#include "renderer.h"
 #include "manager.h"
+#include "renderer.h"
 #include <iostream>
 #include <stdbool.h>
 
 #include "imgui_impl_hal.h"
 #include "system/input.h"
-#include "system/timesystem.h"
 #include "system/physicssystem3D.h"
-#include "system/textureLoader.h"
 #include "system/PhysX_Impl.h"
+#include "system/textureLoader.h"
+#include "system/timesystem.h"
 
-#include "components/CCamera.h"
 #include "components/CAudio.h"
+#include "components/CCamera.h"
 #include "components/CModelRenderer.h"
 #include "components/CText2D.h"
-#include "gamemode/GMDefaultGamemode.h"
-#include "scene/title.h"
-#include "scene/physXtest.h"
-#include "traits/object/spawnable.h"
+#include "Game/gamemode/GMDefaultGamemode.h"
+#include "Game/scene/physXtest.h"
+#include "Game/scene/title.h"
 #include "traits/debugmenu.h"
+#include "traits/object/spawnable.h"
 
 int Manager::entity_count_ = 0;
 std::vector<Entity*> Manager::entities_ = std::vector<Entity*>();

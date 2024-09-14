@@ -6,7 +6,7 @@
 #include "components/CAudio.h"
 #include "components/CCamera.h"
 #include "components/CModelRenderer.h"
-#include "components/custom/CPlayerController.h"
+#include "components/CPlayerController.h"
 #include "components/animationModel.h"
 #include "components/CTransformConstraint.h"
 #include <components/CPhysXRigidBody.h>

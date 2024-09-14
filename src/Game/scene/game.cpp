@@ -9,9 +9,9 @@
 #include "components/CText2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
-#include "components/custom/CPlayerController.h"
+#include "components/CPlayerController.h"
 #include "prefab/cube.h"
-#include "components/custom/CMouseCursor.h"
+#include "components/CMouseCursor.h"
 #include <components/CModelRenderer.h>
 
 

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../entity.h"
+#include "entity.h"
 #include "traits/object/spawnable.h"
 
 class Cube : public Spawnable

@@ -4,8 +4,8 @@
 #include "system/renderPL.h"
 #include "system/threadpool.h"
 #include "components/CCamera.h"
-#include "gamemode/GameMode.h"
-#include "scene/scene.h"
+#include "GameMode.h"
+#include "scene.h"
 
 
 class Spawnable;

@@ -145,6 +145,7 @@ float CPhysXRigidBody::GetMass() const
 		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
 		return dynamic->getMass();
 	}
+	return 0.0f;
 }
 
 float CPhysXRigidBody::GetLinearDamping() const
@@ -155,6 +156,7 @@ float CPhysXRigidBody::GetLinearDamping() const
 		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
 		return dynamic->getLinearDamping();
 	}
+	return 0.0f;
 }
 
 float CPhysXRigidBody::GetAngularDamping() const
@@ -165,6 +167,7 @@ float CPhysXRigidBody::GetAngularDamping() const
 		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
 		return dynamic->getAngularDamping();
 	}
+	return 0.0f;
 }
 
 DirectX::XMFLOAT3 CPhysXRigidBody::GetLinearVelocity() const
@@ -176,6 +179,7 @@ DirectX::XMFLOAT3 CPhysXRigidBody::GetLinearVelocity() const
 		physx::PxVec3 velocity = dynamic->getLinearVelocity();
 		return XMFLOAT3(velocity.x, velocity.y, velocity.z);
 	}
+	return XMFLOAT3(0.0f, 0.0f, 0.0f);
 }
 
 DirectX::XMFLOAT3 CPhysXRigidBody::GetAngularVelocity() const
@@ -187,6 +191,7 @@ DirectX::XMFLOAT3 CPhysXRigidBody::GetAngularVelocity() const
 		physx::PxVec3 velocity = dynamic->getAngularVelocity();
 		return XMFLOAT3(velocity.x, velocity.y, velocity.z);
 	}
+	return XMFLOAT3(0.0f, 0.0f, 0.0f);
 }
 
 bool CPhysXRigidBody::GetEnableGravity() const
@@ -197,4 +202,5 @@ bool CPhysXRigidBody::GetEnableGravity() const
 		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
 		return dynamic->getActorFlags() & physx::PxActorFlag::eDISABLE_GRAVITY;
 	}
+	return false;
 }
