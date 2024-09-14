@@ -23,7 +23,7 @@ protected:
 
 
 public:
-    CPhysXPrimitive() : Component("PhysXPrimitive"), Drawable(10)
+    CPhysXPrimitive() : Component("PhysXPrimitive",Kinematic), Drawable(10)
     {
     }
 

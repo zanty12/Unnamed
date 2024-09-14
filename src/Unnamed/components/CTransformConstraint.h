@@ -10,7 +10,7 @@ private:
     DirectX::XMFLOAT3 position_start_ = DirectX::XMFLOAT3(-100, 0, -100);
     DirectX::XMFLOAT3 position_end_ = DirectX::XMFLOAT3(100, 100, 100);
 public:
-    CTransformConstraint() : Component("TransformConstraint")
+    CTransformConstraint() : Component("TransformConstraint",PhysicsBehaviour)
     {
     }
     void Start() override{};

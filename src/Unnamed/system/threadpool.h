@@ -27,7 +27,6 @@ struct Task
 
 class ThreadPool
 {
-private:
     std::vector<std::thread> workers_;
     std::priority_queue<Task> tasks_;
     std::atomic<int> working_threads_{0}; // counter for working threads
@@ -70,7 +69,8 @@ public:
                             std::cout << "current task priority: " << this->tasks_.top().priority << "\n";
                             this->condition_.wait(lock, [this]
                             {
-                                return this->stop_ || (this->start_processing_ && !this->tasks_.empty() && (this->tasks_.
+                                return this->stop_ || (this->start_processing_ && !this->tasks_.empty() && (this->tasks_
+                                    .
                                     top().priority >= task_priority_ || this->working_threads_ <= 0));
                             });
                         }

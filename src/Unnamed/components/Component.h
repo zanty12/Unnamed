@@ -14,7 +14,7 @@ protected:
     Transform* local_transform_ = nullptr;
 public:
     Component() = delete;
-    Component(std::string type) : type_(std::move(type)),priority_(process_priority.at(type_))
+    Component(std::string type,Process_Level level) : type_(std::move(type)),priority_(level)
     {
         local_transform_ = Transform::Identity();
     }

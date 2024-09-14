@@ -14,7 +14,7 @@ private:
     int y_ = 100;
     std::vector<std::vector<CGridCell*>> grid_;
 public:
-    CGrid() : Component("Grid")
+    CGrid() : Component("Grid",PostPhysicsBehaviour)
     {
         grid_.resize(x_);
         for (int i = 0; i < x_; i++)
@@ -22,7 +22,7 @@ public:
             grid_[i].resize(y_);
         }
     }
-    CGrid(float size,int x, int y) : Component("Grid"), size_(size), x_(x), y_(y)
+    CGrid(float size,int x, int y) : Component("Grid",PostPhysicsBehaviour), size_(size), x_(x), y_(y)
     {
         grid_.resize(x);
         for (int i = 0; i < x; i++)

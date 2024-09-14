@@ -22,7 +22,7 @@ protected:
     CTexture* texture_ = nullptr;
 
 public:
-    CPrimitive3D() : Component("Primitive3D"),Drawable(2){}
+    CPrimitive3D() : Component("Primitive3D",DrawCallers),Drawable(2){}
     void CleanUp() override;
     void SetTexture(CTexture* texture) { texture_ = texture; }
 };

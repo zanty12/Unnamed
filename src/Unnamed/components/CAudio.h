@@ -19,7 +19,7 @@ public:
 	static void StartMaster();
 	static void CleanUpMaster();
 
-	CAudio() : Component("Audio"){};
+	CAudio() : Component("Audio",DontCare){};
 	void Start() override{};
 	void Update() override{};
 	void CleanUp() override;

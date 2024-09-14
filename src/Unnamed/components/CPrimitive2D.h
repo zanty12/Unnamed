@@ -21,7 +21,7 @@ protected:
     std::string pixel_shader_path_= "asset\\shader\\unlitTexturePS.cso";
     CTexture* texture_ = nullptr;
 public:
-    CPrimitive2D() : Component("Primitive2D"), Drawable(10) {}
+    CPrimitive2D() : Component("Primitive2D",DrawCallers), Drawable(10) {}
     virtual ~CPrimitive2D() = default;
 
     void CleanUp() override;

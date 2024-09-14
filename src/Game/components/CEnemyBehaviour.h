@@ -11,7 +11,7 @@ class CEnemyBehaviour : public Component
 {
 private:
 public:
-    CEnemyBehaviour() : Component("EnemyBehaviour")
+    CEnemyBehaviour() : Component("EnemyBehaviour",PhysicsBehaviour)
     {
     };
     ~CEnemyBehaviour() override = default;

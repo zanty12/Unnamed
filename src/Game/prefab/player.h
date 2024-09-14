@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "entity.h"
+#include "traits/debugmenu.h"
 
 class Player
 {

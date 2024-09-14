@@ -8,6 +8,6 @@ protected:
     bool dynamic_ = false;
     bool collision_checked_ = false;
 public:
-    CCollider2D() : Component("CCollider2D") {};
+    CCollider2D() : Component("CCollider2D",Kinematic) {};
     virtual ~CCollider2D() = default;
 };

@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <string>
 
-const std::unordered_map<std::string, int> process_priority = {
+/*const std::unordered_map<std::string, int> process_priority = {
     //components that moves the entity
     {"Controller", 8},
     {"RigidBody", 7},
@@ -35,4 +35,19 @@ const std::unordered_map<std::string, int> process_priority = {
     //dont care
     {"Audio", 0},
     {"Grid",0},
+};*/
+
+enum Process_Level
+{
+    Controller = 8,
+    Kinematic = 7,
+    PhysicsBehaviour = 6,
+    PostPhysicsBehaviour = 5,
+    RenderResources = 4,
+    DrawCallers = 3,
+    Camera = 2,
+    DontCare = 1,
+    SceneControl = 0,
 };
+
+

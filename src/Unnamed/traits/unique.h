@@ -12,6 +12,9 @@
 class Unique : public Trait
 {
 public:
-    Unique() : Trait("Unique"){}
-    virtual ~Unique() = default;
+    Unique() : Trait("Unique")
+    {
+    }
+
+    ~Unique() override = default;
 };

@@ -5,7 +5,7 @@
 #include "traits/drawable.h"
 
 
-// ƒ}ƒeƒŠƒAƒ‹\‘¢‘Ì
+// ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½
 struct MODEL_MATERIAL
 {
     char Name[256];
@@ -15,7 +15,7 @@ struct MODEL_MATERIAL
 };
 
 
-// •`‰æƒTƒuƒZƒbƒg\‘¢‘Ì
+// ï¿½`ï¿½ï¿½Tï¿½uï¿½Zï¿½bï¿½gï¿½\ï¿½ï¿½ï¿½ï¿½
 struct SUBSET
 {
     unsigned int StartIndex;
@@ -24,7 +24,7 @@ struct SUBSET
 };
 
 
-// ƒ‚ƒfƒ‹\‘¢‘Ì
+// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½
 struct MODEL_OBJ
 {
     VERTEX_3D* VertexArray;
@@ -74,7 +74,7 @@ public:
 
     using Component::Component;
 
-    CModelRenderer() : Component("ModelRenderer"),Drawable(2)
+    CModelRenderer() : Component("ModelRenderer",DrawCallers),Drawable(2)
     {
     }
 

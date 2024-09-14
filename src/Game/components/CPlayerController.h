@@ -4,7 +4,7 @@
 class CPlayerController : public Component
 {
 public:
-    CPlayerController() : Component("Controller") {}
+    CPlayerController() : Component("Controller",Controller) {}
     ~CPlayerController() override = default;
     void Start() override{}
     void Update() override;

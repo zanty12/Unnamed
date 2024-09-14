@@ -29,7 +29,7 @@ private:
     PARTICLE m_Particle[ PARTICLE_MAX] {};
 
 public:
-    CParticleEmitter() : Component("ParticleEmitter"),Drawable(2){};
+    CParticleEmitter() : Component("ParticleEmitter",DrawCallers),Drawable(2){};
     void Start() override;
     void CleanUp() override;
     void Update()override;

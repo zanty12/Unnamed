@@ -796,6 +796,7 @@
     <ClInclude Include="src\Game\components\CEnemyBehaviour.h" />
     <ClInclude Include="src\Game\components\CMouseCursor.h" />
     <ClInclude Include="src\Game\components\CPlayerController.h" />
+    <ClInclude Include="src\Game\components\CPlayerMenu.h" />
     <ClInclude Include="src\Game\components\CTitleControl.h" />
     <ClInclude Include="src\Game\gamemode\GMDefaultGamemode.h" />
     <ClInclude Include="src\Game\prefab\bullet.h" />
@@ -839,12 +840,14 @@
     <ClInclude Include="src\Unnamed\components\Transform.h" />
     <ClInclude Include="src\Unnamed\entity.h" />
     <ClInclude Include="src\Unnamed\GameMode.h" />
+    <ClInclude Include="src\Unnamed\helper\ini.h" />
     <ClInclude Include="src\Unnamed\imgui_impl_hal.h" />
     <ClInclude Include="src\Unnamed\main.h" />
     <ClInclude Include="src\Unnamed\manager.h" />
     <ClInclude Include="src\Unnamed\processpriority.h">
       <ExcludedFromBuild>false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="src\Unnamed\ProjectSettings.h" />
     <ClInclude Include="src\Unnamed\renderer.h" />
     <ClInclude Include="src\Unnamed\scene.h" />
     <ClInclude Include="src\Unnamed\system\input.h" />
@@ -969,6 +972,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Unnamed\helper\ini.cpp" />
     <ClCompile Include="src\Unnamed\imgui_impl_hal.cpp">
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1194,6 +1198,7 @@
       <AdditionalIncludeDirectories>C:\Users\zant1\RiderProjects\GM31\packages\directxtex_desktop_win10.2024.2.22.1\build\native\..\..\include;C:\Users\zant1\RiderProjects\GM31\lib;C:\Users\zant1\RiderProjects\GM31\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Unnamed\ProjectSettings.cpp" />
     <ClCompile Include="src\Unnamed\renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

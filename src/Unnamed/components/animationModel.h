@@ -12,17 +12,17 @@
 #include "traits/drawable.h"
 
 
-//•ÏŒ`Œã’¸“_\‘¢‘Ì
+//ï¿½ÏŒ`ï¿½ã’¸ï¿½_ï¿½\ï¿½ï¿½ï¿½ï¿½
 struct DEFORM_VERTEX
 {
 	aiVector3D Position;
 	aiVector3D Normal;
 	int				BoneNum;
-	std::string		BoneName[4];//–{—ˆ‚Íƒ{[ƒ“ƒCƒ“ƒfƒbƒNƒX‚ÅŠÇ—‚·‚é‚×‚«
+	std::string		BoneName[4];//ï¿½{ï¿½ï¿½ï¿½Íƒ{ï¿½[ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½ÅŠÇ—ï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½
 	float			BoneWeight[4];
 };
 
-//ƒ{[ƒ“\‘¢‘Ì
+//ï¿½{ï¿½[ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½
 struct BONE
 {
 	aiMatrix4x4 Matrix;
@@ -41,13 +41,13 @@ private:
 
 	std::unordered_map<std::string, ID3D11ShaderResourceView*> m_Texture;
 
-	std::vector<DEFORM_VERTEX>* m_DeformVertex;//•ÏŒ`Œã’¸“_ƒf[ƒ^
-	std::unordered_map<std::string, BONE> m_Bone;//ƒ{[ƒ“ƒf[ƒ^i–¼‘O‚ÅQÆj
+	std::vector<DEFORM_VERTEX>* m_DeformVertex;//ï¿½ÏŒ`ï¿½ã’¸ï¿½_ï¿½fï¿½[ï¿½^
+	std::unordered_map<std::string, BONE> m_Bone;//ï¿½{ï¿½[ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iï¿½ï¿½ï¿½Oï¿½ÅQï¿½Æj
 
 public:
 	using Component::Component;
 
-	AnimationModel() : Component("AnimationModel"), m_AiScene(nullptr), m_VertexBuffer(nullptr), m_IndexBuffer(nullptr), m_DeformVertex(nullptr),Drawable(2) {}
+	AnimationModel() : Component("AnimationModel",DrawCallers), m_AiScene(nullptr), m_VertexBuffer(nullptr), m_IndexBuffer(nullptr), m_DeformVertex(nullptr),Drawable(2) {}
 	void Load( const char *FileName );
 	void Start() override{}
 	void Update() override{}

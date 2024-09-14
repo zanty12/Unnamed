@@ -2,10 +2,11 @@
 #include "manager.h"
 #include <thread>
 #include "imgui_impl_hal.h"
+#include "ProjectSettings.h"
 
 
 const char* CLASS_NAME = "AppClass";
-const char* WINDOW_NAME = "DX11ÉQÅ[ÉÄ";
+const char* WINDOW_NAME = "Unnamed";
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -48,7 +49,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
-
+    ProjectSettings::InitializeManager();
     Manager::Init();
 
 
@@ -114,7 +115,7 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT uMs
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) //í«â¡
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) //ÔøΩ«âÔøΩ
         return true;
     switch (uMsg)
     {

@@ -14,11 +14,11 @@ class CPhysXRigidBody : public Component
     bool is_dynamic_ = true;
 
 public:
-    CPhysXRigidBody() : Component("PhysXRigidBody")
+    CPhysXRigidBody() : Component("PhysXRigidBody",Kinematic)
     {
     }
 
-    CPhysXRigidBody(bool dynamic) : Component("PhysXRigidBody")
+    CPhysXRigidBody(bool dynamic) : Component("PhysXRigidBody",Kinematic)
     {
         is_dynamic_ = dynamic;
     }
@@ -40,6 +40,8 @@ public:
 	void SetMassSpaceInertiaTensor(const DirectX::XMFLOAT3& inertia_tensor);
 	void SetGlobalPosition(const DirectX::XMFLOAT3& position);
 	void SetGlobalRotation(const DirectX::XMFLOAT4& rotation);
+    void LockLinearAxis(bool x, bool y, bool z);
+    void LockAngularAxis(bool x, bool y, bool z);
 
     //getter
     float GetMass() const;

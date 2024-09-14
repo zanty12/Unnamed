@@ -8,7 +8,7 @@ class CMouseCursor : public Component, public DebugMenu
 private:
     XMFLOAT3 mouse_world_pos_;
 public:
-    CMouseCursor() : Component("MouseCursor")
+    CMouseCursor() : Component("MouseCursor",Controller)
     {
     }
     void Start() override{}

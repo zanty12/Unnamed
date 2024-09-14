@@ -4,7 +4,6 @@
 
 class RenderPL
 {
-private:
     static std::list<Drawable*> drawables_;
 
 public:

@@ -7,7 +7,7 @@
 class CTitleControl : public Component
 {
 public:
-    CTitleControl() : Component("TitleControl"){};
+    CTitleControl() : Component("TitleControl",SceneControl){};
     ~CTitleControl() override = default;
     void Start() override{};
     void Update() override{

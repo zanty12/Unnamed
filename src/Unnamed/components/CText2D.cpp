@@ -141,7 +141,7 @@ HRESULT CText2D::SetTextAlignment(IDWriteTextFormat* text_format, DWRITE_TEXT_AL
 }
 
 //non-static function
-CText2D::CText2D() : Component("Text2D"), Drawable(10)
+CText2D::CText2D() : Component("Text2D",DrawCallers), Drawable(10)
 {
 };
 

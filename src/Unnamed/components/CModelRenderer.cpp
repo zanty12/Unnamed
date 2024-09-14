@@ -28,9 +28,8 @@ void CModelRenderer::Draw()
     Transform world_transform = GetWorldTransform();
     scale = XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
     //if(transform_.quaternion_set)
-       rot = XMMatrixRotationQuaternion(XMLoadFloat4(&world_transform.quaternion));
-    /*else
-        rot = XMMatrixRotationRollPitchYaw(transform_.rotation.x, transform_.rotation.y, transform_.rotation.z);*/
+    rot = XMMatrixRotationQuaternion(XMLoadFloat4(&world_transform.quaternion));
+    //rot = XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y, world_transform.rotation.z);
     trans = XMMatrixTranslation(world_transform.position.x, world_transform.position.y, world_transform.position.z);
     world = scale*rot*trans;
     Renderer::SetWorldMatrix(world);

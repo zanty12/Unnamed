@@ -62,10 +62,12 @@ public:
 
     static Transform* RotateByQuat(Transform* transform, XMFLOAT4 quat)
     {
-        transform->quaternion.x += quat.x;
-        transform->quaternion.y += quat.y;
-        transform->quaternion.z += quat.z;
-        transform->quaternion.w += quat.w;
+        XMVECTOR quat1 = XMLoadFloat4(&transform->quaternion);
+        XMVECTOR quat2 = XMLoadFloat4(&quat);
+        XMVECTOR resultQuat = XMQuaternionMultiply(quat1, quat2);
+        XMFLOAT4 result;
+        XMStoreFloat4(&result, resultQuat);
+        transform->quaternion = result;
         QuatToEuler(transform);
         return transform;
     }
@@ -144,7 +146,7 @@ public:
         world.scale = parent->scale;
         world.quaternion = parent->quaternion;
         MoveBy(&world, local->position);
-        RotateBy(&world, local->rotation);
+        RotateByQuat(&world, local->quaternion);
         ScaleBy(&world, local->scale);
         return world;
     }
@@ -159,8 +161,23 @@ private:
 
     static void QuatToEuler(Transform* transform)
     {
-        XMVECTOR quaternion = XMLoadFloat4(&transform->quaternion);
-        XMVECTOR euler = XMQuaternionRotationRollPitchYawFromVector(quaternion);
-        XMStoreFloat3(&transform->rotation, euler);
+        XMFLOAT4 quaternion = transform->quaternion;
+        //calculate eular angles
+        XMFLOAT3 angles;
+        // roll (x-axis rotation)
+        double sinr_cosp = 2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
+        double cosr_cosp = 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
+        angles.x = std::atan2(sinr_cosp, cosr_cosp);
+
+        // pitch (y-axis rotation)
+        double sinp = std::sqrt(1 + 2 * (quaternion.w * quaternion.y - quaternion.x * quaternion.z));
+        double cosp = std::sqrt(1 - 2 * (quaternion.w * quaternion.y - quaternion.x * quaternion.z));
+        angles.y = 2 * std::atan2(sinp, cosp) - XM_PI / 2;
+
+        // yaw (z-axis rotation)
+        double siny_cosp = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+        double cosy_cosp = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+        angles.z = std::atan2(siny_cosp, cosy_cosp);
+        transform->rotation = angles;
     }
 };

@@ -12,6 +12,8 @@
 #include <components/CPhysXRigidBody.h>
 #include <components/CPhysXCapsule.h>
 
+#include "components/CPlayerMenu.h"
+
 
 void Player::Start()
 {
@@ -24,6 +26,8 @@ void Player::Start()
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\player.obj");
     modelRenderer->Start();
+	Transform* model = modelRenderer->GetLocalTransform();
+	Transform::MoveTo(model, XMFLOAT3(0.0f, -1.0f, 0.0f));
     /*AnimationModel* animModel = new AnimationModel();
     animModel->Load("asset\\model\\Akai.fbx");
     entity_->AddComponent(animModel);
@@ -40,7 +44,7 @@ void Player::Start()
 	entity_->AddComponent(rigidBody);
 	rigidBody->Start();
     //rigidBody->SetMass(0.0f);0
-    rigidBody->SetMassSpaceInertiaTensor(XMFLOAT3(0.0f, 0.0f, 0.0f));
+    rigidBody->LockAngularAxis(true,true,true);
 
 	CPhysXCapsule* capsule = new CPhysXCapsule();
 	capsule->SetDebugView(true);
@@ -49,11 +53,16 @@ void Player::Start()
 	entity_->AddComponent(capsule);
 	capsule->Start();
 
-    CTransformConstraint* transformConstraint = new CTransformConstraint();
-    entity_->AddComponent(transformConstraint);
+    /*CTransformConstraint* transformConstraint = new CTransformConstraint();
+    entity_->AddComponent(transformConstraint);*/
 
     CAudio* audio = new CAudio();
     entity_->AddComponent(audio);
     audio->Load("asset/sound/wan.wav");
+
+	CPlayerMenu* playerMenu = new CPlayerMenu();
+	entity_->AddComponent(playerMenu);
+	playerMenu->Start();
 }
+
 

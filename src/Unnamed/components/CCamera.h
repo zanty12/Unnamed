@@ -14,7 +14,7 @@ class CCamera : public Component, public Drawable
     bool smoothing_ = false;
 
 public:
-    CCamera() : Component("Camera"), Drawable(0)
+    CCamera() : Component("Camera",Camera), Drawable(0)
     {
     }
 

@@ -30,7 +30,7 @@ void PhysicsSystem3D::UpdateCollisions()
         //dynamic_cast<CCollider3D*>(physics3D)->UpdateCollision();
         //use threadpool to update collisions
         CCollider3D* collider = dynamic_cast<CCollider3D*>(physics3D);
-        Manager::GetThreadPool().Enqueue(process_priority.at("CollisionCheck"),[collider](){
+        Manager::GetThreadPool().Enqueue(PhysicsBehaviour,[collider](){
             collider->UpdateCollision();
         });
     }
@@ -43,7 +43,7 @@ void PhysicsSystem3D::ApplyCollisions()
         //dynamic_cast<CCollider3D*>(physics3D)->ApplyCollision();
         //use threadpool to apply collisions
         CCollider3D* collider = dynamic_cast<CCollider3D*>(physics3D);
-        Manager::GetThreadPool().Enqueue(process_priority.at("CollisionApply"),[collider](){
+        Manager::GetThreadPool().Enqueue(PhysicsBehaviour,[collider](){
             collider->ApplyCollision();
         });
     }

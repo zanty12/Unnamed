@@ -11,7 +11,7 @@ private:
     DirectX::XMFLOAT3 start_pos_;
 
 public:
-    CBulletBehaviour() : Component("BulletBehaviour")
+    CBulletBehaviour() : Component("BulletBehaviour",PhysicsBehaviour)
     {
     };
     ~CBulletBehaviour() override = default;

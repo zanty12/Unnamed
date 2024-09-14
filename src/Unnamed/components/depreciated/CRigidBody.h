@@ -26,7 +26,7 @@ private:
     bool constrain_angular_z_ = false;
 
 public:
-    CRigidBody() : Component("RigidBody")
+    CRigidBody() : Component("RigidBody",Kinematic)
     {
     }
 

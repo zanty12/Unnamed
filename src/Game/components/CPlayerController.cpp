@@ -129,8 +129,14 @@ void CPlayerController::Update()
             //Transform::MoveBy(parent->GetTransform(), forward);
 			rigidBody->SetLinearVelocity(forward);
             //rotate parent to face forward
-            Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f));
-            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
+            XMFLOAT3 rot = XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f);
+            //calculate quaternion from euler angles
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(rot.x, rot.y, rot.z);
+            XMFLOAT4 quat_f;
+            XMStoreFloat4(&quat_f, quat);
+            //set parent rotation
+            Transform::RotateToQuat(parent->GetTransform(),quat_f);
+            rigidBody->SetGlobalRotation(quat_f);
 
         }
         if (Input::GetKeyPress('S'))
@@ -143,8 +149,15 @@ void CPlayerController::Update()
             //Transform::MoveBy(parent->GetTransform(), forward);
             rigidBody->SetLinearVelocity(forward);
             //rotate parent to face backward
-            Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f));
-            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
+            XMFLOAT3 rot = XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f);
+            //calculate quaternion from euler angles
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(rot.x, rot.y, rot.z);
+            XMFLOAT4 quat_f;
+            XMStoreFloat4(&quat_f, quat);
+            //set parent rotation
+            Transform::RotateToQuat(parent->GetTransform(),quat_f);
+            rigidBody->SetGlobalRotation(quat_f);
+
         }
         if (Input::GetKeyPress('A'))
         {
@@ -157,8 +170,14 @@ void CPlayerController::Update()
             rigidBody->SetLinearVelocity(right);
             //Transform::MoveBy(parent->GetTransform(), right);
             //rotate parent to face left
-            Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f));
-            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
+            XMFLOAT3 rot = XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f);
+            //calculate quaternion from euler angles
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(rot.x, rot.y, rot.z);
+            XMFLOAT4 quat_f;
+            XMStoreFloat4(&quat_f, quat);
+            //set parent rotation
+            Transform::RotateToQuat(parent->GetTransform(),quat_f);
+            rigidBody->SetGlobalRotation(quat_f);
         }
         if (Input::GetKeyPress('D'))
         {
@@ -171,16 +190,21 @@ void CPlayerController::Update()
             rigidBody->SetLinearVelocity(right);
             //Transform::MoveBy(parent->GetTransform(), right);
             //rotate parent to face right
-            Transform::RotateTo(parent->GetTransform(), XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f));
-            rigidBody->SetGlobalRotation(parent->GetTransform()->quaternion);
+            XMFLOAT3 rot = XMFLOAT3(0.0f, atan2(-right.x, -right.z), 0.0f);
+            //calculate quaternion from euler angles
+            XMVECTOR quat = XMQuaternionRotationRollPitchYaw(rot.x, rot.y, rot.z);
+            XMFLOAT4 quat_f;
+            XMStoreFloat4(&quat_f, quat);
+            //set parent rotation
+            Transform::RotateToQuat(parent->GetTransform(),quat_f);
+            rigidBody->SetGlobalRotation(quat_f);
         }
 
         //jump
         if (Input::GetKeyTrigger(VK_SPACE))
         {
-            CRigidBody* rigidBody = parent->GetComponent<CRigidBody>();
-            if (parent->GetComponent<CRigidBody>() != nullptr)
-                rigidBody->SetLinearVel(XMFLOAT3(0.0f, 10.0f, 0.0f));
+            XMFLOAT3 velocity = rigidBody->GetLinearVelocity();
+            rigidBody->SetLinearVelocity(XMFLOAT3(velocity.x, velocity.y + 10.0f, velocity.z));
         }
         //shoot bullet
         if (Input::GetKeyTrigger('G'))

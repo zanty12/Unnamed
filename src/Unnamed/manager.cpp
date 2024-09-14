@@ -38,11 +38,9 @@ void Manager::Init()
     Time::Start();
     CAudio::StartMaster();
     CText2D::CreatePublicResources();
-    game_mode_ = new DefaultGameMode();
     if(!PhysX_Impl::Start())
         std::cout << "PhysX failed to start" << std::endl;
-
-    LoadScene(new physXtest());
+    LoadScene(scene_);
 }
 
 void Manager::Uninit()
@@ -213,9 +211,15 @@ ThreadPool& Manager::GetThreadPool()
     return thread_pool_;
 }
 
+void Manager::SetScene(Scene* scene)
+{
+    if(scene_ != scene)
+        scene_ = scene;
+}
+
 void Manager::LoadScene(Scene* scene)
 {
-    scene_ = scene;
+    SetScene(scene);
     scene_->Setup();
 }
 

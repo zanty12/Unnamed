@@ -10,7 +10,7 @@ private:
     int y_ = 0;
     bool active_ = true;
 public:
-    CGridCell() : Component("GridCell"){}
+    CGridCell() : Component("GridCell",PostPhysicsBehaviour){}
     void Start() override{};
     void Update() override;
     void Attach(CGrid* grid);

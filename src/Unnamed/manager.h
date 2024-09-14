@@ -39,6 +39,7 @@ public:
 	static CCamera* GetActiveCamera();
 	static void SetActiveCamera(CCamera* camera);
 	static ThreadPool& GetThreadPool();
+	static void SetScene(Scene* scene);
 	static void LoadScene(Scene* scene);
 	static void UnloadCurrentScene();
 	static void SetGameMode(GameMode* game_mode);

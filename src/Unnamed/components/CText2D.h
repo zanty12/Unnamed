@@ -30,9 +30,6 @@ private:
     //text formats
     std::wstring font_ = L"Noto Sans JP";
 
-public:
-
-
 private:
     float font_size_ = 20.0f;
     DWRITE_FONT_WEIGHT font_weight_ = DWRITE_FONT_WEIGHT_NORMAL;

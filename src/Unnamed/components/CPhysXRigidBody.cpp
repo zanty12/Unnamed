@@ -136,6 +136,48 @@ void CPhysXRigidBody::SetGlobalRotation(const DirectX::XMFLOAT4& rotation)
 	actor_->setGlobalPose(actor_transform);
 }
 
+void CPhysXRigidBody::LockLinearAxis(bool x, bool y, bool z)
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		if(x)
+		{
+			dynamic->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_X, true);
+		}
+		if(y)
+		{
+			dynamic->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, true);
+		}
+		if(z)
+		{
+			dynamic->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
+		}
+	}
+}
+
+void CPhysXRigidBody::LockAngularAxis(bool x, bool y, bool z)
+{
+	if(is_dynamic_)
+	{
+		//cast to dynamic
+		physx::PxRigidDynamic* dynamic = actor_->is<physx::PxRigidDynamic>();
+		if(x)
+		{
+			dynamic->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_X, true);
+		}
+		if(y)
+		{
+			dynamic->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y, true);
+		}
+		if(z)
+		{
+			dynamic->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z, true);
+		}
+	}
+}
+
 
 float CPhysXRigidBody::GetMass() const
 {

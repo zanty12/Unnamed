@@ -13,7 +13,7 @@ protected:
     std::vector<CCollider3D*> collided_;
 
 public:
-    CCollider3D() : Component("Collider3D") {};
+    CCollider3D() : Component("Collider3D",Kinematic) {};
     virtual ~CCollider3D() = default;
     virtual void UpdateCollision() = 0;
     virtual bool CheckCollision(CCollider3D* collider) = 0;
