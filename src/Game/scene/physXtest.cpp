@@ -13,9 +13,9 @@
 void physXtest::Setup()
 {
     //create 125 boxes in a 5x5x5 grid
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 10; j++)
         {
             for (int k = 0; k < 5; k++)
             {
@@ -25,7 +25,7 @@ void physXtest::Setup()
                 box->AddComponent(new CPhysXRigidBody(true));
                 CPhysXBox* physXBox = new CPhysXBox();
                 physXBox->SetDebugView(true);
-                physXBox->SetMaterial(0.5f, 0.5f, 0.0f);
+                physXBox->SetMaterial(1.0f, 0.5f, 0.0f);
                 box->AddComponent(physXBox);
                 box->Start();
             }

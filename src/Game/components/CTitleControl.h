@@ -1,7 +1,7 @@
 #pragma once
 #include "system/input.h"
 #include "manager.h"
-#include "scene/game.h"
+#include "scene/CubeGame.h"
 #include "scene/testscene.h"
 
 class CTitleControl : public Component

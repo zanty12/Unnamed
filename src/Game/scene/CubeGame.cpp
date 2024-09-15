@@ -1,4 +1,4 @@
-﻿#include "game.h"
+﻿#include "CubeGame.h"
 #include "manager.h"
 #include "components/CAudio.h"
 #include "prefab/player.h"
@@ -15,7 +15,7 @@
 #include <components/CModelRenderer.h>
 
 
-void Game::Setup()
+void CubeGame::Setup()
 {
     /*Entity* rect2D = Manager::MakeEntity("rect2D");
     Transform::MoveTo(rect2D->GetTransform(),XMFLOAT3(200.0f,200.0f, 0.0f));
