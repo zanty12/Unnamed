@@ -36,11 +36,9 @@ void CPhysXCapsule::Start()
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateCylinder(Renderer::GetDeviceContext(), world_transform.scale.y,
             world_transform.scale.x, 16);
-        if (is_trigger_)
-        {
-            shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
-            shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
-        }
+        shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, simulate_);
+        shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, is_trigger_);
+        shape_->setFlag(physx::PxShapeFlag::eSCENE_QUERY_SHAPE, query_);
     }
     else
     {

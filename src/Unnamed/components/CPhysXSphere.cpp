@@ -26,11 +26,9 @@ void CPhysXSphere::Start()
         physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(*ac,physx::PxSphereGeometry(world_transform.scale.x), *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), world_transform.scale.x, 8);
-        if(is_trigger_)
-        {
-            shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
-            shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
-        }
+        shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, simulate_);
+        shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, is_trigger_);
+        shape_->setFlag(physx::PxShapeFlag::eSCENE_QUERY_SHAPE, query_);
     }
     else
     {

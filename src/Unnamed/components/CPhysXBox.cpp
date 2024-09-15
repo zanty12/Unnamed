@@ -29,11 +29,9 @@ void CPhysXBox::Start()
             *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = box_shape;
         debug_shape_ = GeometricPrimitive::CreateBox(Renderer::GetDeviceContext(), world_transform.scale);
-        if (is_trigger_)
-        {
-            shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
-            shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
-        }
+        shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, simulate_);
+        shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, is_trigger_);
+        shape_->setFlag(physx::PxShapeFlag::eSCENE_QUERY_SHAPE, query_);
     }
     else
     {

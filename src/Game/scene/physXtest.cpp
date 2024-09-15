@@ -7,6 +7,8 @@
 #include "components/CModelRenderer.h"
 #include "components/CPlane.h"
 #include "components/CVideoTexture.h"
+#include "components/depreciated/CRigidBody.h"
+#include "prefab/pinball.h"
 #include "prefab/player.h"
 
 
@@ -20,25 +22,32 @@ void physXtest::Setup()
             for (int k = 0; k < 5; k++)
             {
                 Entity* box = Manager::MakeEntity();
-                Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*1.1f, k*1.1f));
+                Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*0.5f, k*1.1f));
 				Transform::ScaleTo(box->GetTransform(), XMFLOAT3(0.5f, 0.5f, 0.5f));
-                box->AddComponent(new CPhysXRigidBody(true));
+                CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
+                box->AddComponent(rigidBody);
                 CPhysXBox* physXBox = new CPhysXBox();
                 physXBox->SetDebugView(true);
                 physXBox->SetMaterial(1.0f, 0.5f, 0.0f);
                 box->AddComponent(physXBox);
                 box->Start();
+                physx::PxRigidActor* actor = rigidBody->GetActor();
+                if(actor->is<physx::PxRigidDynamic>())
+                {
+                    physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+                    dynamicActor->putToSleep();
+                }
             }
         }
     }
 
-    Entity* sphere = Manager::MakeEntity();
+    /*Entity* sphere = Manager::MakeEntity();
     Transform::MoveTo(sphere->GetTransform(), XMFLOAT3(2, 10, 0));
     sphere->AddComponent(new CPhysXRigidBody(true));
     CPhysXSphere* physXSphere = new CPhysXSphere();
     physXSphere->SetDebugView(true);
     sphere->AddComponent(physXSphere);
-    sphere->Start();
+    sphere->Start();*/
 
     //Create a plane
     Entity* plane = Manager::MakeEntity("plane");
@@ -63,7 +72,7 @@ void physXtest::Setup()
     skybox->AddComponent(skybox_renderer);
     skybox->Start();
 
-    Player* player = new Player();
+    Pinball* player = new Pinball();
     player->Start();
     //delete setup object after creating entity
     delete player;

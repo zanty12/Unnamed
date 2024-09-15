@@ -1,34 +1,31 @@
 ﻿#include "main.h"
 #include "renderer.h"
 #include "manager.h"
-#include "player.h"
+#include "Pinball.h"
 
 #include "components/CAudio.h"
 #include "components/CCamera.h"
 #include "components/CModelRenderer.h"
-#include "components/CPlayerController.h"
+#include "components/CPinballBehaviour.h"
 #include "components/animationModel.h"
 #include "components/CTransformConstraint.h"
 #include <components/CPhysXRigidBody.h>
 #include <components/CPhysXCapsule.h>
 
-#include "components/CPlayerMenu.h"
+#include "components/CPhysXSphere.h"
 
-
-void Player::Start()
+void Pinball::Start()
 {
-    entity_ = Manager::MakeEntity("player");
-    entity_->SetTag("Player");
+    entity_ = Manager::MakeEntity("Pinball");
+    entity_->SetTag("Pinball");
 	Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.0f, -20.0f));
 
-    entity_->AddComponent(new CPlayerController());
-
-    CModelRenderer* modelRenderer = new CModelRenderer();
+    /*CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
-    modelRenderer->Load("asset\\model\\player.obj");
+    modelRenderer->Load("asset\\model\\Pinball.obj");
     modelRenderer->Start();
 	Transform* model = modelRenderer->GetLocalTransform();
-	Transform::MoveTo(model, XMFLOAT3(0.0f, -1.0f, 0.0f));
+	Transform::MoveTo(model, XMFLOAT3(0.0f, -1.0f, 0.0f));*/
     /*AnimationModel* animModel = new AnimationModel();
     animModel->Load("asset\\model\\Akai.fbx");
     entity_->AddComponent(animModel);
@@ -45,14 +42,14 @@ void Player::Start()
 	entity_->AddComponent(rigidBody);
 	rigidBody->Start();
     //rigidBody->SetMass(0.0f);0
-    rigidBody->LockAngularAxis(true,true,true);
+    //rigidBody->LockAngularAxis(true,true,true);
 
-	CPhysXCapsule* capsule = new CPhysXCapsule();
-	capsule->SetDebugView(true);
-	capsule->SetIsTrigger(false);
-    Transform::ScaleTo(capsule->GetLocalTransform(), XMFLOAT3(1.0f, 2.0f, 1.0f));
-	entity_->AddComponent(capsule);
-	capsule->Start();
+	CPhysXSphere* sphere = new CPhysXSphere();
+	sphere->SetDebugView(true);
+	sphere->SetIsTrigger(false);
+    Transform::ScaleTo(sphere->GetLocalTransform(), XMFLOAT3(1.0f, 1.0f, 1.0f));
+	entity_->AddComponent(sphere);
+	sphere->Start();
 
     /*CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);*/
@@ -61,9 +58,9 @@ void Player::Start()
     entity_->AddComponent(audio);
     audio->Load("asset/sound/wan.wav");
 
-	CPlayerMenu* playerMenu = new CPlayerMenu();
-	entity_->AddComponent(playerMenu);
-	playerMenu->Start();
+	CPinballBehaviour* pinballBehaviour = new CPinballBehaviour();
+	entity_->AddComponent(pinballBehaviour);
+	pinballBehaviour->Start();
 }
 
 
