@@ -24,7 +24,7 @@ void CPinballBehaviour::Update()
             auto mouse_pos = Input::GetMousePos();
             auto diff = XMINT2(mouse_pos.x - start_mouse_.x, mouse_pos.y - start_mouse_.y);
             //calculate force
-            auto force = XMINT2(diff.x * 10, diff.y * 10);
+            auto force = XMINT2(diff.x * 100, diff.y * 100);
             if(!Input::GetMouseButtonPress(LEFT_BUTTON))
             {
                 pull_back_ = false;

@@ -4,7 +4,7 @@
 #include "components/depreciated/CCollider3D.h"
 #include "manager.h"
 #include "components/Component.h"
-#include "gamemode/GMDefaultGamemode.h"
+#include "gamemode/GMShooting.h"
 #include "prefab/explosion.h"
 
 class CEnemyBehaviour : public Component
@@ -31,7 +31,7 @@ public:
             {
                 Manager::QueueForRemoval(parent_id_);
                 //add point to the player
-                DefaultGameMode* game_mode = dynamic_cast<DefaultGameMode*>(Manager::GetGameMode());
+                Shooting* game_mode = dynamic_cast<Shooting*>(Manager::GetGameMode());
                 if(game_mode)
                     game_mode->AddPoint();
                 Explosion* explosion = new Explosion();

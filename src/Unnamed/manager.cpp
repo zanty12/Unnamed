@@ -59,6 +59,8 @@ void Manager::Update()
 {
     Input::Update();
 
+    //Update physics in 60fps
+    if(Time::FixedUpdate())
     PhysX_Impl::Update();
 
     //update all entities
@@ -119,6 +121,7 @@ void Manager::Draw()
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
                 ImGui::GetIO().Framerate);
     ImGui::Text("Mouse Pos: %d, %d", Input::GetMousePos().x, Input::GetMousePos().y);
+    ImGui::Text("delta time: %f", Time::GetDeltaTime());
     ImGui::End();
 
     for (auto& debug_menu : debug_menu_)

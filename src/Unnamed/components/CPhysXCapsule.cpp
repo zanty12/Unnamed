@@ -35,7 +35,7 @@ void CPhysXCapsule::Start()
 		shape->setLocalPose(relativePose);
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateCylinder(Renderer::GetDeviceContext(), world_transform.scale.y,
-            world_transform.scale.x, 16);
+            world_transform.scale.x, 8,false);
         shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, simulate_);
         shape_->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, is_trigger_);
         shape_->setFlag(physx::PxShapeFlag::eSCENE_QUERY_SHAPE, query_);

@@ -18,7 +18,7 @@ void Pinball::Start()
 {
     entity_ = Manager::MakeEntity("Pinball");
     entity_->SetTag("Pinball");
-	Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.0f, -20.0f));
+	Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.5f, -15.0f));
 
     /*CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
@@ -41,8 +41,15 @@ void Pinball::Start()
 	CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
 	entity_->AddComponent(rigidBody);
 	rigidBody->Start();
-    //rigidBody->SetMass(0.0f);0
+    rigidBody->SetMass(10.0f);
     //rigidBody->LockAngularAxis(true,true,true);
+	physx::PxRigidActor* actor = rigidBody->GetActor();
+	if (actor->is<physx::PxRigidDynamic>())
+	{
+		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+		//actor->setActorFlag(physx::PxActorFlag::eDISABLE_SIMULATION, false);
+		dynamicActor->putToSleep();
+	}
 
 	CPhysXSphere* sphere = new CPhysXSphere();
 	sphere->SetDebugView(true);

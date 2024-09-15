@@ -7,6 +7,8 @@ class Time
     static DWORD previousTime;
     static DWORD currentTime;
     static DWORD deltaTime;
+    static DWORD fixedTime;
+    static bool fixed_update;
 
 public:
     static void Start(void);
@@ -15,4 +17,5 @@ public:
     static float GetDeltaTime(void);
     static float GetDeltaTime(float start);
     static float GetCurrentTime(void);
+    static bool FixedUpdate(void);
 };

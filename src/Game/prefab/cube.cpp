@@ -5,7 +5,10 @@
 
 #include "components/CAudio.h"
 #include "components/CCamera.h"
+#include "components/CDirectXTKBox.h"
 #include "components/CModelRenderer.h"
+#include "components/CPhysXBox.h"
+#include "components/CPhysXRigidBody.h"
 #include "components/CTransformConstraint.h"
 
 
@@ -15,17 +18,27 @@ void Cube::Start()
     entity_->SetTag("Cube");
 	Transform::Copy(entity_->GetTransform(), &transform_);
 
-    CModelRenderer* modelRenderer = new CModelRenderer();
+    /*CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\roundedcube.obj");
+    Transform local = Transform{ XMFLOAT3{0.0f, -0.5f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
+    modelRenderer->SetLocalTransform(local);*/
+    CDirectXTKBox* box = new CDirectXTKBox();
+    entity_->AddComponent(box);
+    box->Start();
 
-    CTransformConstraint* transformConstraint = new CTransformConstraint();
-    entity_->AddComponent(transformConstraint);
-
-    CAudio* audio = new CAudio();
-    entity_->AddComponent(audio);
-    audio->Load("asset/sound/wan.wav");
+    CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
+    entity_->AddComponent(rigidBody);
+    CPhysXBox* physXBox = new CPhysXBox();
+    physXBox->SetMaterial(1.0f, 1.0f, 0.0f);
+    entity_->AddComponent(physXBox);
     entity_->Start();
+    physx::PxRigidActor* actor = rigidBody->GetActor();
+    /*if (actor->is<physx::PxRigidDynamic>())
+    {
+        physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+        dynamicActor->putToSleep();
+    }*/
 }
 
 void Cube::Spawn() 

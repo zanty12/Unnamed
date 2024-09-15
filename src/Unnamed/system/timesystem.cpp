@@ -1,8 +1,12 @@
 #include "timesystem.h"
+
+#include <ios>
 DWORD Time::startTime = 0;
 DWORD Time::previousTime = 0;
 DWORD Time::currentTime = 0;
 DWORD Time::deltaTime = 0;
+DWORD Time::fixedTime = 0;
+bool Time::fixed_update = false;
 
 
 void Time::Start(void)
@@ -22,6 +26,16 @@ void Time::Update(void)
     previousTime = currentTime;
     currentTime = timeGetTime();
     deltaTime = currentTime - previousTime;
+    fixedTime += deltaTime;
+    if(fixedTime >= 16)
+    {
+        fixedTime = 0;
+        fixed_update = true;
+    }
+    else
+    {
+        fixed_update = false;
+    }
 }
 
 float Time::GetDeltaTime(void)
@@ -38,3 +52,9 @@ float Time::GetCurrentTime(void)
 {
     return currentTime * 0.001f;
 }
+
+bool Time::FixedUpdate()
+{
+    return fixed_update;
+}
+

@@ -22,12 +22,13 @@ void physXtest::Setup()
             for (int k = 0; k < 5; k++)
             {
                 Entity* box = Manager::MakeEntity();
-                Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*0.5f, k*1.1f));
-				Transform::ScaleTo(box->GetTransform(), XMFLOAT3(0.5f, 0.5f, 0.5f));
+                Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*1.0f+0.5f, k*1.1f));
+				//Transform::ScaleTo(box->GetTransform(), XMFLOAT3(0.5f, 0.5f, 0.5f));
                 CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
                 box->AddComponent(rigidBody);
                 CPhysXBox* physXBox = new CPhysXBox();
-                physXBox->SetDebugView(true);
+                physXBox->SetDebugView(false);
+                physXBox->SetSimulate(true);
                 physXBox->SetMaterial(1.0f, 0.5f, 0.0f);
                 box->AddComponent(physXBox);
                 box->Start();

@@ -10,23 +10,37 @@
 void CPlane::Start()
 {
     VERTEX_3D vertex[4];
-
-    vertex[0].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, 50.0f);
+    //Get World Transform
+    Transform world_transform = GetWorldTransform();
+    //set vertex according to world transform
+    vertex[0].Position = DirectX::XMFLOAT3(world_transform.position.x - world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z + world_transform.scale.z / 2);
+    //vertex[0].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, 50.0f);
     vertex[0].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[0].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[0].TexCoord = DirectX::XMFLOAT2(start_uv_.x, start_uv_.y);
 
-    vertex[1].Position = DirectX::XMFLOAT3(50.0f, 0.0f, 50.0f);
+    vertex[1].Position = DirectX::XMFLOAT3(world_transform.position.x + world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z + world_transform.scale.z / 2);
+    //vertex[1].Position = DirectX::XMFLOAT3(50.0f, 0.0f, 50.0f);
     vertex[1].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[1].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[1].TexCoord = DirectX::XMFLOAT2(end_uv_.x, start_uv_.y);
 
-    vertex[2].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, -50.0f);
+    vertex[2].Position = DirectX::XMFLOAT3(world_transform.position.x - world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z - world_transform.scale.z / 2);
+    //vertex[2].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, -50.0f);
     vertex[2].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[2].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[2].TexCoord = DirectX::XMFLOAT2(start_uv_.x, end_uv_.y);
 
-    vertex[3].Position = DirectX::XMFLOAT3(50.0f, 0.0f, -50.0f);
+    vertex[3].Position = DirectX::XMFLOAT3(world_transform.position.x + world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z - world_transform.scale.z / 2);
+    //vertex[3].Position = DirectX::XMFLOAT3(50.0f, 0.0f, -50.0f);
     vertex[3].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[3].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[3].TexCoord = DirectX::XMFLOAT2(end_uv_.x, end_uv_.y);
@@ -76,22 +90,35 @@ void CPlane::Draw()
     if (vertex_buffer_)
         vertex_buffer_->Release();
     VERTEX_3D vertex[4];
-    vertex[0].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, 50.0f);
+    Transform world_transform = GetWorldTransform();
+    vertex[0].Position = DirectX::XMFLOAT3(world_transform.position.x - world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z + world_transform.scale.z / 2);
+    //vertex[0].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, 50.0f);
     vertex[0].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[0].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[0].TexCoord = DirectX::XMFLOAT2(start_uv_.x, start_uv_.y);
 
-    vertex[1].Position = DirectX::XMFLOAT3(50.0f, 0.0f, 50.0f);
+    vertex[1].Position = DirectX::XMFLOAT3(world_transform.position.x + world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z + world_transform.scale.z / 2);
+    //vertex[1].Position = DirectX::XMFLOAT3(50.0f, 0.0f, 50.0f);
     vertex[1].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[1].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[1].TexCoord = DirectX::XMFLOAT2(end_uv_.x, start_uv_.y);
 
-    vertex[2].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, -50.0f);
+    vertex[2].Position = DirectX::XMFLOAT3(world_transform.position.x - world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z - world_transform.scale.z / 2);
+    //vertex[2].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, -50.0f);
     vertex[2].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[2].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[2].TexCoord = DirectX::XMFLOAT2(start_uv_.x, end_uv_.y);
 
-    vertex[3].Position = DirectX::XMFLOAT3(50.0f, 0.0f, -50.0f);
+    vertex[3].Position = DirectX::XMFLOAT3(world_transform.position.x + world_transform.scale.x / 2,
+                                           world_transform.position.y,
+                                           world_transform.position.z - world_transform.scale.z / 2);
+    //vertex[3].Position = DirectX::XMFLOAT3(50.0f, 0.0f, -50.0f);
     vertex[3].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
     vertex[3].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[3].TexCoord = DirectX::XMFLOAT2(end_uv_.x, end_uv_.y);
@@ -120,11 +147,12 @@ void CPlane::Draw()
     if (!billboard_)
     {
         DirectX::XMMATRIX world, scale, rot, trans;
-		Transform world_transform = GetWorldTransform();
+        Transform world_transform = GetWorldTransform();
         scale = DirectX::XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
         rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,
                                                     world_transform.rotation.z);
-        trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y, world_transform.position.z);
+        trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y,
+                                             world_transform.position.z);
         world = scale * rot * trans;
         Renderer::SetWorldMatrix(world);
     }
@@ -137,13 +165,14 @@ void CPlane::Draw()
         inv_view.r[3].m128_f32[1] = 0.0f;
         inv_view.r[3].m128_f32[2] = 0.0f;
 
-        DirectX::XMMATRIX world,rot, scale, trans;
+        DirectX::XMMATRIX world, rot, scale, trans;
         Transform world_transform = GetWorldTransform();
         scale = DirectX::XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
         rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,
                                                     world_transform.rotation.z);
-        trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y, world_transform.position.z);
-        world = scale * rot*inv_view * trans;
+        trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y,
+                                             world_transform.position.z);
+        world = scale * rot * inv_view * trans;
         Renderer::SetWorldMatrix(world);
     }
 
