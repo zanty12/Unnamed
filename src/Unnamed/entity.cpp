@@ -1,4 +1,4 @@
-﻿#include "entity.h"
+#include "entity.h"
 
 #include "manager.h"
 #include "components/CPhysXRigidBody.h"
@@ -9,19 +9,19 @@ void Entity::Update()
     {
         component->Update();
     }*/
-    for(auto component : components_) {
-        Manager::GetThreadPool().Enqueue(component->GetPriority(),[component](){
+    for (auto component : components_) {
+        Manager::GetThreadPool().Enqueue(component->GetPriority(), [component]() {
             component->Update();
-        });
+            });
     }
 }
 
 Entity::~Entity()
 {
     Component* rigidBody = nullptr;
-    for(auto component : components_)
+    for (auto component : components_)
     {
-        if(component->GetType() != "CPhysXRigidBody")
+        if (component->GetType() != "CPhysXRigidBody")
         {
             component->CleanUp();
             delete component;

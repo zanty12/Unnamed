@@ -10,6 +10,7 @@
 #include "components/CPhysXBox.h"
 #include "components/CPhysXRigidBody.h"
 #include "components/CTransformConstraint.h"
+#include "components/CCubeBehaviour.h" 
 
 
 void Cube::Start()
@@ -18,14 +19,13 @@ void Cube::Start()
     entity_->SetTag("Cube");
 	Transform::Copy(entity_->GetTransform(), &transform_);
 
-    /*CModelRenderer* modelRenderer = new CModelRenderer();
+    CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\roundedcube.obj");
     Transform local = Transform{ XMFLOAT3{0.0f, -0.5f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
-    modelRenderer->SetLocalTransform(local);*/
-    CDirectXTKBox* box = new CDirectXTKBox();
-    entity_->AddComponent(box);
-    box->Start();
+    modelRenderer->SetLocalTransform(local);
+    /*CDirectXTKBox* box = new CDirectXTKBox();
+    entity_->AddComponent(box);*/
 
     CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
     entity_->AddComponent(rigidBody);
@@ -34,11 +34,17 @@ void Cube::Start()
     entity_->AddComponent(physXBox);
     entity_->Start();
     physx::PxRigidActor* actor = rigidBody->GetActor();
-    /*if (actor->is<physx::PxRigidDynamic>())
+    rigidBody->AddCollisionFilter("Cube");
+    physXBox->SetQuery(false);
+    if (actor->is<physx::PxRigidDynamic>())
     {
         physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
         dynamicActor->putToSleep();
-    }*/
+    }
+
+	CCubeBehaviour* cubeBehaviour = new CCubeBehaviour();
+	entity_->AddComponent(cubeBehaviour);
+	cubeBehaviour->Start();
 }
 
 void Cube::Spawn() 

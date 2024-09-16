@@ -21,6 +21,20 @@ physx::PxPvd* PhysX_Impl::m_pPvd = nullptr;
 //CUDA
 physx::PxCudaContextManager* PhysX_Impl::m_pCudaCtxMgr = nullptr;
 
+PhysXSimulationCallBack PhysX_Impl::m_simulationCallback;
+
+physx::PxFilterFlags filter_shader(
+    physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0,
+    physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1,
+    physx::PxPairFlags& pairFlags, const void* constantBlock, physx::PxU32 constantBlockSize)
+{
+    pairFlags = physx::PxPairFlag::eCONTACT_DEFAULT;
+    pairFlags |= physx::PxPairFlag::eNOTIFY_TOUCH_FOUND;
+    //pairFlags |= physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS;
+    pairFlags |= physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
+    return physx::PxFilterFlag::eDEFAULT;
+}
+
 bool PhysX_Impl::Start()
 {
     // Foundationのインスタンス化
@@ -65,8 +79,12 @@ bool PhysX_Impl::Start()
     // 空間の設定
     physx::PxSceneDesc scene_desc(m_pPhysics->getTolerancesScale());
     scene_desc.gravity = physx::PxVec3(0, -9, 0);
-    scene_desc.filterShader = physx::PxDefaultSimulationFilterShader;
+    scene_desc.filterShader = filter_shader;
     scene_desc.cpuDispatcher = m_pDispatcher;
+    //set simulation callback
+    m_simulationCallback = PhysXSimulationCallBack();
+    scene_desc.simulationEventCallback = &m_simulationCallback;
+    scene_desc.flags |= physx::PxSceneFlag::eENABLE_ACTIVE_ACTORS;
 
     // GPUを使う場合はここで設定
     physx::PxCudaContextManagerDesc cuda_ctx_mgr_desc;
@@ -88,8 +106,11 @@ bool PhysX_Impl::Start()
             scene_desc.flags |= physx::PxSceneFlag::eENABLE_GPU_DYNAMICS;
             scene_desc.flags |= physx::PxSceneFlag::eENABLE_STABILIZATION;
             scene_desc.gpuMaxNumPartitions = 8;
+            scene_desc.broadPhaseType = physx::PxBroadPhaseType::eGPU;
         }
     }
+
+    
 
     // 空間のインスタンス化
     m_pScene = m_pPhysics->createScene(scene_desc);
@@ -98,6 +119,7 @@ bool PhysX_Impl::Start()
         std::cerr << "Failed to create scene" << std::endl;
         return false;
     }
+
 
     // PVDの表示設定
     physx::PxPvdSceneClient* pvd_client = m_pScene->getScenePvdClient();

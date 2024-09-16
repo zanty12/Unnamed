@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "manager.h"
 #include "renderer.h"
 #include <iostream>
@@ -30,6 +30,10 @@ CCamera* Manager::active_camera_ = nullptr;
 ThreadPool Manager::thread_pool_;
 Scene* Manager::scene_ = nullptr;
 GameMode* Manager::game_mode_ = nullptr;
+bool Manager::skip_one_frame_ = false;
+bool Manager::scene_change_ = false;
+Scene* Manager::next_scene_ = nullptr;
+
 
 void Manager::Init()
 {
@@ -38,7 +42,7 @@ void Manager::Init()
     Time::Start();
     CAudio::StartMaster();
     CText2D::CreatePublicResources();
-    if(!PhysX_Impl::Start())
+    if (!PhysX_Impl::Start())
         std::cout << "PhysX failed to start" << std::endl;
     LoadScene(scene_);
 }
@@ -57,11 +61,20 @@ void Manager::Uninit()
 
 void Manager::Update()
 {
+    if (skip_one_frame_) {
+        return;
+    }
     Input::Update();
 
     //Update physics in 60fps
-    if(Time::FixedUpdate())
-    PhysX_Impl::Update();
+    if (Time::FixedUpdate())
+    {
+        //log physics time
+        //DWORD start_time = timeGetTime();
+        PhysX_Impl::Update();
+        //start_time = timeGetTime() - start_time;
+        //std::cout << "Physics time: " << start_time << std::endl;
+    }
 
     //update all entities
     for (auto& entity : entities_)
@@ -102,14 +115,28 @@ void Manager::Update()
     spawn_queue_.clear();
 
     game_mode_->Update();
+	if (scene_change_)
+	{
+		UnloadCurrentScene();
+		LoadScene(next_scene_);
+		scene_change_ = false;
+	}
 }
 
 void Manager::Draw()
 {
+	if (skip_one_frame_)
+	{
+		skip_one_frame_ = false;
+		return;
+	}
     Renderer::Begin();
     CText2D::TextStart();
     Renderer::LoadState();
-    active_camera_->Draw();
+    if (active_camera_)
+    {
+        active_camera_->Draw();
+    }
     RenderPL::Draw();
     CText2D::TextEnd();
 
@@ -117,9 +144,9 @@ void Manager::Draw()
 
     ImGui::Begin("FPS");
     ImGui::Text("Hello, world!");
-    //ImGui::Text(u8"ƒeƒXƒg");
+    //ImGui::Text(u8"ï¿½eï¿½Xï¿½g");
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
-                ImGui::GetIO().Framerate);
+        ImGui::GetIO().Framerate);
     ImGui::Text("Mouse Pos: %d, %d", Input::GetMousePos().x, Input::GetMousePos().y);
     ImGui::Text("delta time: %f", Time::GetDeltaTime());
     ImGui::End();
@@ -164,7 +191,7 @@ Entity* Manager::FindEntityByName(std::string name)
 {
     for (auto entity : entities_)
     {
-        if(entity == nullptr)
+        if (entity == nullptr)
             continue;
         if (entity->GetName() == name)
         {
@@ -216,7 +243,7 @@ ThreadPool& Manager::GetThreadPool()
 
 void Manager::SetScene(Scene* scene)
 {
-    if(scene_ != scene)
+    if (scene_ != scene)
         scene_ = scene;
 }
 
@@ -224,6 +251,7 @@ void Manager::LoadScene(Scene* scene)
 {
     SetScene(scene);
     scene_->Setup();
+	SkipFrame();
 }
 
 void Manager::UnloadCurrentScene()
@@ -240,8 +268,10 @@ void Manager::UnloadCurrentScene()
     TextureLoader::CleanUp();
     PhysicsSystem3D::CleanUp();
     CModelRenderer::UnloadAll();
+    debug_menu_.clear();
     entities_.clear();
     removal_queue_.clear();
+    active_camera_ = nullptr;
     //clean up spawn queue
     for (auto& spawnable : spawn_queue_)
     {
@@ -261,7 +291,18 @@ GameMode* Manager::GetGameMode()
     return game_mode_;
 }
 
-void Manager::RegisterDebugMenu(DebugMenu* debug_menu){
+void Manager::RegisterDebugMenu(DebugMenu* debug_menu) {
     debug_menu_.push_back(debug_menu);
-   
+
+}
+
+void Manager::SkipFrame()
+{
+	skip_one_frame_ = true;
+}
+
+void Manager::SceneChange(Scene* scene)
+{
+	scene_change_ = true;
+	next_scene_ = scene;
 }

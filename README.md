@@ -6,5 +6,6 @@ Basic implementation of an ECS game framework
 - [ ] ⏫ ~~Collision~~
 - [ ] ⏫ ~~Physics~~
 - [x] ⏫ PhysX integration
+- [x] ⏫ DirectXTK primitive
 - [ ] ⏫ Draw call optimization(reduce resources allocation)
-- [ ] ⏫ Auto process priority
+- [x] ⏫ Multi-threading

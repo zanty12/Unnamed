@@ -11,8 +11,8 @@ void CPinballBehaviour::Start()
 
 void CPinballBehaviour::Update()
 {
-    //ready to shoot when linear velocity is 0
-    if (rigidBody_->getLinearVelocity().magnitude() < 3.0f)
+    //ready to shoot when linear velocity lower than 10
+    if (rigidBody_->getLinearVelocity().magnitude() < 10.0f)
     {
         //get mouse position
         if(Input::GetMouseButtonPress(LEFT_BUTTON) && !pull_back_)
@@ -24,7 +24,7 @@ void CPinballBehaviour::Update()
             auto mouse_pos = Input::GetMousePos();
             auto diff = XMINT2(mouse_pos.x - start_mouse_.x, mouse_pos.y - start_mouse_.y);
             //calculate force
-            auto force = XMINT2(diff.x * 100, diff.y * 100);
+            auto force = XMINT2(diff.x * 150, diff.y * 150);
             if(!Input::GetMouseButtonPress(LEFT_BUTTON))
             {
                 pull_back_ = false;

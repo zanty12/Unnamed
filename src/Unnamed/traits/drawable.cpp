@@ -12,3 +12,9 @@ Drawable::~Drawable()
 {
     RenderPL::RemoveDrawable(this);
 }
+
+void Drawable::SetDrawPriority(int priority)
+{
+	draw_priority_ = priority;
+	RenderPL::SortDrawables();
+}

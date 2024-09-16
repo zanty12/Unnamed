@@ -154,4 +154,11 @@ public:
     {
         return working_threads_;
     }
+
+	void ClearTasks()
+	{
+		std::unique_lock<std::mutex> lock(queueMutex_);
+		while (!tasks_.empty())
+			tasks_.pop();
+	}
 };

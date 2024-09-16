@@ -12,40 +12,34 @@
 #include "prefab/cube.h"
 #include "prefab/pinball.h"
 #include "prefab/player.h"
+#include "gamemode/GMCrush.h"
+
+#include "components/CText2D.h"
 
 
 void CrushGame::Setup()
 {
     //create 125 boxes in a 5x5x5 grid
+    int count = 0;
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 2; j++)
         {
-            for (int k = 0; k < 10; k++)
+            for (int k = 0; k < 5; k++)
             {
                 Cube* box = new Cube();
                 Transform transform = Transform{ XMFLOAT3{(float)i * 1.1f, (float)j+0.5f, (float)k * 1.1f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
                 box->SetTransform(transform);
                 box->Start();
                 delete box;
-                /*Entity* box = Manager::MakeEntity();
-                Transform::MoveTo(box->GetTransform(), XMFLOAT3(i * 1.1f, j * 1.1f, k * 1.1f));
-                Transform::ScaleTo(box->GetTransform(), XMFLOAT3(1.0f, 1.0f, 1.0f));
-                CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
-                box->AddComponent(rigidBody);
-                CPhysXBox* physXBox = new CPhysXBox();
-                physXBox->SetDebugView(true);
-                physXBox->SetMaterial(1.0f, 1.0f, 0.0f);
-                box->AddComponent(physXBox);
-                box->Start();
-                physx::PxRigidActor* actor = rigidBody->GetActor();
-                if (actor->is<physx::PxRigidDynamic>())
-                {
-                    physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
-                    dynamicActor->putToSleep();
-                }*/
+                
+				count++;
             }
         }
+    }
+    GMCrush* gameMode = dynamic_cast<GMCrush*> (Manager::GetGameMode());
+    if (gameMode) {
+		gameMode->SetBlocks(count);
     }
 
     /*Entity* sphere = Manager::MakeEntity();
@@ -59,7 +53,7 @@ void CrushGame::Setup()
     //Create a plane
     Entity* plane = Manager::MakeEntity("plane");
     Transform::MoveTo(plane->GetTransform(), XMFLOAT3(0, -0.5f, 0));
-    Transform::ScaleTo(plane->GetTransform(), XMFLOAT3(10.0f, 1.0f, 10.0f));
+    Transform::ScaleTo(plane->GetTransform(), XMFLOAT3(5.0f, 1.0f, 5.0f));
     CPlane* planecomponent = new CPlane();
     CVideoTexture* video_texture = new CVideoTexture("asset/video/banana.mp4");
     video_texture->SetLoop(1);
@@ -95,8 +89,8 @@ void CrushGame::Setup()
 
     //Create Surrounding Walls
     Entity* wall1 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall1->GetTransform(), XMFLOAT3(-20.0f, 5.0f, 0));
-    Transform::ScaleTo(wall1->GetTransform(), XMFLOAT3(0.1f, 10.0f, 40.0f));
+    Transform::MoveTo(wall1->GetTransform(), XMFLOAT3(-10.0f, 5.0f, 0));
+    Transform::ScaleTo(wall1->GetTransform(), XMFLOAT3(0.1f, 10.0f, 20.0f));
     CPhysXRigidBody* wall_rigid_body = new CPhysXRigidBody(false);
     wall1->AddComponent(wall_rigid_body);
     CPhysXBox* wall_physXBox = new CPhysXBox();
@@ -105,8 +99,8 @@ void CrushGame::Setup()
     wall1->Start();
 
     Entity* wall2 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall2->GetTransform(), XMFLOAT3(20.0f, 5.0f, 0));
-    Transform::ScaleTo(wall2->GetTransform(), XMFLOAT3(0.1f, 10.0f, 40.0f));
+    Transform::MoveTo(wall2->GetTransform(), XMFLOAT3(10.0f, 5.0f, 0));
+    Transform::ScaleTo(wall2->GetTransform(), XMFLOAT3(0.1f, 10.0f, 20.0f));
     CPhysXRigidBody* wall_rigid_body2 = new CPhysXRigidBody(false);
     wall2->AddComponent(wall_rigid_body2);
     CPhysXBox* wall_physXBox2 = new CPhysXBox();
@@ -115,8 +109,8 @@ void CrushGame::Setup()
     wall2->Start();
 
     Entity* wall3 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall3->GetTransform(), XMFLOAT3(0, 5.0f, -20.0f));
-    Transform::ScaleTo(wall3->GetTransform(), XMFLOAT3(40.0f, 10.0f, 0.1f));
+    Transform::MoveTo(wall3->GetTransform(), XMFLOAT3(0, 5.0f, -10.0f));
+    Transform::ScaleTo(wall3->GetTransform(), XMFLOAT3(20.0f, 10.0f, 0.1f));
     CPhysXRigidBody* wall_rigid_body3 = new CPhysXRigidBody(false);
     wall3->AddComponent(wall_rigid_body3);
     CPhysXBox* wall_physXBox3 = new CPhysXBox();
@@ -125,12 +119,35 @@ void CrushGame::Setup()
     wall3->Start();
 
     Entity* wall4 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall4->GetTransform(), XMFLOAT3(0, 5.0f, 20.0f));
-    Transform::ScaleTo(wall4->GetTransform(), XMFLOAT3(40.0f, 10.0f, 0.1f));
+    Transform::MoveTo(wall4->GetTransform(), XMFLOAT3(0, 5.0f, 10.0f));
+    Transform::ScaleTo(wall4->GetTransform(), XMFLOAT3(20.0f, 10.0f, 0.1f));
     CPhysXRigidBody* wall_rigid_body4 = new CPhysXRigidBody(false);
     wall4->AddComponent(wall_rigid_body4);
     CPhysXBox* wall_physXBox4 = new CPhysXBox();
     wall_physXBox4->SetDebugView(true);
     wall4->AddComponent(wall_physXBox4);
     wall4->Start();
+
+    //add a top wall
+	Entity* wall5 = Manager::MakeEntity("wall");
+	Transform::MoveTo(wall5->GetTransform(), XMFLOAT3(0, 10.0f, 0));
+	Transform::ScaleTo(wall5->GetTransform(), XMFLOAT3(20.0f, 0.1f, 20.0f));
+	CPhysXRigidBody* wall_rigid_body5 = new CPhysXRigidBody(false);
+	wall5->AddComponent(wall_rigid_body5);
+	CPhysXBox* wall_physXBox5 = new CPhysXBox();
+	wall_physXBox5->SetDebugView(true);
+	wall5->AddComponent(wall_physXBox5);
+	wall5->Start();
+
+    Entity* text = Manager::MakeEntity("score");
+    Transform::MoveTo(text->GetTransform(), XMFLOAT3(0, 0, 0.0f));
+    Transform::ScaleTo(text->GetTransform(), XMFLOAT3(200.0f, 100.0f, 0.0f));
+    CText2D* textComponent = new CText2D();
+    textComponent->SetFontColor(XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f));
+    textComponent->SetFontWeight(DWRITE_FONT_WEIGHT_BOLD);
+    textComponent->SetFontSize(50);
+    textComponent->SetText(L"Score: 0");
+    textComponent->SetAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+    text->AddComponent(textComponent);
+	text->Start();
 }

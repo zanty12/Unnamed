@@ -1,5 +1,6 @@
 #pragma once
 
+#include "PhysXSimulationCallBack.h"
 #include "PhysX/PxPhysicsAPI.h"
 #pragma comment(lib, "PhysX_64.lib")
 #pragma comment(lib, "PhysXCommon_64.lib")
@@ -27,6 +28,8 @@ private:
     static physx::PxDefaultCpuDispatcher* m_pDispatcher;
     // シミュレーションする空間の単位でActorの追加などもここで行う
     static physx::PxScene* m_pScene;
+    //event callback
+    static PhysXSimulationCallBack m_simulationCallback;
     // PVDと通信する際に必要
     static physx::PxPvd* m_pPvd;
     //CUDA

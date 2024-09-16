@@ -11,6 +11,7 @@ void CPhysXRigidBody::Start()
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
             physx::PxTransform(Transform::ToPhysXTransform(transform)));
         actor_ = rigid_dynamic;
+       
     }
     else
     {
@@ -18,7 +19,12 @@ void CPhysXRigidBody::Start()
             physx::PxTransform(Transform::ToPhysXTransform(transform)));
         actor_ = rigid_static;
     }
+    actor_->setActorFlag(physx::PxActorFlag::eVISUALIZATION, false);
     PhysX_Impl::GetScene()->addActor(*actor_);
+    actor_->userData = new PhysXUserData();
+    static_cast<PhysXUserData*>(actor_->userData)->id = parent_id_;
+    static_cast<PhysXUserData*>(actor_->userData)->name = parent->GetName();
+    static_cast<PhysXUserData*>(actor_->userData)->tag = parent->GetTag();
 }
 
 void CPhysXRigidBody::Update()
@@ -49,10 +55,14 @@ void CPhysXRigidBody::Update()
     Transform::MoveTo(transform, XMFLOAT3(actor_transform.p.x, actor_transform.p.y, actor_transform.p.z));
     XMFLOAT4 quat = XMFLOAT4(actor_transform.q.x, actor_transform.q.y, actor_transform.q.z, actor_transform.q.w);
     Transform::RotateToQuat(transform, quat);
+
+
 }
 
 void CPhysXRigidBody::CleanUp()
 {
+    PhysXUserData* userData = static_cast<PhysXUserData*>(actor_->userData);
+    delete userData;
     actor_->release();
 }
 
@@ -248,4 +258,16 @@ bool CPhysXRigidBody::GetEnableGravity() const
         return dynamic->getActorFlags() & physx::PxActorFlag::eDISABLE_GRAVITY;
     }
     return false;
+}
+
+void CPhysXRigidBody::ClearCollisions()
+{
+    static_cast<PhysXUserData*>(actor_->userData)->collision_ids.clear();
+}
+
+void CPhysXRigidBody::AddCollisionFilter(std::string tag)
+{
+	static_cast<PhysXUserData*>(actor_->userData)->ignore_tags_.push_back(tag);
+	auto it = std::unique(static_cast<PhysXUserData*>(actor_->userData)->ignore_tags_.begin(), static_cast<PhysXUserData*>(actor_->userData)->ignore_tags_.end());
+	static_cast<PhysXUserData*>(actor_->userData)->ignore_tags_.erase(it, static_cast<PhysXUserData*>(actor_->userData)->ignore_tags_.end());
 }

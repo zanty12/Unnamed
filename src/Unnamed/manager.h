@@ -22,6 +22,9 @@ private:
 	static ThreadPool thread_pool_;
 	static Scene* scene_;
 	static GameMode* game_mode_;
+	static bool skip_one_frame_;
+	static bool scene_change_;
+	static Scene* next_scene_;
 
 
 public:
@@ -45,4 +48,6 @@ public:
 	static void SetGameMode(GameMode* game_mode);
 	static GameMode* GetGameMode();
 	static void RegisterDebugMenu(DebugMenu* debug_menu);
+	static void SkipFrame();
+	static void SceneChange(Scene* scene);
 };

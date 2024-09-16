@@ -56,7 +56,7 @@ public:
      *
      * @param priority The new draw priority.
      */
-    void SetDrawPriority(int priority) { draw_priority_ = priority; }
+    void SetDrawPriority(int priority);
 
     /**
      * @brief Get the draw priority of the Drawable.

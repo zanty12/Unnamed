@@ -23,7 +23,7 @@ void CPhysXSphere::Start()
         ac->attachShape(*shape);*/
         //create exclusive shape
 		Transform world_transform = GetWorldTransform();
-        physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(*ac,physx::PxSphereGeometry(world_transform.scale.x), *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
+        physx::PxShape* shape = physx::PxRigidActorExt::createExclusiveShape(*ac,physx::PxSphereGeometry(radius_* world_transform.scale.x), *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_));
         shape_ = shape;
         debug_shape_ = GeometricPrimitive::CreateSphere(Renderer::GetDeviceContext(), world_transform.scale.x, 8,false);
         shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, simulate_);

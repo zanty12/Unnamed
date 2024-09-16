@@ -2,7 +2,7 @@
 #include "system/input.h"
 #include "manager.h"
 #include "scene/CubeGame.h"
-#include "scene/testscene.h"
+#include "scene/CrushGame.h"
 
 class CTitleControl : public Component
 {
@@ -13,8 +13,9 @@ public:
     void Update() override{
         if (Input::GetKeyTrigger(VK_SPACE))
         {
-            Manager::UnloadCurrentScene();
-            Manager::LoadScene(new TestScene());
+            Manager::SceneChange(new CrushGame());
+            /*Manager::UnloadCurrentScene();
+            Manager::LoadScene(new CrushGame());*/
         }
     };
     void CleanUp() override{};

@@ -8,10 +8,21 @@ namespace physx
     class PxRigidActor;
 }
 
+struct PhysXUserData
+{
+    std::string name;
+    int id;
+    std::string tag;
+    std::vector<int> collision_ids;
+	std::vector<std::string> ignore_tags_;
+};
+
 class CPhysXRigidBody : public Component
 {
     physx::PxRigidActor* actor_ = nullptr;
     bool is_dynamic_ = true;
+	bool contact_on_ = false;
+	//PhysXUserData* user_data_ = nullptr;
 
 public:
     CPhysXRigidBody() : Component("PhysXRigidBody",Kinematic)
@@ -42,6 +53,9 @@ public:
 	void SetGlobalRotation(const DirectX::XMFLOAT4& rotation);
     void LockLinearAxis(bool x, bool y, bool z);
     void LockAngularAxis(bool x, bool y, bool z);
+	void SetContact(bool contact) { contact_on_ = contact; }
+
+    
 
     //getter
     float GetMass() const;
@@ -50,4 +64,8 @@ public:
     DirectX::XMFLOAT3 GetLinearVelocity() const;
     DirectX::XMFLOAT3 GetAngularVelocity() const;
     bool GetEnableGravity() const;
+
+    void ClearCollisions();
+    void AddCollisionFilter(std::string tag);
+
 };

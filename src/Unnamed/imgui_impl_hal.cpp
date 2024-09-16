@@ -1,6 +1,6 @@
-ï»¿/**
+/**
  * @file ImGui_Hal.cpp
- * @brief DebugUIã‚¯ãƒ©ã‚¹ã‚’å®Ÿè£…ã—ã¾ã™ã€‚
+ * @brief DebugUIƒNƒ‰ƒX‚ğÀ‘•‚µ‚Ü‚·B
  * @author Cheung To Hung
  * @date 2023/11/22
  */
@@ -9,78 +9,78 @@
 #include "main.h"
 #include "renderer.h"
 
-/**
- * @brief DebugUIã‚¯ãƒ©ã‚¹ã®ãƒ¡ã‚½ãƒƒãƒ‰
- *
- * ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ImGuiã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
- * ImGuiã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’è¨­å®šã—ã€Win32ã¨DirectX 11ç”¨ã®ImGuiã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
- * ã¾ãŸã€ã‚¹ã‚¿ã‚¤ãƒ«ã‚’ãƒ€ãƒ¼ã‚¯ã«è¨­å®šã—ã€ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰æ—¥æœ¬èªã®ãƒ•ã‚©ãƒ³ãƒˆã‚’è¿½åŠ ã—ã¾ã™ã€‚
- */
+ /**
+  * @brief DebugUIƒNƒ‰ƒX‚Ìƒƒ\ƒbƒh
+  *
+  * ‚±‚Ìƒƒ\ƒbƒh‚ÍImGui‚ğ‰Šú‰»‚µ‚Ü‚·B
+  * ImGui‚ÌƒRƒ“ƒeƒLƒXƒg‚ğİ’è‚µAWin32‚ÆDirectX 11—p‚ÌImGui‚ğ‰Šú‰»‚µ‚Ü‚·B
+  * ‚Ü‚½AƒXƒ^ƒCƒ‹‚ğƒ_[ƒN‚Éİ’è‚µAƒtƒ@ƒCƒ‹‚©‚ç“ú–{Œê‚ÌƒtƒHƒ“ƒg‚ğ’Ç‰Á‚µ‚Ü‚·B
+  */
 void ImGui_Hal::Start()
 {
-	// ImGuiã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’ãƒã‚§ãƒƒã‚¯
+	// ImGui‚Ìƒo[ƒWƒ‡ƒ“‚ğƒ`ƒFƒbƒN
 	IMGUI_CHECKVERSION();
-	// ImGuiã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ä½œæˆ
+	// ImGui‚ÌƒRƒ“ƒeƒLƒXƒg‚ğì¬
 	ImGui::CreateContext();
-	// ImGuiã®IOã‚’å–å¾—
+	// ImGui‚ÌIO‚ğæ“¾
 	ImGuiIO& io = ImGui::GetIO();
 	(void)io;
-	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
+	// ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹‚ğæ“¾
 	const HWND hWnd = GetWindow();
-	// Win32ç”¨ã®ImGuiã‚’åˆæœŸåŒ–
+	// Win32—p‚ÌImGui‚ğ‰Šú‰»
 	ImGui_ImplWin32_Init(hWnd);
-	// DirectX 11ç”¨ã®ImGuiã‚’åˆæœŸåŒ–
+	// DirectX 11—p‚ÌImGui‚ğ‰Šú‰»
 	ImGui_ImplDX11_Init(Renderer::GetDevice(), Renderer::GetDeviceContext());
 
-	// ImGuiã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚’ãƒ€ãƒ¼ã‚¯ã«è¨­å®š
+	// ImGui‚ÌƒXƒ^ƒCƒ‹‚ğƒ_[ƒN‚Éİ’è
 	ImGui::StyleColorsDark();
-	// ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰æ—¥æœ¬èªã®ãƒ•ã‚©ãƒ³ãƒˆã‚’è¿½åŠ 
+	// ƒtƒ@ƒCƒ‹‚©‚ç“ú–{Œê‚ÌƒtƒHƒ“ƒg‚ğ’Ç‰Á
 	io.Fonts->AddFontFromFileTTF("asset/fonts/NotoSansJP-Bold.ttf", 20.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 	//io.Fonts->AddFontFromFileTTF("asset/TEXTURE/JF-Dot-Kappa20-0213.ttf", 135.0f, nullptr);
-	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®æç”»ã‚’æœ‰åŠ¹ã«ã™ã‚‹
+	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì•`‰æ‚ğ—LŒø‚É‚·‚é
 	io.MouseDrawCursor = true;
 }
 
 /**
- * @brief ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ImGuiãŒä½¿ç”¨ã—ã¦ã„ãŸãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾ã—ã¾ã™ã€‚
+ * @brief ‚±‚Ìƒƒ\ƒbƒh‚ÍImGui‚ªg—p‚µ‚Ä‚¢‚½ƒŠƒ\[ƒX‚ğ‰ğ•ú‚µ‚Ü‚·B
  *
- * DirectX 11ã¨Win32ç”¨ã®ImGuiã‚’ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³ã—ã€ImGuiã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ç ´æ£„ã—ã¾ã™ã€‚
+ * DirectX 11‚ÆWin32—p‚ÌImGui‚ğƒVƒƒƒbƒgƒ_ƒEƒ“‚µAImGui‚ÌƒRƒ“ƒeƒLƒXƒg‚ğ”jŠü‚µ‚Ü‚·B
  */
 void ImGui_Hal::Cleanup()
 {
-	// DirectX 11ç”¨ã®ImGuiã‚’ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³
+	// DirectX 11—p‚ÌImGui‚ğƒVƒƒƒbƒgƒ_ƒEƒ“
 	ImGui_ImplDX11_Shutdown();
-	// Win32ç”¨ã®ImGuiã‚’ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³
+	// Win32—p‚ÌImGui‚ğƒVƒƒƒbƒgƒ_ƒEƒ“
 	ImGui_ImplWin32_Shutdown();
-	// ImGuiã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ç ´æ£„
+	// ImGui‚ÌƒRƒ“ƒeƒLƒXƒg‚ğ”jŠü
 	ImGui::DestroyContext();
 }
 
 
 /**
- * @brief ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ImGuiã®æç”»ãƒ—ãƒ­ã‚»ã‚¹ã‚’é–‹å§‹ã—ã¾ã™ã€‚
+ * @brief ‚±‚Ìƒƒ\ƒbƒh‚ÍImGui‚Ì•`‰æƒvƒƒZƒX‚ğŠJn‚µ‚Ü‚·B
  *
- * æ–°ã—ã„ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãŸã‚ã®ImGuiã‚’æº–å‚™ã—ã¾ã™ã€‚
+ * V‚µ‚¢ƒtƒŒ[ƒ€‚Ì‚½‚ß‚ÌImGui‚ğ€”õ‚µ‚Ü‚·B
  */
 void ImGui_Hal::BeginDraw()
 {
-	// æ–°ã—ã„DirectX 11ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãŸã‚ã®ImGuiã‚’æº–å‚™
+	// V‚µ‚¢DirectX 11ƒtƒŒ[ƒ€‚Ì‚½‚ß‚ÌImGui‚ğ€”õ
 	ImGui_ImplDX11_NewFrame();
-	// æ–°ã—ã„Win32ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãŸã‚ã®ImGuiã‚’æº–å‚™
+	// V‚µ‚¢Win32ƒtƒŒ[ƒ€‚Ì‚½‚ß‚ÌImGui‚ğ€”õ
 	ImGui_ImplWin32_NewFrame();
-	// æ–°ã—ã„ImGuiãƒ•ãƒ¬ãƒ¼ãƒ ã‚’é–‹å§‹
+	// V‚µ‚¢ImGuiƒtƒŒ[ƒ€‚ğŠJn
 	ImGui::NewFrame();
 }
 
 /**
- * @brief ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ImGuiã®æç”»ãƒ—ãƒ­ã‚»ã‚¹ã‚’çµ‚äº†ã—ã¾ã™ã€‚
+ * @brief ‚±‚Ìƒƒ\ƒbƒh‚ÍImGui‚Ì•`‰æƒvƒƒZƒX‚ğI—¹‚µ‚Ü‚·B
  *
- * DirectX 11ã‚’ä½¿ç”¨ã—ã¦ImGuiã®æç”»ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã—ã¾ã™ã€‚
+ * DirectX 11‚ğg—p‚µ‚ÄImGui‚Ì•`‰æƒf[ƒ^‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO‚µ‚Ü‚·B
  */
 void ImGui_Hal::EndDraw()
 {
-	// ImGuiã®æç”»ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+	// ImGui‚Ì•`‰æƒf[ƒ^‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO
 	ImGui::Render();
-	// DirectX 11ã‚’ä½¿ç”¨ã—ã¦ImGuiã®æç”»ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+	// DirectX 11‚ğg—p‚µ‚ÄImGui‚Ì•`‰æƒf[ƒ^‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }

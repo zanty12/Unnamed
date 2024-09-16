@@ -22,6 +22,7 @@ protected:
     float static_friction_ = 0.5f;
     float dynamic_friction_ = 0.5f;
     float restitution_ = 0.5f;
+	bool contact_ = false;
 
 
 public:
@@ -48,6 +49,8 @@ public:
         dynamic_friction_ = dynamic_friction;
         restitution_ = restitution;
     }
+
+	void SetContact(bool contact) { contact_ = contact; }
 
     physx::PxShape* GetShape() const { return shape_; }
 };

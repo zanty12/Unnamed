@@ -22,6 +22,11 @@ public:
 
     static void Draw();
 
+	static void SortDrawables()
+	{
+		drawables_.sort([](Drawable* a, Drawable* b) { return a->GetDrawPriority() < b->GetDrawPriority(); });
+	}
+
     static void CleanUp()
     {
         drawables_.clear();

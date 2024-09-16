@@ -33,5 +33,8 @@ public:
     virtual void Start() = 0;
     void Update() override;
     void Draw() override;
+    void SetDrawType(DrawType draw_type) { draw_type_ = draw_type; }
+    void SetColor(SimpleMath::Color color) { color_ = color; }
+    void SetTexture(CTexture* texture) { texture_ = texture; }
     virtual void CleanUp() =0;
 };

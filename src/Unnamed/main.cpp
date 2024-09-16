@@ -1,4 +1,4 @@
-#include "main.h"
+﻿#include "main.h"
 #include "manager.h"
 #include <thread>
 #include "imgui_impl_hal.h"
@@ -40,11 +40,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         RegisterClassEx(&wcex);
 
 
-        RECT rc = {0, 0, (LONG)SCREEN_WIDTH, (LONG)SCREEN_HEIGHT};
+        RECT rc = { 0, 0, (LONG)SCREEN_WIDTH, (LONG)SCREEN_HEIGHT };
         AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
         g_Window = CreateWindowEx(0, CLASS_NAME, WINDOW_NAME, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-                                  rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+            rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
     }
 
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
