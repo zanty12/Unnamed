@@ -19,7 +19,7 @@ void Player::Start()
 {
     entity_ = Manager::MakeEntity("player");
     entity_->SetTag("Player");
-	Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.0f, -20.0f));
+	Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.5f, -20.0f));
 
     entity_->AddComponent(new CPlayerController());
 
@@ -48,7 +48,7 @@ void Player::Start()
     rigidBody->LockAngularAxis(true,true,true);
 
 	CPhysXCapsule* capsule = new CPhysXCapsule();
-	capsule->SetDebugView(true);
+	capsule->SetDebugView(false);
 	capsule->SetIsTrigger(false);
     Transform::ScaleTo(capsule->GetLocalTransform(), XMFLOAT3(1.0f, 2.0f, 1.0f));
 	entity_->AddComponent(capsule);

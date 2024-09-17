@@ -5,6 +5,7 @@
 #include "components/CCamera.h"
 #include "components/CParticleEmitter.h"
 #include "components/CPlane.h"
+#include "components/CTerrain.h"
 #include "components/CRect2D.h"
 #include "components/CSprite2D.h"
 #include "components/CText2D.h"
@@ -27,14 +28,6 @@ void TestScene::Setup()
     bgm->Load("asset/sound/bgm.wav");
     rect2D->AddComponent(bgm);
 
-    Entity* plane = Manager::MakeEntity("plane");
-    CPlane* planecomponent = new CPlane();
-    CVideoTexture* video_texture = new CVideoTexture("asset/video/banana.mp4");
-    video_texture->SetLoop(1);
-    planecomponent->SetTexture(video_texture);
-    plane->AddComponent(planecomponent);
-    plane->AddComponent(video_texture);
-    planecomponent->SetEndUV(XMFLOAT2(10.0f,10.0f));
 
     Player* player = new Player();
     player->Start();
@@ -82,9 +75,23 @@ void TestScene::Setup()
 
     particle->AddComponent(particleComponent);
 
+    //Create a plane
+    Entity* plane = Manager::MakeEntity("plane");
+	plane->GetTransform()->scale = XMFLOAT3(100, 1.0, 100);
+    CTerrain* planecomponent = new CTerrain();
+    CTexture2D* texture_2d = new CTexture2D(L"asset/texture/cat.png");
+    planecomponent->SetTexture(texture_2d);
+    plane->AddComponent(planecomponent);
+    plane->AddComponent(texture_2d);
+    plane->Start();
+    planecomponent->SetEndUV(XMFLOAT2(1.0f, 1.0f));
+    PhysX_Impl::GetScene()->addActor(*physx::PxCreatePlane(
+        *PhysX_Impl::GetPhysics(), physx::PxPlane(0, 1, 0, 0),
+        *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f))
+    );
+
     rect2D->Start();
     bgm->Play(true);
-    plane->Start();
     text->Start();
     particle->Start();
 }

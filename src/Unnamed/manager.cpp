@@ -67,14 +67,15 @@ void Manager::Update()
     Input::Update();
 
     //Update physics in 60fps
-    if (Time::FixedUpdate())
-    {
-        //log physics time
-        //DWORD start_time = timeGetTime();
-        PhysX_Impl::Update();
-        //start_time = timeGetTime() - start_time;
-        //std::cout << "Physics time: " << start_time << std::endl;
-    }
+    //if (Time::FixedUpdate())
+    //{
+    //    //log physics time
+    //    //DWORD start_time = timeGetTime();
+    //    PhysX_Impl::Update();
+    //    //start_time = timeGetTime() - start_time;
+    //    //std::cout << "Physics time: " << start_time << std::endl;
+    //}
+    PhysX_Impl::Update();
 
     //update all entities
     for (auto& entity : entities_)

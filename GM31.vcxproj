@@ -840,6 +840,7 @@
     <ClInclude Include="src\Unnamed\components\CPrimitive3D.h" />
     <ClInclude Include="src\Unnamed\components\CRect2D.h" />
     <ClInclude Include="src\Unnamed\components\CSprite2D.h" />
+    <ClInclude Include="src\Unnamed\components\CTerrain.h" />
     <ClInclude Include="src\Unnamed\components\CText2D.h" />
     <ClInclude Include="src\Unnamed\components\CTexture.h" />
     <ClInclude Include="src\Unnamed\components\CTexture2D.h" />
@@ -920,6 +921,7 @@
     <ClCompile Include="src\Unnamed\components\CPrimitive2D.cpp" />
     <ClCompile Include="src\Unnamed\components\CPrimitive3D.cpp" />
     <ClCompile Include="src\Unnamed\components\CRect2D.cpp" />
+    <ClCompile Include="src\Unnamed\components\CTerrain.cpp" />
     <ClCompile Include="src\Unnamed\components\CText2D.cpp" />
     <ClCompile Include="src\Unnamed\components\depreciated\CGrid.cpp" />
     <ClCompile Include="src\Unnamed\components\depreciated\CGridCell.cpp" />
