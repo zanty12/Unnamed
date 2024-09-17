@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Game\components\CClearControl.h" />
+    <ClInclude Include="src\Game\components\CLoadBehaviour.h" />
     <ClInclude Include="src\Game\scene\Clear.h" />
     <ClInclude Include="src\Game\gamemode\GMCrush.h" />
     <ClInclude Include="src\Game\components\CExplosionBehaviour.h" />
@@ -814,6 +815,7 @@
     <ClInclude Include="src\Game\prefab\player.h" />
     <ClInclude Include="src\Game\scene\CrushGame.h" />
     <ClInclude Include="src\Game\scene\CubeGame.h" />
+    <ClInclude Include="src\Game\scene\Load.h" />
     <ClInclude Include="src\Game\scene\physXtest.h" />
     <ClInclude Include="src\Game\scene\testscene.h" />
     <ClInclude Include="src\Game\scene\title.h" />
@@ -880,6 +882,7 @@
     <ClInclude Include="src\Unnamed\traits\unique.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\components\CLoadBehaviour.cpp" />
     <ClCompile Include="src\Game\prefab\pinball.cpp" />
     <ClCompile Include="src\Game\scene\Clear.cpp" />
     <ClCompile Include="src\Game\gamemode\GMCrush.cpp" />
@@ -894,6 +897,7 @@
     <ClCompile Include="src\Game\prefab\player.cpp" />
     <ClCompile Include="src\Game\scene\CrushGame.cpp" />
     <ClCompile Include="src\Game\scene\CubeGame.cpp" />
+    <ClCompile Include="src\Game\scene\Load.cpp" />
     <ClCompile Include="src\Game\scene\physXtest.cpp" />
     <ClCompile Include="src\Game\scene\testscene.cpp" />
     <ClCompile Include="src\Game\scene\title.cpp" />
