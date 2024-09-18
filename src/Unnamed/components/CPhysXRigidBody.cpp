@@ -10,6 +10,7 @@ void CPhysXRigidBody::Start()
     {
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
             physx::PxTransform(Transform::ToPhysXTransform(transform)));
+        //rigid_dynamic->setRigidBodyFlag(physx::PxRigidBodyFlag::eKINEMATIC, true);
         actor_ = rigid_dynamic;
        
     }

@@ -31,5 +31,6 @@ public:
 	void SetTexture(CTexture* texture) { texture_ = texture; }
 	void SetEndUV(XMFLOAT2 end_uv) { end_uv_ = end_uv; }
 	void SetStartUV(XMFLOAT2 start_uv) { start_uv_ = start_uv; }
+	float GetHeight(XMFLOAT3 position);
 };
 

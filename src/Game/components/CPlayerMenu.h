@@ -63,13 +63,6 @@ public:
         ImGui::Text("Entity Scale: %f %f %f", scale.x, scale.y, scale.z);
         XMFLOAT4 quat = transform->quaternion;
         ImGui::Text("Entity Quat: %f %f %f %f", quat.x, quat.y, quat.z, quat.w);
-        Transform* model = parent->GetComponent<CModelRenderer>()->GetLocalTransform();
-        XMFLOAT3 model_position = model->position;
-        ImGui::Text("Model Position: %f %f %f", model_position.x, model_position.y, model_position.z);
-        XMFLOAT3 model_rotation = model->rotation;
-        ImGui::Text("Model Rotation: %f %f %f", model_rotation.x, model_rotation.y, model_rotation.z);
-        XMFLOAT3 model_scale = model->scale;
-        ImGui::Text("Model Scale: %f %f %f", model_scale.x, model_scale.y, model_scale.z);
         ImGui::End();
     }
 };

@@ -11,6 +11,9 @@
 #include "prefab/bullet.h"
 #include <components/CPhysXRigidBody.h>
 
+#include "components/CAnimationModel.h"
+#include "components/CTerrain.h"
+
 void CPlayerController::Update()
 {
     //find parent
@@ -27,6 +30,7 @@ void CPlayerController::Update()
         XMFLOAT3 camera_pos = camera->GetWorldTransform().position;
         XMFLOAT3 parent_pos = parent->GetTransform()->position;
 		CPhysXRigidBody* rigidBody = parent->GetComponent<CPhysXRigidBody>();
+        physx::PxRigidDynamic *actor = rigidBody->GetActor()->is<physx::PxRigidDynamic>();
 
         //rotate camera with arrow keys
         if (Input::GetKeyPress(VK_LEFT))
@@ -128,6 +132,7 @@ void CPlayerController::Update()
 			forward.y = 0.0f;
             //Transform::MoveBy(parent->GetTransform(), forward);
 			rigidBody->SetLinearVelocity(forward);
+            //actor->setKinematicTarget(physx::PxTransform(forward.x, forward.y, forward.z));
             //rotate parent to face forward
             XMFLOAT3 rot = XMFLOAT3(0.0f, atan2(-forward.x, -forward.z), 0.0f);
             //calculate quaternion from euler angles
@@ -137,7 +142,7 @@ void CPlayerController::Update()
             //set parent rotation
             Transform::RotateToQuat(parent->GetTransform(),quat_f);
             rigidBody->SetGlobalRotation(quat_f);
-
+            forward_ = 1;
         }
         if (Input::GetKeyPress('S'))
         {
@@ -157,7 +162,7 @@ void CPlayerController::Update()
             //set parent rotation
             Transform::RotateToQuat(parent->GetTransform(),quat_f);
             rigidBody->SetGlobalRotation(quat_f);
-
+            forward_ = -1;
         }
         if (Input::GetKeyPress('A'))
         {
@@ -177,7 +182,7 @@ void CPlayerController::Update()
             XMStoreFloat4(&quat_f, quat);
             //set parent rotation
             Transform::RotateToQuat(parent->GetTransform(),quat_f);
-            rigidBody->SetGlobalRotation(quat_f);
+           rigidBody->SetGlobalRotation(quat_f);
         }
         if (Input::GetKeyPress('D'))
         {
@@ -223,6 +228,32 @@ void CPlayerController::Update()
             bullet->SetPosition(bullet_pos);
             bullet->QueueSpawn();
         }
+    }
+
+    //Get Terrain
+    CTerrain* terrain = Manager::FindEntityByName("Terrain")->GetComponent<CTerrain>();
+    //Get Height
+    if(terrain == nullptr)
+    {
+        parent->Unlock();
+        return;
+    }
+    /*XMFLOAT3 parent_pos = parent->GetTransform()->position;
+    float height = terrain->GetHeight(parent_pos);
+    //Set parent y position to terrain height
+    //set height in rigidbody
+    CPhysXRigidBody* rigidBody = parent->GetComponent<CPhysXRigidBody>();
+    rigidBody->GetActor()->is<physx::PxRigidDynamic>()->setKinematicTarget(physx::PxTransform(parent_pos.x, height, parent_pos.z));*/
+
+    //animation
+    CAnimationModel* animModel = parent->GetComponent<CAnimationModel>();
+    if(animModel)
+    {
+        //get velocity
+        XMFLOAT3 velocity = parent->GetComponent<CPhysXRigidBody>()->GetLinearVelocity();
+        float speed = sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
+        animModel->Update("Idle", animation_frame_, "Run", animation_frame_, speed / 9.0f);
+        animation_frame_ += forward_;
     }
     parent->Unlock();
 }

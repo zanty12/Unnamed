@@ -819,7 +819,7 @@
     <ClInclude Include="src\Game\scene\physXtest.h" />
     <ClInclude Include="src\Game\scene\testscene.h" />
     <ClInclude Include="src\Game\scene\title.h" />
-    <ClInclude Include="src\Unnamed\components\animationModel.h" />
+    <ClInclude Include="src\Unnamed\components\CAnimationModel.h" />
     <ClInclude Include="src\Unnamed\components\CAudio.h" />
     <ClInclude Include="src\Unnamed\components\CCamera.h" />
     <ClInclude Include="src\Unnamed\components\CCollider2D.h" />
@@ -902,7 +902,7 @@
     <ClCompile Include="src\Game\scene\physXtest.cpp" />
     <ClCompile Include="src\Game\scene\testscene.cpp" />
     <ClCompile Include="src\Game\scene\title.cpp" />
-    <ClCompile Include="src\Unnamed\components\animationModel.cpp" />
+    <ClCompile Include="src\Unnamed\components\CAnimationModel.cpp" />
     <ClCompile Include="src\Unnamed\components\CAudio.cpp" />
     <ClCompile Include="src\Unnamed\components\CCamera.cpp" />
     <ClCompile Include="src\Unnamed\components\CDirectXTKBox.cpp" />

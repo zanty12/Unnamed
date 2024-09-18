@@ -7,7 +7,7 @@
 #include "components/CCamera.h"
 #include "components/CModelRenderer.h"
 #include "components/CPinballBehaviour.h"
-#include "components/animationModel.h"
+#include "components/CAnimationModel.h"
 #include "components/CTransformConstraint.h"
 #include <components/CPhysXRigidBody.h>
 #include <components/CPhysXCapsule.h>

@@ -141,3 +141,53 @@ void CTerrain::CleanUp()
 	pixel_shader_->Release();
 	vertex_layout_->Release();
 }
+
+float CTerrain::GetHeight(XMFLOAT3 position)
+{
+	int x,z;
+	Transform world_transform = GetWorldTransform();
+	x= static_cast<int>(position.x / 0.05f /world_transform.scale.x  + 10);
+	z = static_cast<int>(position.z / -0.05f / world_transform.scale.z + 10);
+	XMFLOAT3 pos0, pos1, pos2, pos3;
+	pos0 = vertex_[x][z].Position;
+	pos1 = vertex_[x + 1][z].Position;
+	pos2 = vertex_[x][z + 1].Position;
+	pos3 = vertex_[x + 1][z + 1].Position;
+
+	XMFLOAT3 v12,v1p;
+	v12.x = pos1.x - pos0.x;
+	v12.y = pos1.y - pos0.y;
+	v12.z = pos1.z - pos0.z;
+
+	v1p.x = position.x / world_transform.scale.x - pos1.x;
+	v1p.y = position.y / world_transform.scale.y - pos1.y;
+	v1p.z = position.z / world_transform.scale.z - pos1.z;
+
+	float cy = v12.z * v1p.x - v12.x * v1p.z;
+	float py;
+	XMFLOAT3 n;
+	if(cy > 0.0f)
+	{
+		XMFLOAT3 v10;
+		v10.x = pos0.x - pos1.x;
+		v10.y = pos0.y - pos1.y;
+		v10.z = pos0.z - pos1.z;
+
+		n.x = v10.y * v12.z - v10.z * v12.y;
+		n.y = v10.z * v12.x - v10.x * v12.z;
+		n.z = v10.x * v12.y - v10.y * v12.x;
+	}
+	else
+	{
+		XMFLOAT3 v13;
+		v13.x = pos3.x - pos1.x;
+		v13.y = pos3.y - pos1.y;
+		v13.z = pos3.z - pos1.z;
+
+		n.x = v12.y * v13.z - v12.z * v13.y;
+		n.y = v12.z * v13.x - v12.x * v13.z;
+		n.z = v12.x * v13.y - v12.y * v13.x;
+	}
+	py = -((position.x / world_transform.scale.x - pos1.x) * n.x  + (position.z / world_transform.scale.z - pos1.z) * n.z) / n.y + pos1.y;
+	return py * world_transform.scale.y;
+}

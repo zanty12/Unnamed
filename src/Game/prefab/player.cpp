@@ -7,7 +7,7 @@
 #include "components/CCamera.h"
 #include "components/CModelRenderer.h"
 #include "components/CPlayerController.h"
-#include "components/animationModel.h"
+#include "components/CAnimationModel.h"
 #include "components/CTransformConstraint.h"
 #include <components/CPhysXRigidBody.h>
 #include <components/CPhysXCapsule.h>
@@ -19,20 +19,26 @@ void Player::Start()
 {
     entity_ = Manager::MakeEntity("player");
     entity_->SetTag("Player");
-	Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.5f, -20.0f));
+    Transform::MoveTo(entity_->GetTransform(), XMFLOAT3(0.0f, 0.5f, -20.0f));
+	Transform::ScaleTo(entity_->GetTransform(), XMFLOAT3(0.01f, 0.01f, 0.01f));
 
     entity_->AddComponent(new CPlayerController());
 
-    CModelRenderer* modelRenderer = new CModelRenderer();
+    /*CModelRenderer* modelRenderer = new CModelRenderer();
+	modelRenderer->GetLocalTransform()->scale = XMFLOAT3(100.0f, 100.0f, 100.0f);
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\player.obj");
     modelRenderer->Start();
 	Transform* model = modelRenderer->GetLocalTransform();
-	Transform::MoveTo(model, XMFLOAT3(0.0f, -1.0f, 0.0f));
-    /*AnimationModel* animModel = new AnimationModel();
+	Transform::MoveTo(model, XMFLOAT3(0.0f, -1.0f, 0.0f));*/
+    CAnimationModel* animModel = new CAnimationModel();
     animModel->Load("asset\\model\\Akai.fbx");
+	animModel->LoadAnimation("asset\\model\\Akai_Idle.fbx", "Idle");
+	animModel->LoadAnimation("asset\\model\\Akai_Run.fbx", "Run");
     entity_->AddComponent(animModel);
-    animModel->Start();*/
+	//rotate model by 180 degrees
+	Transform::RotateToQuat(animModel->GetLocalTransform(), XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f));
+    //animModel->Start();
 
     CCamera* camera = new CCamera();
     entity_->AddComponent(camera);
@@ -41,18 +47,18 @@ void Player::Start()
     camera->Activate();
     camera->Start();
 
-	CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
-	entity_->AddComponent(rigidBody);
-	rigidBody->Start();
+    CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
+    entity_->AddComponent(rigidBody);
+    rigidBody->Start();
     //rigidBody->SetMass(0.0f);0
-    rigidBody->LockAngularAxis(true,true,true);
+    rigidBody->LockAngularAxis(true, true, true);
 
-	CPhysXCapsule* capsule = new CPhysXCapsule();
-	capsule->SetDebugView(false);
-	capsule->SetIsTrigger(false);
-    Transform::ScaleTo(capsule->GetLocalTransform(), XMFLOAT3(1.0f, 2.0f, 1.0f));
-	entity_->AddComponent(capsule);
-	capsule->Start();
+    CPhysXCapsule* capsule = new CPhysXCapsule();
+    capsule->SetDebugView(false);
+    capsule->SetIsTrigger(false);
+    Transform::ScaleTo(capsule->GetLocalTransform(), XMFLOAT3(100.0f, 200.0f, 100.0f));
+    entity_->AddComponent(capsule);
+    capsule->Start();
 
     /*CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);*/
@@ -61,9 +67,7 @@ void Player::Start()
     entity_->AddComponent(audio);
     audio->Load("asset/sound/wan.wav");
 
-	CPlayerMenu* playerMenu = new CPlayerMenu();
-	entity_->AddComponent(playerMenu);
-	playerMenu->Start();
+    CPlayerMenu* playerMenu = new CPlayerMenu();
+    entity_->AddComponent(playerMenu);
+    playerMenu->Start();
 }
-
-

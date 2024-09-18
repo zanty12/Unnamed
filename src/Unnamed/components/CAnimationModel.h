@@ -12,17 +12,17 @@
 #include "traits/drawable.h"
 
 
-//�ό`�㒸�_�\����
+//変形後頂点構造体
 struct DEFORM_VERTEX
 {
 	aiVector3D Position;
 	aiVector3D Normal;
 	int				BoneNum;
-	std::string		BoneName[4];//�{���̓{�[���C���f�b�N�X�ŊǗ�����ׂ�
+	std::string		BoneName[4];//本来はボーンインデックスで管理するべき
 	float			BoneWeight[4];
 };
 
-//�{�[���\����
+//ボーン構造体
 struct BONE
 {
 	aiMatrix4x4 Matrix;
@@ -30,7 +30,7 @@ struct BONE
 	aiMatrix4x4 OffsetMatrix;
 };
 
-class AnimationModel : public Component,public Drawable
+class CAnimationModel : public Component, public Drawable
 {
 private:
 	const aiScene* m_AiScene = nullptr;
@@ -41,16 +41,21 @@ private:
 
 	std::unordered_map<std::string, ID3D11ShaderResourceView*> m_Texture;
 
-	std::vector<DEFORM_VERTEX>* m_DeformVertex;//�ό`�㒸�_�f�[�^
-	std::unordered_map<std::string, BONE> m_Bone;//�{�[���f�[�^�i���O�ŎQ�Ɓj
+	std::vector<DEFORM_VERTEX>* m_DeformVertex;//変形後頂点データ
+	std::unordered_map<std::string, BONE> m_Bone;//ボーンデータ（名前で参照）
 
 public:
 	using Component::Component;
 
-	AnimationModel() : Component("AnimationModel",DrawCallers), m_AiScene(nullptr), m_VertexBuffer(nullptr), m_IndexBuffer(nullptr), m_DeformVertex(nullptr),Drawable(2) {}
+	CAnimationModel() : Component("AnimationModel",DrawCallers), Drawable(3) {};
+	~CAnimationModel() = default;
+	void Start() override {};
+	void Update() override{};
 	void Load( const char *FileName );
-	void Start() override{}
-	void Update() override{}
 	void CleanUp() override;
+	void Update(const char* AnimationName1, int Frame1, const char* AnimationName2, int Frame2, float BlendRatio);
+	void UpdateBoneMatrix(aiNode* node, aiMatrix4x4 matrix);
 	void Draw() override;
+	void LoadAnimation(const char* FileName, const char* Name);
+	void CreateBone(aiNode* node);
 };
