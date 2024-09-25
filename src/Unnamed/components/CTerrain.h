@@ -2,7 +2,7 @@
 #include "CTexture.h"
 #include "renderer.h"
 #include "component.h"
-
+#include "system/PhysX_Impl.h"
 #include "traits/drawable.h"
 
 class CTerrain : public Component, public Drawable
@@ -21,6 +21,13 @@ class CTerrain : public Component, public Drawable
     XMFLOAT2 start_uv_ = XMFLOAT2(0.0f, 0.0f);
     XMFLOAT2 end_uv_ = XMFLOAT2(1.0f, 1.0f);
     VERTEX_3D vertex_[21][21];
+	std::vector<physx::PxVec3> physX_vertex_;
+	std::vector<physx::PxU32> physX_index_;
+	unsigned int index_[((21 + 1) * 2) * 20 - 2];
+
+    physx::PxRigidStatic* actor_{};
+    physx::PxShape* shape_;
+
 
 public:
     CTerrain(): Component("Terrain",DrawCallers),Drawable(2){}

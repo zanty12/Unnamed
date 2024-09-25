@@ -10,13 +10,15 @@ void CTerrain::Start()
 	{
 		for (int z = 0; z < 21; z++)
 		{
+			Transform world_transform = GetWorldTransform();
 			//generate random float for height
 			float height = static_cast<float>(rand() % 10) * 0.1f;
 			//set vertex
 			vertex_[x][z].Position = DirectX::XMFLOAT3(
-				(static_cast<float>(x) - 10) * 0.05f,
-				height,
-				(static_cast<float>(z) - 10) * -0.05f);
+				(static_cast<float>(x) - 10) * world_transform.scale.x / 20.0f,
+				height*2.0f,
+				(static_cast<float>(z) - 10) * -world_transform.scale.z / 20.0f);
+			physX_vertex_.push_back(physx::PxVec3(vertex_[x][z].Position.x, vertex_[x][z].Position.y, vertex_[x][z].Position.z));
 			//vertex[0].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, 50.0f);
 			vertex_[x][z].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
 			vertex_[x][z].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -38,25 +40,39 @@ void CTerrain::Start()
 
 	Renderer::GetDevice()->CreateBuffer(&buffer_desc, &subresource_data, &vertex_buffer_);
 
-	unsigned int index[((21 + 1) * 2) * 20 - 2];
 	int i = 0;
 	for (int x = 0; x < 20; x++)
 	{
 		for (int z = 0; z < 21; z++)
 		{
-			index[i] = x * 21 + z;
+			index_[i] = x * 21 + z;
 			i++;
 
-			index[i] = (x + 1) * 21 + z;
+			index_[i] = (x + 1) * 21 + z;
 			i++;
 		}
 		if (x == 19)
 			break;
-		index[i] = (x + 1) * 21 + 20;
+		index_[i] = (x + 1) * 21 + 20;
 		i++;
-		index[i] = (x + 1) * 21;
+		index_[i] = (x + 1) * 21;
 		i++;
 	}
+
+	for (int x = 0; x < 20; x++)
+	{
+		for (int z = 0; z < 21; z++)
+		{
+			physX_index_.push_back(x * 21 + z);
+			physX_index_.push_back((x + 1) * 21 + z);
+			physX_index_.push_back(x * 21 + z + 1);
+
+			physX_index_.push_back((x + 1) * 21 + z);
+			physX_index_.push_back((x + 1) * 21 + z + 1);
+			physX_index_.push_back(x * 21 + z + 1);
+		}
+	}
+
 
 	//index buffer
 	D3D11_BUFFER_DESC bd;
@@ -68,26 +84,75 @@ void CTerrain::Start()
 
 	D3D11_SUBRESOURCE_DATA sd;
 	ZeroMemory(&sd, sizeof(sd));
-	sd.pSysMem = index;
+	sd.pSysMem = index_;
 
 	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &index_buffer_);
 
 	Renderer::CreateVertexShader(&vertex_shader_, &vertex_layout_, vertex_shader_path_.c_str());
 	Renderer::CreatePixelShader(&pixel_shader_, pixel_shader_path_.c_str());
+
+	// Create triangle mesh description
+	physx::PxTriangleMeshDesc meshDesc;
+	meshDesc.points.count = static_cast<physx::PxU32>(physX_vertex_.size());
+	meshDesc.points.stride = sizeof(physx::PxVec3);
+	meshDesc.points.data = physX_vertex_.data();
+
+	meshDesc.triangles.count = static_cast<physx::PxU32>(physX_index_.size() / 3);
+	meshDesc.triangles.stride = 3 * sizeof(physx::PxU32);
+	meshDesc.triangles.data = physX_index_.data();
+
+	assert(meshDesc.isValid());
+
+
+	// Cooking parameters
+	physx::PxCookingParams cookingParams(PhysX_Impl::GetPhysics()->getTolerancesScale());
+	cookingParams.buildGPUData = true;
+	// disable mesh cleaning - perform mesh validation on development configurations
+	//cookingParams.meshPreprocessParams |= physx::PxMeshPreprocessingFlag::eDISABLE_CLEAN_MESH;
+	// disable edge precompute, edges are set for each triangle, slows contact generation
+	//cookingParams.meshPreprocessParams |= physx::PxMeshPreprocessingFlag::eDISABLE_ACTIVE_EDGES_PRECOMPUTE;
+	//cookingParams.meshWeldTolerance = 0.001f;
+
+#ifdef _DEBUG
+// mesh should be validated before cooked without the mesh cleaning
+	bool res = PxValidateTriangleMesh(cookingParams, meshDesc);
+	PX_ASSERT(res);
+#endif
+
+	// Cook the triangle mesh
+	physx::PxDefaultMemoryOutputStream writeBuffer{};
+	physx::PxTriangleMeshCookingResult::Enum result;
+	bool status = PxCookTriangleMesh(cookingParams, meshDesc, writeBuffer, &result);
+
+	if (!status)
+	{
+		throw std::runtime_error("Failed to cook triangle mesh");
+	}
+
+	physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+	physx::PxTriangleMesh* triangleMesh = PhysX_Impl::GetPhysics()->createTriangleMesh(readBuffer);
+	assert(triangleMesh);
+
+	// Create a triangle mesh geometry
+	physx::PxTriangleMeshGeometry meshGeometry{};
+	meshGeometry.triangleMesh = triangleMesh;
+	//validate meshGeometry
+	assert(meshGeometry.isValid());
+
+	// Create a rigid static actor with the triangle mesh geometry
+	//identity transform
+	actor_ = PhysX_Impl::GetPhysics()->createRigidStatic(physx::PxTransform(physx::PxIdentity));
+	shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry, *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f));
+	shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
+	actor_->attachShape(*shape_);
+
+	// Add the actor to the PhysX scene
+	physx::PxScene* scene = PhysX_Impl::GetScene();
+	scene->addActor(*actor_);
 }
 
 void CTerrain::Update()
 {
-	////find parent
-	//Entity* parent = Manager::FindEntityByID(parent_id_);
-
-	//if (parent_id_ < 0 || parent == nullptr)
-	//{
-	//    //do nothing
-	//}
-	//else
-	//{
-	//}
 }
 
 void CTerrain::Draw()
@@ -102,7 +167,7 @@ void CTerrain::Draw()
 	//world matrix
 	DirectX::XMMATRIX world, scale, rot, trans;
 	Transform world_transform = GetWorldTransform();
-	scale = DirectX::XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
+	scale = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f);
 	//rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,world_transform.rotation.z);
 	rot = DirectX::XMMatrixRotationQuaternion(XMLoadFloat4(&world_transform.quaternion));
 	trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y,
@@ -140,6 +205,9 @@ void CTerrain::CleanUp()
 	vertex_shader_->Release();
 	pixel_shader_->Release();
 	vertex_layout_->Release();
+	shape_->release();
+	actor_->release();
+
 }
 
 float CTerrain::GetHeight(XMFLOAT3 position)

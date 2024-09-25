@@ -34,6 +34,7 @@ private:
     static physx::PxPvd* m_pPvd;
     //CUDA
     static physx::PxCudaContextManager* m_pCudaCtxMgr;
+
 public:
     static bool Start();
     static void Update();
