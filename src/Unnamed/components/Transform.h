@@ -4,6 +4,7 @@
 using namespace DirectX;
 
 //Technically a component but it is treated as a helper class
+//use as struct to reduce memory allocations
 struct Transform
 {
 public:
@@ -12,88 +13,79 @@ public:
     XMFLOAT3 scale;
     XMFLOAT4 quaternion{0.0f, 0.0f, 0.0f, 1.0f};
 
-    static Transform* Identity()
+    static Transform Identity()
     {
-        return new Transform{XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f}};
+        return Transform{XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f}};
     }
 
-    static Transform* MoveTo(Transform* transform, XMFLOAT3 position)
+    static void MoveTo(Transform& transform, XMFLOAT3 position)
     {
-        transform->position = position;
-        return transform;
+        transform.position = position;
     }
 
-    static Transform* RotateTo(Transform* transform, XMFLOAT3 rotation)
+    static void RotateTo(Transform& transform, XMFLOAT3 rotation)
     {
-        transform->rotation = rotation;
+        transform.rotation = rotation;
         EulerToQuat(transform);
-        return transform;
     }
 
-    static Transform* RotateToQuat(Transform* transform, XMFLOAT4 quat)
+    static void RotateToQuat(Transform& transform, XMFLOAT4 quat)
     {
-        transform->quaternion = quat;
+        transform.quaternion = quat;
         QuatToEuler(transform);
-        return transform;
     }
 
-    static Transform* ScaleTo(Transform* transform, XMFLOAT3 scale)
+    static void ScaleTo(Transform& transform, XMFLOAT3 scale)
     {
-        transform->scale = scale;
-        return transform;
+        transform.scale = scale;
     }
 
-    static Transform* MoveBy(Transform* transform, XMFLOAT3 position)
+    static void MoveBy(Transform& transform, XMFLOAT3 position)
     {
-        transform->position.x += position.x;
-        transform->position.y += position.y;
-        transform->position.z += position.z;
-        return transform;
+        transform.position.x += position.x;
+        transform.position.y += position.y;
+        transform.position.z += position.z;
     }
 
-    static Transform* RotateBy(Transform* transform, XMFLOAT3 rotation)
+    static void RotateBy(Transform& transform, XMFLOAT3 rotation)
     {
-        transform->rotation.x += rotation.x;
-        transform->rotation.y += rotation.y;
-        transform->rotation.z += rotation.z;
+        transform.rotation.x += rotation.x;
+        transform.rotation.y += rotation.y;
+        transform.rotation.z += rotation.z;
         EulerToQuat(transform);
-        return transform;
     }
 
-    static Transform* RotateByQuat(Transform* transform, XMFLOAT4 quat)
+    static void RotateByQuat(Transform& transform, XMFLOAT4 quat)
     {
-        XMVECTOR quat1 = XMLoadFloat4(&transform->quaternion);
+        XMVECTOR quat1 = XMLoadFloat4(&transform.quaternion);
         XMVECTOR quat2 = XMLoadFloat4(&quat);
         XMVECTOR resultQuat = XMQuaternionMultiply(quat1, quat2);
         XMFLOAT4 result;
         XMStoreFloat4(&result, resultQuat);
-        transform->quaternion = result;
+        transform.quaternion = result;
         QuatToEuler(transform);
-        return transform;
     }
 
-    static Transform* ScaleBy(Transform* transform, XMFLOAT3 scale)
+    static void ScaleBy(Transform& transform, XMFLOAT3 scale)
     {
-        transform->scale.x *= scale.x;
-        transform->scale.y *= scale.y;
-        transform->scale.z *= scale.z;
-        return transform;
+        transform.scale.x *= scale.x;
+        transform.scale.y *= scale.y;
+        transform.scale.z *= scale.z;
     }
 
-    static Transform* Copy(Transform* transform, const Transform* other)
+    static void Copy(Transform& transform, const Transform& other)
     {
-        transform->position = other->position;
-        transform->rotation = other->rotation;
-        transform->scale = other->scale;
-        transform->quaternion = other->quaternion;
-        return transform;
+        transform.position = other.position;
+        transform.rotation = other.rotation;
+        transform.scale = other.scale;
+        transform.quaternion = other.quaternion;
     }
 
     //return the forward vector of a transform
-    static XMFLOAT3 GetForward(Transform* transform)
+    static XMFLOAT3 GetForward(const Transform& transform)
     {
         XMMATRIX rot =
-            XMMatrixRotationRollPitchYaw(transform->rotation.x, transform->rotation.y, transform->rotation.z);
+            XMMatrixRotationRollPitchYaw(transform.rotation.x, transform.rotation.y, transform.rotation.z);
 
         XMFLOAT3 forward;
         XMStoreFloat3(&forward, rot.r[2]);
@@ -130,38 +122,38 @@ public:
         return rotatedPoint;
     }
 
-    static physx::PxTransform ToPhysXTransform(Transform* transform)
+    static physx::PxTransform ToPhysXTransform(const Transform& transform)
     {
-        physx::PxVec3 position = physx::PxVec3(transform->position.x, transform->position.y, transform->position.z);
-        physx::PxQuat rotation = physx::PxQuat(transform->quaternion.x, transform->quaternion.y,
-                                               transform->quaternion.z, transform->quaternion.w);
+        physx::PxVec3 position = physx::PxVec3(transform.position.x, transform.position.y, transform.position.z);
+        physx::PxQuat rotation = physx::PxQuat(transform.quaternion.x, transform.quaternion.y,
+                                               transform.quaternion.z, transform.quaternion.w);
         return physx::PxTransform(position, rotation);
     }
 
-    static Transform ToWorld(const Transform* parent,const Transform* local)
+    static Transform ToWorld(const Transform& parent,const Transform& local)
     {
         Transform world;
-        world.position = parent->position;
-        world.rotation = parent->rotation;
-        world.scale = parent->scale;
-        world.quaternion = parent->quaternion;
-        MoveBy(&world, local->position);
-        RotateByQuat(&world, local->quaternion);
-        ScaleBy(&world, local->scale);
+        world.position = parent.position;
+        world.rotation = parent.rotation;
+        world.scale = parent.scale;
+        world.quaternion = parent.quaternion;
+        MoveBy(world, local.position);
+        RotateByQuat(world, local.quaternion);
+        ScaleBy(world, local.scale);
         return world;
     }
 
 private:
-    static void EulerToQuat(Transform* transform)
+    static void EulerToQuat(Transform& transform)
     {
-        XMVECTOR rotationVector = XMQuaternionRotationRollPitchYaw(transform->rotation.x, transform->rotation.y,
-                                                                   transform->rotation.z);
-        XMStoreFloat4(&transform->quaternion, rotationVector);
+        XMVECTOR rotationVector = XMQuaternionRotationRollPitchYaw(transform.rotation.x, transform.rotation.y,
+                                                                   transform.rotation.z);
+        XMStoreFloat4(&transform.quaternion, rotationVector);
     }
 
-    static void QuatToEuler(Transform* transform)
+    static void QuatToEuler(Transform& transform)
     {
-        XMFLOAT4 quaternion = transform->quaternion;
+        XMFLOAT4 quaternion = transform.quaternion;
         //calculate eular angles
         XMFLOAT3 angles;
         // roll (x-axis rotation)
@@ -178,6 +170,6 @@ private:
         double siny_cosp = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
         double cosy_cosp = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
         angles.z = std::atan2(siny_cosp, cosy_cosp);
-        transform->rotation = angles;
+        transform.rotation = angles;
     }
 };

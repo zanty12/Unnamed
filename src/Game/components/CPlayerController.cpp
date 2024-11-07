@@ -6,7 +6,6 @@
 #include "components/CAudio.h"
 #include "components/CCamera.h"
 #include "entity.h"
-#include "components/depreciated/CRigidBody.h"
 #include "system/timesystem.h"
 #include "prefab/bullet.h"
 #include <components/CPhysXRigidBody.h>
@@ -28,7 +27,7 @@ void CPlayerController::Update()
         //get camera component
         CCamera* camera = parent->GetComponent<CCamera>();
         XMFLOAT3 camera_pos = camera->GetWorldTransform().position;
-        XMFLOAT3 parent_pos = parent->GetTransform()->position;
+        XMFLOAT3 parent_pos = parent->GetTransform().position;
 		CPhysXRigidBody* rigidBody = parent->GetComponent<CPhysXRigidBody>();
         physx::PxRigidDynamic *actor = rigidBody->GetActor()->is<physx::PxRigidDynamic>();
 

@@ -166,8 +166,8 @@ void CText2D::Update(){}
 
 void CText2D::Draw()
 {
-    Transform* transform = Manager::FindEntityByID(parent_id_)->GetTransform();
-    WriteText(text_.c_str(), text_format_, solid_brush_, transform->position.x, transform->position.y, transform->scale.x, transform->scale.y);
+    Transform transform = Manager::FindEntityByID(parent_id_)->GetTransform();
+    WriteText(text_.c_str(), text_format_, solid_brush_, transform.position.x, transform.position.y, transform.scale.x, transform.scale.y);
 }
 
 std::wstring CText2D::GetFont() const

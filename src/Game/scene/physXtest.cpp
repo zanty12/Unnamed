@@ -14,12 +14,12 @@
 
 void physXtest::Setup()
 {
-    //create 125 boxes in a 5x5x5 grid
+    //create 500 boxes in a 10x10x5 grid
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
         {
-            for (int k = 0; k < 5; k++)
+            for (int k = 0; k < 10; k++)
             {
                 Entity* box = Manager::MakeEntity();
                 Transform::MoveTo(box->GetTransform(), XMFLOAT3(i*1.1f, j*1.0f+0.5f, k*1.1f));
@@ -67,7 +67,7 @@ void physXtest::Setup()
 
     //skybox
     Entity* skybox = Manager::MakeEntity("skybox");
-    skybox->GetTransform()->scale = XMFLOAT3(100, 100, 100);
+    skybox->GetTransform().scale = XMFLOAT3(100, 100, 100);
     CModelRenderer* skybox_renderer = new CModelRenderer();
     skybox_renderer->Load("asset\\model\\sky.obj");
     skybox->AddComponent(skybox_renderer);

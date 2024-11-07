@@ -35,7 +35,7 @@ public:
                 if(game_mode)
                     game_mode->AddPoint();
                 Explosion* explosion = new Explosion();
-                explosion->SetPosition(entity->GetTransform()->position);
+                explosion->SetPosition(entity->GetTransform().position);
                 explosion->Start();
             }
         }

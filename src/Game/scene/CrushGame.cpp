@@ -23,9 +23,9 @@ void CrushGame::Setup()
     int count = 0;
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 2; j++)
+        for (int j = 0; j < 10; j++)
         {
-            for (int k = 0; k < 5; k++)
+            for (int k = 0; k < 10; k++)
             {
                 Cube* box = new Cube();
                 Transform transform = Transform{ XMFLOAT3{(float)i * 1.1f, (float)j+0.5f, (float)k * 1.1f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
@@ -76,7 +76,7 @@ void CrushGame::Setup()
 
     //skybox
     Entity* skybox = Manager::MakeEntity("skybox");
-    skybox->GetTransform()->scale = XMFLOAT3(100, 100, 100);
+    skybox->GetTransform().scale = XMFLOAT3(100, 100, 100);
     CModelRenderer* skybox_renderer = new CModelRenderer();
     skybox_renderer->Load("asset\\model\\sky.obj");
     skybox->AddComponent(skybox_renderer);

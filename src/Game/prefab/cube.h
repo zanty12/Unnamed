@@ -13,5 +13,5 @@ public:
     ~Cube()= default;
     void Start();
 	void Spawn() override;
-    void SetTransform(Transform transform) { Transform::Copy(&transform_, &transform); }
+    void SetTransform(const Transform& transform) { Transform::Copy(transform_, transform); }
 };

@@ -84,7 +84,7 @@ void CRigidBody::Update()
         //get parent transform
         Entity* parent = Manager::FindEntityByID(parent_id_);
         parent->Lock();
-        Transform* parent_transform = parent->GetTransform();
+        Transform parent_transform = parent->GetTransform();
         //apply linear velocity
         Transform::MoveBy(parent_transform, XMFLOAT3(linear_vel_.x * dt, linear_vel_.y * dt, linear_vel_.z * dt));
         //apply angular velocity

@@ -45,7 +45,7 @@ void CCubeBehaviour::Update()
         if (destroyed_ && rigid_body_->getLinearVelocity().magnitude() < 3.0f)
         {
 			Explosion* explosion = new Explosion();
-			XMFLOAT3 pos = Manager::FindEntityByID(parent_id_)->GetTransform()->position;
+			XMFLOAT3 pos = Manager::FindEntityByID(parent_id_)->GetTransform().position;
 			explosion->SetPosition(pos);
 			Manager::QueueForSpawn(explosion);
             GMCrush* gameMode = dynamic_cast<GMCrush*> (Manager::GetGameMode());

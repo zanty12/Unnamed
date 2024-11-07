@@ -34,6 +34,10 @@ bool Manager::skip_one_frame_ = false;
 bool Manager::scene_change_ = false;
 Scene* Manager::next_scene_ = nullptr;
 
+DWORD physx_time;
+DWORD update_time;
+DWORD draw_time;
+
 
 void Manager::Init()
 {
@@ -65,18 +69,17 @@ void Manager::Update()
         return;
     }
     Input::Update();
-
+    DWORD start_time = timeGetTime();
     //Update physics in 60fps
-    //if (Time::FixedUpdate())
-    //{
-    //    //log physics time
-    //    //DWORD start_time = timeGetTime();
-    //    PhysX_Impl::Update();
-    //    //start_time = timeGetTime() - start_time;
-    //    //std::cout << "Physics time: " << start_time << std::endl;
-    //}
-    PhysX_Impl::Update();
+    if (Time::FixedUpdate())
+    {
+        //log physics time
+        PhysX_Impl::Update();
+        physx_time = timeGetTime() - start_time;
+    }
+    //PhysX_Impl::Update();
 
+    start_time = timeGetTime();
     //update all entities
     for (auto& entity : entities_)
     {
@@ -90,6 +93,7 @@ void Manager::Update()
     PhysicsSystem3D::ApplyCollisions();
 
     thread_pool_.StartProcessing();
+
     //wait for all threads to finish
     while (true)
     {
@@ -122,6 +126,7 @@ void Manager::Update()
 		LoadScene(next_scene_);
 		scene_change_ = false;
 	}
+    update_time = timeGetTime() - start_time;
 }
 
 void Manager::Draw()
@@ -138,7 +143,9 @@ void Manager::Draw()
     {
         active_camera_->Draw();
     }
+    DWORD start_time = timeGetTime();
     RenderPL::Draw();
+    draw_time = timeGetTime() - start_time;
     CText2D::TextEnd();
 
     ImGui_Hal::BeginDraw();
@@ -150,6 +157,9 @@ void Manager::Draw()
         ImGui::GetIO().Framerate);
     ImGui::Text("Mouse Pos: %d, %d", Input::GetMousePos().x, Input::GetMousePos().y);
     ImGui::Text("delta time: %f", Time::GetDeltaTime());
+    ImGui::Text("physx time: %d",physx_time);
+    ImGui::Text("update time: %d", update_time);
+    ImGui::Text("draw time: %d", draw_time);
     ImGui::End();
 
     for (auto& debug_menu : debug_menu_)

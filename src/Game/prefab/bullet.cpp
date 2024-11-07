@@ -11,7 +11,7 @@
 void Bullet::Start()
 {
     entity_ = Manager::MakeEntity("bullet");
-    entity_->GetTransform()->position = pos_;
+    entity_->GetTransform().position = pos_;
     entity_->SetTag("Bullet");
 
     CModelRenderer* modelRenderer = new CModelRenderer();

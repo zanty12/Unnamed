@@ -77,7 +77,7 @@ void TestScene::Setup()
 
     //Create a plane
     Entity* plane = Manager::MakeEntity("Terrain");
-	plane->GetTransform()->scale = XMFLOAT3(100, 1.0, 100);
+	plane->GetTransform().scale = XMFLOAT3(100, 1.0, 100);
     CTerrain* planecomponent = new CTerrain();
     CTexture2D* texture_2d = new CTexture2D(L"asset/texture/cat.png");
     planecomponent->SetTexture(texture_2d);

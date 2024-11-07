@@ -10,17 +10,13 @@ void CPhysXPrimitive::Draw()
             std::cerr << "Parent entity not found" << std::endl;
             return;
         }
-        Transform* transform = parent->GetTransform();
-        if (!transform) {
-            std::cerr << "Transform not found" << std::endl;
-            return;
-        }
+        Transform transform = parent->GetTransform();
         XMFLOAT4X4 originalView, originalProj;
         originalView = Manager::GetActiveCamera()->GetViewMatrix();
         originalProj = Manager::GetActiveCamera()->GetProjectionMatrix();
         XMMATRIX world, scale, rot, trans;
-        rot = XMMatrixRotationQuaternion(XMLoadFloat4(&transform->quaternion));
-        trans = XMMatrixTranslation(transform->position.x, transform->position.y, transform->position.z);
+        rot = XMMatrixRotationQuaternion(XMLoadFloat4(&transform.quaternion));
+        trans = XMMatrixTranslation(transform.position.x, transform.position.y, transform.position.z);
         scale = XMMatrixScaling(1.0f, 1.0f, 1.0f);
         world = scale * rot * trans;
         XMMATRIX viewMatrix = XMLoadFloat4x4(&originalView);

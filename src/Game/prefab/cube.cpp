@@ -17,7 +17,7 @@ void Cube::Start()
 {
     entity_ = Manager::MakeEntity("Cube");
     entity_->SetTag("Cube");
-	Transform::Copy(entity_->GetTransform(), &transform_);
+	Transform::Copy(entity_->GetTransform(), transform_);
 
     CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);

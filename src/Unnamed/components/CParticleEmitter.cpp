@@ -67,7 +67,7 @@ void CParticleEmitter::CleanUp()
 
 void CParticleEmitter::Update()
 {
-	Transform* transform = Manager::FindEntityByID(parent_id_)->GetTransform();
+	Transform transform = Manager::FindEntityByID(parent_id_)->GetTransform();
 	// パーティクル発射
 	for (int i = 0; i < PARTICLE_MAX; i++)
 	{
@@ -78,10 +78,10 @@ void CParticleEmitter::Update()
 				m_Particle[i].pos = player->GetPosition();
 			}*/
 			m_Particle[i].Enable = true;
-			m_Particle[i].Position.x = transform->position.x + (rand() % 1000 - 500) / 500.0f;
-			m_Particle[i].Position.z = transform->position.y + (rand() % 1000 - 500) / 500.0f;
+			m_Particle[i].Position.x = transform.position.x + (rand() % 1000 - 500) / 500.0f;
+			m_Particle[i].Position.z = transform.position.y + (rand() % 1000 - 500) / 500.0f;
 			m_Particle[i].Position.y = -0.1f;
-			m_Particle[i].Scale = transform->scale;
+			m_Particle[i].Scale = transform.scale;
 			m_Particle[i].Life = 120;
 			m_Particle[i].Velocity.x = 0.0f;
 			m_Particle[i].Velocity.y = 0.0f;

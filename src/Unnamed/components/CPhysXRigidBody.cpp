@@ -5,7 +5,7 @@
 void CPhysXRigidBody::Start()
 {
     Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
+    Transform transform = parent->GetTransform();
     if (is_dynamic_)
     {
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
@@ -52,7 +52,7 @@ void CPhysXRigidBody::Update()
     //copy actor transform to Parent transform
     physx::PxTransform actor_transform = actor_->getGlobalPose();
     Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform* transform = parent->GetTransform();
+    Transform transform = parent->GetTransform();
     Transform::MoveTo(transform, XMFLOAT3(actor_transform.p.x, actor_transform.p.y, actor_transform.p.z));
     XMFLOAT4 quat = XMFLOAT4(actor_transform.q.x, actor_transform.q.y, actor_transform.q.z, actor_transform.q.w);
     Transform::RotateToQuat(transform, quat);
