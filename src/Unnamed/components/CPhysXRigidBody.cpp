@@ -4,8 +4,7 @@
 
 void CPhysXRigidBody::Start()
 {
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform transform = parent->GetTransform();
+    Transform transform = parent_entity_->GetTransform();
     if (is_dynamic_)
     {
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
@@ -24,8 +23,8 @@ void CPhysXRigidBody::Start()
     PhysX_Impl::GetScene()->addActor(*actor_);
     actor_->userData = new PhysXUserData();
     static_cast<PhysXUserData*>(actor_->userData)->id = parent_id_;
-    static_cast<PhysXUserData*>(actor_->userData)->name = parent->GetName();
-    static_cast<PhysXUserData*>(actor_->userData)->tag = parent->GetTag();
+    static_cast<PhysXUserData*>(actor_->userData)->name = parent_entity_->GetName();
+    static_cast<PhysXUserData*>(actor_->userData)->tag = parent_entity_->GetTag();
 }
 
 void CPhysXRigidBody::Update()
@@ -33,14 +32,6 @@ void CPhysXRigidBody::Update()
     //static rigidbody
     if (!is_dynamic_)
     {
-        /*//copy actor transform to component transform
-        physx::PxTransform actor_transform = actor_->getGlobalPose();
-        Transform worldTransform = GetWorldTransform();
-        actor_transform.p = physx::PxVec3(worldTransform.position.x, worldTransform.position.y,
-                                          worldTransform.position.z);
-        actor_transform.q = physx::PxQuat(worldTransform.quaternion.x, worldTransform.quaternion.y,
-                                          worldTransform.quaternion.z, worldTransform.quaternion.w);
-        actor_->setGlobalPose(actor_transform);*/
         return;
     }
     //dynamic rigidbody
@@ -51,13 +42,10 @@ void CPhysXRigidBody::Update()
 
     //copy actor transform to Parent transform
     physx::PxTransform actor_transform = actor_->getGlobalPose();
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-    Transform transform = parent->GetTransform();
+    Transform& transform = parent_entity_->GetTransform();
     Transform::MoveTo(transform, XMFLOAT3(actor_transform.p.x, actor_transform.p.y, actor_transform.p.z));
     XMFLOAT4 quat = XMFLOAT4(actor_transform.q.x, actor_transform.q.y, actor_transform.q.z, actor_transform.q.w);
     Transform::RotateToQuat(transform, quat);
-
-
 }
 
 void CPhysXRigidBody::CleanUp()

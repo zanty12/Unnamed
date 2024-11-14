@@ -63,17 +63,6 @@ void CModelRenderer::Draw()
 
 void CModelRenderer::Update()
 {
-    //find parent
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-
-    if(parent_id_ < 0 || parent == nullptr)
-    {
-        //do nothing
-    }
-    else
-    {
-        //Transform::Copy(&transform_,parent->GetTransform());
-    }
 }
 
 void CModelRenderer::CleanUp()

@@ -5,12 +5,7 @@ void CPhysXPrimitive::Draw()
 {
     if (debug_view_)
     {
-        Entity* parent = Manager::FindEntityByID(parent_id_);
-        if (!parent) {
-            std::cerr << "Parent entity not found" << std::endl;
-            return;
-        }
-        Transform transform = parent->GetTransform();
+        Transform transform = parent_entity_->GetTransform();
         XMFLOAT4X4 originalView, originalProj;
         originalView = Manager::GetActiveCamera()->GetViewMatrix();
         originalProj = Manager::GetActiveCamera()->GetProjectionMatrix();

@@ -2,7 +2,6 @@
 #include "traits/drawable.h"
 #include "entity.h"
 #include "system/renderPL.h"
-#include "system/threadpool.h"
 #include "components/CCamera.h"
 #include "GameMode.h"
 #include "scene.h"
@@ -19,7 +18,6 @@ private:
 	static std::vector<Spawnable*> spawn_queue_;
 	static std::vector<DebugMenu*> debug_menu_;
 	static CCamera* active_camera_;
-	static ThreadPool thread_pool_;
 	static Scene* scene_;
 	static GameMode* game_mode_;
 	static bool skip_one_frame_;
@@ -41,7 +39,6 @@ public:
 	static void QueueForSpawn(Spawnable* spawnable);
 	static CCamera* GetActiveCamera();
 	static void SetActiveCamera(CCamera* camera);
-	static ThreadPool& GetThreadPool();
 	static void SetScene(Scene* scene);
 	static void LoadScene(Scene* scene);
 	static void UnloadCurrentScene();

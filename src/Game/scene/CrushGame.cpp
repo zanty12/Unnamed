@@ -8,7 +8,6 @@
 #include "components/CModelRenderer.h"
 #include "components/CPlane.h"
 #include "components/CVideoTexture.h"
-#include "components/depreciated/CRigidBody.h"
 #include "prefab/cube.h"
 #include "prefab/pinball.h"
 #include "prefab/player.h"

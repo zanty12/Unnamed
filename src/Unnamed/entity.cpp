@@ -5,15 +5,6 @@
 
 void Entity::Update()
 {
-    /*for(auto component : components_)
-    {
-        component->Update();
-    }*/
-    for (auto component : components_) {
-        Manager::GetThreadPool().Enqueue(component->GetPriority(), [component]() {
-            component->Update();
-            });
-    }
 }
 
 Entity::~Entity()
@@ -33,4 +24,5 @@ Entity::~Entity()
     }
     //delete rigidBody lasts
     delete rigidBody;
+    TaskScheduler::RemoveTask(id_);
 }

@@ -31,7 +31,7 @@ public:
     virtual void CleanUp() = 0;
     int GetParentID() const { return parent_id_; }
     std::string GetType() const { return type_; }
-    void AttachTo(int parent_id) { parent_id_ = parent_id; }
+    void AttachTo(int parent_id,Entity* parent) { parent_id_ = parent_id; parent_entity_ = parent;}
     void SetPriority(int priority) { priority_ = priority; }
     int GetPriority() const { return priority_; }
     Transform& GetLocalTransform() { return local_transform_; }

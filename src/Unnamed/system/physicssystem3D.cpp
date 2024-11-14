@@ -25,7 +25,7 @@ std::vector<Physics3D*> PhysicsSystem3D::GetPhysics3D()
 
 void PhysicsSystem3D::UpdateCollisions()
 {
-    for(auto physics3D : physics3D_)
+    /*for(auto physics3D : physics3D_)
         {
         //dynamic_cast<CCollider3D*>(physics3D)->UpdateCollision();
         //use threadpool to update collisions
@@ -33,12 +33,12 @@ void PhysicsSystem3D::UpdateCollisions()
         Manager::GetThreadPool().Enqueue(PhysicsBehaviour,[collider](){
             collider->UpdateCollision();
         });
-    }
+    }*/
 }
 
 void PhysicsSystem3D::ApplyCollisions()
 {
-    for(auto physics3D : physics3D_)
+    /*for(auto physics3D : physics3D_)
     {
         //dynamic_cast<CCollider3D*>(physics3D)->ApplyCollision();
         //use threadpool to apply collisions
@@ -46,7 +46,7 @@ void PhysicsSystem3D::ApplyCollisions()
         Manager::GetThreadPool().Enqueue(PhysicsBehaviour,[collider](){
             collider->ApplyCollision();
         });
-    }
+    }*/
 }
 
 void PhysicsSystem3D::CleanUp()

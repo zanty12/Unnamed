@@ -7,10 +7,9 @@
 
 void CPhysXBox::Start()
 {
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-    if (parent->GetComponent<CPhysXRigidBody>())
+    if (parent_entity_->GetComponent<CPhysXRigidBody>())
     {
-        physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
+        physx::PxRigidActor* ac = parent_entity_->GetComponent<CPhysXRigidBody>()->GetActor();
         // Œ`ó(Box)‚ðì¬
         /*physx::PxShape* box_shape
             = PhysX_Impl::GetPhysics()->createShape(

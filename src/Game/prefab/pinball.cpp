@@ -37,37 +37,23 @@ void Pinball::Start()
 	camera->SetLookAtParent(true);
 	camera->SetSmoothing(true);
 	camera->Activate();
-	camera->Start();
 
 	CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
 	entity_->AddComponent(rigidBody);
-	rigidBody->Start();
-	rigidBody->SetMass(10.0f);
-	//rigidBody->LockAngularAxis(true,true,true);
-	physx::PxRigidActor* actor = rigidBody->GetActor();
-	if (actor->is<physx::PxRigidDynamic>())
-	{
-		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
-		//actor->setActorFlag(physx::PxActorFlag::eDISABLE_SIMULATION, false);
-		dynamicActor->putToSleep();
-	}
+
+
 
 	CPhysXSphere* sphere = new CPhysXSphere();
 	sphere->SetDebugView(false);
 	sphere->SetIsTrigger(false);
-	sphere->SetRadius(1.5f);
+
 	Transform::ScaleTo(sphere->GetLocalTransform(), XMFLOAT3(1.0f, 1.0f, 1.0f));
 	entity_->AddComponent(sphere);
-	sphere->Start();
 
 	CDirectXTKSphere* directXTKSphere = new CDirectXTKSphere();
-	directXTKSphere->SetRadius(1.5f);
-	entity_->AddComponent(directXTKSphere);
-	directXTKSphere->SetColor(SimpleMath::Color(1.0f, 0.0f, 0.0f, 1.0f));
-	directXTKSphere->Start();
 
-	/*CTransformConstraint* transformConstraint = new CTransformConstraint();
-	entity_->AddComponent(transformConstraint);*/
+	entity_->AddComponent(directXTKSphere);
+
 
 	CAudio* audio = new CAudio();
 	entity_->AddComponent(audio);
@@ -75,7 +61,21 @@ void Pinball::Start()
 
 	CPinballBehaviour* pinballBehaviour = new CPinballBehaviour();
 	entity_->AddComponent(pinballBehaviour);
-	pinballBehaviour->Start();
+
+	entity_->Start();
+
+	sphere->SetRadius(1.5f);
+	directXTKSphere->SetRadius(1.5f);
+	directXTKSphere->SetColor(SimpleMath::Color(1.0f, 0.0f, 0.0f, 1.0f));
+	//rigidBody->LockAngularAxis(true,true,true);
+	rigidBody->SetMass(10.0f);
+	physx::PxRigidActor* actor = rigidBody->GetActor();
+	if (actor->is<physx::PxRigidDynamic>())
+	{
+		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+		//actor->setActorFlag(physx::PxActorFlag::eDISABLE_SIMULATION, false);
+		dynamicActor->putToSleep();
+	}
 }
 
 

@@ -16,9 +16,8 @@ public:
     void Start() override{};
     void Update() override{
         //constrain position
-        Entity* parent = Manager::FindEntityByID(parent_id_);
-        parent->Lock();
-        Transform transform = parent->GetTransform();
+        parent_entity_->Lock();
+        Transform& transform = parent_entity_->GetTransform();
         if (transform.position.x < position_start_.x)
         {
             Transform::MoveTo(transform,DirectX::XMFLOAT3(position_start_.x, transform.position.y, transform.position.z));
@@ -45,7 +44,7 @@ public:
         {
             Transform::MoveTo(transform,DirectX::XMFLOAT3(transform.position.x, transform.position.y, position_end_.z));
         }
-        parent->Unlock();
+        parent_entity_->Unlock();
     }
     void CleanUp() override{};
     ~CTransformConstraint() override = default;

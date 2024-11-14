@@ -67,7 +67,7 @@ void CParticleEmitter::CleanUp()
 
 void CParticleEmitter::Update()
 {
-	Transform transform = Manager::FindEntityByID(parent_id_)->GetTransform();
+	Transform transform = parent_entity_->GetTransform();
 	// パーティクル発射
 	for (int i = 0; i < PARTICLE_MAX; i++)
 	{

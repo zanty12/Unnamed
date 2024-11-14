@@ -6,7 +6,6 @@
 
 #include "imgui_impl_hal.h"
 #include "system/input.h"
-#include "system/physicssystem3D.h"
 #include "system/PhysX_Impl.h"
 #include "system/textureLoader.h"
 #include "system/timesystem.h"
@@ -27,7 +26,6 @@ std::vector<int> Manager::removal_queue_ = std::vector<int>();
 std::vector<Spawnable*> Manager::spawn_queue_ = std::vector<Spawnable*>();
 std::vector<DebugMenu*> Manager::debug_menu_;
 CCamera* Manager::active_camera_ = nullptr;
-ThreadPool Manager::thread_pool_;
 Scene* Manager::scene_ = nullptr;
 GameMode* Manager::game_mode_ = nullptr;
 bool Manager::skip_one_frame_ = false;
@@ -37,6 +35,7 @@ Scene* Manager::next_scene_ = nullptr;
 DWORD physx_time;
 DWORD update_time;
 DWORD draw_time;
+DWORD schedule_time;
 
 
 void Manager::Init()
@@ -49,11 +48,14 @@ void Manager::Init()
     if (!PhysX_Impl::Start())
         std::cout << "PhysX failed to start" << std::endl;
     LoadScene(scene_);
+    TaskScheduler::RebuildQueue();
+    TaskScheduler::Initialize();
 }
 
 void Manager::Uninit()
 {
-    thread_pool_.StopProcessing();
+    TaskScheduler::StopProcessing();
+    TaskScheduler::ClearTasks();
     Renderer::Uninit();
     Input::Uninit();
     Time::CleanUp();
@@ -88,36 +90,44 @@ void Manager::Update()
             entity->Update();
         }
     }
-    //update physics
-    PhysicsSystem3D::UpdateCollisions();
-    PhysicsSystem3D::ApplyCollisions();
 
-    thread_pool_.StartProcessing();
+    schedule_time = timeGetTime() - start_time;
+    start_time = timeGetTime();
+
+    TaskScheduler::StartProcessing();
 
     //wait for all threads to finish
     while (true)
     {
-        if (thread_pool_.GetWorkingThreads() <= 0 && thread_pool_.GetTasksCount() <= 0)
+        if (TaskScheduler::GetWorkingThreads() <= 0 && TaskScheduler::FrameFinished())
             break;
     }
-    thread_pool_.StopProcessing();
+    TaskScheduler::StopProcessing();
 
     //delete entities in the removal queue
-    for (auto& id : removal_queue_)
+    if(spawn_queue_.size() > 0)
     {
-        if (entities_[id] != nullptr)
+        for (auto& spawnable : spawn_queue_)
         {
-            RemoveEntity(id);
+            spawnable->Spawn();
+            delete spawnable;
         }
+        //clean up spawn queue
+        spawn_queue_.clear();
     }
+
     //spawn entities
-    for (auto& spawnable : spawn_queue_)
+    if(spawn_queue_.size() > 0)
     {
-        spawnable->Spawn();
-        delete spawnable;
+        for (auto& spawnable : spawn_queue_)
+        {
+            spawnable->Spawn();
+            delete spawnable;
+        }
+        //clean up spawn queue
+        spawn_queue_.clear();
+        TaskScheduler::RebuildQueue();
     }
-    //clean up spawn queue
-    spawn_queue_.clear();
 
     game_mode_->Update();
 	if (scene_change_)
@@ -160,6 +170,7 @@ void Manager::Draw()
     ImGui::Text("physx time: %d",physx_time);
     ImGui::Text("update time: %d", update_time);
     ImGui::Text("draw time: %d", draw_time);
+    ImGui::Text("schedule time: %d", schedule_time);
     ImGui::End();
 
     for (auto& debug_menu : debug_menu_)
@@ -247,11 +258,6 @@ void Manager::SetActiveCamera(CCamera* camera)
     active_camera_ = camera;
 }
 
-ThreadPool& Manager::GetThreadPool()
-{
-    return thread_pool_;
-}
-
 void Manager::SetScene(Scene* scene)
 {
     if (scene_ != scene)
@@ -277,7 +283,6 @@ void Manager::UnloadCurrentScene()
     }
     RenderPL::CleanUp();
     TextureLoader::CleanUp();
-    PhysicsSystem3D::CleanUp();
     CModelRenderer::UnloadAll();
     debug_menu_.clear();
     entities_.clear();

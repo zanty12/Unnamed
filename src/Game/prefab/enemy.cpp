@@ -6,8 +6,8 @@
 #include "components/CCamera.h"
 #include "components/CEnemyBehaviour.h"
 #include "components/CModelRenderer.h"
-#include "components/depreciated/CRigidBody.h"
-#include "components/depreciated/CSphereCollider.h"
+/*#include "components/depreciated/CRigidBody.h"
+#include "components/depreciated/CSphereCollider.h"*/
 #include "components/CTransformConstraint.h"
 
 
@@ -21,11 +21,11 @@ void Enemy::Start()
     modelRenderer->Load("asset\\model\\player.obj");
     modelRenderer->Start();
 
-    CSphereCollider* sphereCollider = new CSphereCollider();
+    /*CSphereCollider* sphereCollider = new CSphereCollider();
     entity_->AddComponent(sphereCollider);
     sphereCollider->SetRadius(2.0f);
     sphereCollider->SetDynamic(true);
-    sphereCollider->Start();
+    sphereCollider->Start();*/
 
     CEnemyBehaviour* enemyBehaviour = new CEnemyBehaviour();
     entity_->AddComponent(enemyBehaviour);

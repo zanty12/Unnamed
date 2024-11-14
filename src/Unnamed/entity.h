@@ -8,6 +8,7 @@
 #include <vector>
 #include "components/Component.h"
 #include "components/transform.h"
+#include "system/taskscheduler.h"
 #include "traits/unique.h"
 
 /**
@@ -56,6 +57,14 @@ public:
         for(auto component : components_)
         {
             component->Start();
+        }
+
+        //add updates to the task scheduler
+        for(auto component : components_)
+        {
+            TaskScheduler::AddTask(component->GetPriority(),id_,[component](){
+                component->Update();
+            });
         }
     }
 
@@ -120,7 +129,7 @@ public:
                 }
             }
         }
-        component->AttachTo(id_);
+        component->AttachTo(id_,this);
         components_.push_back(component);
     }
 

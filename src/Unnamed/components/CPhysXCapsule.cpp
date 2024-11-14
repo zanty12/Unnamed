@@ -6,10 +6,9 @@
 
 void CPhysXCapsule::Start()
 {
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-    if (parent->GetComponent<CPhysXRigidBody>())
+    if (parent_entity_->GetComponent<CPhysXRigidBody>())
     {
-        physx::PxRigidActor* ac = parent->GetComponent<CPhysXRigidBody>()->GetActor();
+        physx::PxRigidActor* ac = parent_entity_->GetComponent<CPhysXRigidBody>()->GetActor();
         /*//create dynamic actor
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
             physx::PxTransform(Transform::ToPhysXTransform(local_transform_)));*/

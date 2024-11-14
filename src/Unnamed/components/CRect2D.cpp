@@ -29,17 +29,6 @@ void CRect2D::Start()
 
 void CRect2D::Update()
 {
-    //find parent
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-
-    if (parent_id_ < 0 || parent == nullptr)
-    {
-        //do nothing
-    }
-    else
-    {
-        
-    }
     //if texture is sprite, get uv
     if (texture_->GetType() == "Sprite2D")
     {

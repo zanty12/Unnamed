@@ -866,13 +866,12 @@
     <ClInclude Include="src\Unnamed\renderer.h" />
     <ClInclude Include="src\Unnamed\scene.h" />
     <ClInclude Include="src\Unnamed\system\input.h" />
-    <ClInclude Include="src\Unnamed\system\physicssystem2D.h" />
     <ClInclude Include="src\Unnamed\system\physicssystem3D.h" />
     <ClInclude Include="src\Unnamed\system\PhysXSimulationCallBack.h" />
     <ClInclude Include="src\Unnamed\system\PhysX_Impl.h" />
     <ClInclude Include="src\Unnamed\system\renderPL.h" />
+    <ClInclude Include="src\Unnamed\system\taskscheduler.h" />
     <ClInclude Include="src\Unnamed\system\textureLoader.h" />
-    <ClInclude Include="src\Unnamed\system\threadpool.h" />
     <ClInclude Include="src\Unnamed\system\timesystem.h" />
     <ClInclude Include="src\Unnamed\traits\debugmenu.h" />
     <ClInclude Include="src\Unnamed\traits\drawable.h" />
@@ -934,11 +933,11 @@
     <ClCompile Include="src\Unnamed\ProjectSettings.cpp" />
     <ClCompile Include="src\Unnamed\renderer.cpp" />
     <ClCompile Include="src\Unnamed\system\input.cpp" />
-    <ClCompile Include="src\Unnamed\system\physicssystem2D.cpp" />
     <ClCompile Include="src\Unnamed\system\physicssystem3D.cpp" />
     <ClCompile Include="src\Unnamed\system\PhysXSimulationCallBack.cpp" />
     <ClCompile Include="src\Unnamed\system\PhysX_Impl.cpp" />
     <ClCompile Include="src\Unnamed\system\renderPL.cpp" />
+    <ClCompile Include="src\Unnamed\system\taskscheduler.cpp" />
     <ClCompile Include="src\Unnamed\system\textureLoader.cpp" />
     <ClCompile Include="src\Unnamed\system\timesystem.cpp" />
     <ClCompile Include="src\Unnamed\traits\drawable.cpp" />

@@ -61,7 +61,7 @@ void CMouseCursor::Update()
             Entity* parent = Manager::FindEntityByID(parent_id_);
             if (parent)
             {
-                Transform transform = parent->GetTransform();
+                Transform& transform = parent->GetTransform();
                 Transform::MoveTo(transform, XMFLOAT3(XMVectorGetX(mouse_world_pos), XMVectorGetY(mouse_world_pos), XMVectorGetZ(mouse_world_pos)));
 
             }

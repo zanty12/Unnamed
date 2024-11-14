@@ -13,7 +13,7 @@ void CCamera::Start()
     else
     {
         //Get the transform of parent
-        XMFLOAT3 parent_pos = Manager::FindEntityByID(parent_id_)->GetTransform().position;
+        XMFLOAT3 parent_pos = parent_entity_->GetTransform().position;
         if(look_at_parent_)
             target_ = parent_pos;
         Transform::MoveTo(local_transform_, XMFLOAT3(offset_.x, offset_.y, offset_.z));
@@ -29,7 +29,7 @@ void CCamera::Update()
     if (parent_id_ >= 0)
     {
         //Get the transform of parent
-        XMFLOAT3 parent_pos = Manager::FindEntityByID(parent_id_)->GetTransform().position;
+        XMFLOAT3 parent_pos = parent_entity_->GetTransform().position;
         if(look_at_parent_)
         {
             if(smoothing_)

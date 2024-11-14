@@ -65,16 +65,6 @@ void CPlane::Start()
 
 void CPlane::Update()
 {
-    //find parent
-    Entity* parent = Manager::FindEntityByID(parent_id_);
-
-    if (parent_id_ < 0 || parent == nullptr)
-    {
-        //do nothing
-    }
-    else
-    {
-    }
     //if texture is sprite, get uv
     CSprite2D* sprite = dynamic_cast<CSprite2D*>(texture_);
     if (sprite)
