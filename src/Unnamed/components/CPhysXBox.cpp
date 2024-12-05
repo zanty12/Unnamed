@@ -10,15 +10,15 @@ void CPhysXBox::Start()
     if (parent_entity_->GetComponent<CPhysXRigidBody>())
     {
         physx::PxRigidActor* ac = parent_entity_->GetComponent<CPhysXRigidBody>()->GetActor();
-        // Œ`ó(Box)‚ðì¬
+        // å½¢çŠ¶(Box)ã‚’ä½œæˆ
         /*physx::PxShape* box_shape
             = PhysX_Impl::GetPhysics()->createShape(
-                // Box‚Ì‘å‚«‚³
+                // Boxã®å¤§ãã•
                 physx::PxBoxGeometry(local_transform_->scale.x / 2.0f, local_transform_->scale.y / 2.0f, local_transform_->scale.z / 2.0f),
-                // –€ŽCŒW”‚Æ”½”­ŒW”‚ÌÝ’è
+                // æ‘©æ“¦ä¿‚æ•°ã¨åç™ºä¿‚æ•°ã®è¨­å®š
                 *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
-        // Œ`ó‚ð•R‚Ã‚¯
+        // å½¢çŠ¶ã‚’ç´ã¥ã‘
         box_shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*box_shape);*/
         //create exclusive shape

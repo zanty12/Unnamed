@@ -22,7 +22,7 @@ void Cube::Start()
     CModelRenderer* modelRenderer = new CModelRenderer();
     entity_->AddComponent(modelRenderer);
     modelRenderer->Load("asset\\model\\roundedcube.obj");
-    Transform local = Transform{ XMFLOAT3{0.0f, -0.5f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
+    Transform local = Transform{ XMFLOAT3{0.0f, -0.5f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f}, XMFLOAT4{0.0f,0.0f,0.0f,1.0f} };
     modelRenderer->SetLocalTransform(local);
     /*CDirectXTKBox* box = new CDirectXTKBox();
     entity_->AddComponent(box);*/

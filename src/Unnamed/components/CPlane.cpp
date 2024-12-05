@@ -158,8 +158,7 @@ void CPlane::Draw()
         DirectX::XMMATRIX world, rot, scale, trans;
         Transform world_transform = GetWorldTransform();
         scale = DirectX::XMMatrixScaling(world_transform.scale.x, world_transform.scale.y, world_transform.scale.z);
-        rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,
-                                                    world_transform.rotation.z);
+        rot = DirectX::XMMatrixRotationQuaternion(XMLoadFloat4(&world_transform.quaternion));
         trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y,
                                              world_transform.position.z);
         world = scale * rot * inv_view * trans;

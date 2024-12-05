@@ -7,13 +7,13 @@ IXAudio2MasteringVoice* CAudio::m_MasteringVoice = NULL;
 
 void CAudio::StartMaster()
 {
-    // COM‰Šú‰»
+    // COMåˆæœŸåŒ–
     CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
-    // XAudio¶¬
+    // XAudioç”Ÿæˆ
     XAudio2Create(&m_Xaudio, 0);
 
-    // ƒ}ƒXƒ^ƒŠƒ“ƒOƒ{ƒCƒX¶¬
+    // ãƒã‚¹ã‚¿ãƒªãƒ³ã‚°ãƒœã‚¤ã‚¹ç”Ÿæˆ
     m_Xaudio->CreateMasteringVoice(&m_MasteringVoice);
 }
 
@@ -28,7 +28,7 @@ void CAudio::CleanUpMaster()
 
 void CAudio::Load(const char* FileName)
 {
-    // ƒTƒEƒ“ƒhƒf[ƒ^“Ç
+    // ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿èª­è¾¼
     WAVEFORMATEX wfx = {0};
 
     {
@@ -81,7 +81,7 @@ void CAudio::Load(const char* FileName)
     }
 
 
-    // ƒTƒEƒ“ƒhƒ\[ƒX¶¬
+    // ã‚µã‚¦ãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹ç”Ÿæˆ
     m_Xaudio->CreateSourceVoice(&source_voice_, &wfx);
     assert(source_voice_);
 }
@@ -102,7 +102,7 @@ void CAudio::Play(bool Loop)
     source_voice_->FlushSourceBuffers();
 
 
-    // ƒoƒbƒtƒ@İ’è
+    // ãƒãƒƒãƒ•ã‚¡è¨­å®š
     XAUDIO2_BUFFER bufinfo;
 
     memset(&bufinfo, 0x00, sizeof(bufinfo));
@@ -111,7 +111,7 @@ void CAudio::Play(bool Loop)
     bufinfo.PlayBegin = 0;
     bufinfo.PlayLength = play_length_;
 
-    // ƒ‹[ƒvİ’è
+    // ãƒ«ãƒ¼ãƒ—è¨­å®š
     if (Loop)
     {
         bufinfo.LoopBegin = 0;
@@ -128,7 +128,7 @@ void CAudio::Play(bool Loop)
     */
 
 
-    // Ä¶
+    // å†ç”Ÿ
     source_voice_->Start();
 }
 

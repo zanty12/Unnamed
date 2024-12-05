@@ -29,13 +29,13 @@ void CParticleEmitter::Start()
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
-	// ’¸“_ƒoƒbƒtƒ@¶¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	D3D11_BUFFER_DESC bd{};
 	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DYNAMIC; // D3D11_USAGE_DYNAMIC‚Í‚ ‚Æ‚©‚ç‘‚«Š·‚¦‰Â”\
+	bd.Usage = D3D11_USAGE_DYNAMIC; // D3D11_USAGE_DYNAMICã¯ã‚ã¨ã‹ã‚‰æ›¸ãæ›ãˆå¯èƒ½
 	bd.ByteWidth = sizeof(VERTEX_3D) * 4;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;  // D3D11_CPU_ACCESS_WRITE‚Í‚ ‚Æ‚©‚ç‘‚«Š·‚¦‰Â”\
+	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;  // D3D11_CPU_ACCESS_WRITEã¯ã‚ã¨ã‹ã‚‰æ›¸ãæ›ãˆå¯èƒ½
 
 	D3D11_SUBRESOURCE_DATA sd{};
 	ZeroMemory(&sd, sizeof(sd));
@@ -43,7 +43,7 @@ void CParticleEmitter::Start()
 
 	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &vertex_buffer_);
 
-	// ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	TexMetadata metadata;
 	ScratchImage image;
 	LoadFromWICFile(L"asset\\texture\\particle.png", WIC_FLAGS_NONE, &metadata, image);
@@ -68,7 +68,7 @@ void CParticleEmitter::CleanUp()
 void CParticleEmitter::Update()
 {
 	Transform transform = parent_entity_->GetTransform();
-	// ƒp[ƒeƒBƒNƒ‹”­Ë
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç™ºå°„
 	for (int i = 0; i < PARTICLE_MAX; i++)
 	{
 		if (m_Particle[i].Enable == false)
@@ -92,7 +92,7 @@ void CParticleEmitter::Update()
 		}
 	}
 
-	// ƒp[ƒeƒBƒNƒ‹ˆÚ“®
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç§»å‹•
 	for (int i = 0; i < PARTICLE_MAX; i++)
 	{
 		if (m_Particle[i].Enable == true)
@@ -111,7 +111,7 @@ void CParticleEmitter::Update()
 				m_Particle[i].Color.y = 0;
 			}
 
-			// ƒ‰ƒCƒt
+			// ãƒ©ã‚¤ãƒ•
 			m_Particle[i].Life--;
 
 			if (m_Particle[i].Life <= 0)
@@ -147,66 +147,66 @@ void CParticleEmitter::Update()
 
 void CParticleEmitter::Draw()
 {
-	//“ü—ÍƒŒƒCƒAƒEƒgİ’è
+	//å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	Renderer::GetDeviceContext()->IASetInputLayout(vertex_layout_);
 
-	// ƒVƒF[ƒ_İ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(vertex_shader_, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(pixel_shader_, NULL, 0);
 
-	// ƒJƒƒ‰‚Ìƒrƒ…[ƒ}ƒgƒŠƒNƒXæ“¾
+	// ã‚«ãƒ¡ãƒ©ã®ãƒ“ãƒ¥ãƒ¼ãƒãƒˆãƒªã‚¯ã‚¹å–å¾—
 	XMFLOAT4X4 view = Manager::GetActiveCamera()->GetViewMatrix();
 
-	// ƒrƒ…[‚Ì‹ts—ñ
+	// ãƒ“ãƒ¥ãƒ¼ã®é€†è¡Œåˆ—
 	XMMATRIX invView= XMLoadFloat4x4(&view);;
-	invView = XMMatrixInverse(nullptr, invView); // ‹ts—ñ
+	invView = XMMatrixInverse(nullptr, invView); // é€†è¡Œåˆ—
 	invView.r[3].m128_f32[0] = 0.0f;
 	invView.r[3].m128_f32[1] = 0.0f;
 	invView.r[3].m128_f32[2] = 0.0f;
 
-	// ’¸“_ƒoƒbƒtƒ@İ’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
 	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertex_buffer_, &stride, &offset);
 
-	//// ƒ}ƒeƒŠƒAƒ‹İ’è
+	//// ãƒãƒ†ãƒªã‚¢ãƒ«è¨­å®š
 	//MATERIAL material;
 	//ZeroMemory(&material, sizeof(material));
 	//material.Diffuse = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
 	//material.TextureEnable = true;
 	//Renderer::SetMaterial(material);
 
-	// ƒeƒNƒXƒ`ƒƒİ’è
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
 	Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_Texture);
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWİ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	// Zƒoƒbƒtƒ@–³Œø
+	// Zãƒãƒƒãƒ•ã‚¡ç„¡åŠ¹
 	Renderer::SetDepthEnable(false);
 
 	for (int i = 0; i < PARTICLE_MAX; i++)
 	{
 		if (m_Particle[i].Enable == true)
 		{
-			// ƒ}ƒeƒŠƒAƒ‹İ’è
+			// ãƒãƒ†ãƒªã‚¢ãƒ«è¨­å®š
 			MATERIAL material;
 			ZeroMemory(&material, sizeof(material));
 			material.Diffuse = XMFLOAT4(m_Particle[i].Color.x / 255.0f, m_Particle[i].Color.y / 255.0f, m_Particle[i].Color.z / 255.0f, m_Particle[i].Color.w / 255.0f);
 			material.TextureEnable = true;
 			Renderer::SetMaterial(material);
 
-			// ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXİ’è
+			// ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹è¨­å®š
 			XMMATRIX world, scale, rot, trans;
 			scale = XMMatrixScaling(m_Particle[i].Scale.x, m_Particle[i].Scale.y, m_Particle[i].Scale.z);
 			trans = XMMatrixTranslation(m_Particle[i].Position.x, m_Particle[i].Position.y, m_Particle[i].Position.z);
 			world = scale * invView * trans;
 			Renderer::SetWorldMatrix(world);
 
-			// ƒ|ƒŠƒSƒ“•`‰æ
+			// ãƒãƒªã‚´ãƒ³æç”»
 			Renderer::GetDeviceContext()->Draw(4, 0);
 		}
 	}
-	// Zƒoƒbƒtƒ@—LŒø
+	// Zãƒãƒƒãƒ•ã‚¡æœ‰åŠ¹
 	Renderer::SetDepthEnable(true);
 }

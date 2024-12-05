@@ -12,15 +12,15 @@ void CPhysXCapsule::Start()
         /*//create dynamic actor
         physx::PxRigidDynamic* rigid_dynamic = PhysX_Impl::GetPhysics()->createRigidDynamic(
             physx::PxTransform(Transform::ToPhysXTransform(local_transform_)));*/
-        // Œ`ó‚ðì¬
+        // å½¢çŠ¶ã‚’ä½œæˆ
         /*physx::PxShape* shape
             = PhysX_Impl::GetPhysics()->createShape(
-                // Box‚Ì‘å‚«‚³
+                // Boxã®å¤§ãã•
                 physx::PxCapsuleGeometry(local_transform_->scale.x / 2.0f, local_transform_->scale.y / 2.0f),
-                // –€ŽCŒW”‚Æ”½”­ŒW”‚ÌÝ’è
+                // æ‘©æ“¦ä¿‚æ•°ã¨åç™ºä¿‚æ•°ã®è¨­å®š
                 *PhysX_Impl::GetPhysics()->createMaterial(static_friction_, dynamic_friction_, restitution_)
             );
-        // Œ`ó‚ð•R‚Ã‚¯
+        // å½¢çŠ¶ã‚’ç´ã¥ã‘
         shape->setLocalPose(physx::PxTransform(physx::PxIdentity));
         ac->attachShape(*shape);*/
         //create exclusive shape

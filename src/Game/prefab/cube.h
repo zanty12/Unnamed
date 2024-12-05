@@ -7,7 +7,7 @@ class Cube : public Spawnable
 {
 private:
     Entity* entity_ = nullptr;
-	Transform transform_ = Transform{ XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
+	Transform transform_ = Transform::Identity();
 public:
     Cube() = default;
     ~Cube()= default;

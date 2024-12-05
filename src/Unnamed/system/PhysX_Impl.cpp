@@ -4,19 +4,19 @@
 #include "timesystem.h"
 #include "PhysX_Impl.h"
 
-// PhysXì‡Ç≈óòópÇ∑ÇÈÉAÉçÉPÅ[É^Å[
+// PhysXÂÜÖ„ÅßÂà©Áî®„Åô„Çã„Ç¢„É≠„Ç±„Éº„Çø„Éº
 physx::PxDefaultAllocator PhysX_Impl::m_defaultAllocator;
-// ÉGÉâÅ[éûópÇÃÉRÅ[ÉãÉoÉbÉNÇ≈ÉGÉâÅ[ì‡óeÇ™ì¸Ç¡ÇƒÇÈ
+// „Ç®„É©„ÉºÊôÇÁî®„ÅÆ„Ç≥„Éº„É´„Éê„ÉÉ„ÇØ„Åß„Ç®„É©„ÉºÂÜÖÂÆπ„ÅåÂÖ•„Å£„Å¶„Çã
 physx::PxDefaultErrorCallback PhysX_Impl::m_defaultErrorCallback;
-// è„à ÉåÉxÉãÇÃSDK(PxPhysicsÇ»Ç«)ÇÉCÉìÉXÉ^ÉìÉXâªÇ∑ÇÈç€Ç…ïKóv
+// ‰∏ä‰Ωç„É¨„Éô„É´„ÅÆSDK(PxPhysics„Å™„Å©)„Çí„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ„Åô„ÇãÈöõ„Å´ÂøÖË¶Å
 physx::PxFoundation* PhysX_Impl::m_pFoundation = nullptr;
-// é¿ç€Ç…ï®óùââéZÇçsÇ§
+// ÂÆüÈöõ„Å´Áâ©ÁêÜÊºîÁÆó„ÇíË°å„ÅÜ
 physx::PxPhysics* PhysX_Impl::m_pPhysics = nullptr;
-// ÉVÉ~ÉÖÉåÅ[ÉVÉáÉìÇÇ«Ç§èàóùÇ∑ÇÈÇ©ÇÃê›íËÇ≈É}ÉãÉ`ÉXÉåÉbÉhÇÃê›íËÇ‡Ç≈Ç´ÇÈ
+// „Ç∑„Éü„É•„É¨„Éº„Ç∑„Éß„É≥„Çí„Å©„ÅÜÂá¶ÁêÜ„Åô„Çã„Åã„ÅÆË®≠ÂÆö„Åß„Éû„É´„ÉÅ„Çπ„É¨„ÉÉ„Éâ„ÅÆË®≠ÂÆö„ÇÇ„Åß„Åç„Çã
 physx::PxDefaultCpuDispatcher* PhysX_Impl::m_pDispatcher = nullptr;
-// ÉVÉ~ÉÖÉåÅ[ÉVÉáÉìÇ∑ÇÈãÛä‘ÇÃíPà Ç≈ActorÇÃí«â¡Ç»Ç«Ç‡Ç±Ç±Ç≈çsÇ§
+// „Ç∑„Éü„É•„É¨„Éº„Ç∑„Éß„É≥„Åô„ÇãÁ©∫Èñì„ÅÆÂçò‰Ωç„ÅßActor„ÅÆËøΩÂä†„Å™„Å©„ÇÇ„Åì„Åì„ÅßË°å„ÅÜ
 physx::PxScene* PhysX_Impl::m_pScene = nullptr;
-// PVDÇ∆í êMÇ∑ÇÈç€Ç…ïKóv
+// PVD„Å®ÈÄö‰ø°„Åô„ÇãÈöõ„Å´ÂøÖË¶Å
 physx::PxPvd* PhysX_Impl::m_pPvd = nullptr;
 //CUDA
 physx::PxCudaContextManager* PhysX_Impl::m_pCudaCtxMgr = nullptr;
@@ -37,7 +37,7 @@ physx::PxFilterFlags filter_shader(
 
 bool PhysX_Impl::Start()
 {
-    // FoundationÇÃÉCÉìÉXÉ^ÉìÉXâª
+    // Foundation„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ
     m_pFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, m_defaultAllocator, m_defaultErrorCallback);
     if (!m_pFoundation)
     {
@@ -45,7 +45,7 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // PVDÇ∆ê⁄ë±Ç∑ÇÈê›íË
+    // PVD„Å®Êé•Á∂ö„Åô„ÇãË®≠ÂÆö
     m_pPvd = physx::PxCreatePvd(*m_pFoundation);
     if (m_pPvd)
     {
@@ -53,7 +53,7 @@ bool PhysX_Impl::Start()
         m_pPvd->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
     }
 
-    // PhysicsÇÃÉCÉìÉXÉ^ÉìÉXâª
+    // Physics„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ
     m_pPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *m_pFoundation, physx::PxTolerancesScale(), true, m_pPvd);
     if (!m_pPhysics)
     {
@@ -61,14 +61,14 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // ägí£ã@î\óp
+    // Êã°ÂºµÊ©üËÉΩÁî®
     if (!PxInitExtensions(*m_pPhysics, m_pPvd))
     {
         std::cerr << "Failed to initialize PhysX extensions" << std::endl;
         return false;
     }
 
-    // èàóùÇ…égÇ§ÉXÉåÉbÉhÇéwíËÇ∑ÇÈ
+    // Âá¶ÁêÜ„Å´‰Ωø„ÅÜ„Çπ„É¨„ÉÉ„Éâ„ÇíÊåáÂÆö„Åô„Çã
     m_pDispatcher = physx::PxDefaultCpuDispatcherCreate(8);
     if (!m_pDispatcher)
     {
@@ -76,7 +76,7 @@ bool PhysX_Impl::Start()
         return false;
     }
 
-    // ãÛä‘ÇÃê›íË
+    // Á©∫Èñì„ÅÆË®≠ÂÆö
     physx::PxSceneDesc scene_desc(m_pPhysics->getTolerancesScale());
     scene_desc.gravity = physx::PxVec3(0, -9, 0);
     scene_desc.filterShader = filter_shader;
@@ -86,7 +86,7 @@ bool PhysX_Impl::Start()
     scene_desc.simulationEventCallback = &m_simulationCallback;
     scene_desc.flags |= physx::PxSceneFlag::eENABLE_ACTIVE_ACTORS;
 
-    // GPUÇégÇ§èÍçáÇÕÇ±Ç±Ç≈ê›íË
+    // GPU„Çí‰Ωø„ÅÜÂ†¥Âêà„ÅØ„Åì„Åì„ÅßË®≠ÂÆö
     physx::PxCudaContextManagerDesc cuda_ctx_mgr_desc;
     ID3D11Device* dev = Renderer::GetDevice();
     cuda_ctx_mgr_desc.graphicsDevice = dev;
@@ -112,7 +112,7 @@ bool PhysX_Impl::Start()
 
     
 
-    // ãÛä‘ÇÃÉCÉìÉXÉ^ÉìÉXâª
+    // Á©∫Èñì„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπÂåñ
     m_pScene = m_pPhysics->createScene(scene_desc);
     if (!m_pScene)
     {
@@ -121,7 +121,7 @@ bool PhysX_Impl::Start()
     }
 
 
-    // PVDÇÃï\é¶ê›íË
+    // PVD„ÅÆË°®Á§∫Ë®≠ÂÆö
     physx::PxPvdSceneClient* pvd_client = m_pScene->getScenePvdClient();
     if (pvd_client)
     {
@@ -135,9 +135,9 @@ bool PhysX_Impl::Start()
 
 void PhysX_Impl::Update()
 {
-    // ÉVÉ~ÉÖÉåÅ[ÉVÉáÉìë¨ìxÇéwíËÇ∑ÇÈ
+    // „Ç∑„Éü„É•„É¨„Éº„Ç∑„Éß„É≥ÈÄüÂ∫¶„ÇíÊåáÂÆö„Åô„Çã
     m_pScene->simulate(1.0f/60.0f);
-    // PhysXÇÃèàóùÇ™èIÇÌÇÈÇ‹Ç≈ë“Ç¬
+    // PhysX„ÅÆÂá¶ÁêÜ„ÅåÁµÇ„Çè„Çã„Åæ„ÅßÂæÖ„Å§
     m_pScene->fetchResults(true);
 }
 

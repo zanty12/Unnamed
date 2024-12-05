@@ -27,7 +27,7 @@ void CrushGame::Setup()
             for (int k = 0; k < 10; k++)
             {
                 Cube* box = new Cube();
-                Transform transform = Transform{ XMFLOAT3{(float)i * 1.1f, (float)j+0.5f, (float)k * 1.1f}, XMFLOAT3{0.0f, 0.0f, 0.0f}, XMFLOAT3{1.0f, 1.0f, 1.0f} };
+                Transform transform = Transform{ XMFLOAT3{(float)i * 1.1f, (float)j+0.5f, (float)k * 1.1f}, XMFLOAT3{1.0f, 1.0f, 1.0f}, XMFLOAT4{0.0f, 0.0f, 0.0f,1.0f} };
                 box->SetTransform(transform);
                 box->Start();
                 delete box;

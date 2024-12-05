@@ -57,8 +57,6 @@ public:
         Transform& transform = parent->GetTransform();
         XMFLOAT3 position = transform.position;
         ImGui::Text("Entity Position: %f %f %f", position.x, position.y, position.z);
-        XMFLOAT3 rotation = transform.rotation;
-        ImGui::Text("Entity Rotation: %f %f %f", rotation.x, rotation.y, rotation.z);
         XMFLOAT3 scale = transform.scale;
         ImGui::Text("Entity Scale: %f %f %f", scale.x, scale.y, scale.z);
         XMFLOAT4 quat = transform.quaternion;
