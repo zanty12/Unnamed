@@ -152,7 +152,7 @@ public:
 
     static int GetTasksCount()
     {
-        return tasks_.size();
+        return static_cast<int>(tasks_.size());
     }
 
     static bool FrameFinished()

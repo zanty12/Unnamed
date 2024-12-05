@@ -983,6 +983,7 @@
     <ClCompile Include="include\video_reader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".editorconfig" />
     <Content Include=".gitignore" />
     <Content Include="asset\fonts\JF-Dot-Kappa20-0213.ttf" />
     <Content Include="asset\fonts\NotoSansJP-Bold.ttf" />
