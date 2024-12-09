@@ -45,20 +45,19 @@ void Player::Start()
     camera->SetLookAtParent(true);
     camera->SetSmoothing(true);
     camera->Activate();
-    camera->Start();
+
 
     CPhysXRigidBody* rigidBody = new CPhysXRigidBody(true);
     entity_->AddComponent(rigidBody);
-    rigidBody->Start();
     //rigidBody->SetMass(0.0f);0
-    rigidBody->LockAngularAxis(true, true, true);
+
 
     CPhysXCapsule* capsule = new CPhysXCapsule();
     capsule->SetDebugView(false);
     capsule->SetIsTrigger(false);
     Transform::ScaleTo(capsule->GetLocalTransform(), XMFLOAT3(100.0f, 200.0f, 100.0f));
     entity_->AddComponent(capsule);
-    capsule->Start();
+
 
     /*CTransformConstraint* transformConstraint = new CTransformConstraint();
     entity_->AddComponent(transformConstraint);*/
@@ -69,5 +68,7 @@ void Player::Start()
 
     CPlayerMenu* playerMenu = new CPlayerMenu();
     entity_->AddComponent(playerMenu);
-    playerMenu->Start();
+
+    entity_->Start();
+    rigidBody->LockAngularAxis(true, true, true);
 }

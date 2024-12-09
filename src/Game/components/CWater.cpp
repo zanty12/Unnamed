@@ -18,7 +18,7 @@ void CWater::Start()
 			physX_vertex_.push_back(physx::PxVec3(vertex_[x][z].Position.x, vertex_[x][z].Position.y, vertex_[x][z].Position.z));
 			//vertex[0].Position = DirectX::XMFLOAT3(-50.0f, 0.0f, 50.0f);
 			vertex_[x][z].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
-			vertex_[x][z].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+			vertex_[x][z].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 0.8f);
 			vertex_[x][z].TexCoord = DirectX::XMFLOAT2(x, z);
 		}
 	}
@@ -159,7 +159,12 @@ void CWater::Update()
     {
         for (int z = 0; z < 21; z++)
         {
-            vertex_[x][z].Position.y = sinf((x + z) * 0.1f + time) * 1.0f;
+            //wave in x direction
+            vertex_[x][z].Position.y = sinf(static_cast<float>(x) * 2.0f + time) * 1.0f;
+            //wave in z direction
+            vertex_[x][z].Position.y += sinf(static_cast<float>(x+z) * 2.0f + time) * 1.0f;
+            //update physx vertex position
+            physX_vertex_[x * 21 + z].y = vertex_[x][z].Position.y;
         }
     }
 
@@ -180,6 +185,60 @@ void CWater::Update()
 
     Renderer::GetDevice()->CreateBuffer(&buffer_desc, &subresource_data, &vertex_buffer_);
 
+    //update physx shape
+    physx::PxTriangleMeshDesc meshDesc;
+	meshDesc.points.count = static_cast<physx::PxU32>(physX_vertex_.size());
+	meshDesc.points.stride = sizeof(physx::PxVec3);
+	meshDesc.points.data = physX_vertex_.data();
+
+	meshDesc.triangles.count = static_cast<physx::PxU32>(physX_index_.size() / 3);
+	meshDesc.triangles.stride = 3 * sizeof(physx::PxU32);
+	meshDesc.triangles.data = physX_index_.data();
+
+	assert(meshDesc.isValid());
+
+
+	// Cooking parameters
+	physx::PxCookingParams cookingParams(PhysX_Impl::GetPhysics()->getTolerancesScale());
+	cookingParams.buildGPUData = true;
+	// disable mesh cleaning - perform mesh validation on development configurations
+	//cookingParams.meshPreprocessParams |= physx::PxMeshPreprocessingFlag::eDISABLE_CLEAN_MESH;
+	// disable edge precompute, edges are set for each triangle, slows contact generation
+	//cookingParams.meshPreprocessParams |= physx::PxMeshPreprocessingFlag::eDISABLE_ACTIVE_EDGES_PRECOMPUTE;
+	//cookingParams.meshWeldTolerance = 0.001f;
+
+#ifdef _DEBUG
+// mesh should be validated before cooked without the mesh cleaning
+	bool res = PxValidateTriangleMesh(cookingParams, meshDesc);
+	PX_ASSERT(res);
+#endif
+
+	// Cook the triangle mesh
+	physx::PxDefaultMemoryOutputStream writeBuffer{};
+	physx::PxTriangleMeshCookingResult::Enum result;
+	bool status = PxCookTriangleMesh(cookingParams, meshDesc, writeBuffer, &result);
+
+	if (!status)
+	{
+		throw std::runtime_error("Failed to cook triangle mesh");
+	}
+
+	physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+	physx::PxTriangleMesh* triangleMesh = PhysX_Impl::GetPhysics()->createTriangleMesh(readBuffer);
+	assert(triangleMesh);
+
+	// Create a triangle mesh geometry
+	physx::PxTriangleMeshGeometry meshGeometry{};
+	meshGeometry.triangleMesh = triangleMesh;
+	//validate meshGeometry
+	assert(meshGeometry.isValid());
+
+	//release shape
+    actor_->detachShape(*shape_);
+    shape_->release();
+	shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry, *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f));
+	shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
+	actor_->attachShape(*shape_);
 }
 
 void CWater::Draw()
