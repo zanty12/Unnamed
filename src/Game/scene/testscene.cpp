@@ -112,7 +112,7 @@ void TestScene::Setup()
     plane->Start();
     planecomponent->SetEndUV(XMFLOAT2(1.0f, 1.0f));
     PhysX_Impl::GetScene()->addActor(*physx::PxCreatePlane(
-        *PhysX_Impl::GetPhysics(), physx::PxPlane(0, 1, 0, 2.0f),
+        *PhysX_Impl::GetPhysics(), physx::PxPlane(0, 1, 0, 0.5f),
         *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f))
     );
 
