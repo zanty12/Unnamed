@@ -11,5 +11,5 @@
 void ProjectSettings::InitializeManager()
 {
     Manager::SetGameMode(new GMCrush());
-    Manager::SetScene(new Title());
+    Manager::SetScene(new TestScene());
 }

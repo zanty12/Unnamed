@@ -11,6 +11,7 @@
 #include "components/CText2D.h"
 #include "components/CTexture2D.h"
 #include "components/CVideoTexture.h"
+#include "components/CWater.h"
 #include "prefab/enemy.h"
 #include "prefab/explosion.h"
 
@@ -78,7 +79,7 @@ void TestScene::Setup()
     //Create a plane
     Entity* plane = Manager::MakeEntity("Terrain");
 	plane->GetTransform().scale = XMFLOAT3(100, 1.0, 100);
-    CTerrain* planecomponent = new CTerrain();
+    CWater* planecomponent = new CWater();
     CTexture2D* texture_2d = new CTexture2D(L"asset/texture/cat.png");
     planecomponent->SetTexture(texture_2d);
     plane->AddComponent(planecomponent);
