@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 #include "imgui_impl_hal.h"
+#include "Inspector.h"
 #include "system/input.h"
 #include "system/PhysX_Impl.h"
 #include "system/textureLoader.h"
@@ -160,9 +161,8 @@ void Manager::Draw()
 
     ImGui_Hal::BeginDraw();
 
-    ImGui::Begin("FPS");
+    ImGui::Begin("Performance");
     ImGui::Text("Hello, world!");
-    //ImGui::Text(u8"�e�X�g");
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
         ImGui::GetIO().Framerate);
     ImGui::Text("Mouse Pos: %d, %d", Input::GetMousePos().x, Input::GetMousePos().y);
@@ -173,10 +173,7 @@ void Manager::Draw()
     ImGui::Text("schedule time: %d", schedule_time);
     ImGui::End();
 
-    for (auto& debug_menu : debug_menu_)
-    {
-        debug_menu->DrawMenu();
-    }
+    Inspector::DrawInspector();
 
     ImGui_Hal::EndDraw();
 
@@ -321,4 +318,9 @@ void Manager::SceneChange(Scene* scene)
 {
 	scene_change_ = true;
 	next_scene_ = scene;
+}
+
+std::vector<Entity*> Manager::GetEntities()
+{
+    return entities_;
 }

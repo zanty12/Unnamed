@@ -136,7 +136,6 @@ public:
         return world;
     }
 
-private:
     static XMFLOAT4 EulerToQuat(XMFLOAT3 rotation)
     {
         XMFLOAT4 quat;

@@ -15,7 +15,8 @@ void CWater::Start()
                 (static_cast<float>(x) - (float)div_x_ / 2.0f) * world_transform.scale.x / (float)div_x_,
                 0.0f,
                 (static_cast<float>(z) - (float)div_z_ / 2.0f) * -world_transform.scale.z / (float)div_z_);
-            physX_vertex_.push_back(physx::PxVec3(vertex_[x * (div_z_ + 1) + z].Position.x, vertex_[x * (div_z_ + 1) + z].Position.y,
+            physX_vertex_.push_back(physx::PxVec3(vertex_[x * (div_z_ + 1) + z].Position.x,
+                                                  vertex_[x * (div_z_ + 1) + z].Position.y,
                                                   vertex_[x * (div_z_ + 1) + z].Position.z));
             vertex_[x * (div_z_ + 1) + z].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
             vertex_[x * (div_z_ + 1) + z].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 0.8f);
@@ -246,7 +247,7 @@ void CWater::Draw()
     Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
     //draw
-    Renderer::GetDeviceContext()->DrawIndexed((22 * 2) * 20 - 2, 0, 0);
+    Renderer::GetDeviceContext()->DrawIndexed(((div_z_ + 2) * 2 * div_x_ - 2), 0, 0);
 }
 
 void CWater::CleanUp()
@@ -263,13 +264,13 @@ float CWater::GetHeight(XMFLOAT3 position)
 {
     int x, z;
     Transform world_transform = GetWorldTransform();
-    x = static_cast<int>(position.x / 0.05f / world_transform.scale.x + 10);
-    z = static_cast<int>(position.z / -0.05f / world_transform.scale.z + 10);
+    x = static_cast<int>(position.x / (1.0f / static_cast<float>(div_x_)) / world_transform.scale.x + static_cast<float>(div_x_) / 2.0f);
+    z = static_cast<int>(position.z / (-1.0f / static_cast<float>(div_z_)) / world_transform.scale.z + static_cast<float>(div_z_) / 2);
     XMFLOAT3 pos0, pos1, pos2, pos3;
-    pos0 = vertex_[x * 21 + z].Position;
-    pos1 = vertex_[(x + 1) * 21 + z].Position;
-    pos2 = vertex_[x * 21 + z + 1].Position;
-    pos3 = vertex_[(x + 1) * 21 + z + 1].Position;
+    pos0 = vertex_[x * (div_z_ + 1) + z].Position;
+    pos1 = vertex_[(x + 1) * (div_z_ + 1) + z].Position;
+    pos2 = vertex_[x * (div_z_ + 1) + z + 1].Position;
+    pos3 = vertex_[(x + 1) * (div_z_ + 1) + z + 1].Position;
 
     XMFLOAT3 v12, v1p;
     v12.x = pos1.x - pos0.x;

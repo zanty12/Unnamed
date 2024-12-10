@@ -858,6 +858,7 @@
     <ClInclude Include="src\Unnamed\GameMode.h" />
     <ClInclude Include="src\Unnamed\helper\ini.h" />
     <ClInclude Include="src\Unnamed\imgui_impl_hal.h" />
+    <ClInclude Include="src\Unnamed\Inspector.h" />
     <ClInclude Include="src\Unnamed\main.h" />
     <ClInclude Include="src\Unnamed\manager.h" />
     <ClInclude Include="src\Unnamed\processpriority.h">
@@ -1004,6 +1005,7 @@
     <ClCompile Include="src\Unnamed\entity.cpp" />
     <ClCompile Include="src\Unnamed\helper\ini.cpp" />
     <ClCompile Include="src\Unnamed\imgui_impl_hal.cpp" />
+    <ClCompile Include="src\Unnamed\Inspector.cpp" />
     <ClCompile Include="src\Unnamed\main.cpp" />
     <ClCompile Include="src\Unnamed\manager.cpp" />
     <ClCompile Include="src\Unnamed\ProjectSettings.cpp" />

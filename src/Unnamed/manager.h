@@ -47,4 +47,5 @@ public:
 	static void RegisterDebugMenu(DebugMenu* debug_menu);
 	static void SkipFrame();
 	static void SceneChange(Scene* scene);
+    static std::vector<Entity*> GetEntities();
 };
