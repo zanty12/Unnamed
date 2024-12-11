@@ -258,6 +258,10 @@ void CWater::CleanUp()
     vertex_layout_->Release();
     shape_->release();
     actor_->release();
+    delete vertex_;
+    vertex_ = nullptr;
+    delete index_;
+    index_ = nullptr;
 }
 
 float CWater::GetHeight(XMFLOAT3 position)
