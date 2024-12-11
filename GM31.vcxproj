@@ -80,7 +80,7 @@
     <IncludePath>$(ProjectDir)\include\;$(ProjectDir)\src\;$(ProjectDir)\packages\directxtex_desktop_win10.2024.6.5.1\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)\include\;$(ProjectDir)\src\;$(ProjectDir)\packages\directxtex_desktop_win10.2024.6.5.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\include\;$(ProjectDir)\src\Unamed;$(ProjectDir)\src\Game;$(ProjectDir)\packages\directxtex_desktop_win10.2024.6.5.1\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -147,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\src\Game\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\PhysX;$(SolutionDir)include\;$(SolutionDir)src\Unnamed\;$(SolutionDir)src\Game\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -959,6 +959,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\admin\RiderProjects\GM31\\include\PhysX;C:\Users\admin\RiderProjects\GM31\\include\;C:\Users\admin\RiderProjects\GM31\\src\Unnamed\;C:\Users\admin\RiderProjects\GM31\\src\Game\;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Game\prefab\pinball.cpp" />
     <ClCompile Include="src\Game\scene\Clear.cpp" />

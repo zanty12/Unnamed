@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <string>
-#include "processpriority.h"
+#include "Unnamed/processpriority.h"
 #include "transform.h"
 #define PRIORITIES_H_
 
@@ -26,7 +26,7 @@ public:
     virtual ~Component()
     {
     };
-    virtual void InspectorWindow() = 0;
+    virtual void InspectorWindow();
     virtual void Start() = 0;
     virtual void Update() = 0;
     virtual void CleanUp() = 0;

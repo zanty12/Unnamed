@@ -3,10 +3,12 @@
 #include "components/CAudio.h"
 #include "prefab/player.h"
 #include "components/CCamera.h"
+#include "components/CDirectXTKSphere.h"
 #include "components/CModelRenderer.h"
 #include "components/CParticleEmitter.h"
 #include "components/CPhysXBox.h"
 #include "components/CPhysXRigidBody.h"
+#include "components/CPhysXSphere.h"
 #include "components/CPlane.h"
 #include "components/CTerrain.h"
 #include "components/CRect2D.h"
@@ -36,7 +38,7 @@ void TestScene::Setup()
 
     //create a cube
     Entity* cube = Manager::MakeEntity("Cube");
-    Transform::MoveTo(cube->GetTransform(), XMFLOAT3(0.0f, 5.0f, 0.0f));
+    Transform::MoveTo(cube->GetTransform(), XMFLOAT3(3.0f, 5.0f, 0.0f));
     cube->SetTag("Cube");
 
     CModelRenderer* modelRenderer = new CModelRenderer();
@@ -132,6 +134,25 @@ void TestScene::Setup()
     skybox_renderer->Load("asset\\model\\sky.obj");
     skybox->AddComponent(skybox_renderer);
     skybox->Start();
+
+    //a static sphere to act as a island
+    Entity* island = Manager::MakeEntity("island");
+    Transform::MoveTo(island->GetTransform(), XMFLOAT3(-5.0f, -2.0f, -4.0f));
+    CPhysXRigidBody* island_rigid_body = new CPhysXRigidBody(true);
+    island->AddComponent(island_rigid_body);
+    island_rigid_body->SetDynamic(false);
+    island_rigid_body->SetMass(0.0f);
+    CPhysXSphere* island_sphere = new CPhysXSphere();
+    island_sphere->SetRadius(10.0f);
+    island_sphere->SetMaterial(1.0f, 1.0f, 0.0f);
+    island_sphere->SetQuery(false);
+    island->AddComponent(island_sphere);
+    CDirectXTKSphere * island_renderer = new CDirectXTKSphere();
+    island_renderer->SetRadius(10.0f);
+    island->AddComponent(island_renderer);
+    island->Start();
+
+
 
     /*Pinball* player = new Pinball();
     player->Start();

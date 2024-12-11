@@ -22,6 +22,7 @@ public:
     void Update() override;
     void CleanUp() override;
     void Draw() override;
+    void InspectorWindow() override;
     void SetTarget(DirectX::XMFLOAT3 target) { target_ = target; }
     XMFLOAT3 GetTarget() const { return target_; }
     XMFLOAT3 GetOffset() const { return offset_; }

@@ -3,6 +3,8 @@
 #include "manager.h"
 #include "CCamera.h"
 
+#include "ImGui/imgui.h"
+
 void CCamera::Start()
 {
     if (parent_id_ < 0)
@@ -66,6 +68,21 @@ void CCamera::Draw()
         DirectX::XMStoreFloat4x4(&projection_matrix_, projectionMatrix);
 
         Renderer::SetProjectionMatrix(projectionMatrix);
+    }
+}
+
+void CCamera::InspectorWindow()
+{
+    //parent class inspector
+    Component::InspectorWindow();
+    //camera specific inspector
+    ImGui::Checkbox("Look At Parent", &look_at_parent_);
+    ImGui::Checkbox("Smoothing", &smoothing_);
+    ImGui::DragFloat3("Offset", &offset_.x, 0.1f);
+    ImGui::DragFloat3("Target", &target_.x, 0.1f);
+    if (ImGui::Button("Activate"))
+    {
+        Activate();
     }
 }
 

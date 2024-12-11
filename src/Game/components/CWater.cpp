@@ -141,8 +141,8 @@ void CWater::Update()
     {
         for (int z = 0; z <= div_z_; z++)
         {
-            vertex_[x * (div_z_ + 1) + z].Position.y = sinf(static_cast<float>(x) * 2.0f + time) * 1.0f;
-            vertex_[x * (div_z_ + 1) + z].Position.y += sinf(static_cast<float>(x + z) * 2.0f + time) * 1.0f;
+            vertex_[x * (div_z_ + 1) + z].Position.y = sinf(static_cast<float>(x) * 2.0f + time) * 0.8f;
+            vertex_[x * (div_z_ + 1) + z].Position.y += sinf(static_cast<float>(x + z) * 2.0f + time) * 0.8f;
             physX_vertex_[x * (div_z_ + 1) + z].y = vertex_[x * (div_z_ + 1) + z].Position.y;
         }
     }
