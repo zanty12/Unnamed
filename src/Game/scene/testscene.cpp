@@ -104,15 +104,15 @@ void TestScene::Setup()
     particle->AddComponent(particleComponent);*/
 
     //Create a plane
-    Entity* plane = Manager::MakeEntity("Terrain");
+    Entity* plane = Manager::MakeEntity("Water");
 	plane->GetTransform().scale = XMFLOAT3(100, 1.0, 100);
-    CWater* planecomponent = new CWater();
-    CTexture2D* texture_2d = new CTexture2D(L"asset/texture/cat.png");
-    planecomponent->SetTexture(texture_2d);
-    plane->AddComponent(planecomponent);
+    CWater* water = new CWater();
+    CTexture2D* texture_2d = new CTexture2D(L"asset/texture/water.png");
+    water->SetTexture(texture_2d);
+    plane->AddComponent(water);
     plane->AddComponent(texture_2d);
     plane->Start();
-    planecomponent->SetEndUV(XMFLOAT2(1.0f, 1.0f));
+    water->SetEndUV(XMFLOAT2(1.0f, 1.0f));
     PhysX_Impl::GetScene()->addActor(*physx::PxCreatePlane(
         *PhysX_Impl::GetPhysics(), physx::PxPlane(0, 1, 0, 0.5f),
         *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f))
@@ -137,22 +137,21 @@ void TestScene::Setup()
 
     //a static sphere to act as a island
     Entity* island = Manager::MakeEntity("island");
+    island->GetTransform().scale = XMFLOAT3(5, 5, 5);
     Transform::MoveTo(island->GetTransform(), XMFLOAT3(-5.0f, -2.0f, -4.0f));
     CPhysXRigidBody* island_rigid_body = new CPhysXRigidBody(true);
     island->AddComponent(island_rigid_body);
     island_rigid_body->SetDynamic(false);
     island_rigid_body->SetMass(0.0f);
     CPhysXSphere* island_sphere = new CPhysXSphere();
-    island_sphere->SetRadius(10.0f);
+    island_sphere->SetRadius(1.0f);
     island_sphere->SetMaterial(1.0f, 1.0f, 0.0f);
     island_sphere->SetQuery(false);
     island->AddComponent(island_sphere);
-    CDirectXTKSphere * island_renderer = new CDirectXTKSphere();
-    island_renderer->SetRadius(10.0f);
+    CModelRenderer* island_renderer = new CModelRenderer();
+    island_renderer->Load("asset\\model\\island.obj");
     island->AddComponent(island_renderer);
     island->Start();
-
-
 
     /*Pinball* player = new Pinball();
     player->Start();
