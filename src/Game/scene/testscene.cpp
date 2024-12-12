@@ -146,7 +146,7 @@ void TestScene::Setup()
     Transform::ScaleTo(TitleControl->GetTransform(), XMFLOAT3(SCREEN_WIDTH/100.0f, SCREEN_HEIGHT/100.0f, 0.0f));
     CTexture2D* texture = new CTexture2D(L"asset/texture/title2.png");
     CRect2D* rect = new CRect2D();
-    rect->SetDrawPriority(10);
+    //rect->SetDrawPriority(10);
     rect->SetTexture(texture);
     TitleControl->AddComponent(rect);
     TitleControl->AddComponent(texture);
