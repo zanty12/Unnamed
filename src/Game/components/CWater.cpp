@@ -19,7 +19,7 @@ void CWater::Start()
                                                   vertex_[x * (div_z_ + 1) + z].Position.y,
                                                   vertex_[x * (div_z_ + 1) + z].Position.z));
             vertex_[x * (div_z_ + 1) + z].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
-            vertex_[x * (div_z_ + 1) + z].Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex_[x * (div_z_ + 1) + z].Diffuse = DirectX::XMFLOAT4(0.5f, 0.5f, 0.7f, 0.6f);
             vertex_[x * (div_z_ + 1) + z].TexCoord = DirectX::XMFLOAT2(x, z);
         }
     }
@@ -141,8 +141,8 @@ void CWater::Update()
     {
         for (int z = 0; z <= div_z_; z++)
         {
-            vertex_[x * (div_z_ + 1) + z].Position.y = sinf(static_cast<float>(x) * 2.0f + time) * 0.8f;
-            vertex_[x * (div_z_ + 1) + z].Position.y += sinf(static_cast<float>(x + z) * 2.0f + time) * 0.8f;
+            vertex_[x * (div_z_ + 1) + z].Position.y = sinf(static_cast<float>(x) * 1.5f + time) * 0.8f;
+            vertex_[x * (div_z_ + 1) + z].Position.y += sinf(static_cast<float>(x + z) * 1.5f + time) * 0.8f;
             physX_vertex_[x * (div_z_ + 1) + z].y = vertex_[x * (div_z_ + 1) + z].Position.y;
         }
     }
@@ -201,13 +201,15 @@ void CWater::Update()
     actor_->detachShape(*shape_);
     shape_->release();
     shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry,
-                                                   *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f));
+                                                   *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 1.0f));
     shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
     actor_->attachShape(*shape_);
 }
 
 void CWater::Draw()
 {
+    //ATC
+    Renderer::SetATCEnable(true);
     //input layout
     Renderer::GetDeviceContext()->IASetInputLayout(vertex_layout_);
 
@@ -235,7 +237,7 @@ void CWater::Draw()
     //material
     MATERIAL material;
     ZeroMemory(&material, sizeof(material));
-    material.Diffuse = DirectX::XMFLOAT4(0.5f, 0.5f, 0.7f, 0.6f);
+    material.Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     material.TextureEnable = true;
     Renderer::SetMaterial(material);
 
@@ -248,6 +250,8 @@ void CWater::Draw()
 
     //draw
     Renderer::GetDeviceContext()->DrawIndexed(((div_z_ + 2) * 2 * div_x_ - 2), 0, 0);
+    //ATC
+    Renderer::SetATCEnable(false);
 }
 
 void CWater::CleanUp()
