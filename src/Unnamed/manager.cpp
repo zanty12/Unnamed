@@ -15,9 +15,9 @@
 #include "components/CCamera.h"
 #include "components/CModelRenderer.h"
 #include "components/CText2D.h"
-#include "Game/gamemode/GMDefaultGamemode.h"
-#include "Game/scene/physXtest.h"
-#include "Game/scene/title.h"
+#include "gamemode/GMDefaultGamemode.h"
+#include "scene/physXtest.h"
+#include "scene/title.h"
 #include "traits/debugmenu.h"
 #include "traits/object/spawnable.h"
 

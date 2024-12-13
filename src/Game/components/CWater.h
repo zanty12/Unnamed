@@ -1,9 +1,9 @@
 #pragma once
-#include "Unnamed/components/CTexture.h"
-#include "Unnamed/renderer.h"
-#include "Unnamed/system/PhysX_Impl.h"
-#include "Unnamed/components/Component.h"
-#include "Unnamed/traits/drawable.h"
+#include "components/CTexture.h"
+#include "renderer.h"
+#include "system/PhysX_Impl.h"
+#include "components/Component.h"
+#include "traits/drawable.h"
 
 class CWater : public Component, public Drawable
 {

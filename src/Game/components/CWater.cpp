@@ -19,7 +19,7 @@ void CWater::Start()
                                                   vertex_[x * (div_z_ + 1) + z].Position.y,
                                                   vertex_[x * (div_z_ + 1) + z].Position.z));
             vertex_[x * (div_z_ + 1) + z].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
-            vertex_[x * (div_z_ + 1) + z].Diffuse = DirectX::XMFLOAT4(0.5f, 0.5f, 0.7f, 0.6f);
+            vertex_[x * (div_z_ + 1) + z].Diffuse = DirectX::XMFLOAT4(0.5f, 0.5f, 0.7f, 0.7f);
             vertex_[x * (div_z_ + 1) + z].TexCoord = DirectX::XMFLOAT2(x, z);
         }
     }

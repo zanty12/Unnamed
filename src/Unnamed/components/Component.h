@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <string>
-#include "Unnamed/processpriority.h"
+#include "processpriority.h"
 #include "transform.h"
 #define PRIORITIES_H_
 

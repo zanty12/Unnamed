@@ -961,6 +961,7 @@
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="src\Game\prefab\pinball.cpp" />
     <ClCompile Include="src\Game\scene\Clear.cpp" />
