@@ -85,5 +85,10 @@ public:
 
     void Update() override;
 
+    MODEL *GetModel() const
+    {
+        return m_Model;
+    }
+
     void CleanUp() override;
 };
