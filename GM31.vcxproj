@@ -885,84 +885,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game\components\CLoadBehaviour.cpp" />
-    <ClCompile Include="src\Game\components\CWater.cpp">
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <Optimization>Disabled</Optimization>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <AssemblerOutput>NoListing</AssemblerOutput>
-      <AssemblerListingLocation>GM31\x64\Debug\</AssemblerListingLocation>
-      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
-      <BrowseInformation>false</BrowseInformation>
-      <BrowseInformationFile>GM31\x64\Debug\</BrowseInformationFile>
-      <CompileAs>Default</CompileAs>
-      <ConformanceMode>true</ConformanceMode>
-      <DiagnosticsFormat>Column</DiagnosticsFormat>
-      <DisableLanguageExtensions>false</DisableLanguageExtensions>
-      <ErrorReporting>Prompt</ErrorReporting>
-      <ExpandAttributedSource>false</ExpandAttributedSource>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <EnableASAN>false</EnableASAN>
-      <EnableFuzzer>false</EnableFuzzer>
-      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Precise</FloatingPointModel>
-      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
-      <GenerateModuleDependencies>false</GenerateModuleDependencies>
-      <GenerateSourceDependencies>false</GenerateSourceDependencies>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
-      <MinimalRebuild>false</MinimalRebuild>
-      <ModuleDependenciesFile>GM31\x64\Debug\</ModuleDependenciesFile>
-      <ModuleOutputFile>GM31\x64\Debug\</ModuleOutputFile>
-      <OmitDefaultLibName>false</OmitDefaultLibName>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <ObjectFileName>GM31\x64\Debug\</ObjectFileName>
-      <CallingConvention>Cdecl</CallingConvention>
-      <ProgramDataBaseFileName>GM31\x64\Debug\vc143.pdb</ProgramDataBaseFileName>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>GM31\x64\Debug\GM31.pch</PrecompiledHeaderOutputFile>
-      <PreprocessToFile>false</PreprocessToFile>
-      <PreprocessKeepComments>false</PreprocessKeepComments>
-      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
-      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
-      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
-      <ShowIncludes>false</ShowIncludes>
-      <SourceDependenciesFile>GM31\x64\Debug\</SourceDependenciesFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
-      <SmallerTypeCheck>false</SmallerTypeCheck>
-      <SpectreMitigation>false</SpectreMitigation>
-      <StructMemberAlignment>Default</StructMemberAlignment>
-      <TrackerLogDirectory>GM31\x64\Debug\GM31.tlog\</TrackerLogDirectory>
-      <TranslateIncludes>false</TranslateIncludes>
-      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <UseFullPaths>true</UseFullPaths>
-      <WarningLevel>Level3</WarningLevel>
-      <XMLDocumentationFileName>GM31\x64\Debug\</XMLDocumentationFileName>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <IntelJCCErratum>false</IntelJCCErratum>
-      <BuildStlModules>false</BuildStlModules>
-      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
-      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
-      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_MBCS;</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\admin\RiderProjects\GM31\\include\PhysX;C:\Users\admin\RiderProjects\GM31\\include\;C:\Users\admin\RiderProjects\GM31\\src\Unnamed\;C:\Users\admin\RiderProjects\GM31\\src\Game\;</AdditionalIncludeDirectories>
-      <LinkCompiled>true</LinkCompiled>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
-    </ClCompile>
+    <ClCompile Include="src\Game\components\CWater.cpp" />
     <ClCompile Include="src\Game\prefab\pinball.cpp" />
     <ClCompile Include="src\Game\scene\Clear.cpp" />
     <ClCompile Include="src\Game\gamemode\GMCrush.cpp" />
@@ -1075,13 +998,31 @@
     <Content Include="asset\model\bullet.mtl" />
     <Content Include="asset\model\bullet.obj" />
     <Content Include="asset\model\cube.png" />
+    <Content Include="asset\model\island.jpg" />
+    <Content Include="asset\model\island.mtl" />
+    <Content Include="asset\model\island.obj" />
     <Content Include="asset\model\normalcube.png" />
     <Content Include="asset\model\player.mtl" />
     <Content Include="asset\model\player.obj" />
     <Content Include="asset\model\roundedcube.mtl" />
     <Content Include="asset\model\roundedcube.obj" />
+    <Content Include="asset\model\sky.jpg" />
     <Content Include="asset\model\sky.mtl" />
     <Content Include="asset\model\sky.obj" />
+    <Content Include="asset\model\Textures\1024\Wooden Crate_Crate_BaseColor.png" />
+    <Content Include="asset\model\Textures\1024\Wooden Crate_Crate_Height.png" />
+    <Content Include="asset\model\Textures\1024\Wooden Crate_Crate_Metallic.png" />
+    <Content Include="asset\model\Textures\1024\Wooden Crate_Crate_Normal.png" />
+    <Content Include="asset\model\Textures\1024\Wooden Crate_Crate_Roughness.png" />
+    <Content Include="asset\model\Textures\1024\Wooden_Crate.json" />
+    <Content Include="asset\model\Textures\2048\WoodenCrate_Crate_BaseColor.png" />
+    <Content Include="asset\model\Textures\2048\WoodenCrate_Crate_Height.png" />
+    <Content Include="asset\model\Textures\2048\WoodenCrate_Crate_Metallic.png" />
+    <Content Include="asset\model\Textures\2048\WoodenCrate_Crate_Normal.png" />
+    <Content Include="asset\model\Textures\2048\WoodenCrate_Crate_Roughness.png" />
+    <Content Include="asset\model\Textures\2048\Wooden_Crate.json" />
+    <Content Include="asset\model\WoodenCrate.mtl" />
+    <Content Include="asset\model\WoodenCrate.obj" />
     <Content Include="asset\shader\unlitTexturePS.cso" />
     <Content Include="asset\shader\unlitTextureVS.cso" />
     <Content Include="asset\sound\bgm.wav" />

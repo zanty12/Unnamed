@@ -2366,9 +2366,6 @@
     <ClCompile Include="src\Game\components\CLoadBehaviour.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\components\CWater.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\scene\Load.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -2382,6 +2379,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Unnamed\system\taskscheduler.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\components\CWater.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

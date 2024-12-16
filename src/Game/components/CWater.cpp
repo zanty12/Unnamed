@@ -16,8 +16,8 @@ void CWater::Start()
                 0.0f,
                 (static_cast<float>(z) - (float)div_z_ / 2.0f) * -world_transform.scale.z / (float)div_z_);
             physX_vertex_.push_back(physx::PxVec3(vertex_[x * (div_z_ + 1) + z].Position.x,
-                                                  vertex_[x * (div_z_ + 1) + z].Position.y,
-                                                  vertex_[x * (div_z_ + 1) + z].Position.z));
+                vertex_[x * (div_z_ + 1) + z].Position.y,
+                vertex_[x * (div_z_ + 1) + z].Position.z));
             vertex_[x * (div_z_ + 1) + z].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
             vertex_[x * (div_z_ + 1) + z].Diffuse = DirectX::XMFLOAT4(0.5f, 0.5f, 0.7f, 0.7f);
             vertex_[x * (div_z_ + 1) + z].TexCoord = DirectX::XMFLOAT2(x, z);
@@ -124,7 +124,7 @@ void CWater::Start()
 
     actor_ = PhysX_Impl::GetPhysics()->createRigidStatic(physx::PxTransform(physx::PxIdentity));
     shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry,
-                                                   *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f));
+        *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f));
     shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
     actor_->attachShape(*shape_);
 
@@ -201,7 +201,7 @@ void CWater::Update()
     actor_->detachShape(*shape_);
     shape_->release();
     shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry,
-                                                   *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 1.0f));
+        *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 1.0f));
     shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
     actor_->attachShape(*shape_);
 }
@@ -224,7 +224,7 @@ void CWater::Draw()
     //rot = DirectX::XMMatrixRotationRollPitchYaw(world_transform.rotation.x, world_transform.rotation.y,world_transform.rotation.z);
     rot = DirectX::XMMatrixRotationQuaternion(XMLoadFloat4(&world_transform.quaternion));
     trans = DirectX::XMMatrixTranslation(world_transform.position.x, world_transform.position.y,
-                                         world_transform.position.z);
+        world_transform.position.z);
     world = scale * rot * trans;
     Renderer::SetWorldMatrix(world);
 
