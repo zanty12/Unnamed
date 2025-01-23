@@ -5,8 +5,8 @@
 #include "manager.h"
 #include "components/CBulletBehaviour.h"
 #include "components/CModelRenderer.h"
-#include <components/CPhysXSphere.h>
-#include <components/CPhysXRigidBody.h>
+#include <components/PhysX/CPhysXSphere.h>
+#include <components/PhysX/CPhysXRigidBody.h>
 
 void Bullet::Start()
 {

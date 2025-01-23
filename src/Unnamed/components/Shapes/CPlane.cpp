@@ -3,7 +3,7 @@
 #include "manager.h"
 #include "CPlane.h"
 
-#include "CSprite2D.h"
+#include "components/CSprite2D.h"
 #include "entity.h"
 
 

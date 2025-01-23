@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "system/PhysX_Impl.h"
-#include "component.h"
+#include "components/Component.h"
 #include "traits/drawable.h"
 
 #include <DirectXTK/GeometricPrimitive.h>

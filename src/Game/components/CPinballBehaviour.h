@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "components/Component.h"
-#include "components/CPhysXRigidBody.h"
+#include "components/PhysX/CPhysXRigidBody.h"
 #include "traits/DebugMenu.h"
 
 class CPinballBehaviour : public Component, public DebugMenu

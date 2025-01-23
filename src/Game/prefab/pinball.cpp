@@ -9,11 +9,10 @@
 #include "components/CPinballBehaviour.h"
 #include "components/CAnimationModel.h"
 #include "components/CTransformConstraint.h"
-#include <components/CPhysXRigidBody.h>
-#include <components/CPhysXCapsule.h>
+#include <components/PhysX/CPhysXRigidBody.h>
 
-#include "components/CDirectXTKSphere.h"
-#include "components/CPhysXSphere.h"
+#include "components/Shapes/CDirectXTKSphere.h"
+#include "components/PhysX/CPhysXSphere.h"
 
 void Pinball::Start()
 {

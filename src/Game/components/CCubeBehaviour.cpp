@@ -1,5 +1,5 @@
 ﻿#include "CCubeBehaviour.h"
-#include "components/CPhysXRigidBody.h"
+#include "components/PhysX/CPhysXRigidBody.h"
 #include "manager.h"
 #include "prefab/explosion.h"
 #include "gamemode/GMCrush.h"

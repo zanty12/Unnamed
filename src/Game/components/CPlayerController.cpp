@@ -8,7 +8,7 @@
 #include "entity.h"
 #include "system/timesystem.h"
 #include "prefab/bullet.h"
-#include <components/CPhysXRigidBody.h>
+#include <components/PhysX/CPhysXRigidBody.h>
 
 #include "components/CAnimationModel.h"
 #include "components/CTerrain.h"

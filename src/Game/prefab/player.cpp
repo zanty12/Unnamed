@@ -9,8 +9,8 @@
 #include "components/CPlayerController.h"
 #include "components/CAnimationModel.h"
 #include "components/CTransformConstraint.h"
-#include <components/CPhysXRigidBody.h>
-#include <components/CPhysXCapsule.h>
+#include <components/PhysX/CPhysXRigidBody.h>
+#include <components/PhysX/CPhysXCapsule.h>
 
 #include "components/CPlayerMenu.h"
 

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <memory>
 
-#include "CTexture.h"
+#include "components/CTexture.h"
 #include "components/Component.h"
 #include "DirectXTK/GeometricPrimitive.h"
 #include "DirectXTK/SimpleMath.h"

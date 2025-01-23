@@ -1,6 +1,6 @@
 ﻿#include "CPinballBehaviour.h"
 #include "Manager.h"
-#include "components/CPhysXSphere.h"
+#include "components/PhysX/CPhysXSphere.h"
 #include "system/input.h"
 
 void CPinballBehaviour::Start()

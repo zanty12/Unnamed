@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-#include "component.h"
+#include "components/Component.h"
 #include "system/PhysX_Impl.h"
 
 namespace physx

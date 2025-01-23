@@ -3,7 +3,7 @@
 #include "components/CAudio.h"
 #include "prefab/player.h"
 #include "components/CCamera.h"
-#include "components/CPlane.h"
+#include "components/Shapes/CPlane.h"
 #include "components/CRect2D.h"
 #include "components/CSprite2D.h"
 #include "components/CText2D.h"

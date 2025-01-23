@@ -5,10 +5,10 @@
 
 #include "components/CAudio.h"
 #include "components/CCamera.h"
-#include "components/CDirectXTKBox.h"
+#include "components/Shapes/CDirectXTKBox.h"
 #include "components/CModelRenderer.h"
-#include "components/CPhysXBox.h"
-#include "components/CPhysXRigidBody.h"
+#include "components/PhysX/CPhysXBox.h"
+#include "components/PhysX/CPhysXRigidBody.h"
 #include "components/CTransformConstraint.h"
 #include "components/CCubeBehaviour.h" 
 

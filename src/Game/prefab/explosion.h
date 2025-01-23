@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "entity.h"
 #include "manager.h"
-#include "components/CPlane.h"
+#include "components/Shapes/CPlane.h"
 #include "components/CSprite2D.h"
 #include "components/CExplosionBehaviour.h"
 #include "traits/object/spawnable.h"

@@ -1,11 +1,10 @@
 ﻿#pragma once
 #include <d3d11.h>
 
-#include "Component.h"
-#include "CTexture.h"
+#include "components/Component.h"
+#include "components/CTexture.h"
 #include "processpriority.h"
 #include "traits/drawable.h"
-#include "transform.h"
 
 class CPrimitive3D : public Component, public Drawable
 {

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "components/CModelRenderer.h"
-#include "components/CPhysXRigidBody.h"
+#include "components/PhysX/CPhysXRigidBody.h"
 #include "traits/debugmenu.h"
 
 class CPlayerMenu : public Component, public DebugMenu

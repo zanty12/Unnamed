@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "components/CPhysXRigidBody.h"
+#include "components/PhysX/CPhysXRigidBody.h"
 
 #include <iostream>
 

@@ -1,7 +1,7 @@
 #include "entity.h"
 
 #include "manager.h"
-#include "components/CPhysXRigidBody.h"
+#include "components/PhysX/CPhysXRigidBody.h"
 
 void Entity::Update()
 {

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "renderer.h"
 #include "manager.h"
-#include "CTexture.h"
+#include "components/CTexture.h"
 
 void CDirectXTKPrimitive::Update()
 {
