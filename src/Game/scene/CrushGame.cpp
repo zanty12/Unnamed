@@ -14,6 +14,7 @@
 #include "gamemode/GMCrush.h"
 
 #include "components/CText2D.h"
+#include "components/CTexture2D.h"
 
 
 void CrushGame::Setup()
@@ -54,11 +55,14 @@ void CrushGame::Setup()
     Transform::MoveTo(plane->GetTransform(), XMFLOAT3(0, -0.5f, 0));
     Transform::ScaleTo(plane->GetTransform(), XMFLOAT3(5.0f, 1.0f, 5.0f));
     CPlane* planecomponent = new CPlane();
-    CVideoTexture* video_texture = new CVideoTexture("asset/video/banana.mp4");
-    video_texture->SetLoop(1);
-    planecomponent->SetTexture(video_texture);
+    CTexture2D* texture_2d = new CTexture2D(L"asset/texture/calibrate.png");
+    planecomponent->SetTexture(texture_2d);
     plane->AddComponent(planecomponent);
-    plane->AddComponent(video_texture);
+    /*CVideoTexture* video_texture = new CVideoTexture("asset/video/banana.mp4");
+    video_texture->SetLoop(1);
+    planecomponent->SetTexture(video_texture);*/
+    plane->AddComponent(planecomponent);
+    /*plane->AddComponent(video_texture);*/
     //add rigidbody
     CPhysXRigidBody* plane_rigid_body = new CPhysXRigidBody(false);
     plane->AddComponent(plane_rigid_body);
