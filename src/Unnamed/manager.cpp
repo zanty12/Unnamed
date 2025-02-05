@@ -84,13 +84,13 @@ void Manager::Update()
 
     start_time = timeGetTime();
     //update all entities
-    for (auto& entity : entities_)
+    /*for (auto& entity : entities_)
     {
         if (entity != nullptr)
         {
             entity->Update();
         }
-    }
+    }*/
 
     schedule_time = timeGetTime() - start_time;
     start_time = timeGetTime();

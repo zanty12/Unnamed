@@ -816,6 +816,7 @@
     <ClInclude Include="src\Game\prefab\player.h" />
     <ClInclude Include="src\Game\scene\CrushGame.h" />
     <ClInclude Include="src\Game\scene\CubeGame.h" />
+    <ClInclude Include="src\Game\scene\JointDemo.h" />
     <ClInclude Include="src\Game\scene\Load.h" />
     <ClInclude Include="src\Game\scene\physXtest.h" />
     <ClInclude Include="src\Game\scene\testscene.h" />
@@ -901,6 +902,7 @@
     <ClCompile Include="src\Game\prefab\player.cpp" />
     <ClCompile Include="src\Game\scene\CrushGame.cpp" />
     <ClCompile Include="src\Game\scene\CubeGame.cpp" />
+    <ClCompile Include="src\Game\scene\JointDemo.cpp" />
     <ClCompile Include="src\Game\scene\Load.cpp" />
     <ClCompile Include="src\Game\scene\physXtest.cpp" />
     <ClCompile Include="src\Game\scene\testscene.cpp" />
@@ -995,6 +997,7 @@
       <LinkCompiled>true</LinkCompiled>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_MBCS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXCapsule.cpp">
       <AssemblerOutput>NoListing</AssemblerOutput>
@@ -1073,6 +1076,7 @@
       <LinkCompiled>true</LinkCompiled>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_MBCS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXCharacterController.cpp">
       <AssemblerOutput>NoListing</AssemblerOutput>
@@ -1151,6 +1155,7 @@
       <LinkCompiled>true</LinkCompiled>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_MBCS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\include\;$(SolutionDir)\include\PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXJoint.cpp" />
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXPrimitive.cpp">
@@ -1230,6 +1235,7 @@
       <LinkCompiled>true</LinkCompiled>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_MBCS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\src\Game\</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXRigidBody.cpp">
       <AssemblerOutput>NoListing</AssemblerOutput>
@@ -1308,6 +1314,7 @@
       <LinkCompiled>true</LinkCompiled>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_MBCS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\Game\;$(SolutionDir)\src\Unnamed\</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXSphere.cpp">
       <AssemblerOutput>NoListing</AssemblerOutput>
@@ -1386,6 +1393,7 @@
       <LinkCompiled>true</LinkCompiled>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_MBCS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\include\PhysX;$(SolutionDir)\include\;$(SolutionDir)\src\Unnamed\;$(SolutionDir)\src\Game\</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\Shapes\CDirectXTKBox.cpp" />
     <ClCompile Include="src\Unnamed\components\Shapes\CDirectXTKPrimitive.cpp" />
