@@ -2151,9 +2151,6 @@
     <ClInclude Include="src\Unnamed\components\PhysX\CPhysXCharacterController.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Unnamed\components\PhysX\CPhysXPrimitive.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\Unnamed\components\PhysX\CPhysXRigidBody.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -2176,6 +2173,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Unnamed\components\PhysX\CPhysXJoint.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\scene\JointDemo.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Unnamed\components\PhysX\CPhysXPrimitive.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2363,9 +2366,6 @@
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXCharacterController.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Unnamed\components\PhysX\CPhysXPrimitive.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXRigidBody.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -2388,6 +2388,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Unnamed\components\PhysX\CPhysXJoint.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\scene\JointDemo.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Unnamed\components\PhysX\CPhysXPrimitive.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
