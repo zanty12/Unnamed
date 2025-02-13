@@ -1,4 +1,4 @@
-﻿#include "CrushGame.h"
+﻿#include "JointCrush.h"
 #include "physXtest.h"
 #include "manager.h"
 #include "system/PhysX_Impl.h"
@@ -16,10 +16,12 @@
 #include "components/CText2D.h"
 #include "components/CTexture2D.h"
 
+void CreateCubeGrid(physx::PxPhysics* physics, physx::PxScene* scene,
+                    int gridSizeX, int gridSizeY, int gridSizeZ, float spacing);
 
-void CrushGame::Setup()
+void JointCrush::Setup()
 {
-    //create 1000 boxes in a 10x10x10 grid
+    /*//create 1000 boxes in a 10x10x10 grid
     int count = 0;
     for (int i = 0; i < 10; i++)
     {
@@ -39,8 +41,14 @@ void CrushGame::Setup()
                 count++;
             }
         }
-    }
+    }*/
 
+    int count = 100;
+    //create a grid of cubes and connect them with joints
+
+    CreateCubeGrid(PhysX_Impl::GetPhysics(), PhysX_Impl::GetScene(), 10, 10, 2, 1.1f);
+
+    
     if (GMCrush* gameMode = dynamic_cast<GMCrush*>(Manager::GetGameMode()))
     {
         gameMode->SetBlocks(count);
@@ -49,7 +57,7 @@ void CrushGame::Setup()
     //Create a plane
     Entity* plane = Manager::MakeEntity("plane");
     Transform::MoveTo(plane->GetTransform(), XMFLOAT3(0, -0.5f, 0));
-    Transform::ScaleTo(plane->GetTransform(), XMFLOAT3(5.0f, 1.0f, 5.0f));
+    Transform::ScaleTo(plane->GetTransform(), XMFLOAT3(7.5f, 1.0f, 7.5f));
     CPlane* planecomponent = new CPlane();
     CTexture2D* texture_2d = new CTexture2D(L"asset/texture/calibrate.png");
     planecomponent->SetTexture(texture_2d);
@@ -80,8 +88,8 @@ void CrushGame::Setup()
 
     //Create Surrounding Walls
     Entity* wall1 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall1->GetTransform(), XMFLOAT3(-10.0f, 5.0f, 0));
-    Transform::ScaleTo(wall1->GetTransform(), XMFLOAT3(0.1f, 10.0f, 20.0f));
+    Transform::MoveTo(wall1->GetTransform(), XMFLOAT3(-15.0f, 5.0f, 0));
+    Transform::ScaleTo(wall1->GetTransform(), XMFLOAT3(0.1f, 15.0f, 30.0f));
     CPhysXRigidBody* wall_rigid_body = new CPhysXRigidBody(false);
     wall1->AddComponent(wall_rigid_body);
     CPhysXBox* wall_physXBox = new CPhysXBox();
@@ -90,8 +98,8 @@ void CrushGame::Setup()
     wall1->Start();
 
     Entity* wall2 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall2->GetTransform(), XMFLOAT3(10.0f, 5.0f, 0));
-    Transform::ScaleTo(wall2->GetTransform(), XMFLOAT3(0.1f, 10.0f, 20.0f));
+    Transform::MoveTo(wall2->GetTransform(), XMFLOAT3(15.0f, 5.0f, 0));
+    Transform::ScaleTo(wall2->GetTransform(), XMFLOAT3(0.1f, 15.0f, 30.0f));
     CPhysXRigidBody* wall_rigid_body2 = new CPhysXRigidBody(false);
     wall2->AddComponent(wall_rigid_body2);
     CPhysXBox* wall_physXBox2 = new CPhysXBox();
@@ -100,8 +108,8 @@ void CrushGame::Setup()
     wall2->Start();
 
     Entity* wall3 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall3->GetTransform(), XMFLOAT3(0, 5.0f, -10.0f));
-    Transform::ScaleTo(wall3->GetTransform(), XMFLOAT3(20.0f, 10.0f, 0.1f));
+    Transform::MoveTo(wall3->GetTransform(), XMFLOAT3(0, 5.0f, -15.0f));
+    Transform::ScaleTo(wall3->GetTransform(), XMFLOAT3(30.0f, 15.0f, 0.1f));
     CPhysXRigidBody* wall_rigid_body3 = new CPhysXRigidBody(false);
     wall3->AddComponent(wall_rigid_body3);
     CPhysXBox* wall_physXBox3 = new CPhysXBox();
@@ -110,8 +118,8 @@ void CrushGame::Setup()
     wall3->Start();
 
     Entity* wall4 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall4->GetTransform(), XMFLOAT3(0, 5.0f, 10.0f));
-    Transform::ScaleTo(wall4->GetTransform(), XMFLOAT3(20.0f, 10.0f, 0.1f));
+    Transform::MoveTo(wall4->GetTransform(), XMFLOAT3(0, 5.0f, 15.0f));
+    Transform::ScaleTo(wall4->GetTransform(), XMFLOAT3(30.0f, 15.0f, 0.1f));
     CPhysXRigidBody* wall_rigid_body4 = new CPhysXRigidBody(false);
     wall4->AddComponent(wall_rigid_body4);
     CPhysXBox* wall_physXBox4 = new CPhysXBox();
@@ -121,8 +129,8 @@ void CrushGame::Setup()
 
     //add a top wall
     Entity* wall5 = Manager::MakeEntity("wall");
-    Transform::MoveTo(wall5->GetTransform(), XMFLOAT3(0, 10.0f, 0));
-    Transform::ScaleTo(wall5->GetTransform(), XMFLOAT3(20.0f, 0.1f, 20.0f));
+    Transform::MoveTo(wall5->GetTransform(), XMFLOAT3(0, 15.0f, 0));
+    Transform::ScaleTo(wall5->GetTransform(), XMFLOAT3(30.0f, 0.1f, 30.0f));
     CPhysXRigidBody* wall_rigid_body5 = new CPhysXRigidBody(false);
     wall5->AddComponent(wall_rigid_body5);
     CPhysXBox* wall_physXBox5 = new CPhysXBox();
@@ -141,4 +149,65 @@ void CrushGame::Setup()
     textComponent->SetAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
     text->AddComponent(textComponent);
     text->Start();
+}
+
+void CreateCubeGrid(physx::PxPhysics* physics, physx::PxScene* scene,
+                    int gridSizeX, int gridSizeY, int gridSizeZ, float spacing) {
+    std::vector<std::vector<std::vector<Entity*>>> grid(gridSizeX,
+        std::vector<std::vector<Entity*>>(gridSizeY, std::vector<Entity*>(gridSizeZ, nullptr)));
+
+    // Create cubes and place them in the grid
+    for (int x = 0; x < gridSizeX; ++x) {
+        for (int y = 0; y < gridSizeY; ++y) {
+            for (int z = 0; z < gridSizeZ; ++z) {
+                // Calculate the position for the current cube
+                physx::PxVec3 position(x * spacing, y * spacing, z * spacing);
+
+                // Create a Cube instance
+                Cube* cube = new Cube();
+                cube->SetTransform(Transform{ XMFLOAT3(position.x, position.y, position.z),
+                    XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) });
+                cube->Start();  // Start will initialize everything
+                grid[x][y][z] = cube->GetEntity();  // Save only the entity
+                delete cube;  // Cube object should be deleted after Start()
+            }
+        }
+    }
+
+    // Create PxFixedJoints between adjacent cubes
+    for (int x = 0; x < gridSizeX; ++x) {
+        for (int y = 0; y < gridSizeY; ++y) {
+            for (int z = 0; z < gridSizeZ; ++z) {
+                Entity* currentEntity = grid[x][y][z];
+                physx::PxRigidDynamic* currentBody = currentEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+
+                // Connect to the cube on the +X axis
+                if (x + 1 < gridSizeX) {
+                    Entity* neighborEntity = grid[x + 1][y][z];
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                    physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
+                        physx::PxTransform(physx::PxVec3(spacing / 2, 0, 0)),
+                        neighborBody, physx::PxTransform(physx::PxVec3(-spacing / 2, 0, 0)));
+                }
+
+                // Connect to the cube on the +Y axis
+                if (y + 1 < gridSizeY) {
+                    Entity* neighborEntity = grid[x][y + 1][z];
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                    physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
+                        physx::PxTransform(physx::PxVec3(0, spacing / 2, 0)),
+                        neighborBody, physx::PxTransform(physx::PxVec3(0, -spacing / 2, 0)));
+                }
+
+                // Connect to the cube on the +Z axis
+                if (z + 1 < gridSizeZ) {
+                    Entity* neighborEntity = grid[x][y][z + 1];
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                    physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
+                        physx::PxTransform(physx::PxVec3(0, 0, spacing / 2)),
+                        neighborBody, physx::PxTransform(physx::PxVec3(0, 0, -spacing / 2)));
+                }
+            }
+        }
+    }
 }

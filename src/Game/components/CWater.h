@@ -27,6 +27,7 @@ class CWater : public Component, public Drawable
 
     physx::PxRigidStatic* actor_{};
     physx::PxShape* shape_;
+    physx::PxMaterial* material_;
 
     int div_x_ = 20;
     int div_z_ = 20;

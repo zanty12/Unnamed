@@ -14,4 +14,5 @@ public:
     void Start();
 	void Spawn() override;
     void SetTransform(const Transform& transform) { Transform::Copy(transform_, transform); }
+    Entity* GetEntity() { return entity_; }
 };

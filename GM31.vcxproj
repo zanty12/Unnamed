@@ -816,6 +816,7 @@
     <ClInclude Include="src\Game\prefab\player.h" />
     <ClInclude Include="src\Game\scene\CrushGame.h" />
     <ClInclude Include="src\Game\scene\CubeGame.h" />
+    <ClInclude Include="src\Game\scene\JointCrush.h" />
     <ClInclude Include="src\Game\scene\JointDemo.h" />
     <ClInclude Include="src\Game\scene\Load.h" />
     <ClInclude Include="src\Game\scene\physXtest.h" />
@@ -902,6 +903,7 @@
     <ClCompile Include="src\Game\prefab\player.cpp" />
     <ClCompile Include="src\Game\scene\CrushGame.cpp" />
     <ClCompile Include="src\Game\scene\CubeGame.cpp" />
+    <ClCompile Include="src\Game\scene\JointCrush.cpp" />
     <ClCompile Include="src\Game\scene\JointDemo.cpp" />
     <ClCompile Include="src\Game\scene\Load.cpp" />
     <ClCompile Include="src\Game\scene\physXtest.cpp" />

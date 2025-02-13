@@ -123,8 +123,9 @@ void CWater::Start()
     assert(meshGeometry.isValid());
 
     actor_ = PhysX_Impl::GetPhysics()->createRigidStatic(physx::PxTransform(physx::PxIdentity));
+    material_ = PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 1.0f);
     shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry,
-        *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 0.5f));
+        *material_);
     shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
     actor_->attachShape(*shape_);
 
@@ -201,7 +202,7 @@ void CWater::Update()
     actor_->detachShape(*shape_);
     shape_->release();
     shape_ = PhysX_Impl::GetPhysics()->createShape(meshGeometry,
-        *PhysX_Impl::GetPhysics()->createMaterial(0.5f, 0.5f, 1.0f));
+        *material_);
     shape_->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, true);
     actor_->attachShape(*shape_);
 }
