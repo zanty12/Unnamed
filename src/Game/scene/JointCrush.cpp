@@ -19,36 +19,18 @@
 void CreateCubeGrid(physx::PxPhysics* physics, physx::PxScene* scene,
                     int gridSizeX, int gridSizeY, int gridSizeZ, float spacing);
 
+void CreateCubeGridBreak(physx::PxPhysics* physics, physx::PxScene* scene, const physx::PxVec3& posOffset,
+                         int gridSizeX, int gridSizeY, int gridSizeZ, float spacing, int breakForce, int breakTorque);
+
 void JointCrush::Setup()
 {
-    /*//create 1000 boxes in a 10x10x10 grid
-    int count = 0;
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            for (int k = 0; k < 10; k++)
-            {
-                Cube* box = new Cube();
-                Transform transform = Transform{
-                    XMFLOAT3{(float)i * 1.1f, (float)j + 0.5f, (float)k * 1.1f}, XMFLOAT3{1.0f, 1.0f, 1.0f},
-                    XMFLOAT4{0.0f, 0.0f, 0.0f, 1.0f}
-                };
-                box->SetTransform(transform);
-                box->Start();
-                delete box;
-
-                count++;
-            }
-        }
-    }*/
-
     int count = 100;
-    //create a grid of cubes and connect them with joints
 
     CreateCubeGrid(PhysX_Impl::GetPhysics(), PhysX_Impl::GetScene(), 10, 10, 2, 1.1f);
 
-    
+    CreateCubeGridBreak(PhysX_Impl::GetPhysics(), PhysX_Impl::GetScene(), physx::PxVec3(-10, 0, 0), 10, 10, 2, 1.1f, 50,
+                        50);
+
     if (GMCrush* gameMode = dynamic_cast<GMCrush*>(Manager::GetGameMode()))
     {
         gameMode->SetBlocks(count);
@@ -152,60 +134,177 @@ void JointCrush::Setup()
 }
 
 void CreateCubeGrid(physx::PxPhysics* physics, physx::PxScene* scene,
-                    int gridSizeX, int gridSizeY, int gridSizeZ, float spacing) {
+                    int gridSizeX, int gridSizeY, int gridSizeZ, float spacing)
+{
     std::vector<std::vector<std::vector<Entity*>>> grid(gridSizeX,
-        std::vector<std::vector<Entity*>>(gridSizeY, std::vector<Entity*>(gridSizeZ, nullptr)));
+                                                        std::vector<std::vector<Entity*>>(
+                                                            gridSizeY, std::vector<Entity*>(gridSizeZ, nullptr)));
 
     // Create cubes and place them in the grid
-    for (int x = 0; x < gridSizeX; ++x) {
-        for (int y = 0; y < gridSizeY; ++y) {
-            for (int z = 0; z < gridSizeZ; ++z) {
+    for (int x = 0; x < gridSizeX; ++x)
+    {
+        for (int y = 0; y < gridSizeY; ++y)
+        {
+            for (int z = 0; z < gridSizeZ; ++z)
+            {
                 // Calculate the position for the current cube
                 physx::PxVec3 position(x * spacing, y * spacing, z * spacing);
 
                 // Create a Cube instance
                 Cube* cube = new Cube();
-                cube->SetTransform(Transform{ XMFLOAT3(position.x, position.y, position.z),
-                    XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) });
-                cube->Start();  // Start will initialize everything
-                grid[x][y][z] = cube->GetEntity();  // Save only the entity
-                delete cube;  // Cube object should be deleted after Start()
+                cube->SetTransform(Transform{
+                    XMFLOAT3(position.x, position.y, position.z),
+                    XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f)
+                });
+                cube->Start(); // Start will initialize everything
+                grid[x][y][z] = cube->GetEntity(); // Save only the entity
+                delete cube; // Cube object should be deleted after Start()
             }
         }
     }
 
     // Create PxFixedJoints between adjacent cubes
-    for (int x = 0; x < gridSizeX; ++x) {
-        for (int y = 0; y < gridSizeY; ++y) {
-            for (int z = 0; z < gridSizeZ; ++z) {
+    for (int x = 0; x < gridSizeX; ++x)
+    {
+        for (int y = 0; y < gridSizeY; ++y)
+        {
+            for (int z = 0; z < gridSizeZ; ++z)
+            {
                 Entity* currentEntity = grid[x][y][z];
-                physx::PxRigidDynamic* currentBody = currentEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                physx::PxRigidDynamic* currentBody = currentEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<
+                    physx::PxRigidDynamic>();
 
                 // Connect to the cube on the +X axis
-                if (x + 1 < gridSizeX) {
+                if (x + 1 < gridSizeX)
+                {
                     Entity* neighborEntity = grid[x + 1][y][z];
-                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->
+                                                                          is<physx::PxRigidDynamic>();
                     physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
-                        physx::PxTransform(physx::PxVec3(spacing / 2, 0, 0)),
-                        neighborBody, physx::PxTransform(physx::PxVec3(-spacing / 2, 0, 0)));
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(spacing / 2, 0, 0)),
+                                                                           neighborBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(-spacing / 2, 0, 0)));
                 }
 
                 // Connect to the cube on the +Y axis
-                if (y + 1 < gridSizeY) {
+                if (y + 1 < gridSizeY)
+                {
                     Entity* neighborEntity = grid[x][y + 1][z];
-                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->
+                                                                          is<physx::PxRigidDynamic>();
                     physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
-                        physx::PxTransform(physx::PxVec3(0, spacing / 2, 0)),
-                        neighborBody, physx::PxTransform(physx::PxVec3(0, -spacing / 2, 0)));
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, spacing / 2, 0)),
+                                                                           neighborBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, -spacing / 2, 0)));
                 }
 
                 // Connect to the cube on the +Z axis
-                if (z + 1 < gridSizeZ) {
+                if (z + 1 < gridSizeZ)
+                {
                     Entity* neighborEntity = grid[x][y][z + 1];
-                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<physx::PxRigidDynamic>();
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->
+                                                                          is<physx::PxRigidDynamic>();
                     physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
-                        physx::PxTransform(physx::PxVec3(0, 0, spacing / 2)),
-                        neighborBody, physx::PxTransform(physx::PxVec3(0, 0, -spacing / 2)));
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, 0, spacing / 2)),
+                                                                           neighborBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, 0, -spacing / 2)));
+                }
+            }
+        }
+    }
+}
+
+void CreateCubeGridBreak(physx::PxPhysics* physics, physx::PxScene* scene, const physx::PxVec3& posOffset,
+                         int gridSizeX, int gridSizeY, int gridSizeZ, float spacing, int breakForce, int breakTorque)
+{
+    std::vector<std::vector<std::vector<Entity*>>> grid(gridSizeX,
+                                                        std::vector<std::vector<Entity*>>(
+                                                            gridSizeY, std::vector<Entity*>(gridSizeZ, nullptr)));
+
+    // Create cubes and place them in the grid
+    for (int x = 0; x < gridSizeX; ++x)
+    {
+        for (int y = 0; y < gridSizeY; ++y)
+        {
+            for (int z = 0; z < gridSizeZ; ++z)
+            {
+                // Calculate the position for the current cube
+                physx::PxVec3 position(x * spacing + posOffset.x, y * spacing + posOffset.y, z * spacing + posOffset.z);
+
+                // Create a Cube instance
+                Cube* cube = new Cube();
+                cube->SetTransform(Transform{
+                    XMFLOAT3(position.x, position.y, position.z),
+                    XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f)
+                });
+                cube->Start(); // Start will initialize everything
+                grid[x][y][z] = cube->GetEntity(); // Save only the entity
+                delete cube; // Cube object should be deleted after Start()
+            }
+        }
+    }
+
+    // Create PxFixedJoints between adjacent cubes
+    for (int x = 0; x < gridSizeX; ++x)
+    {
+        for (int y = 0; y < gridSizeY; ++y)
+        {
+            for (int z = 0; z < gridSizeZ; ++z)
+            {
+                Entity* currentEntity = grid[x][y][z];
+                physx::PxRigidDynamic* currentBody = currentEntity->GetComponent<CPhysXRigidBody>()->GetActor()->is<
+                    physx::PxRigidDynamic>();
+
+                // Connect to the cube on the +X axis
+                if (x + 1 < gridSizeX)
+                {
+                    Entity* neighborEntity = grid[x + 1][y][z];
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->
+                                                                          is<physx::PxRigidDynamic>();
+                    physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(spacing / 2, 0, 0)),
+                                                                           neighborBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(-spacing / 2, 0, 0)));
+                    //set break force
+                    joint->setBreakForce(breakForce, breakTorque);
+                }
+
+                // Connect to the cube on the +Y axis
+                if (y + 1 < gridSizeY)
+                {
+                    Entity* neighborEntity = grid[x][y + 1][z];
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->
+                                                                          is<physx::PxRigidDynamic>();
+                    physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, spacing / 2, 0)),
+                                                                           neighborBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, -spacing / 2, 0)));
+                    joint->setBreakForce(breakForce, breakTorque);
+                }
+
+                // Connect to the cube on the +Z axis
+                if (z + 1 < gridSizeZ)
+                {
+                    Entity* neighborEntity = grid[x][y][z + 1];
+                    physx::PxRigidDynamic* neighborBody = neighborEntity->GetComponent<CPhysXRigidBody>()->GetActor()->
+                                                                          is<physx::PxRigidDynamic>();
+                    physx::PxFixedJoint* joint = physx::PxFixedJointCreate(*physics, currentBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, 0, spacing / 2)),
+                                                                           neighborBody,
+                                                                           physx::PxTransform(
+                                                                               physx::PxVec3(0, 0, -spacing / 2)));
+                    joint->setBreakForce(breakForce, breakTorque);
                 }
             }
         }
